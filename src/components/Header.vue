@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-    <div class="flex flex-row w-screen justify-between h-auto bg-white">
+    <div class="flex flex-row w-full justify-between h-auto bg-white">
         <div class="flex flex-row justify-center items-center">
             <div class="m-4">
                 <RouterLink
@@ -22,11 +22,12 @@ import { RouterLink } from 'vue-router';
                 </RouterLink>
             </div>
             <div class="m-4">
-                <a
-                    href="#"
+                <RouterLink
+                    to="/countries"
                     class="font-medium text-blue-900 no-underline hover:text-blue-600 text-xl"
-                    >Countries</a
                 >
+                    Countries
+                </RouterLink>
             </div>
         </div>
         <div class="flex items-center">

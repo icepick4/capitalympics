@@ -3,21 +3,23 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'TiltWrap';
-  src: url('./assets/fonts/TiltWarp-Regular.ttf')
+    font-family: 'TiltWrap';
+    src: url('./assets/fonts/TiltWarp-Regular.ttf')
 }
 
 :root {
-  font-family: 'TiltWrap', sans-serif;
-  background-color: #242424;
+    font-family: 'TiltWrap', sans-serif;
+    background-color: #242424;
 }
 
+html,
 body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
 }
+
 
 #app {
-  height: 100%;
+    height: 100%;
 }
