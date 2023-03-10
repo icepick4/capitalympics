@@ -8,7 +8,7 @@ import { RouterLink } from 'vue-router';
             <div class="m-4">
                 <RouterLink
                     to="/"
-                    class="font-medium text-blue-900 no-underline hover:text-blue-600 text-xl"
+                    class="font-medium text-links no-underline hover:text-blue-600 text-xl"
                 >
                     Home
                 </RouterLink>
@@ -16,7 +16,7 @@ import { RouterLink } from 'vue-router';
             <div class="m-4">
                 <RouterLink
                     to="/about"
-                    class="font-medium text-blue-900 no-underline hover:text-blue-600 text-xl"
+                    class="font-medium text-links no-underline hover:text-blue-600 text-xl"
                 >
                     About
                 </RouterLink>
@@ -24,33 +24,43 @@ import { RouterLink } from 'vue-router';
             <div class="m-4">
                 <RouterLink
                     to="/countries"
-                    class="font-medium text-blue-900 no-underline hover:text-blue-600 text-xl"
+                    class="font-medium text-links no-underline hover:text-blue-600 text-xl"
                 >
                     Countries
                 </RouterLink>
             </div>
+            <div class="m-4">
+                <RouterLink
+                    to="/learn"
+                    class="font-medium text-links no-underline hover:text-blue-600 text-xl"
+                >
+                    Learn
+                </RouterLink>
+            </div>
         </div>
-        <div class="flex items-center">
-            <RouterLink to="/">
+        <RouterLink to="/">
+            <div class="flex items-center">
                 <img
-                    src="../assets/logo/logo1.png"
+                    src="../assets/logo/logo3.png"
                     alt="logo"
                     class="w-28 h-28"
                 />
-            </RouterLink>
-        </div>
+                <h1 class="font-medium text-links text-xl">Capitalympics</h1>
+            </div>
+        </RouterLink>
+
         <div class="flex flex-row justify-center items-center">
             <div class="m-4">
                 <a
                     href="#"
-                    class="font-medium text-blue-900 no-underline hover:text-blue-600 text-xl"
+                    class="font-medium text-links no-underline hover:text-blue-600 text-xl"
                     >Sign In</a
                 >
             </div>
             <div class="m-4">
                 <a
                     href="#"
-                    class="font-medium text-blue-900 no-underline hover:text-blue-600 text-xl"
+                    class="font-medium text-links no-underline hover:text-blue-600 text-xl"
                     >Sign Up</a
                 >
             </div>

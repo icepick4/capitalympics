@@ -12,14 +12,10 @@
             </div>
             <div class="flex flex-col items-center justify-start m-6">
                 <h1 class="text-2xl">Follow us</h1>
-                <a
-                    href="#"
-                    class="text-blue-900 no-underline hover:text-blue-600"
+                <a href="#" class="text-links no-underline hover:text-secondary"
                     >GitHub</a
                 >
-                <a
-                    href="#"
-                    class="text-blue-900 no-underline hover:text-blue-600"
+                <a href="#" class="text-links no-underline hover:text-secondary"
                     >Twitter</a
                 >
             </div>
