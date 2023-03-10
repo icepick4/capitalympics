@@ -13,7 +13,7 @@ module.exports = {
             text: '#000000',
             white: '#FFFFFF',
             black: '#000000',
-            gray: colors.trueGray
+            gray: colors.neutral
         }
     },
     variants: {

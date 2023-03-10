@@ -36,7 +36,9 @@ export default {
 </script>
 
 <template>
-    <div class="grid grid-cols-4 gap-16 p-10">
+    <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-16 p-10"
+    >
         <div v-for="country in countries" :key="country.alpha3Code">
             <router-link
                 :to="{
@@ -47,17 +49,18 @@ export default {
                     }
                 }"
             >
-                <div class="relative">
+                <div class="relative flex justify-center items-center h-full">
                     <img
                         :src="country.flag"
                         :alt="`Flag of ${country.name}`"
-                        class="w-full h-36 object-cover rounded shadow transition ease-in-out duration-300"
+                        class="w-full h-auto object-cover rounded shadow transition ease-in-out duration-300"
                         :title="country.name"
                     />
                     <span
-                        class="absolute w-full h-full bottom-7 left-0 right-0 px-2 py-1 text-white opacity-0 hover:opacity-100 transition ease-in-out duration-200"
-                        >{{ country.name }}</span
+                        class="absolute w-full h-full bottom-0 left-0 right-0 px-2 py-1 text-white opacity-0 hover:opacity-100 transition ease-in-out duration-200"
                     >
+                        <p class="-translate-y-7">{{ country.name }}</p>
+                    </span>
                 </div>
             </router-link>
         </div>
