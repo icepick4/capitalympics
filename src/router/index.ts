@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import About from '../views/About.vue';
 import Countries from '../views/Countries.vue';
-import Country from '../views/Country.vue';
 import Home from '../views/Home.vue';
 import NotFound from '../views/NotFound.vue';
+import SingleCountry from '../views/SingleCountry.vue';
 const routes = [
     {
         path: '/',
@@ -21,9 +21,10 @@ const routes = [
         component: Countries
     },
     {
-        path: '/country/:country',
-        name: 'Country',
-        component: Country
+        path: '/countries/:countryName',
+        name: 'SingleCountry',
+        component: SingleCountry,
+        props: true
     },
     {
         path: '/:catchAll(.*)',

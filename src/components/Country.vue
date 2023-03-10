@@ -1,0 +1,72 @@
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { CountryObject } from '../models/Country';
+export default defineComponent({
+    name: 'Country',
+    props: {
+        country: {
+            type: CountryObject,
+            required: true
+        }
+    },
+    components: {},
+    setup() {
+        return {};
+    }
+});
+</script>
+
+<template>
+    <div class="flex justify-center">
+        <div
+            class="max-w-lg w-full bg-gray-300 rounded-lg shadow-lg overflow-hidden"
+        >
+            <div class="p-4 flex flex-row justify-between">
+                <div class="flex flex-col">
+                    <h1 class="text-4xl font-bold">{{ country.name }}</h1>
+                    <p class="text-gray-500">{{ country.alpha3Code }}</p>
+                </div>
+                <div class="col-span-1">
+                    <dt class="text-gray-500">Flag</dt>
+                    <dd>
+                        <img
+                            :src="country.flag"
+                            alt="Flag"
+                            class="w-28 h-auto"
+                        />
+                    </dd>
+                </div>
+            </div>
+            <div class="px-4 py-2 bg-white">
+                <dl class="mt-2 grid grid-cols-2 gap-x-4 gap-y-2">
+                    <div class="col-span-1">
+                        <dt class="text-gray-500">Capital</dt>
+                        <dd class="text-gray-900">{{ country.capital }}</dd>
+                    </div>
+                    <div class="col-span-1">
+                        <dt class="text-gray-500">Region</dt>
+                        <dd class="text-gray-900">{{ country.region }}</dd>
+                    </div>
+                    <div class="col-span-1">
+                        <dt class="text-gray-500">Population</dt>
+                        <dd class="text-gray-900">{{ country.population }}</dd>
+                    </div>
+                    <div class="col-span-1">
+                        <dt class="text-gray-500">Currencies</dt>
+                        <dd class="text-gray-900">
+                            <ul>
+                                <li
+                                    v-for="currency in country.currencies"
+                                    :key="currency.name"
+                                >
+                                    {{ currency.name }}
+                                    {{ currency.symbol }}
+                                </li>
+                            </ul>
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+</template>
