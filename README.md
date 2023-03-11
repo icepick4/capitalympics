@@ -6,6 +6,10 @@
 
 With this site learn all the capitals and flags of the world, search filtered and sorted countries and learn more about them through the user interface!
 
+[![forthebadge](https://forthebadge.com/images/badges/made-with-vue.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
+
 </div>
 
 # Vue 3 + TypeScript + Vite + TailwindCSS

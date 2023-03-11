@@ -14,10 +14,13 @@ const fetchCountries = async () => {
     for (let i = 0; i < data.length; i++) {
         countries.push({
             name: data[i].name.common,
+            officialName: data[i].name.official,
             capital: data[i].capital,
-            flag: data[i].flags.png,
-            population: data[i].population,
             region: data[i].region,
+            subregion: data[i].subregion,
+            population: data[i].population,
+            googleMapsLink: data[i].maps.googleMaps,
+            flag: data[i].flags.png,
             alpha3Code: data[i].cca3,
             currencies: data[i].currencies
         });

@@ -29,9 +29,12 @@ export default defineComponent({
         }
         let countryObject: CountryObject = new CountryObject(
             tempCountryObject.name,
+            tempCountryObject.officialName,
             tempCountryObject.capital[0],
             tempCountryObject.region,
-            tempCountryObject.population,
+            tempCountryObject.subregion,
+            new Intl.NumberFormat().format(tempCountryObject.population),
+            tempCountryObject.googleMapsLink,
             tempCountryObject.flag,
             tempCountryObject.alpha3Code,
             tempCountryObject.currencies
