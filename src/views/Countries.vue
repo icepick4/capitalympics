@@ -29,20 +29,68 @@ const fetchCountries = async () => {
 
 fetchCountries();
 
+const regions: string[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
+
 export default {
     name: 'Countries',
     components: { RouterLink },
-    setup() {
-        return { countries };
+    data() {
+        return { countries, search: '', region: '', regions };
+    },
+    computed: {
+        filteredCountriesByName() {
+            if (this.search.length > 0 || this.region.length > 0) {
+                return this.countries.filter((country) => {
+                    return (
+                        country.name
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) &&
+                        country.region.includes(this.region)
+                    );
+                });
+            } else {
+                return this.countries;
+            }
+        }
     }
 };
 </script>
 
 <template>
+    <div class="flex flex-col gap-5 m-5">
+        <h1 class="text-4xl font-bold text-center text-white">Countries</h1>
+        <input
+            type="text"
+            v-model="search"
+            class="w-1/4 mx-auto p-2 placeholder-opacity-50 rounded-md"
+            placeholder="Search by name"
+        />
+
+        <select v-model="region" class="w-1/4 mx-auto p-2 rounded-md">
+            <option value="">All</option>
+            <option v-for="region in regions" :key="region" :value="region">
+                {{ region }}
+            </option>
+        </select>
+
+        <button
+            class="w-1/4 mx-auto p-2 rounded-md bg-primary hover:bg-primaryhover text-white"
+            @click="
+                search = '';
+                region = '';
+            "
+        >
+            Reset Filters
+        </button>
+    </div>
+
     <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-16 p-10"
     >
-        <div v-for="country in countries" :key="country.alpha3Code">
+        <div
+            v-for="country in filteredCountriesByName"
+            :key="country.alpha3Code"
+        >
             <router-link
                 :to="{
                     name: 'SingleCountry',
