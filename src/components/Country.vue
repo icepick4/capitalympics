@@ -8,10 +8,6 @@ export default defineComponent({
             type: CountryObject,
             required: true
         }
-    },
-    components: {},
-    setup() {
-        return {};
     }
 });
 </script>
@@ -33,7 +29,7 @@ export default defineComponent({
                         <img
                             :src="country.flag"
                             alt="Flag"
-                            class="w-28 h-auto"
+                            class="w-28 h-auto border-2 border-black rounded"
                         />
                     </dd>
                 </div>
@@ -50,11 +46,15 @@ export default defineComponent({
                     </div>
                     <div class="col-span-1">
                         <dt class="text-gray-500">Population</dt>
-                        <dd class="text-gray-900">{{ country.population }}</dd>
+                        <dd class="text-gray-900">
+                            {{ country.population }}
+                        </dd>
                     </div>
                     <div class="col-span-1">
                         <dt class="text-gray-500">Subregion</dt>
-                        <dd class="text-gray-900">{{ country.subregion }}</dd>
+                        <dd class="text-gray-900">
+                            {{ country.subregion }}
+                        </dd>
                     </div>
                     <div class="col-span-1">
                         <dt class="text-gray-500">Currencies</dt>
@@ -80,7 +80,7 @@ export default defineComponent({
                                 class="flex flex-row items-center gap-2"
                             >
                                 <img
-                                    src="../assets/logo/google-maps-logo.png"
+                                    src="../assets/icons/google-maps.png"
                                     alt="Google Maps"
                                     class="w-12 h-12"
                                 />

@@ -45,11 +45,29 @@ export default defineComponent({
 </script>
 
 <template>
-    <Country v-if="countryObject != undefined" :country="countryObject" />
+    <Transition name="slide-fade" appear>
+        <Country v-if="countryObject != undefined" :country="countryObject" />
+    </Transition>
     <RouterLink
         :to="{ name: 'Countries' }"
-        class="transition ease-in-out delay-100 text-white text-2xl font-bold text-center p-5 bg-primary rounded-md hover:bg-primaryhover hover:scale-105 w-1/4 mx-auto"
+        class="transition ease-in-out delay-100 text-white text-2xl font-bold text-center p-5 bg-secondary rounded-md hover:bg-secondaryhover hover:scale-105 w-1/4 mx-auto"
     >
         Back
     </RouterLink>
 </template>
+
+<style scoped>
+.slide-fade-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateX(80px);
+    opacity: 0;
+}
+</style>

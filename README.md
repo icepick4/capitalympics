@@ -2,7 +2,9 @@
 
 # Capitalympics
 
-<img src="https://raw.githubusercontent.com/icepick4/capitalympics/main/src/assets/logo/logo3.png" alt="Capitalympics Logo" width="200" />
+<img src="https://raw.githubusercontent.com/icepick4/capitalympics/main/src/assets/logo.png" alt="Capitalympics Logo" width="200" />
+
+_This images has been generated with MidJourney_
 
 With this site learn all the capitals and flags of the world, search filtered and sorted countries and learn more about them through the user interface!
 

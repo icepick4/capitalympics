@@ -4,6 +4,8 @@ import Countries from '../views/Countries.vue';
 import Home from '../views/Home.vue';
 import Learn from '../views/Learn.vue';
 import NotFound from '../views/NotFound.vue';
+import SignIn from '../views/SignIn.vue';
+import SignUp from '../views/SignUp.vue';
 import SingleCountry from '../views/SingleCountry.vue';
 const routes = [
     {
@@ -20,6 +22,16 @@ const routes = [
         path: '/learn',
         name: 'Learn',
         component: Learn
+    },
+    {
+        path: '/signup',
+        name: 'SignUp',
+        component: SignUp
+    },
+    {
+        path: '/signin',
+        name: 'SignIn',
+        component: SignIn
     },
     {
         path: '/countries',

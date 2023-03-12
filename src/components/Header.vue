@@ -1,5 +1,11 @@
-<script setup lang="ts">
+<script lang="ts">
 import { RouterLink } from 'vue-router';
+export default {
+    name: 'Header',
+    setup() {
+        return {};
+    }
+};
 </script>
 
 <template>
@@ -7,38 +13,34 @@ import { RouterLink } from 'vue-router';
         <div class="flex flex-row justify-center items-center">
             <RouterLink
                 to="/"
-                class="w-full h-full flex items-center p-4 font-medium text-links no-underline hover:text-primaryhover text-xl hover:font-semibold"
+                class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-primaryhover text-xl transition-all duration-75 ease-in-out"
             >
                 Home
             </RouterLink>
             <RouterLink
                 to="/countries"
-                class="w-full h-full flex items-center p-4 font-medium text-links no-underline hover:text-primaryhover text-xl hover:font-semibold"
+                class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-primaryhover text-xl transition-all duration-75 ease-in-out"
             >
                 Countries
             </RouterLink>
             <RouterLink
                 to="/learn"
-                class="w-full h-full flex items-center p-4 font-medium text-links no-underline hover:text-primaryhover text-xl hover:font-semibold"
+                class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-primaryhover text-xl transition-all duration-75 ease-in-out"
             >
                 Learn
             </RouterLink>
             <RouterLink
                 to="/about"
-                class="w-full h-full flex items-center p-4 font-medium text-links no-underline hover:text-primaryhover text-xl hover:font-semibold"
+                class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-primaryhover text-xl transition-all duration-75 ease-in-out"
             >
                 About
             </RouterLink>
         </div>
         <RouterLink to="/">
             <div class="flex items-center group">
-                <img
-                    src="../assets/logo/logo3.png"
-                    alt="logo"
-                    class="w-28 h-28"
-                />
+                <img src="../assets/logo.png" alt="logo" class="w-28 h-28" />
                 <h1
-                    class="font-medium text-links text-xl group-hover:text-primaryhover group-hover:font-semibold"
+                    class="font-medium text-primary text-xl group-hover:text-primaryhover group- transition-all duration-75 ease-in-out"
                 >
                     Capitalympics
                 </h1>
@@ -48,13 +50,13 @@ import { RouterLink } from 'vue-router';
         <div class="flex flex-row justify-center items-center w-1/4">
             <RouterLink
                 to="/"
-                class="w-full h-full flex justify-end items-center p-4 font-medium text-links no-underline hover:text-primaryhover text-xl hover:font-semibold"
+                class="w-full h-full flex justify-end items-center p-4 font-medium text-primary no-underline hover:text-primaryhover text-xl transition-all duration-75 ease-in-out"
             >
                 Sign In</RouterLink
             >
             <RouterLink
-                to="/"
-                class="w-full h-full flex justify-center items-center p-4 font-medium text-links no-underline hover:text-primaryhover text-xl hover:font-semibold"
+                to="/signup"
+                class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-primaryhover text-xl transition-all duration-75 ease-in-out"
             >
                 Sign Up</RouterLink
             >

@@ -5,11 +5,13 @@ module.exports = {
     theme: {
         extend: {},
         colors: {
-            primary: '#1E3A8A',
-            primaryhover: '#2F50AD',
-            secondary: '#00BFD5',
-            links: '#007EC4',
-            background: '#7BB6B3',
+            primary: '#0D8C5D',
+            primaryhover: '#67D39F',
+            secondary: '#67AC64',
+            secondaryhover: '#76BB73',
+            links: '#00542A',
+            background: '#567162',
+            error: '#A21c1c',
             text: '#000000',
             white: '#FFFFFF',
             black: '#000000',

@@ -9,7 +9,7 @@
 
 :root {
     font-family: 'TiltWrap', sans-serif;
-    background-color: #242424;
+    background-color: #0d8c5d;
 }
 
 html,
@@ -17,6 +17,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
+    overflow-x: hidden;
 }
 
 

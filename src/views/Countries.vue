@@ -100,15 +100,17 @@ export default {
                     }
                 }"
             >
-                <div class="relative flex justify-center items-center h-full">
+                <div
+                    class="relative flex justify-center items-center h-full hover:scale-105 transition ease-in-out duration-300"
+                >
                     <img
                         :src="country.flag"
                         :alt="`Flag of ${country.name}`"
-                        class="w-full h-auto object-cover rounded shadow transition ease-in-out duration-300"
+                        class="w-full h-auto object-cover rounded shadow transition ease-in-out duration-300 border-2 border-black"
                         :title="country.name"
                     />
                     <span
-                        class="absolute w-full h-full bottom-0 left-0 right-0 px-2 py-1 text-white opacity-0 hover:opacity-100 transition ease-in-out duration-200"
+                        class="absolute w-full h-full bottom-0 left-0 right-0 text-white opacity-0 hover:opacity-100 transition ease-in-out duration-200"
                     >
                         <p class="-translate-y-7">{{ country.name }}</p>
                     </span>
