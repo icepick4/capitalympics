@@ -1,8 +1,10 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div class="flex flex-col bg-white items-center">
-        <div class="flex flex-row justify-evenly w-full h-auto bg-white">
+    <div class="flex flex-col bg-gray-100 items-center">
+        <div
+            class="flex flex-row justify-evenly w-full h-auto bg-gray-100 border-t-2 border-black"
+        >
             <div class="flex flex-col items-center justify-start m-6">
                 <h1 class="text-2xl">Infos</h1>
             </div>
@@ -12,10 +14,14 @@
             </div>
             <div class="flex flex-col items-center justify-start m-6">
                 <h1 class="text-2xl">Follow us</h1>
-                <a href="#" class="text-links no-underline hover:text-secondary"
+                <a
+                    href="#"
+                    class="text-primary no-underline hover:text-secondary"
                     >GitHub</a
                 >
-                <a href="#" class="text-links no-underline hover:text-secondary"
+                <a
+                    href="#"
+                    class="text-primary no-underline hover:text-secondary"
                     >Twitter</a
                 >
             </div>

@@ -12,18 +12,20 @@ const fetchCountries = async () => {
     }
     const data = await response.json();
     for (let i = 0; i < data.length; i++) {
-        countries.push({
-            name: data[i].name.common,
-            officialName: data[i].name.official,
-            capital: data[i].capital,
-            region: data[i].region,
-            subregion: data[i].subregion,
-            population: data[i].population,
-            googleMapsLink: data[i].maps.googleMaps,
-            flag: data[i].flags.png,
-            alpha3Code: data[i].cca3,
-            currencies: data[i].currencies
-        });
+        if (data[i].population > 0) {
+            countries.push({
+                name: data[i].name.common,
+                officialName: data[i].name.official,
+                capital: data[i].capital[0],
+                region: data[i].region,
+                subregion: data[i].subregion,
+                population: data[i].population,
+                googleMapsLink: data[i].maps.googleMaps,
+                flag: data[i].flags.png,
+                alpha3Code: data[i].cca3,
+                currencies: data[i].currencies
+            });
+        }
     }
 };
 

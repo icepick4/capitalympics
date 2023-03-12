@@ -95,13 +95,13 @@ export default {
                 </div>
                 <div class="flex flex-col items-center">
                     <button
-                        class="bg-primaryhover hover:bg-secondary w-3/4 hover:scale-105 transition-all duration-100 delay-75 text-xl rounded-md p-2 text-center"
+                        class="bg-primary hover:bg-secondary w-3/4 hover:scale-105 transition-all duration-100 delay-75 text-xl rounded-md p-2 text-center"
                     >
                         Sign Up
                     </button>
                     <RouterLink
                         :to="{ name: 'SignIn' }"
-                        class="text-primaryhover text-center hover:text-secondary text-lg marker:traisition-all duration-75"
+                        class="text-primary text-center hover:text-secondary text-lg marker:traisition-all duration-75"
                         >Already have an account ?</RouterLink
                     >
                 </div>

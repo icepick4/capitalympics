@@ -21,16 +21,20 @@ export default defineComponent({
             country = country[0];
         }
         let tempCountryObject = JSON.parse(country);
-        for (let i = 0; i < tempCountryObject.currencies.length; i++) {
-            tempCountryObject.currencies[i] = new Currency(
-                tempCountryObject.currencies[i].name,
-                tempCountryObject.currencies[i].symbol
-            );
+        if (tempCountryObject.currencies == undefined) {
+            tempCountryObject.currencies = [];
+        } else {
+            for (let i = 0; i < tempCountryObject.currencies.length; i++) {
+                tempCountryObject.currencies[i] = new Currency(
+                    tempCountryObject.currencies[i].name,
+                    tempCountryObject.currencies[i].symbol
+                );
+            }
         }
         let countryObject: CountryObject = new CountryObject(
             tempCountryObject.name,
             tempCountryObject.officialName,
-            tempCountryObject.capital[0],
+            tempCountryObject.capital,
             tempCountryObject.region,
             tempCountryObject.subregion,
             new Intl.NumberFormat().format(tempCountryObject.population),
@@ -50,7 +54,7 @@ export default defineComponent({
     </Transition>
     <RouterLink
         :to="{ name: 'Countries' }"
-        class="transition ease-in-out delay-100 text-white text-2xl font-bold text-center p-5 bg-secondary rounded-md hover:bg-secondaryhover hover:scale-105 w-1/4 mx-auto"
+        class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/4 mx-auto"
     >
         Back
     </RouterLink>
