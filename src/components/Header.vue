@@ -49,7 +49,7 @@ export default {
 
         <div class="flex flex-row justify-center items-center w-1/4">
             <RouterLink
-                to="/"
+                to="/signin"
                 class="w-full h-full flex justify-end items-center p-4 font-medium text-primary no-underline hover:text-primaryhover text-xl transition-all duration-75 ease-in-out"
             >
                 Sign In</RouterLink
