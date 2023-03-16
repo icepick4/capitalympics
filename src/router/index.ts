@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import NotFound from '../components/NotFound.vue';
 import About from '../views/About.vue';
 import Countries from '../views/Countries.vue';
 import Home from '../views/Home.vue';
 import Learn from '../views/Learn.vue';
-import NotFound from '../views/NotFound.vue';
 import SignIn from '../views/SignIn.vue';
 import SignUp from '../views/SignUp.vue';
 import SingleCountry from '../views/SingleCountry.vue';

@@ -12,11 +12,14 @@ const fetchCountries = async () => {
     }
     const data = await response.json();
     for (let i = 0; i < data.length; i++) {
-        if (data[i].population > 0) {
+        if (data[i].population > 0 && 'capital' in data[i]) {
             countries.push({
                 name: data[i].name.common,
                 officialName: data[i].name.official,
-                capital: data[i].capital[0],
+                capital:
+                    typeof data[i].capital === 'string'
+                        ? data[i].capital
+                        : data[i].capital[0],
                 region: data[i].region,
                 subregion: data[i].subregion,
                 population: data[i].population,
@@ -30,6 +33,7 @@ const fetchCountries = async () => {
 };
 
 fetchCountries();
+let message = `${countries.length} countries available`;
 
 const regions: string[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
@@ -37,7 +41,13 @@ export default {
     name: 'Countries',
     components: { RouterLink },
     data() {
-        return { countries, search: '', region: '', regions };
+        return {
+            countries,
+            search: '',
+            region: '',
+            regions,
+            message
+        };
     },
     computed: {
         filteredCountriesByName() {
@@ -85,6 +95,8 @@ export default {
             Reset Filters
         </button>
     </div>
+
+    <p class="text-center text-2xl">{{ message }}</p>
 
     <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-16 p-10"

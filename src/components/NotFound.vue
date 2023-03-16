@@ -20,13 +20,13 @@ export default {
         <div class="flex flex-row w-full justify-evenly items-center">
             <RouterLink
                 :to="{ name: 'Home' }"
-                class="transition ease-in-out delay-100 text-white text-2xl font-bold text-center p-5 bg-primary rounded-md hover:bg-primaryhover hover:scale-105 w-1/4"
+                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/4"
             >
                 Go back to home
             </RouterLink>
             <RouterLink
                 :to="{ name: 'Countries' }"
-                class="transition ease-in-out delay-100 text-white text-2xl font-bold text-center p-5 bg-primary rounded-md hover:bg-primaryhover hover:scale-105 w-1/4"
+                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/4"
             >
                 Go back to countries
             </RouterLink>

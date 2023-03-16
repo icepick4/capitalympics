@@ -20,21 +20,27 @@ export default {
                 <img src="../assets/logo.png" alt="logo" class="w-20 h-20" />
             </div>
             <div class="flex flex-col items-center">
-                <input
-                    class="rounded-md p-2 w-3/4"
-                    type="text"
-                    placeholder="Username"
-                />
+                <div class="w-3/4">
+                    <p class="ml-2">Username</p>
+                    <input
+                        class="rounded-md p-2 w-full border-2 border-black"
+                        type="text"
+                        placeholder="Username"
+                    />
+                </div>
                 <span class="text-error text-sm scale-0"
                     >Username doesn't exists</span
                 >
             </div>
             <div class="flex flex-col items-center">
-                <input
-                    class="rounded-md p-2 w-3/4"
-                    type="text"
-                    placeholder="Password"
-                />
+                <div class="w-3/4">
+                    <p class="ml-2">Password</p>
+                    <input
+                        class="rounded-md p-2 w-full border-2 border-black"
+                        type="password"
+                        placeholder="Password"
+                    />
+                </div>
                 <span class="text-error text-sm scale-0">Wrong password</span>
             </div>
             <div class="flex flex-col items-center">
