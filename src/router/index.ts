@@ -4,6 +4,7 @@ import About from '../views/About.vue';
 import Countries from '../views/Countries.vue';
 import Home from '../views/Home.vue';
 import Learn from '../views/Learn.vue';
+import Profile from '../views/Profile.vue';
 import SignIn from '../views/SignIn.vue';
 import SignUp from '../views/SignUp.vue';
 import SingleCountry from '../views/SingleCountry.vue';
@@ -42,6 +43,12 @@ const routes = [
         path: '/countries/:countryName',
         name: 'SingleCountry',
         component: SingleCountry,
+        props: true
+    },
+    {
+        path: '/account',
+        name: 'Profile',
+        component: Profile,
         props: true
     },
     {
