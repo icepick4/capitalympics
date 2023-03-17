@@ -40,7 +40,7 @@ const routes = [
         component: Countries
     },
     {
-        path: '/countries/:countryName',
+        path: '/countries/:countryCode',
         name: 'SingleCountry',
         component: SingleCountry,
         props: true

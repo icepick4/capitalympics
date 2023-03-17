@@ -1,11 +1,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { CountryObject } from '../models/Country';
+import { CountryI } from '../models/Country';
 export default defineComponent({
     name: 'Country',
     props: {
         country: {
-            type: CountryObject,
+            type: Object as () => CountryI,
             required: true
         }
     }
@@ -20,7 +20,7 @@ export default defineComponent({
             <div class="p-4 flex flex-row justify-between">
                 <div class="flex flex-col">
                     <h1 class="text-4xl font-bold">{{ country.name }}</h1>
-                    <p>{{ country.officialName }}</p>
+                    <p>{{ country.official_name }}</p>
                     <p class="text-gray-500">{{ country.alpha3Code }}</p>
                 </div>
                 <div class="col-span-1">
@@ -62,9 +62,9 @@ export default defineComponent({
                             <ul>
                                 <li
                                     v-for="currency in country.currencies"
-                                    :key="currency.name"
+                                    :key="currency.currency_name"
                                 >
-                                    {{ currency.name }}
+                                    {{ currency.currency_name }}
                                     {{ currency.symbol }}
                                 </li>
                             </ul>
@@ -74,7 +74,7 @@ export default defineComponent({
                         <dt class="text-gray-500">Google Maps</dt>
                         <dd class="text-gray-900">
                             <a
-                                :href="country.googleMapsLink"
+                                :href="country.google_maps_link"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="flex flex-row items-center gap-2"

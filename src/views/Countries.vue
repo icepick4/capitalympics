@@ -1,39 +1,27 @@
 <script lang="ts">
 import { reactive } from '@vue/reactivity';
+import axios from 'axios';
 import { RouterLink } from 'vue-router';
-import { CountryObject } from '../models/Country';
-const countries = reactive([] as CountryObject[]);
+import { CountryI } from '../models/Country';
+interface State {
+    countries: CountryI[];
+    message: string;
+}
 
-const fetchCountries = async () => {
-    const url = 'https://restcountries.com/v3.1/all';
-    const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error(response.statusText);
-    }
-    const data = await response.json();
-    for (let i = 0; i < data.length; i++) {
-        if (data[i].population > 0 && 'capital' in data[i]) {
-            countries.push({
-                name: data[i].name.common,
-                officialName: data[i].name.official,
-                capital:
-                    typeof data[i].capital === 'string'
-                        ? data[i].capital
-                        : data[i].capital[0],
-                region: data[i].region,
-                subregion: data[i].subregion,
-                population: data[i].population,
-                googleMapsLink: data[i].maps.googleMaps,
-                flag: data[i].flags.png,
-                alpha3Code: data[i].cca3,
-                currencies: data[i].currencies
-            });
-        }
-    }
-};
+const state: State = reactive({
+    countries: [],
+    message: ''
+});
 
-fetchCountries();
-let message = `${countries.length} countries available`;
+axios
+    .get('http://localhost:3000/countries')
+    .then((response) => {
+        state.countries = response.data.countries;
+        state.message = `${state.countries.length} countries available`;
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 
 const regions: string[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
@@ -42,17 +30,16 @@ export default {
     components: { RouterLink },
     data() {
         return {
-            countries,
+            state,
             search: '',
             region: '',
-            regions,
-            message
+            regions
         };
     },
     computed: {
-        filteredCountriesByName() {
+        filteredCountriesByName(): CountryI[] {
             if (this.search.length > 0 || this.region.length > 0) {
-                return this.countries.filter((country) => {
+                return this.state.countries.filter((country) => {
                     return (
                         country.name
                             .toLowerCase()
@@ -61,7 +48,7 @@ export default {
                     );
                 });
             } else {
-                return this.countries;
+                return this.state.countries;
             }
         }
     }
@@ -96,7 +83,7 @@ export default {
         </button>
     </div>
 
-    <p class="text-center text-2xl">{{ message }}</p>
+    <p class="text-center text-white text-2xl">{{ state.message }}</p>
 
     <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-16 p-10"
@@ -109,8 +96,7 @@ export default {
                 :to="{
                     name: 'SingleCountry',
                     params: {
-                        countryName: country.alpha3Code,
-                        countryData: JSON.stringify(country)
+                        countryCode: country.alpha3Code
                     }
                 }"
             >
@@ -120,7 +106,7 @@ export default {
                     <img
                         :src="country.flag"
                         :alt="`Flag of ${country.name}`"
-                        class="w-full h-auto object-cover rounded shadow transition ease-in-out duration-300 border-2 border-black"
+                        class="w-full h-auto I-cover rounded shadow transition ease-in-out duration-300 border-2 border-black"
                         :title="country.name"
                     />
                     <span

@@ -1,56 +1,41 @@
 <script lang="ts">
+import axios from 'axios';
 import { defineComponent } from 'vue';
-import { RouterLink, useRoute } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import Country from '../components/Country.vue';
-import { CountryObject, Currency } from '../models/Country';
-import router from '../router';
+import { CountryI } from '../models/Country';
+interface State {
+    country: CountryI | undefined;
+}
 
 export default defineComponent({
     name: 'SingleCountry',
     components: { Country },
     inheritAttrs: false,
-    setup() {
-        const route = useRoute();
-        let country = route.params.countryData;
-        if (country == undefined) {
-            //go back to countries
-            router.replace({ name: 'Countries' });
-            return {};
-        }
-        if (Array.isArray(country)) {
-            country = country[0];
-        }
-        let tempCountryObject = JSON.parse(country);
-        if (tempCountryObject.currencies == undefined) {
-            tempCountryObject.currencies = [];
-        } else {
-            for (let i = 0; i < tempCountryObject.currencies.length; i++) {
-                tempCountryObject.currencies[i] = new Currency(
-                    tempCountryObject.currencies[i].name,
-                    tempCountryObject.currencies[i].symbol
-                );
-            }
-        }
-        let countryObject: CountryObject = new CountryObject(
-            tempCountryObject.name,
-            tempCountryObject.officialName,
-            tempCountryObject.capital,
-            tempCountryObject.region,
-            tempCountryObject.subregion,
-            new Intl.NumberFormat().format(tempCountryObject.population),
-            tempCountryObject.googleMapsLink,
-            tempCountryObject.flag,
-            tempCountryObject.alpha3Code,
-            tempCountryObject.currencies
-        );
-        return { countryObject };
+    data() {
+        return {
+            state: {
+                country: undefined
+            } as State
+        };
+    },
+    created() {
+        const countryCode = this.$route.params.countryCode;
+        axios
+            .get(`http://localhost:3000/countries/${countryCode}`)
+            .then((response) => {
+                this.state.country = response.data.country as CountryI;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 });
 </script>
 
 <template>
     <Transition name="slide-fade" appear>
-        <Country v-if="countryObject != undefined" :country="countryObject" />
+        <Country v-if="state.country != undefined" :country="state.country" />
     </Transition>
     <RouterLink
         :to="{ name: 'Countries' }"

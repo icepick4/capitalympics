@@ -1,44 +1,17 @@
-export class CountryObject {
+export interface CountryI {
     name: string;
-    officialName: string;
+    official_name: string;
     capital: string;
     region: string;
     subregion: string;
     population: string;
-    googleMapsLink: string;
+    google_maps_link: string;
     flag: string;
     alpha3Code: string;
     currencies: Currency[];
-    constructor(
-        name: string,
-        officialName: string,
-        capital: string,
-        region: string,
-        subregion: string,
-        population: string,
-        googleMapsLink: string,
-        flag: string,
-        alpha3Code: string,
-        currencies: Currency[]
-    ) {
-        this.name = name;
-        this.officialName = officialName;
-        this.capital = capital;
-        this.region = region;
-        this.subregion = subregion;
-        this.population = population;
-        this.googleMapsLink = googleMapsLink;
-        this.flag = flag;
-        this.alpha3Code = alpha3Code;
-        this.currencies = currencies;
-    }
 }
 
-export class Currency {
-    name: string;
+export interface Currency {
+    currency_name: string;
     symbol: string;
-    constructor(name: string, symbol: string) {
-        this.name = name;
-        this.symbol = symbol;
-    }
 }
