@@ -15,9 +15,7 @@ export default defineComponent({
 
 <template>
     <div class="flex justify-center">
-        <div
-            class="max-w-lg w-full bg-gray-300 rounded-lg shadow-lg overflow-hidden"
-        >
+        <div class="w-2/5 bg-gray-300 rounded-lg shadow-lg overflow-hidden">
             <div class="p-4 flex flex-row justify-between">
                 <div class="flex flex-col">
                     <h1 class="text-4xl font-bold">{{ country.name }}</h1>

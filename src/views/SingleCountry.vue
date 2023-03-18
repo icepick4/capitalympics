@@ -3,18 +3,21 @@ import axios from 'axios';
 import { defineComponent, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import Country from '../components/Country.vue';
+import EmptyCountry from '../components/EmptyCountry.vue';
 import { CountryI } from '../models/Country';
 interface State {
     country: CountryI | undefined;
+    isLoading: boolean;
 }
 
 export default defineComponent({
     name: 'SingleCountry',
-    components: { Country },
+    components: { Country, EmptyCountry },
     inheritAttrs: false,
     setup() {
         const state: State = reactive({
-            country: undefined
+            country: undefined,
+            isLoading: true
         });
         return {
             state
@@ -26,6 +29,7 @@ export default defineComponent({
             .get(`http://localhost:3000/countries/${countryCode}`)
             .then((response) => {
                 this.state.country = response.data.country as CountryI;
+                this.state.isLoading = false;
             })
             .catch((error) => {
                 console.log(error);
@@ -35,6 +39,12 @@ export default defineComponent({
 </script>
 
 <template>
+    <div
+        v-if="state.isLoading"
+        class="flex justify-center items-center h-full w-full"
+    >
+        <EmptyCountry />
+    </div>
     <Transition name="slide-fade" appear>
         <Country v-if="state.country != undefined" :country="state.country" />
     </Transition>
