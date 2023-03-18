@@ -1,9 +1,9 @@
 <script lang="ts">
 import axios from 'axios';
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { defineComponent, ref } from 'vue';
+import { RouterLink, useRouter } from 'vue-router';
 
-export default {
+export default defineComponent({
     name: 'SignUp',
     components: { RouterLink },
     setup() {
@@ -11,69 +11,78 @@ export default {
         const password = ref('');
         const passwordConfirmation = ref('');
         const numberOfPeople = ref(0);
+        const router = useRouter();
+
         axios.get('http://localhost:3000/users').then((response) => {
             numberOfPeople.value = response.data.count;
         });
-        return {
-            numberOfPeople,
-            password,
-            passwordConfirmation,
-            username
-        };
-    },
-    methods: {
-        async signup() {
+
+        const signup = async () => {
             axios
                 .post('http://localhost:3000/users', {
                     user: {
-                        name: this.username,
-                        password: this.password
+                        name: username.value,
+                        password: password.value
                     }
                 })
                 .then((response) => {
-                    this.$router.push('/signin');
+                    router.push('/signin');
                 })
                 .catch((error) => {
                     console.log(error);
                 });
-        },
-        validatePassword() {
+        };
+
+        const validatePassword = () => {
             const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-            if (!passwordRegex.test(this.password)) {
+            if (!passwordRegex.test(password.value)) {
                 return false;
             } else {
                 return true;
             }
-        },
-        validatePasswordConfirmation() {
-            if (this.password !== this.passwordConfirmation) {
+        };
+
+        const validatePasswordConfirmation = () => {
+            if (password.value !== passwordConfirmation.value) {
                 return false;
             } else {
                 return true;
             }
-        },
-        validateUsername() {
-            if (this.username.length < 1) {
+        };
+
+        const validateUsername = () => {
+            if (username.value.length < 1) {
                 return false;
             } else {
                 return true;
             }
-        }
-    },
-    computed: {
-        isFormValid(): boolean {
+        };
+
+        const isFormValid = () => {
             if (
-                this.validatePassword() &&
-                this.validatePasswordConfirmation() &&
-                this.validateUsername()
+                validatePassword() &&
+                validatePasswordConfirmation() &&
+                validateUsername()
             ) {
                 return true;
             } else {
                 return false;
             }
-        }
+        };
+
+        return {
+            username,
+            password,
+            passwordConfirmation,
+            numberOfPeople,
+            signup,
+            validatePassword,
+            validatePasswordConfirmation,
+            validateUsername,
+            isFormValid
+        };
     }
-};
+});
 </script>
 
 <template>

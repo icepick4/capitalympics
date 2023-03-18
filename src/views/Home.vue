@@ -1,12 +1,4 @@
-<script lang="ts">
-export default {
-    name: 'Home',
-    components: {},
-    setup() {
-        return {};
-    }
-};
-</script>
+<script setup lang="ts"></script>
 
 <template>
     <h1 class="text-white text-center text-6xl">Capitalympics !</h1>

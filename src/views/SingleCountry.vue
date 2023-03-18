@@ -1,6 +1,6 @@
 <script lang="ts">
 import axios from 'axios';
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import Country from '../components/Country.vue';
 import { CountryI } from '../models/Country';
@@ -12,11 +12,12 @@ export default defineComponent({
     name: 'SingleCountry',
     components: { Country },
     inheritAttrs: false,
-    data() {
+    setup() {
+        const state: State = reactive({
+            country: undefined
+        });
         return {
-            state: {
-                country: undefined
-            } as State
+            state
         };
     },
     created() {

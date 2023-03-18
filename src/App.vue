@@ -1,12 +1,13 @@
 <script lang="ts">
+import { defineComponent } from 'vue';
 import Footer from './components/Footer.vue';
 import Header from './components/Header.vue';
 
-export default {
+export default defineComponent({
     name: 'App',
     components: { Header, Footer },
     setup() {}
-};
+});
 </script>
 
 <template>

@@ -1,8 +1,8 @@
 <script lang="ts">
 import axios from 'axios';
-import { ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 
-export default {
+export default defineComponent({
     name: 'SignIn',
     components: {},
     setup() {
@@ -63,7 +63,7 @@ export default {
             signIn
         };
     }
-};
+});
 </script>
 
 <template>

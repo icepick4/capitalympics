@@ -1,7 +1,7 @@
 <script lang="ts">
 import { reactive } from '@vue/reactivity';
 import axios from 'axios';
-import { computed, defineComponent, onBeforeMount } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { RouterLink } from 'vue-router';
 import { CountryI } from '../models/Country';
 interface State {
@@ -49,18 +49,6 @@ export default defineComponent({
             }
         });
 
-        onBeforeMount(() => {
-            axios
-                .get('http://localhost:3000/countries')
-                .then((response) => {
-                    state.countries = response.data.countries;
-                    state.message = `${state.countries.length} countries available`;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        });
-
         return {
             filteredCountriesByName,
             regions,
@@ -68,6 +56,17 @@ export default defineComponent({
             search,
             state
         };
+    },
+    created() {
+        axios
+            .get('http://localhost:3000/countries')
+            .then((response) => {
+                this.state.countries = response.data.countries;
+                this.state.message = `${this.state.countries.length} countries available`;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 });
 </script>
