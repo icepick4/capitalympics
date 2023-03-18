@@ -3,6 +3,7 @@ import { reactive } from '@vue/reactivity';
 import axios from 'axios';
 import { computed, defineComponent } from 'vue';
 import { RouterLink } from 'vue-router';
+import CountryLink from '../components/CountryLink.vue';
 import { CountryI } from '../models/Country';
 interface State {
     countries: CountryI[];
@@ -11,7 +12,7 @@ interface State {
 
 export default defineComponent({
     name: 'Countries',
-    components: { RouterLink },
+    components: { RouterLink, CountryLink },
     setup() {
         const regions: string[] = [
             'Africa',
@@ -58,9 +59,11 @@ export default defineComponent({
         };
     },
     created() {
+        console.log('Countries created');
         axios
             .get('http://localhost:3000/countries')
             .then((response) => {
+                console.log('finished loading countries');
                 this.state.countries = response.data.countries;
                 this.state.message = `${this.state.countries.length} countries available`;
             })
@@ -108,30 +111,11 @@ export default defineComponent({
             v-for="country in filteredCountriesByName"
             :key="country.alpha3Code"
         >
-            <router-link
-                :to="{
-                    name: 'SingleCountry',
-                    params: {
-                        countryCode: country.alpha3Code
-                    }
-                }"
-            >
-                <div
-                    class="relative flex justify-center items-center h-full hover:scale-105 transition ease-in-out duration-300"
-                >
-                    <img
-                        :src="country.flag"
-                        :alt="`Flag of ${country.name}`"
-                        class="w-full h-auto I-cover rounded shadow transition ease-in-out duration-300 border-2 border-black"
-                        :title="country.name"
-                    />
-                    <span
-                        class="absolute w-full h-full bottom-0 left-0 right-0 text-white opacity-0 hover:opacity-100 transition ease-in-out duration-200"
-                    >
-                        <p class="-translate-y-7">{{ country.name }}</p>
-                    </span>
-                </div>
-            </router-link>
+            <CountryLink
+                :countryName="country.name"
+                :countryCode="country.alpha3Code"
+                :countryFlag="country.flag"
+            />
         </div>
     </div>
 </template>
