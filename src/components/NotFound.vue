@@ -1,12 +1,4 @@
-<script lang="ts">
-export default {
-    name: 'NotFound',
-    components: {},
-    setup() {
-        return {};
-    }
-};
-</script>
+<script setup lang="ts"></script>
 
 <template>
     <div class="flex flex-col items-center justify-center h-full gap-20">

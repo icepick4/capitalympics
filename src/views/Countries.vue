@@ -1,6 +1,7 @@
 <script lang="ts">
 import { reactive } from '@vue/reactivity';
 import axios from 'axios';
+import { computed, defineComponent, onBeforeMount } from 'vue';
 import { RouterLink } from 'vue-router';
 import { CountryI } from '../models/Country';
 interface State {
@@ -8,51 +9,67 @@ interface State {
     message: string;
 }
 
-const state: State = reactive({
-    countries: [],
-    message: ''
-});
-
-axios
-    .get('http://localhost:3000/countries')
-    .then((response) => {
-        state.countries = response.data.countries;
-        state.message = `${state.countries.length} countries available`;
-    })
-    .catch((error) => {
-        console.log(error);
-    });
-
-const regions: string[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
-
-export default {
+export default defineComponent({
     name: 'Countries',
     components: { RouterLink },
-    data() {
-        return {
-            state,
-            search: '',
-            region: '',
-            regions
-        };
-    },
-    computed: {
-        filteredCountriesByName(): CountryI[] {
-            if (this.search.length > 0 || this.region.length > 0) {
-                return this.state.countries.filter((country) => {
+    setup() {
+        const regions: string[] = [
+            'Africa',
+            'Americas',
+            'Asia',
+            'Europe',
+            'Oceania'
+        ];
+
+        const state: State = reactive({
+            countries: [],
+            message: ''
+        });
+
+        const search = reactive({
+            value: ''
+        });
+
+        const region = reactive({
+            value: ''
+        });
+
+        const filteredCountriesByName = computed(() => {
+            if (search.value.length > 0 || region.value.length > 0) {
+                return state.countries.filter((country) => {
                     return (
                         country.name
                             .toLowerCase()
-                            .includes(this.search.toLowerCase()) &&
-                        country.region.includes(this.region)
+                            .includes(search.value.toLowerCase()) &&
+                        country.region.includes(region.value)
                     );
                 });
             } else {
-                return this.state.countries;
+                return state.countries;
             }
-        }
+        });
+
+        onBeforeMount(() => {
+            axios
+                .get('http://localhost:3000/countries')
+                .then((response) => {
+                    state.countries = response.data.countries;
+                    state.message = `${state.countries.length} countries available`;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        });
+
+        return {
+            filteredCountriesByName,
+            regions,
+            region,
+            search,
+            state
+        };
     }
-};
+});
 </script>
 
 <template>
@@ -60,12 +77,12 @@ export default {
         <h1 class="text-4xl font-bold text-center text-white">Countries</h1>
         <input
             type="text"
-            v-model="search"
+            v-model="search.value"
             class="w-1/4 mx-auto p-2 placeholder-opacity-50 rounded-md"
             placeholder="Search by name"
         />
 
-        <select v-model="region" class="w-1/4 mx-auto p-2 rounded-md">
+        <select v-model="region.value" class="w-1/4 mx-auto p-2 rounded-md">
             <option value="">All</option>
             <option v-for="region in regions" :key="region" :value="region">
                 {{ region }}
@@ -75,8 +92,8 @@ export default {
         <button
             class="w-1/4 mx-auto p-2 rounded-md bg-primary hover:bg-primaryhover text-white"
             @click="
-                search = '';
-                region = '';
+                search.value = '';
+                region.value = '';
             "
         >
             Reset Filters

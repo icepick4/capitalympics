@@ -1,12 +1,4 @@
-<script lang="ts">
-export default {
-    name: 'About',
-    components: {},
-    setup() {
-        return {};
-    }
-};
-</script>
+<script setup lang="ts"></script>
 
 <template>
     <h1 class="text-white">Hello About !</h1>

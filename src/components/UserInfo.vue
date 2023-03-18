@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 import { User } from '../models/User';
 export default defineComponent({
-    name: 'Country',
+    name: 'UserInfo',
     props: {
         user: {
             type: User,

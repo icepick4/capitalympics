@@ -1,11 +1,17 @@
 <script lang="ts">
+import { defineComponent } from 'vue';
 import { RouterLink } from 'vue-router';
-export default {
+export default defineComponent({
     name: 'Header',
     setup() {
-        return {};
+        const isUserLoggedIn = () => {
+            return localStorage.getItem('token') !== null;
+        };
+        return {
+            isUserLoggedIn
+        };
     }
-};
+});
 </script>
 
 <template>

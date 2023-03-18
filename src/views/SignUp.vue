@@ -1,12 +1,77 @@
 <script lang="ts">
+import axios from 'axios';
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
-let numberOfPeople = 4;
 export default {
     name: 'SignUp',
     components: { RouterLink },
     setup() {
-        return { numberOfPeople };
+        const username = ref('');
+        const password = ref('');
+        const passwordConfirmation = ref('');
+        const numberOfPeople = ref(0);
+        axios.get('http://localhost:3000/users').then((response) => {
+            numberOfPeople.value = response.data.count;
+        });
+        return {
+            numberOfPeople,
+            password,
+            passwordConfirmation,
+            username
+        };
+    },
+    methods: {
+        async signup() {
+            axios
+                .post('http://localhost:3000/users', {
+                    user: {
+                        name: this.username,
+                        password: this.password
+                    }
+                })
+                .then((response) => {
+                    this.$router.push('/signin');
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        validatePassword() {
+            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            if (!passwordRegex.test(this.password)) {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        validatePasswordConfirmation() {
+            if (this.password !== this.passwordConfirmation) {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        validateUsername() {
+            if (this.username.length < 1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    },
+    computed: {
+        isFormValid(): boolean {
+            if (
+                this.validatePassword() &&
+                this.validatePasswordConfirmation() &&
+                this.validateUsername()
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 };
 </script>
@@ -63,10 +128,14 @@ export default {
                             class="rounded-md p-2 w-full border-2 border-black"
                             type="text"
                             placeholder="Username"
+                            v-model="username"
+                            @input="validateUsername()"
                         />
                     </div>
-                    <span class="text-error text-sm hidden ml-2"
-                        >Username already taken</span
+                    <span
+                        v-if="!validateUsername()"
+                        class="text-error text-sm ml-2 text-center"
+                        >Username must be at least 1 character long</span
                     >
                 </div>
                 <div class="flex flex-col items-center">
@@ -74,11 +143,15 @@ export default {
                         <p class="ml-2">Password</p>
                         <input
                             class="rounded-md p-2 w-full border-2 border-black"
-                            type="text"
+                            type="password"
                             placeholder="Password"
+                            v-model="password"
+                            @input="validatePassword()"
                         />
                     </div>
-                    <span class="text-error text-sm hidden ml-2"
+                    <span
+                        v-if="!validatePassword()"
+                        class="text-error text-sm ml-2 text-center"
                         >Password must be at least 8 characters long and contain
                         at least one number and one capital letter</span
                     >
@@ -88,17 +161,23 @@ export default {
                         <p class="ml-2">Confirm Password</p>
                         <input
                             class="rounded-md p-2 w-full border-2 border-black"
-                            type="text"
+                            type="password"
                             placeholder="Confirm Password"
+                            v-model="passwordConfirmation"
+                            @input="validatePasswordConfirmation()"
                         />
                     </div>
-                    <span class="text-error text-sm hidden ml-2"
+                    <span
+                        v-if="!validatePasswordConfirmation()"
+                        class="text-error text-center text-sm ml-2"
                         >Passwords do not match</span
                     >
                 </div>
                 <div class="flex flex-col items-center">
                     <button
                         class="bg-primary hover:bg-secondary w-3/4 hover:scale-105 transition-all duration-100 delay-75 text-xl rounded-md p-2 text-center"
+                        @click="signup"
+                        :disabled="!isFormValid"
                     >
                         Sign Up
                     </button>

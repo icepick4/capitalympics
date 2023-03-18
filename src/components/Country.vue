@@ -1,11 +1,12 @@
 <script lang="ts">
+import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 import { CountryI } from '../models/Country';
 export default defineComponent({
     name: 'Country',
     props: {
         country: {
-            type: Object as () => CountryI,
+            type: Object as PropType<CountryI>,
             required: true
         }
     }
@@ -47,7 +48,7 @@ export default defineComponent({
                     <div class="col-span-1">
                         <dt class="text-gray-500">Population</dt>
                         <dd class="text-gray-900">
-                            {{ country.population }}
+                            {{ Intl.NumberFormat().format(country.population) }}
                         </dd>
                     </div>
                     <div class="col-span-1">

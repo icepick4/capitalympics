@@ -4,7 +4,7 @@ export interface CountryI {
     capital: string;
     region: string;
     subregion: string;
-    population: string;
+    population: number;
     google_maps_link: string;
     flag: string;
     alpha3Code: string;
