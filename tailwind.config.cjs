@@ -3,7 +3,11 @@ const colors = require('tailwindcss/colors');
 module.exports = {
     content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     theme: {
-        extend: {},
+        extend: {
+            animation: {
+                'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+            }
+        },
         colors: {
             primary: '#0D8C5D',
             secondary: '#67AC64',

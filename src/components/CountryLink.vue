@@ -1,24 +1,19 @@
-<script lang="ts">
+<script setup lang="ts">
 import VLazyImage from 'v-lazy-image';
-import { defineComponent } from 'vue';
 import { RouterLink } from 'vue-router';
-export default defineComponent({
-    name: 'CountryLink',
-    props: {
-        countryName: {
-            type: String,
-            required: true
-        },
-        countryFlag: {
-            type: String,
-            required: true
-        },
-        countryCode: {
-            type: String,
-            required: true
-        }
+const props = defineProps({
+    countryName: {
+        type: String,
+        required: true
     },
-    components: { RouterLink, 'v-lazy-image': VLazyImage }
+    countryFlag: {
+        type: String,
+        required: true
+    },
+    countryCode: {
+        type: String,
+        required: true
+    }
 });
 </script>
 

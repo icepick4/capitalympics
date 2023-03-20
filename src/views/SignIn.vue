@@ -1,69 +1,55 @@
-<script lang="ts">
+<script setup lang="ts">
 import axios from 'axios';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 
-export default defineComponent({
-    name: 'SignIn',
-    components: {},
-    setup() {
-        const userFound = ref(false);
-        const signedIn = ref(false);
-        const username = ref('');
-        const password = ref('');
+const userFound = ref(false);
+const signedIn = ref(false);
+const username = ref('');
+const password = ref('');
 
-        const handleSignInError = () => {
+const handleSignInError = () => {
+    userFound.value = false;
+    signedIn.value = true;
+};
+
+const validateForm = () => {
+    if (!username.value || !password.value) {
+        alert('Please fill in both username and password fields');
+        return false;
+    }
+    return true;
+};
+
+const signIn = async () => {
+    if (!validateForm()) {
+        return;
+    }
+
+    try {
+        const response = await axios.post(
+            'http://localhost:3000/users/connect',
+            {
+                user: {
+                    name: username.value,
+                    password: password.value
+                }
+            }
+        );
+        if (response.status === 200) {
+            //store token in local storage
+            const token = response.data.token;
+            localStorage.setItem('token', token);
+            const user = response.data.user;
+            localStorage.setItem('user', JSON.stringify(user));
+        } else if (response.status === 500) {
+            console.log('user not found');
             userFound.value = false;
             signedIn.value = true;
-        };
-
-        const validateForm = () => {
-            if (!username.value || !password.value) {
-                alert('Please fill in both username and password fields');
-                return false;
-            }
-            return true;
-        };
-
-        const signIn = async () => {
-            if (!validateForm()) {
-                return;
-            }
-
-            try {
-                const response = await axios.post(
-                    'http://localhost:3000/users/connect',
-                    {
-                        user: {
-                            name: username.value,
-                            password: password.value
-                        }
-                    }
-                );
-                if (response.status === 200) {
-                    //store token in local storage
-                    const token = response.data.token;
-                    localStorage.setItem('token', token);
-                    const user = response.data.user;
-                    localStorage.setItem('user', JSON.stringify(user));
-                } else if (response.status === 500) {
-                    console.log('user not found');
-                    userFound.value = false;
-                    signedIn.value = true;
-                }
-            } catch (error) {
-                handleSignInError();
-            }
-        };
-
-        return {
-            userFound,
-            signedIn,
-            username,
-            password,
-            signIn
-        };
+        }
+    } catch (error) {
+        handleSignInError();
     }
-});
+};
 </script>
 
 <template>

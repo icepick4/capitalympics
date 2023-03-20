@@ -1,13 +1,9 @@
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import { User } from '../models/User';
-export default defineComponent({
-    name: 'UserInfo',
-    props: {
-        user: {
-            type: User,
-            required: true
-        }
+const props = defineProps({
+    user: {
+        type: User,
+        required: true
     }
 });
 </script>

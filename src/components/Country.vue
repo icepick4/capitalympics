@@ -1,14 +1,10 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue';
-import { defineComponent } from 'vue';
 import { CountryI } from '../models/Country';
-export default defineComponent({
-    name: 'Country',
-    props: {
-        country: {
-            type: Object as PropType<CountryI>,
-            required: true
-        }
+const props = defineProps({
+    country: {
+        type: Object as PropType<CountryI>,
+        required: true
     }
 });
 </script>

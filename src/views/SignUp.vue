@@ -1,88 +1,69 @@
-<script lang="ts">
+<script setup lang="ts">
 import axios from 'axios';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
+const username = ref('');
+const password = ref('');
+const passwordConfirmation = ref('');
+const numberOfPeople = ref(0);
+const router = useRouter();
 
-export default defineComponent({
-    name: 'SignUp',
-    components: { RouterLink },
-    setup() {
-        const username = ref('');
-        const password = ref('');
-        const passwordConfirmation = ref('');
-        const numberOfPeople = ref(0);
-        const router = useRouter();
-
-        axios.get('http://localhost:3000/users').then((response) => {
-            numberOfPeople.value = response.data.count;
-        });
-
-        const signup = async () => {
-            axios
-                .post('http://localhost:3000/users', {
-                    user: {
-                        name: username.value,
-                        password: password.value
-                    }
-                })
-                .then((response) => {
-                    router.push('/signin');
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        };
-
-        const validatePassword = () => {
-            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-            if (!passwordRegex.test(password.value)) {
-                return false;
-            } else {
-                return true;
-            }
-        };
-
-        const validatePasswordConfirmation = () => {
-            if (password.value !== passwordConfirmation.value) {
-                return false;
-            } else {
-                return true;
-            }
-        };
-
-        const validateUsername = () => {
-            if (username.value.length < 1) {
-                return false;
-            } else {
-                return true;
-            }
-        };
-
-        const isFormValid = () => {
-            if (
-                validatePassword() &&
-                validatePasswordConfirmation() &&
-                validateUsername()
-            ) {
-                return true;
-            } else {
-                return false;
-            }
-        };
-
-        return {
-            username,
-            password,
-            passwordConfirmation,
-            numberOfPeople,
-            signup,
-            validatePassword,
-            validatePasswordConfirmation,
-            validateUsername,
-            isFormValid
-        };
-    }
+axios.get('http://localhost:3000/users').then((response) => {
+    numberOfPeople.value = response.data.count;
 });
+
+const signup = async () => {
+    axios
+        .post('http://localhost:3000/users', {
+            user: {
+                name: username.value,
+                password: password.value
+            }
+        })
+        .then((response) => {
+            router.push('/signin');
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
+
+const validatePassword = () => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(password.value)) {
+        return false;
+    } else {
+        return true;
+    }
+};
+
+const validatePasswordConfirmation = () => {
+    if (password.value !== passwordConfirmation.value) {
+        return false;
+    } else {
+        return true;
+    }
+};
+
+const validateUsername = () => {
+    if (username.value.length < 1) {
+        return false;
+    } else {
+        return true;
+    }
+};
+
+const isFormValid = () => {
+    if (
+        validatePassword() &&
+        validatePasswordConfirmation() &&
+        validateUsername()
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+};
 </script>
 
 <template>

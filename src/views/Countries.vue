@@ -1,76 +1,53 @@
-<script lang="ts">
+<script setup lang="ts">
 import { reactive } from '@vue/reactivity';
 import axios from 'axios';
-import { computed, defineComponent } from 'vue';
-import { RouterLink } from 'vue-router';
+import { computed, onBeforeMount } from 'vue';
 import CountryLink from '../components/CountryLink.vue';
 import { CountryI } from '../models/Country';
+
 interface State {
     countries: CountryI[];
     message: string;
 }
+const regions: string[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
-export default defineComponent({
-    name: 'Countries',
-    components: { RouterLink, CountryLink },
-    setup() {
-        const regions: string[] = [
-            'Africa',
-            'Americas',
-            'Asia',
-            'Europe',
-            'Oceania'
-        ];
+const state: State = reactive({
+    countries: [],
+    message: ''
+});
 
-        const state: State = reactive({
-            countries: [],
-            message: ''
+const search = reactive({
+    value: ''
+});
+
+const region = reactive({
+    value: ''
+});
+const filteredCountriesByName = computed(() => {
+    if (search.value.length > 0 || region.value.length > 0) {
+        return state.countries.filter((country) => {
+            return (
+                country.name
+                    .toLowerCase()
+                    .includes(search.value.toLowerCase()) &&
+                country.region.includes(region.value)
+            );
         });
-
-        const search = reactive({
-            value: ''
-        });
-
-        const region = reactive({
-            value: ''
-        });
-
-        const filteredCountriesByName = computed(() => {
-            if (search.value.length > 0 || region.value.length > 0) {
-                return state.countries.filter((country) => {
-                    return (
-                        country.name
-                            .toLowerCase()
-                            .includes(search.value.toLowerCase()) &&
-                        country.region.includes(region.value)
-                    );
-                });
-            } else {
-                return state.countries;
-            }
-        });
-
-        return {
-            filteredCountriesByName,
-            regions,
-            region,
-            search,
-            state
-        };
-    },
-    created() {
-        console.log('Countries created');
-        axios
-            .get('http://localhost:3000/countries')
-            .then((response) => {
-                console.log('finished loading countries');
-                this.state.countries = response.data.countries;
-                this.state.message = `${this.state.countries.length} countries available`;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    } else {
+        return state.countries;
     }
+});
+onBeforeMount(() => {
+    axios
+        .get('http://localhost:3000/countries')
+        .then((response) => {
+            console.log('finished loading countries');
+            state.countries = response.data.countries;
+            state.message = `${state.countries.length} countries available`;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 });
 </script>
 
@@ -105,6 +82,18 @@ export default defineComponent({
     <p class="text-center text-white text-2xl">{{ state.message }}</p>
 
     <div
+        v-if="filteredCountriesByName.length === 0"
+        class="flex justify-center items-center w-full h-full gap-5"
+    >
+        <div
+            v-for="i in 3"
+            :key="i"
+            :style="{ 'animation-delay': `${(i - 1) * 0.2}s` }"
+            class="rounded-full h-8 w-8 animate-pulse-fast flex justify-center items-center bg-white"
+        ></div>
+    </div>
+    <div
+        v-else
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-16 p-10"
     >
         <div

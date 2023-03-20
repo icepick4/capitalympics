@@ -1,17 +1,8 @@
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import { RouterLink } from 'vue-router';
-export default defineComponent({
-    name: 'Header',
-    setup() {
-        const isUserLoggedIn = () => {
-            return localStorage.getItem('token') !== null;
-        };
-        return {
-            isUserLoggedIn
-        };
-    }
-});
+const isUserLoggedIn = () => {
+    return localStorage.getItem('token') !== null;
+};
 </script>
 
 <template>

@@ -1,7 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 import axios from 'axios';
-import { defineComponent, reactive } from 'vue';
-import { RouterLink } from 'vue-router';
+import { onBeforeMount, reactive } from 'vue';
+import { RouterLink, useRoute } from 'vue-router';
 import Country from '../components/Country.vue';
 import EmptyCountry from '../components/EmptyCountry.vue';
 import { CountryI } from '../models/Country';
@@ -10,31 +10,23 @@ interface State {
     isLoading: boolean;
 }
 
-export default defineComponent({
-    name: 'SingleCountry',
-    components: { Country, EmptyCountry },
-    inheritAttrs: false,
-    setup() {
-        const state: State = reactive({
-            country: undefined,
-            isLoading: true
+const state: State = reactive({
+    country: undefined,
+    isLoading: true
+});
+
+onBeforeMount(() => {
+    const route = useRoute();
+    const countryCode = route.params.countryCode;
+    axios
+        .get(`http://localhost:3000/countries/${countryCode}`)
+        .then((response) => {
+            state.country = response.data.country as CountryI;
+            state.isLoading = false;
+        })
+        .catch((error) => {
+            console.log(error);
         });
-        return {
-            state
-        };
-    },
-    created() {
-        const countryCode = this.$route.params.countryCode;
-        axios
-            .get(`http://localhost:3000/countries/${countryCode}`)
-            .then((response) => {
-                this.state.country = response.data.country as CountryI;
-                this.state.isLoading = false;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
 });
 </script>
 
