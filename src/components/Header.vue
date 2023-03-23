@@ -37,7 +37,7 @@ const isUserLoggedIn = () => {
         </div>
         <RouterLink to="/">
             <div class="flex items-center group">
-                <img src="../assets/logo.png" alt="logo" class="w-28 h-28" />
+                <img src="/logo.png" alt="logo" class="w-28 h-28" />
                 <h1
                     class="font-medium text-primary text-xl group-hover:text-secondary group- transition-all duration-75 ease-in-out"
                 >

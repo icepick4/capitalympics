@@ -73,12 +73,12 @@ const isFormValid = () => {
                 class="flex flex-col bg-white h-full w-full justify-evenly items-center gap-3 py-10 px-6 rounded-l-xl border-2 border-black"
             >
                 <h1 class="text-4xl">Discover the world !</h1>
-                <img src="../assets/logo.png" alt="logo" class="w-1/2 h-auto" />
+                <img src="/logo.png" alt="logo" class="w-1/2 h-auto" />
                 <h1 class="text-2xl underline">By signing up you get :</h1>
                 <ul class="flex flex-col gap-2">
                     <li class="flex flex-row gap-5">
                         <img
-                            src="../assets/icons/medal.png"
+                            src="/icons/medal.png"
                             alt="medal"
                             class="w-11 h-11"
                         />
@@ -86,7 +86,7 @@ const isFormValid = () => {
                     </li>
                     <li class="flex flex-row gap-5">
                         <img
-                            src="../assets/icons/medal.png"
+                            src="/icons/medal.png"
                             alt="medal"
                             class="w-11 h-11"
                         />
@@ -94,7 +94,7 @@ const isFormValid = () => {
                     </li>
                     <li class="flex flex-row gap-5">
                         <img
-                            src="../assets/icons/medal.png"
+                            src="/icons/medal.png"
                             alt="medal"
                             class="w-11 h-11"
                         />

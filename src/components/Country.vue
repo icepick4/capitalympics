@@ -75,7 +75,7 @@ const props = defineProps({
                                 class="flex flex-row items-center gap-2"
                             >
                                 <img
-                                    src="../assets/icons/google-maps.png"
+                                    src="/icons/google-maps.png"
                                     alt="Google Maps"
                                     class="w-12 h-12"
                                 />

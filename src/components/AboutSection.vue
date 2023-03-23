@@ -30,8 +30,14 @@ const props = defineProps({
         <div class="flex flex-col gap-5">
             <h1 class="text-4xl font-bold">{{ title }}</h1>
             <p class="text-gray-600">{{ text }}</p>
-            <RouterLink :to="link" class="text-primary hover:underline text-lg"
+            <RouterLink
+                v-if="!link.includes('https')"
+                :to="link"
+                class="text-primary hover:underline text-lg"
                 >Learn more</RouterLink
+            >
+            <a v-else :href="link" class="text-primary hover:underline text-lg"
+                >Learn more</a
             >
         </div>
         <div class="relative">

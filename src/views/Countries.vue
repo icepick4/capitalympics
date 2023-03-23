@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { reactive } from '@vue/reactivity';
-import axios from 'axios';
 import { computed, onBeforeMount } from 'vue';
 import CountryLink from '../components/CountryLink.vue';
 import { CountryI } from '../models/Country';
+import ApiService from '../services/ApiService';
 
 interface State {
     countries: CountryI[];
@@ -37,17 +37,13 @@ const filteredCountriesByName = computed(() => {
         return state.countries;
     }
 });
-onBeforeMount(() => {
-    axios
-        .get('http://localhost:3000/countries')
-        .then((response) => {
-            console.log('finished loading countries');
-            state.countries = response.data.countries;
-            state.message = `${state.countries.length} countries available`;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+onBeforeMount(async () => {
+    state.countries = await ApiService.getCountries();
+    if (state.countries.length === 0) {
+        state.message = 'No countries found';
+    } else {
+        state.message = `Found ${state.countries.length} countries`;
+    }
 });
 </script>
 

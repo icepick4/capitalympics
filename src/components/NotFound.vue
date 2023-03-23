@@ -3,7 +3,7 @@
 <template>
     <div class="flex flex-col items-center justify-center h-full gap-20">
         <div class="flex flex-col items-center justify-center">
-            <img src="../assets/logo.png" alt="logo" class="w-28 h-28" />
+            <img src="/logo.png" alt="logo" class="w-28 h-28" />
             <h1 class="text-6xl font-bold text-white text-center">404</h1>
             <h2 class="text-2xl font-bold text-white text-center">
                 Page not found

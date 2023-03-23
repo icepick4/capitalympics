@@ -64,7 +64,7 @@ const signIn = async () => {
                 <h1 class="text-4xl text-center m-5">
                     Sign In to Capitalympics!
                 </h1>
-                <img src="../assets/logo.png" alt="logo" class="w-20 h-20" />
+                <img src="/logo.png" alt="logo" class="w-20 h-20" />
             </div>
             <div class="flex flex-col items-center">
                 <div class="w-3/4">
