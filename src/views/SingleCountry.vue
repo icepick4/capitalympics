@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { onBeforeMount, reactive } from 'vue';
-import { RouterLink, useRoute } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import Country from '../components/Country.vue';
 import EmptyCountry from '../components/EmptyCountry.vue';
 import { CountryI } from '../models/Country';
+import ApiService from '../services/ApiService';
 interface State {
     country: CountryI | undefined;
     isLoading: boolean;
@@ -15,18 +15,16 @@ const state: State = reactive({
     isLoading: true
 });
 
-onBeforeMount(() => {
-    const route = useRoute();
-    const countryCode = route.params.countryCode;
-    axios
-        .get(`http://localhost:3000/countries/${countryCode}`)
-        .then((response) => {
-            state.country = response.data.country as CountryI;
-            state.isLoading = false;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+const props = defineProps({
+    countryCode: {
+        type: String,
+        required: true
+    }
+});
+
+onBeforeMount(async () => {
+    state.country = await ApiService.getCountry(props.countryCode);
+    state.isLoading = false;
 });
 </script>
 
@@ -41,7 +39,7 @@ onBeforeMount(() => {
         <Country v-if="state.country != undefined" :country="state.country" />
     </Transition>
     <RouterLink
-        :to="{ name: 'Countries' }"
+        to="/countries"
         class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/4 mx-auto"
     >
         Back

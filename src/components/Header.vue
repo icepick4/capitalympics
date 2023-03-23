@@ -48,10 +48,10 @@ const isUserLoggedIn = () => {
 
         <div class="flex flex-row justify-center items-center w-1/4">
             <RouterLink
-                to="/signin"
+                to="/login"
                 class="w-full h-full flex justify-end items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
             >
-                Sign In</RouterLink
+                Log In</RouterLink
             >
             <RouterLink
                 to="/signup"

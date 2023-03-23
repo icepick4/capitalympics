@@ -4,8 +4,8 @@ import About from '../views/About.vue';
 import Countries from '../views/Countries.vue';
 import Home from '../views/Home.vue';
 import Learn from '../views/Learn.vue';
+import LogIn from '../views/LogIn.vue';
 import Profile from '../views/Profile.vue';
-import SignIn from '../views/SignIn.vue';
 import SignUp from '../views/SignUp.vue';
 import SingleCountry from '../views/SingleCountry.vue';
 const routes = [
@@ -30,9 +30,9 @@ const routes = [
         component: SignUp
     },
     {
-        path: '/signin',
-        name: 'SignIn',
-        component: SignIn
+        path: '/login',
+        name: 'LogIn',
+        component: LogIn
     },
     {
         path: '/countries',

@@ -1,31 +1,27 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
+import ApiService from '../services/ApiService';
 const username = ref('');
 const password = ref('');
 const passwordConfirmation = ref('');
 const numberOfPeople = ref(0);
 const router = useRouter();
 
-axios.get('http://localhost:3000/users').then((response) => {
-    numberOfPeople.value = response.data.count;
-});
+const getNumberOfPeople = async () => {
+    const response = await ApiService.getUsersCount();
+    numberOfPeople.value = response;
+};
+
+getNumberOfPeople();
 
 const signup = async () => {
-    axios
-        .post('http://localhost:3000/users', {
-            user: {
-                name: username.value,
-                password: password.value
-            }
-        })
-        .then((response) => {
-            router.push('/signin');
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+    const response = await ApiService.signUp(username.value, password.value);
+    if (response) {
+        router.push('/login');
+    } else {
+        alert('Username already taken');
+    }
 };
 
 const validatePassword = () => {
@@ -172,7 +168,7 @@ const isFormValid = () => {
                         Sign Up
                     </button>
                     <RouterLink
-                        :to="{ name: 'SignIn' }"
+                        to="/login"
                         class="text-primary text-center hover:text-secondary text-lg marker:traisition-all duration-75"
                         >Already have an account ?</RouterLink
                     >

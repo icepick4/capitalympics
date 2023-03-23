@@ -4,7 +4,6 @@ import { computed, onBeforeMount } from 'vue';
 import CountryLink from '../components/CountryLink.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/ApiService';
-
 interface State {
     countries: CountryI[];
     message: string;

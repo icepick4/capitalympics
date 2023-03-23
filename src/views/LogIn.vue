@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { ref } from 'vue';
+import ApiService from '../services/ApiService';
 
 const userFound = ref(false);
 const signedIn = ref(false);
@@ -20,33 +20,18 @@ const validateForm = () => {
     return true;
 };
 
-const signIn = async () => {
+const logIn = async () => {
     if (!validateForm()) {
         return;
     }
-
-    try {
-        const response = await axios.post(
-            'http://localhost:3000/users/connect',
-            {
-                user: {
-                    name: username.value,
-                    password: password.value
-                }
-            }
-        );
-        if (response.status === 200) {
-            //store token in local storage
-            const token = response.data.token;
-            localStorage.setItem('token', token);
-            const user = response.data.user;
-            localStorage.setItem('user', JSON.stringify(user));
-        } else if (response.status === 500) {
-            console.log('user not found');
-            userFound.value = false;
-            signedIn.value = true;
-        }
-    } catch (error) {
+    console.log('Logging in...');
+    const isLoggedIn = await ApiService.logIn(username.value, password.value);
+    console.log(isLoggedIn);
+    if (isLoggedIn !== false) {
+        console.log('Logged in successfully');
+        userFound.value = true;
+        signedIn.value = true;
+    } else {
         handleSignInError();
     }
 };
@@ -95,12 +80,12 @@ const signIn = async () => {
             <div class="flex flex-col items-center">
                 <button
                     class="bg-primary hover:bg-secondary w-3/4 hover:scale-105 transition-all duration-100 delay-75 text-xl rounded-md p-2 text-center"
-                    @click="signIn()"
+                    @click="logIn()"
                 >
                     Sign In
                 </button>
                 <RouterLink
-                    :to="{ name: 'SignUp' }"
+                    to="/signup"
                     class="text-primary text-center hover:text-secondary text-lg marker:traisition-all duration-75"
                 >
                     Don't have an account yet ?</RouterLink
