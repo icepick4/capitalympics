@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import ApiService from '../services/ApiService';
 
 const userFound = ref(false);
 const signedIn = ref(false);
 const username = ref('');
 const password = ref('');
+const router = useRouter();
 
 const handleSignInError = () => {
     userFound.value = false;
@@ -28,9 +30,7 @@ const logIn = async () => {
     const isLoggedIn = await ApiService.logIn(username.value, password.value);
     console.log(isLoggedIn);
     if (isLoggedIn !== false) {
-        console.log('Logged in successfully');
-        userFound.value = true;
-        signedIn.value = true;
+        router.push('/account');
     } else {
         handleSignInError();
     }

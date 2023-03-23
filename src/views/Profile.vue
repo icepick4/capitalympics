@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import UserInfo from '../components/UserInfo.vue';
 import { User } from '../models/User';
-let user: User = new User(1, 'John Doe', 'image', 1, new Date(), new Date());
+import { getToken, getUserData } from '../utils/common';
+const router = useRouter();
+const token = getToken();
+if (!token) {
+    router.push('/login');
+}
+const user: User | null = getUserData();
 </script>
 
 <template>
-    <UserInfo :user="user"></UserInfo>
+    <UserInfo v-if="user" :user="user"></UserInfo>
 </template>

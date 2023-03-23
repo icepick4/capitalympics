@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CountryI } from '../models/Country';
-
+import { User } from '../models/User';
 export default class ApiService {
     private static readonly API_URL = 'http://localhost:3001';
 
@@ -34,7 +34,7 @@ export default class ApiService {
                 //store token in local storage
                 const token = response.data.token;
                 localStorage.setItem('token', token);
-                const user = response.data.user;
+                const user: User = response.data.user;
                 localStorage.setItem('user', JSON.stringify(user));
             } else if (response.status === 500) {
                 //user not found
