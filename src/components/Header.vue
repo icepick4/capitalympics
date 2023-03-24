@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
-const isUserLoggedIn = () => {
-    return localStorage.getItem('token') !== null;
-};
+import { getUserData } from '../utils/common';
+
+const user = ref(getUserData());
+console.log(user);
 </script>
 
 <template>
@@ -46,7 +48,10 @@ const isUserLoggedIn = () => {
             </div>
         </RouterLink>
 
-        <div class="flex flex-row justify-center items-center w-1/4">
+        <div
+            v-if="user == null"
+            class="flex flex-row justify-center items-center w-1/4"
+        >
             <RouterLink
                 to="/login"
                 class="w-full h-full flex justify-end items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
@@ -58,6 +63,20 @@ const isUserLoggedIn = () => {
                 class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
             >
                 Sign Up</RouterLink
+            >
+        </div>
+        <div v-else class="flex flex-row justify-center items-center w-1/4">
+            <RouterLink
+                to="/account"
+                class="w-full h-full flex justify-end items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
+            >
+                Account</RouterLink
+            >
+            <RouterLink
+                to="/"
+                class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
+            >
+                Log Out</RouterLink
             >
         </div>
     </div>
