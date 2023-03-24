@@ -2,7 +2,7 @@
 
 # Capitalympics
 
-<img src="https://raw.githubusercontent.com/icepick4/capitalympics/main/src/assets/logo.png" alt="Capitalympics Logo" width="200" />
+<img src="https://raw.githubusercontent.com/icepick4/capitalympics/main/public/logo.png" alt="Capitalympics Logo" width="200" />
 
 _This images has been generated with MidJourney_
 
