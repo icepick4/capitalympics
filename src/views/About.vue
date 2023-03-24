@@ -10,12 +10,6 @@ import AboutSection from '../components/AboutSection.vue';
                 alt="about"
                 class="w-full h-96 object-cover"
             />
-            <span
-                id="title"
-                class="left-10 absolute top-10 text-3xl lg:text-6xl text-black p-5 bg-primary rounded-xl"
-            >
-                Capitalympics
-            </span>
             <span class="right-1 bottom-0 text-white absolute text-sm">
                 Photo of
                 <a
@@ -90,7 +84,7 @@ import AboutSection from '../components/AboutSection.vue';
             />
             <h1 class="text-3xl text-center mt-10 lg:w-1/2">
                 We hope you enjoy using Capitalympics as much as we enjoyed
-                creating it. Happy learning! 🌍🚀
+                creating it. Happy learning ! 🌍🚀
             </h1>
         </div>
     </div>

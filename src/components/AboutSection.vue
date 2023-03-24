@@ -41,7 +41,13 @@ const props = defineProps({
             >
         </div>
         <div class="relative">
-            <img :src="image" :alt="link.substring(1)" class="w-full h-auto" />
+            <div class="overflow-hidden">
+                <img
+                    :src="image"
+                    :alt="link.substring(1)"
+                    class="w-full h-auto hover:scale-[1.2] transition-all duration-500"
+                />
+            </div>
             <span
                 class="absolute -bottom-5 right-0 text-black text-sm"
                 v-html="alt"

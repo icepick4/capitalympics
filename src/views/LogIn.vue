@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import ApiService from '../services/ApiService';
+import ApiService from '../services/apiService';
 
 const userFound = ref(false);
 const signedIn = ref(false);

@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router';
 import Country from '../components/Country.vue';
 import EmptyCountry from '../components/EmptyCountry.vue';
 import { CountryI } from '../models/Country';
-import ApiService from '../services/ApiService';
+import ApiService from '../services/apiService';
 interface State {
     country: CountryI | undefined;
     isLoading: boolean;

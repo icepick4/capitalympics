@@ -32,7 +32,7 @@
         </div>
         <div class="h-px w-1/2 bg-black"></div>
         <div class="h-auto m-3">
-            <p>© 2023 Rémi JARA. All rights reserved.</p>
+            <p>2023 - Rémi JARA</p>
         </div>
     </div>
 </template>

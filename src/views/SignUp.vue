@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
-import ApiService from '../services/ApiService';
+import ApiService from '../services/apiService';
 const username = ref('');
 const password = ref('');
 const passwordConfirmation = ref('');
