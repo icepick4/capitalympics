@@ -29,7 +29,7 @@ const props = defineProps({
         <div
             class="relative flex justify-center items-center h-full hover:scale-105 transition ease-in-out duration-300"
         >
-            <v-lazy-image
+            <VLazyImage
                 :src="countryFlag"
                 :alt="`Flag of ${countryName}`"
                 class="w-full h-auto I-cover rounded shadow transition ease-in-out duration-300 border-2 border-black"
