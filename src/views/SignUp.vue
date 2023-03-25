@@ -94,7 +94,7 @@ const isFormValid = () => {
     <section class="bg-primary h-full flex w-full justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
             <div
-                class="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-primary sm:px-6 lg:px-8"
+                class="relative flex items-center px-4 pb-10 pt-10 sm:pb-16 md:justify-center lg:pb-24 bg-primary sm:px-6 lg:px-8"
             >
                 <div class="absolute top-0 right-1 text-white z-40">
                     Photo de
@@ -137,7 +137,7 @@ const isFormValid = () => {
                                 >
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
-                                <span class="text-lg font-medium text-white">
+                                <span class="text-xl font-medium text-white">
                                     Play the quiz and learn more
                                 </span>
                             </li>
@@ -147,7 +147,7 @@ const isFormValid = () => {
                                 >
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
-                                <span class="text-lg font-medium text-white">
+                                <span class="text-xl font-medium text-white">
                                     Access to the capitals learning process
                                 </span>
                             </li>
@@ -157,7 +157,7 @@ const isFormValid = () => {
                                 >
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
-                                <span class="text-lg font-medium text-white">
+                                <span class="text-xl font-medium text-white">
                                     Access to the flags learning process
                                 </span>
                             </li>
@@ -167,7 +167,7 @@ const isFormValid = () => {
                                 >
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
-                                <span class="text-lg font-medium text-white">
+                                <span class="text-xl font-medium text-white">
                                     Many statistics all along your learning
                                 </span>
                             </li>

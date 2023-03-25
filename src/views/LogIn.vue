@@ -36,9 +36,23 @@ const logIn = async () => {
 </script>
 
 <template>
-    <section class="relative py-10 bg-gray-900 sm:py-16 lg:py-24 h-full">
+    <section
+        class="relative py-10 bg-gray-900 sm:py-16 lg:py-24 h-full flex items-center"
+    >
         <div class="absolute inset-0">
             <img class="object-cover w-full h-full" src="/signup.jpg" alt="" />
+        </div>
+        <div class="absolute bottom-0 right-1 text-white z-40">
+            Photo de
+            <a
+                href="https://unsplash.com/@nasa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                >NASA</a
+            >
+            sur
+            <a
+                href="https://unsplash.com/fr/photos/6-jTZysYY_U?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                >Unsplash</a
+            >
         </div>
         <div class="absolute inset-0 mt-10">
             <h1
@@ -50,7 +64,9 @@ const logIn = async () => {
         </div>
 
         <div class="relative max-w-lg px-4 mx-auto sm:px-0">
-            <div class="overflow-hidden bg-primary rounded-md shadow-md">
+            <div
+                class="overflow-hidden bg-primary rounded-md shadow-md p-0 sm:p-5 lg:p-8"
+            >
                 <div class="px-4 py-6 sm:px-8 sm:py-7">
                     <div class="text-center">
                         <h2 class="text-3xl font-bold text-gray-900">
