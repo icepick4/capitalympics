@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import ApiService from '../services/apiService';
+import { useStore } from 'vuex';
 
 const userFound = ref(false);
 const signedIn = ref(false);
 const username = ref('');
 const password = ref('');
 const router = useRouter();
+const store = useStore();
 
 const handleSignInError = () => {
     userFound.value = false;
@@ -26,10 +27,13 @@ const logIn = async () => {
     if (!validateForm()) {
         return;
     }
-    const isLoggedIn = await ApiService.logIn(username.value, password.value);
-    if (isLoggedIn !== false) {
+    try {
+        await store.dispatch('logIn', {
+            username: username.value,
+            password: password.value
+        });
         router.push('/account');
-    } else {
+    } catch (e) {
         handleSignInError();
     }
 };
@@ -43,12 +47,12 @@ const logIn = async () => {
             <img class="object-cover w-full h-full" src="/signup.jpg" alt="" />
         </div>
         <div class="absolute bottom-0 right-1 text-white z-40">
-            Photo de
+            Photo of
             <a
                 href="https://unsplash.com/@nasa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
                 >NASA</a
             >
-            sur
+            on
             <a
                 href="https://unsplash.com/fr/photos/6-jTZysYY_U?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
                 >Unsplash</a

@@ -28,7 +28,7 @@ const getNumberOfPeople = async () => {
 
 getNumberOfPeople();
 
-const signup = async () => {
+const signUp = async () => {
     const response = await ApiService.signUp(
         username.content,
         password.content
@@ -66,6 +66,8 @@ const typedPasswordConfirmation = () => {
 };
 
 const validateUsername = () => {
+    console.log(username.content.length);
+    console.log(username.hasTyped);
     if (username.content.length < 1) {
         return false;
     } else {
@@ -97,12 +99,12 @@ const isFormValid = () => {
                 class="relative flex items-center px-4 pb-10 pt-10 sm:pb-16 md:justify-center lg:pb-24 bg-primary sm:px-6 lg:px-8"
             >
                 <div class="absolute top-0 right-1 text-white z-40">
-                    Photo de
+                    Photo of
                     <a
                         href="https://unsplash.com/@nasa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
                         >NASA</a
                     >
-                    sur
+                    on
                     <a
                         href="https://unsplash.com/fr/photos/6-jTZysYY_U?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
                         >Unsplash</a
@@ -206,7 +208,7 @@ const isFormValid = () => {
                                 </label>
                                 <span
                                     v-if="
-                                        !validateUsername() && username.hasTyped
+                                        username.hasTyped && !validateUsername()
                                     "
                                     class="text-error text-sm ml-1 text-center"
                                     >Must be at least 1 character long</span
@@ -235,11 +237,10 @@ const isFormValid = () => {
 
                                     <input
                                         type="text"
-                                        name=""
-                                        id=""
                                         placeholder="Enter your name"
                                         class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
-                                        v-on:input="typedUsername"
+                                        @input="typedUsername"
+                                        v-model="username.content"
                                     />
                                 </div>
                             </div>
@@ -284,11 +285,10 @@ const isFormValid = () => {
 
                                     <input
                                         type="password"
-                                        name=""
-                                        id=""
                                         placeholder="Enter your password"
                                         class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
-                                        v-on:input="typedPassword"
+                                        @input="typedPassword"
+                                        v-model="password.content"
                                     />
                                 </div>
                             </div>
@@ -333,19 +333,19 @@ const isFormValid = () => {
 
                                     <input
                                         type="password"
-                                        name=""
-                                        id=""
                                         placeholder="Confirm your password"
                                         class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
-                                        v-on:input="typedPasswordConfirmation"
+                                        @input="typedPasswordConfirmation"
+                                        v-model="passwordConfirmation.content"
                                     />
                                 </div>
                             </div>
 
                             <div>
                                 <button
+                                    type="submit"
                                     class="inline-flex items-center bg-white justify-center w-full px-4 py-4 text-base font-semibold text-black transition-all duration-200 border border-transparent rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 focus:outline-none hover:scale-105 delay-100"
-                                    @click="signup"
+                                    @click="signUp"
                                     :disabled="!isFormValid"
                                 >
                                     Sign up

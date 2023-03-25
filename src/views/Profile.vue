@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 import UserInfo from '../components/UserInfo.vue';
 import { User } from '../models/User';
-import { getToken, getUserData } from '../utils/common';
+
+const store = useStore();
 const router = useRouter();
-const token = getToken();
+
+const token = store.getters.token;
 if (!token) {
     router.push('/login');
 }
-const user: User | null = getUserData();
+const user: User = store.getters.user;
 </script>
 
 <template>

@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { RouterLink } from 'vue-router';
-import { getUserData } from '../utils/common';
+import { useStore } from 'vuex';
 
-const user = ref(getUserData());
-console.log(user);
+const store = useStore();
+const user = ref(store.getters.user);
+watchEffect(() => {
+    user.value = store.getters.user;
+});
 </script>
 
 <template>
@@ -47,7 +50,6 @@ console.log(user);
                 </h1>
             </div>
         </RouterLink>
-
         <div
             v-if="user == null"
             class="flex flex-row justify-center items-center w-1/4"
@@ -75,6 +77,7 @@ console.log(user);
             <RouterLink
                 to="/"
                 class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
+                @click="() => store.dispatch('logout')"
             >
                 Log Out</RouterLink
             >
