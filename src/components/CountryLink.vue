@@ -43,14 +43,3 @@ const props = defineProps({
         </div>
     </RouterLink>
 </template>
-
-<style scoped>
-.v-lazy-image {
-    filter: blur(8px);
-    transition: filter 0.5s;
-}
-
-.v-lazy-image-loaded {
-    filter: blur(0);
-}
-</style>

@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import { getCurrentMySQLDate } from '../utils/common';
 
 const userFound = ref(false);
 const signedIn = ref(false);
@@ -30,7 +31,8 @@ const logIn = async () => {
     try {
         await store.dispatch('logIn', {
             username: username.value,
-            password: password.value
+            password: password.value,
+            last_activity: getCurrentMySQLDate()
         });
         router.push('/account');
     } catch (e) {

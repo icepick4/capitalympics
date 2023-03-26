@@ -24,6 +24,7 @@ export enum Level {
     Advanced = 2,
     Expert = 3,
     Master = 4,
-    Grandmaster = 5,
-    Legend = 6
+    GrandMaster = 5,
+    God = 6,
+    Supreme = 7
 }

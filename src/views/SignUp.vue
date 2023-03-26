@@ -2,6 +2,7 @@
 import { reactive, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import ApiService from '../services/apiService';
+import { getCurrentMySQLDate } from '../utils/common';
 interface inputState {
     content: string;
     hasTyped: boolean;
@@ -31,7 +32,8 @@ getNumberOfPeople();
 const signUp = async () => {
     const response = await ApiService.signUp(
         username.content,
-        password.content
+        password.content,
+        getCurrentMySQLDate()
     );
     if (response) {
         router.push('/login');
@@ -54,6 +56,7 @@ const typedPassword = () => {
 };
 
 const validatePasswordConfirmation = () => {
+    console.log(password.content, passwordConfirmation.content);
     if (password.content !== passwordConfirmation.content) {
         return false;
     } else {
@@ -66,8 +69,6 @@ const typedPasswordConfirmation = () => {
 };
 
 const validateUsername = () => {
-    console.log(username.content.length);
-    console.log(username.hasTyped);
     if (username.content.length < 1) {
         return false;
     } else {
@@ -197,7 +198,7 @@ const isFormValid = () => {
                         </RouterLink>
                     </p>
 
-                    <form action="#" method="POST" class="mt-8">
+                    <div class="mt-8">
                         <div class="space-y-5">
                             <div>
                                 <label
@@ -343,7 +344,6 @@ const isFormValid = () => {
 
                             <div>
                                 <button
-                                    type="submit"
                                     class="inline-flex items-center bg-white justify-center w-full px-4 py-4 text-base font-semibold text-black transition-all duration-200 border border-transparent rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 focus:outline-none hover:scale-105 delay-100"
                                     @click="signUp"
                                     :disabled="!isFormValid"
@@ -352,7 +352,7 @@ const isFormValid = () => {
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

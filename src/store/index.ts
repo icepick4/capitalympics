@@ -16,14 +16,15 @@ const store = createStore({
         }
     },
     actions: {
-        async logIn(context, { username, password }) {
+        async logIn(context, { username, password, last_activity }) {
             try {
                 const response = await axios.post(
                     `${ApiService.API_URL}/users/connect`,
                     {
                         user: {
                             name: username,
-                            password: password
+                            password: password,
+                            last_activity: last_activity
                         }
                     }
                 );

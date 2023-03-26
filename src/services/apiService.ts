@@ -18,12 +18,14 @@ export default class ApiService {
 
     public static async signUp(
         name: string,
-        password: string
+        password: string,
+        created_at: string
     ): Promise<boolean> {
         const response = await axios.post(`${ApiService.API_URL}/users`, {
             user: {
                 name,
-                password
+                password,
+                created_at
             }
         });
         if (response.status === 200) {

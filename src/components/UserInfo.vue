@@ -8,11 +8,14 @@ const props = defineProps({
     }
 });
 const formatDate = (date: Date) => {
-    return date.toLocaleDateString();
+    return `The ${date.getDate()} of ${date.toLocaleString('default', {
+        month: 'long'
+    })} of ${date.getFullYear()} at ${date.getHours()}:${date.getMinutes()}`;
 };
 </script>
 
 <template>
     <p>{{ user.name }}</p>
     <p>{{ formatDate(new Date(user.created_at)) }}</p>
+    <p>Last activity at {{ formatDate(new Date(user.last_activity)) }}</p>
 </template>
