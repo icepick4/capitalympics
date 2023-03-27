@@ -29,11 +29,8 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <div
-        v-if="state.isLoading"
-        class="flex justify-center items-center h-full w-full"
-    >
-        <EmptyCountry />
+    <div class="flex justify-center items-center">
+        <EmptyCountry v-if="state.isLoading" />
     </div>
     <Transition name="slide-fade" appear>
         <Country v-if="state.country != undefined" :country="state.country" />
