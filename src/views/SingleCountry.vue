@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onBeforeMount, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
-import Country from '../components/Country.vue';
+import Country from '../components/Country/Country.vue';
 import EmptyCountry from '../components/EmptyCountry.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from '@vue/reactivity';
 import { computed, onBeforeMount } from 'vue';
-import CountryLink from '../components/CountryLink.vue';
+import CountryLink from '../components/Country/CountryLink.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
 interface State {

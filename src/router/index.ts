@@ -22,7 +22,19 @@ const routes = [
     {
         path: '/learn',
         name: 'Learn',
-        component: Learn
+        component: Learn,
+        children: [
+            {
+                path: '/capitals',
+                name: 'Capitals',
+                component: Learn
+            },
+            {
+                path: '/flags',
+                name: 'Flags',
+                component: Learn
+            }
+        ]
     },
     {
         path: '/signup',
