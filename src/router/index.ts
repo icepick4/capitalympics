@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import LearnTemplate from '../components/Learning/LearnTemplate.vue';
 import NotFound from '../components/NotFound.vue';
 import About from '../views/About.vue';
 import Countries from '../views/Countries.vue';
@@ -22,19 +23,17 @@ const routes = [
     {
         path: '/learn',
         name: 'Learn',
-        component: Learn,
-        children: [
-            {
-                path: 'capitals',
-                name: 'Capitals',
-                component: Learn
-            },
-            {
-                path: 'flags',
-                name: 'Flags',
-                component: Learn
-            }
-        ]
+        component: Learn
+    },
+    {
+        path: '/learn/capitals',
+        name: 'Capitals',
+        component: LearnTemplate
+    },
+    {
+        path: '/learn/flags',
+        name: 'Flags',
+        component: LearnTemplate
     },
     {
         path: '/signup',

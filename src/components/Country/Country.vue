@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
 import { CountryI } from '../../models/Country';
-const props = defineProps({
+defineProps({
     country: {
         type: Object as PropType<CountryI>,
         required: true
