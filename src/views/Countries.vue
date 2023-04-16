@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive } from '@vue/reactivity';
-import { computed, onBeforeMount } from 'vue';
+import { onBeforeMount, watchEffect } from 'vue';
 import CountryLink from '../components/Country/CountryLink.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
@@ -22,7 +22,8 @@ const search = reactive({
 const region = reactive({
     value: ''
 });
-const filteredCountriesByName = computed(() => {
+
+const filteredCountries = () => {
     if (search.value.length > 0 || region.value.length > 0) {
         return state.countries.filter((country) => {
             return (
@@ -35,7 +36,8 @@ const filteredCountriesByName = computed(() => {
     } else {
         return state.countries;
     }
-});
+};
+
 onBeforeMount(async () => {
     state.countries = await ApiService.getCountries();
     if (state.countries.length === 0) {
@@ -43,6 +45,12 @@ onBeforeMount(async () => {
     } else {
         state.message = `Found ${state.countries.length} countries`;
     }
+});
+
+const numberOfCountries = () => filteredCountries().length;
+
+watchEffect(() => {
+    state.message = `Found ${numberOfCountries()} countries.`;
 });
 </script>
 
@@ -77,7 +85,7 @@ onBeforeMount(async () => {
     <p class="text-center text-white text-2xl">{{ state.message }}</p>
 
     <div
-        v-if="filteredCountriesByName.length === 0"
+        v-if="filteredCountries().length === 0"
         class="flex justify-center items-center w-full h-full gap-5"
     >
         <div
@@ -91,10 +99,7 @@ onBeforeMount(async () => {
         v-else
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-16 p-10"
     >
-        <div
-            v-for="country in filteredCountriesByName"
-            :key="country.alpha3Code"
-        >
+        <div v-for="country in filteredCountries()" :key="country.alpha3Code">
             <CountryLink
                 :countryName="country.name"
                 :countryCode="country.alpha3Code"
