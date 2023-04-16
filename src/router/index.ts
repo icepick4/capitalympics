@@ -25,12 +25,12 @@ const routes = [
         component: Learn,
         children: [
             {
-                path: '/capitals',
+                path: 'capitals',
                 name: 'Capitals',
                 component: Learn
             },
             {
-                path: '/flags',
+                path: 'flags',
                 name: 'Flags',
                 component: Learn
             }

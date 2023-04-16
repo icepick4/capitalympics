@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import LearnCapitals from '../components/Learning/LearnCapitals.vue';
-import LearnFlags from '../components/Learning/LearnFlags.vue';
+import LearnCapitals from '../components/Learning/Buttons/LearnCapitalsButton.vue';
+import LearnFlags from '../components/Learning/Buttons/LearnFlagsButton.vue';
 const router = useRouter();
 const store = useStore();
 const user = store.getters.user;

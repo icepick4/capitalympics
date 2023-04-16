@@ -4,15 +4,25 @@ import ApiService from '../services/apiService';
 
 const store = createStore({
     state: {
-        user: null,
-        token: null
+        user: JSON.parse(localStorage.getItem('user') || '{}'),
+        token: localStorage.getItem('token') || null
     },
     mutations: {
         setUser(state, user) {
             state.user = user;
+            localStorage.setItem('user', JSON.stringify(user));
         },
         setToken(state, token) {
             state.token = token;
+            localStorage.setItem('token', token);
+        },
+        clearUser(state) {
+            state.user = null;
+            localStorage.removeItem('user');
+        },
+        clearToken(state) {
+            state.token = null;
+            localStorage.removeItem('token');
         }
     },
     actions: {
@@ -39,8 +49,8 @@ const store = createStore({
             }
         },
         async logout(context) {
-            context.commit('setUser', null);
-            context.commit('setToken', null);
+            context.commit('clearUser');
+            context.commit('clearToken');
             //reload
             window.location.reload();
         }
