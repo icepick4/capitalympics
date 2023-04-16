@@ -15,19 +15,35 @@ const currentState = ref<CurrentState>('starting');
 <template>
     <div class="w-full h-full flex flex-col items-center justify-center">
         <div
-            class="flex w-1/3 h-2/3 justify-center items-center border-[3px] border-black rounded-3xl bg-white"
+            class="flex flex-col w-4/5 lg:w-2/3 xl:w-1/2 2xl:w-2/5 h-2/3 justify-between items-center border-[3px] border-black rounded-3xl bg-white p-5"
         >
-            <div v-if="currentLearning === 'capitals'">
-                <LearnCapitals />
+            <div v-if="currentLearning === 'capitals'" class="w-full h-full">
+                <LearnCapitals
+                    :text="
+                        currentState === 'starting'
+                            ? 'What is the capital of'
+                            : 'What is the capital of'
+                    "
+                    :countryName="
+                        currentState === 'starting' ? 'France' : 'France'
+                    "
+                    :countryFlag="
+                        currentState === 'starting'
+                            ? 'https://restcountries.eu/data/fra.svg'
+                            : 'https://restcountries.eu/data/fra.svg'
+                    "
+                />
             </div>
             <div v-else-if="currentLearning === 'flags'">
                 <LearnFlags />
             </div>
-            <div v-if="currentState === 'starting'">
-                <StartingButtons />
-            </div>
-            <div v-else-if="currentState === 'ending'">
-                <EndingButtons />
+            <div class="w-full">
+                <div v-if="currentState === 'starting'">
+                    <StartingButtons />
+                </div>
+                <div v-else-if="currentState === 'ending'">
+                    <EndingButtons />
+                </div>
             </div>
         </div>
     </div>

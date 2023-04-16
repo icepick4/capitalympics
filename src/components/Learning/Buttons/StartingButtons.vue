@@ -15,7 +15,9 @@ const handleClickFailed = () => {
 </script>
 
 <template>
-    <div class="flex flex-row w-full items-center justify-center gap-2">
+    <div
+        class="flex flex-col sm:flex-row w-full items-center justify-center gap-2"
+    >
         <ButtonTemplate
             :title="'Easy'"
             :color="'bg-blue-500'"

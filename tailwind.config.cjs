@@ -16,7 +16,10 @@ module.exports = {
             text: '#000000',
             white: '#FFFFFF',
             black: '#000000',
-            gray: colors.neutral
+            gray: colors.neutral,
+            red: colors.red,
+            yellow: colors.amber,
+            blue: colors.blue
         }
     },
     variants: {
