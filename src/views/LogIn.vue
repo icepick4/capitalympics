@@ -5,7 +5,7 @@ import { useStore } from 'vuex';
 import { getCurrentMySQLDate } from '../utils/common';
 
 const userFound = ref(false);
-const signedIn = ref(false);
+const signed = ref(false);
 const username = ref('');
 const password = ref('');
 const router = useRouter();
@@ -13,7 +13,7 @@ const store = useStore();
 
 const handleSignInError = () => {
     userFound.value = false;
-    signedIn.value = true;
+    signed.value = true;
 };
 
 const validateForm = () => {
@@ -25,10 +25,12 @@ const validateForm = () => {
 };
 
 const logIn = async () => {
+    console.log('Logging in...');
     if (!validateForm()) {
         return;
     }
     try {
+        signed.value = false;
         await store.dispatch('logIn', {
             username: username.value,
             password: password.value,
@@ -62,7 +64,7 @@ const logIn = async () => {
         </div>
         <div class="absolute inset-0 mt-10">
             <h1
-                v-if="!userFound && signedIn"
+                v-if="!userFound && signed"
                 class="text-2xl text-center text-white m-0 z-50"
             >
                 User not found
@@ -88,7 +90,7 @@ const logIn = async () => {
                         </p>
                     </div>
 
-                    <div class="space-y-5">
+                    <form @submit.prevent="logIn" class="space-y-5">
                         <div>
                             <label
                                 for=""
@@ -121,7 +123,7 @@ const logIn = async () => {
                                 <input
                                     type="text"
                                     placeholder="Enter your name"
-                                    class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
+                                    class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-black"
                                     v-model="username"
                                 />
                             </div>
@@ -158,19 +160,18 @@ const logIn = async () => {
                                 <input
                                     type="password"
                                     placeholder="Enter your password"
-                                    class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
+                                    class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-black"
                                     v-model="password"
                                 />
                             </div>
                         </div>
 
-                        <button
-                            @click="logIn()"
+                        <input
                             class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-black transition-all duration-200 bg-white hover:scale-105 delay-100 rounded-md"
-                        >
-                            Log in
-                        </button>
-                    </div>
+                            type="submit"
+                            value="Log in"
+                        />
+                    </form>
                 </div>
             </div>
         </div>

@@ -27,25 +27,22 @@ const store = createStore({
     },
     actions: {
         async logIn(context, { username, password, last_activity }) {
-            try {
-                const response = await axios.post(
-                    `${ApiService.API_URL}/users/connect`,
-                    {
-                        user: {
-                            name: username,
-                            password: password,
-                            last_activity: last_activity
-                        }
+            const response = await axios.post(
+                `${ApiService.API_URL}/users/connect`,
+                {
+                    user: {
+                        name: username,
+                        password: password,
+                        last_activity: last_activity
                     }
-                );
-                if (response.status === 200) {
-                    context.commit('setToken', response.data.token);
-                    context.commit('setUser', response.data.user);
-                } else {
-                    throw new Error('Login failed');
                 }
-            } catch (error) {
-                console.log(error);
+            );
+            console.log(response.data);
+            if (response.status === 200) {
+                context.commit('setToken', response.data.token);
+                context.commit('setUser', response.data.user);
+            } else {
+                throw new Error('Login failed');
             }
         },
         async logOut(context) {

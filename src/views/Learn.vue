@@ -6,13 +6,16 @@ import LearnFlags from '../components/Learning/Buttons/LearnFlagsButton.vue';
 const router = useRouter();
 const store = useStore();
 const user = store.getters.user;
-if (user == null) {
+if (user === null) {
     router.push('/login');
 }
 </script>
 
 <template>
-    <div class="flex flex-col justify-center items-center gap-10">
+    <div
+        v-if="user !== null"
+        class="flex flex-col justify-center items-center gap-10"
+    >
         <h1 class="text-white text-center text-6xl">Hi {{ user.name }} !</h1>
         <div
             class="flex flex-col lg:flex-row justify-center items-center w-1/2 gap-5"

@@ -30,6 +30,9 @@ const getNumberOfPeople = async () => {
 getNumberOfPeople();
 
 const signUp = async () => {
+    if (!isFormValid()) {
+        return;
+    }
     const response = await ApiService.signUp(
         username.content,
         password.content,
@@ -72,6 +75,7 @@ const validateUsername = () => {
     if (username.content.length < 1) {
         return false;
     } else {
+        console.log(username.content);
         return true;
     }
 };
@@ -136,7 +140,7 @@ const isFormValid = () => {
                         >
                             <li class="flex items-center space-x-3">
                                 <div
-                                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full"
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-full"
                                 >
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
@@ -146,7 +150,7 @@ const isFormValid = () => {
                             </li>
                             <li class="flex items-center space-x-3">
                                 <div
-                                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full"
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-full"
                                 >
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
@@ -156,7 +160,7 @@ const isFormValid = () => {
                             </li>
                             <li class="flex items-center space-x-3">
                                 <div
-                                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full"
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-full"
                                 >
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
@@ -166,7 +170,7 @@ const isFormValid = () => {
                             </li>
                             <li class="flex items-center space-x-3">
                                 <div
-                                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full"
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-full"
                                 >
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
@@ -189,16 +193,16 @@ const isFormValid = () => {
                         Sign up to Capitalympics
                     </h2>
                     <p class="mt-2 text-base text-black">
-                        Already have an account?
+                        Already have an account ?
                         <RouterLink
                             to="/login"
-                            class="font-medium text-black hover:text-blue-500 hover:underline"
+                            class="font-medium text-black italic hover:underline"
                         >
                             Log in
                         </RouterLink>
                     </p>
 
-                    <div class="mt-8">
+                    <form @submit.prevent="signUp" class="mt-8">
                         <div class="space-y-5">
                             <div>
                                 <label
@@ -343,16 +347,14 @@ const isFormValid = () => {
                             </div>
 
                             <div>
-                                <button
+                                <input
                                     class="inline-flex items-center bg-white justify-center w-full px-4 py-4 text-base font-semibold text-black transition-all duration-200 border border-transparent rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 focus:outline-none hover:scale-105 delay-100"
-                                    @click="signUp"
-                                    :disabled="!isFormValid"
-                                >
-                                    Sign up
-                                </button>
+                                    type="submit"
+                                    value="Sign up"
+                                />
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
