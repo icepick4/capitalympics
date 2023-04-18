@@ -4,8 +4,8 @@ import ApiService from '../services/apiService';
 
 const store = createStore({
     state: {
-        user: JSON.parse(localStorage.getItem('user') || '{}'),
-        token: localStorage.getItem('token') || null
+        user: null,
+        token: null
     },
     mutations: {
         setUser(state, user) {
@@ -48,11 +48,9 @@ const store = createStore({
                 console.log(error);
             }
         },
-        async logout(context) {
+        async logOut(context) {
             context.commit('clearUser');
             context.commit('clearToken');
-            //reload
-            window.location.reload();
         }
     },
     getters: {

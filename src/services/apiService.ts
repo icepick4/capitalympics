@@ -2,7 +2,7 @@ import axios from 'axios';
 import { CountryI } from '../models/Country';
 
 export default class ApiService {
-    public static readonly API_URL = 'http://localhost:3001';
+    public static readonly API_URL: string = 'http://localhost:3001';
 
     public static async getCountries(): Promise<CountryI[]> {
         const response = await axios.get(`${ApiService.API_URL}/countries`);

@@ -51,7 +51,7 @@ watchEffect(() => {
             </div>
         </RouterLink>
         <div
-            v-if="user == null"
+            v-if="user === null"
             class="flex flex-row justify-center items-center w-1/4"
         >
             <RouterLink
@@ -77,7 +77,7 @@ watchEffect(() => {
             <RouterLink
                 to="/"
                 class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
-                @click="() => store.dispatch('logout')"
+                @click="() => store.dispatch('logOut')"
             >
                 Log Out</RouterLink
             >

@@ -79,11 +79,11 @@ const logIn = async () => {
                             Welcome back
                         </h2>
                         <p class="mt-2 text-base text-black">
-                            Don't have one?
+                            Don't have an account ?
                             <RouterLink
                                 to="/signup"
-                                class="text-blue-600 transition-all duration-200 hover:underline hover:text-blue-700"
-                                >Create a free account</RouterLink
+                                class="text-black hover:underline italic"
+                                >Create one for free</RouterLink
                             >
                         </p>
                     </div>
