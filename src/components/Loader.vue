@@ -2,15 +2,19 @@
 
 <template>
     <div class="absolute backdrop-blur-md w-full h-full">
-        <div class="flex flex-col gap-5 justify-center items-center h-full">
-            <span class="loader"></span>
-            <div class="flex justify-center items-center w-full gap-5">
-                <div
-                    v-for="i in 3"
-                    :key="i"
-                    :style="{ 'animation-delay': `${(i - 1) * 0.2}s` }"
-                    class="rounded-full h-6 w-6 animate-pulse-fast flex justify-center items-center bg-white"
-                ></div>
+        <div class="flex justify-center items-center h-full w-full">
+            <div
+                class="flex flex-col justify-center items-center rounded-full bg-gray-600 w-52 h-52 scale-105"
+            >
+                <span class="loader"></span>
+                <div class="flex justify-center items-center w-full gap-5">
+                    <div
+                        v-for="i in 3"
+                        :key="i"
+                        :style="{ 'animation-delay': `${(i - 1) * 0.2}s` }"
+                        class="rounded-full h-5 w-5 animate-pulse-fast flex justify-center items-center bg-white"
+                    ></div>
+                </div>
             </div>
         </div>
     </div>
@@ -29,6 +33,7 @@
     background-repeat: no-repeat;
     z-index: 10;
     perspective: 500px;
+    transform: translateY(-20px);
 }
 .loader::before {
     content: '';
