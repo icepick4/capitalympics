@@ -41,6 +41,7 @@ const logIn = async () => {
         });
         hasLoggedIn.value = true;
         setTimeout(() => {
+            hasLoggedIn.value = false;
             router.push('/account');
         }, 2000);
     } catch (e) {

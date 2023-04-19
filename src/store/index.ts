@@ -37,7 +37,6 @@ const store = createStore({
                     }
                 }
             );
-            console.log(response.data);
             if (response.status === 200) {
                 context.commit('setToken', response.data.token);
                 context.commit('setUser', response.data.user);

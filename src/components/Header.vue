@@ -1,16 +1,28 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import Loader from './Loader.vue';
 
+const router = useRouter();
 const store = useStore();
 const user = ref(store.getters.user);
 watchEffect(() => {
     user.value = store.getters.user;
 });
+const hasLoggedOut = ref(false);
+const logOut = () => {
+    hasLoggedOut.value = true;
+    setTimeout(() => {
+        store.dispatch('logOut');
+        hasLoggedOut.value = false;
+        router.push('/');
+    }, 1000);
+};
 </script>
 
 <template>
+    <Loader v-if="hasLoggedOut" />
     <div
         class="flex flex-row w-full justify-between h-auto bg-gray-100 border-b-2 border-black"
     >
@@ -74,13 +86,12 @@ watchEffect(() => {
             >
                 Account</RouterLink
             >
-            <RouterLink
-                to="/"
-                class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
-                @click="() => store.dispatch('logOut')"
+            <div
+                class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out cursor-pointer"
+                @click="logOut"
             >
-                Log Out</RouterLink
-            >
+                Log Out
+            </div>
         </div>
     </div>
 </template>

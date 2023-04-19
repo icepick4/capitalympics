@@ -43,6 +43,7 @@ const signUp = async () => {
     if (response) {
         hasSignedUp.value = true;
         setTimeout(() => {
+            hasSignedUp.value = false;
             router.push('/login');
         }, 3000);
     } else {
