@@ -2,7 +2,6 @@
 import { onBeforeMount, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import Country from '../components/Country/Country.vue';
-import EmptyCountry from '../components/EmptyCountry.vue';
 import Loader from '../components/Loader.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
@@ -30,10 +29,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <Loader v-if="!state.isLoading" />
-    <div class="flex justify-center items-center">
-        <EmptyCountry v-if="state.isLoading" />
-    </div>
+    <Loader v-if="state.isLoading" />
     <Transition name="slide-fade" appear>
         <Country v-if="state.country != undefined" :country="state.country" />
     </Transition>

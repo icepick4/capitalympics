@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import Loader from '../components/Loader.vue';
 import { getCurrentMySQLDate } from '../utils/common';
 
 const userFound = ref(false);
@@ -24,6 +25,8 @@ const validateForm = () => {
     return true;
 };
 
+const hasLoggedIn = ref(false);
+
 const logIn = async () => {
     console.log('Logging in...');
     if (!validateForm()) {
@@ -36,7 +39,10 @@ const logIn = async () => {
             password: password.value,
             last_activity: getCurrentMySQLDate()
         });
-        router.push('/account');
+        hasLoggedIn.value = true;
+        setTimeout(() => {
+            router.push('/account');
+        }, 2000);
     } catch (e) {
         handleSignInError();
     }
@@ -44,13 +50,14 @@ const logIn = async () => {
 </script>
 
 <template>
+    <Loader v-if="hasLoggedIn" />
     <section
         class="relative py-10 bg-gray-900 sm:py-16 lg:py-24 h-full flex items-center"
     >
         <div class="absolute inset-0">
             <img class="object-cover w-full h-full" src="/signup.jpg" alt="" />
         </div>
-        <div class="absolute bottom-0 right-1 text-white z-40">
+        <div class="absolute bottom-0 right-1 text-white z-10">
             Photo of
             <a
                 href="https://unsplash.com/@nasa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
@@ -65,7 +72,7 @@ const logIn = async () => {
         <div class="absolute inset-0 mt-10">
             <h1
                 v-if="!userFound && signed"
-                class="text-2xl text-center text-white m-0 z-50"
+                class="text-2xl text-center text-white m-0 z-10"
             >
                 User not found
             </h1>

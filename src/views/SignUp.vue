@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
+import Loader from '../components/Loader.vue';
 import ApiService from '../services/apiService';
 import { getCurrentMySQLDate } from '../utils/common';
 interface inputState {
@@ -19,6 +20,7 @@ const passwordConfirmation: inputState = reactive({
     content: '',
     hasTyped: false
 });
+const hasSignedUp = ref(false);
 const numberOfPeople = ref(0);
 const router = useRouter();
 
@@ -39,7 +41,10 @@ const signUp = async () => {
         getCurrentMySQLDate()
     );
     if (response) {
-        router.push('/login');
+        hasSignedUp.value = true;
+        setTimeout(() => {
+            router.push('/login');
+        }, 3000);
     } else {
         alert('Username already taken');
     }
@@ -59,7 +64,6 @@ const typedPassword = () => {
 };
 
 const validatePasswordConfirmation = () => {
-    console.log(password.content, passwordConfirmation.content);
     if (password.content !== passwordConfirmation.content) {
         return false;
     } else {
@@ -75,7 +79,6 @@ const validateUsername = () => {
     if (username.content.length < 1) {
         return false;
     } else {
-        console.log(username.content);
         return true;
     }
 };
@@ -98,6 +101,7 @@ const isFormValid = () => {
 </script>
 
 <template>
+    <Loader v-if="hasSignedUp" />
     <section class="bg-primary h-full flex w-full justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
             <div

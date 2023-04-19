@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div class="absolute backdrop-blur-md w-full h-full">
+    <div class="absolute backdrop-blur-sm w-full h-full z-50">
         <div class="flex justify-center items-center h-full w-full">
             <div
                 class="flex flex-col justify-center items-center rounded-full bg-gray-600 w-52 h-52 scale-105"
@@ -57,7 +57,7 @@
     left: 50%;
     top: 50%;
     box-sizing: border-box;
-    border: 7px solid #ff3d00;
+    border: 7px solid #0d8c5d;
     border-radius: 50%;
     animation: rotate 1s linear infinite;
 }
