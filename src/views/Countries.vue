@@ -2,6 +2,7 @@
 import { reactive } from '@vue/reactivity';
 import { onBeforeMount, watchEffect } from 'vue';
 import CountryLink from '../components/Country/CountryLink.vue';
+import Loader from '../components/Loader.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
 interface State {
@@ -84,17 +85,7 @@ watchEffect(() => {
 
     <p class="text-center text-white text-2xl">{{ state.message }}</p>
 
-    <div
-        v-if="filteredCountries().length === 0"
-        class="flex justify-center items-center w-full h-full gap-5"
-    >
-        <div
-            v-for="i in 3"
-            :key="i"
-            :style="{ 'animation-delay': `${(i - 1) * 0.2}s` }"
-            class="rounded-full h-8 w-8 animate-pulse-fast flex justify-center items-center bg-white"
-        ></div>
-    </div>
+    <Loader v-if="filteredCountries().length === 0" />
     <div
         v-else
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-16 p-10"
