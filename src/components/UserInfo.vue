@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import { PropType } from 'vue';
 import { User } from '../models/User';
-const props = defineProps({
-    user: {
-        type: Object as PropType<User>,
-        required: true
-    }
-});
+defineProps<{
+    user: User;
+}>();
 const formatDate = (date: Date) => {
     return `The ${date.getDate()} of ${date.toLocaleString('default', {
         month: 'long'

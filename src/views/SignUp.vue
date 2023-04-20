@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
+import BlurContainer from '../components/BlurContainer.vue';
 import Loader from '../components/Loader.vue';
 import ApiService from '../services/apiService';
 import { getCurrentMySQLDate } from '../utils/common';
@@ -102,7 +103,7 @@ const isFormValid = () => {
 </script>
 
 <template>
-    <Loader v-if="hasSignedUp" />
+    <BlurContainer v-if="hasSignedUp" :customComponent="Loader" />
     <section class="bg-primary h-full flex w-full justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
             <div

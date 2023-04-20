@@ -2,6 +2,7 @@
 import { ref, watchEffect } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import BlurContainer from './BlurContainer.vue';
 import Loader from './Loader.vue';
 
 const router = useRouter();
@@ -22,7 +23,7 @@ const logOut = () => {
 </script>
 
 <template>
-    <Loader v-if="hasLoggedOut" />
+    <BlurContainer v-if="hasLoggedOut" :customComponent="Loader" />
     <div
         class="flex flex-row w-full justify-between h-auto bg-gray-100 border-b-2 border-black"
     >

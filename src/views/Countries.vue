@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive } from '@vue/reactivity';
 import { onBeforeMount, watchEffect } from 'vue';
+import BlurContainer from '../components/BlurContainer.vue';
 import CountryLink from '../components/Country/CountryLink.vue';
 import Loader from '../components/Loader.vue';
 import { CountryI } from '../models/Country';
@@ -85,7 +86,10 @@ watchEffect(() => {
 
     <p class="text-center text-white text-2xl">{{ state.message }}</p>
 
-    <Loader v-if="filteredCountries().length === 0" />
+    <BlurContainer
+        v-if="filteredCountries().length === 0"
+        :customComponent="Loader"
+    />
     <div
         v-else
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-16 p-10"

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onBeforeMount, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
+import BlurContainer from '../components/BlurContainer.vue';
 import Country from '../components/Country/Country.vue';
 import Loader from '../components/Loader.vue';
 import { CountryI } from '../models/Country';
@@ -29,7 +30,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <Loader v-if="state.isLoading" />
+    <BlurContainer v-if="state.isLoading" :customComponent="Loader" />
     <Transition name="slide-fade" appear>
         <Country v-if="state.country != undefined" :country="state.country" />
     </Transition>
