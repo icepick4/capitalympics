@@ -7,15 +7,19 @@ defineProps<{
 
 <template>
     <div class="flex justify-center">
-        <div class="w-2/5 bg-gray-300 rounded-lg shadow-lg overflow-hidden">
-            <div class="p-4 flex flex-row justify-between">
-                <div class="flex flex-col">
+        <div
+            class="w-5/6 md:w-3/5 lg:w-2/5 bg-gray-300 rounded-lg shadow-lg overflow-hidden"
+        >
+            <div
+                class="p-2 lg:p-4 flex flex-col justify-center items-center lg:flex-row lg:justify-between"
+            >
+                <div class="flex flex-col items-center lg:items-start">
                     <h1 class="text-4xl font-bold">{{ country.name }}</h1>
                     <p>{{ country.official_name }}</p>
                     <p class="text-gray-500">{{ country.alpha3Code }}</p>
                 </div>
                 <div class="col-span-1">
-                    <dt class="text-gray-500">Flag</dt>
+                    <dt class="text-gray-500 hidden lg:visible">Flag</dt>
                     <dd>
                         <img
                             :src="country.flag"

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
-import EndingButtons from './Buttons/EndingButtons.vue';
-import StartingButtons from './Buttons/StartingButtons.vue';
-import LearnCapitals from './Capitals/CapitalsQuestion.vue';
-import LearnFlags from './Flags/FlagsQuestion.vue';
+import EndingButtons from '../components/Learning/Buttons/EndingButtons.vue';
+import StartingButtons from '../components/Learning/Buttons/StartingButtons.vue';
+import LearnCapitals from '../components/Learning/Capitals/CapitalsQuestion.vue';
+import LearnFlags from '../components/Learning/Flags/FlagsQuestion.vue';
 type Learning = 'capitals' | 'flags';
 type CurrentState = 'starting' | 'ending';
 const route = useRoute();

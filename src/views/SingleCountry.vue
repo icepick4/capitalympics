@@ -28,15 +28,20 @@ onBeforeMount(async () => {
 
 <template>
     <BlurContainer v-if="state.isLoading" :customComponent="Loader" />
-    <Transition name="slide-fade" appear>
-        <Country v-if="state.country != undefined" :country="state.country" />
-    </Transition>
-    <RouterLink
-        to="/countries"
-        class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/4 mx-auto"
-    >
-        Back
-    </RouterLink>
+    <div class="flex flex-col gap-5">
+        <Transition name="slide-fade" appear>
+            <Country
+                v-if="state.country != undefined"
+                :country="state.country"
+            />
+        </Transition>
+        <RouterLink
+            to="/countries"
+            class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/2 md:w-1/4 mx-auto"
+        >
+            Back
+        </RouterLink>
+    </div>
 </template>
 
 <style scoped>
