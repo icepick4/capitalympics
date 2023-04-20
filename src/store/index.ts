@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { createStore } from 'vuex';
 import ApiService from '../services/apiService';
-
+import { setLocalStorageToken, setLocalStorageUser } from '../utils/common';
 const store = createStore({
     state: {
         user: null,
@@ -10,15 +10,13 @@ const store = createStore({
     mutations: {
         setUser(state, user) {
             state.user = user;
-            localStorage.setItem('user', JSON.stringify(user));
         },
         setToken(state, token) {
             state.token = token;
-            localStorage.setItem('token', token);
         },
         clearUser(state) {
             state.user = null;
-            localStorage.removeItem('user');
+            localStorage.removeItem('user_id');
         },
         clearToken(state) {
             state.token = null;
@@ -35,6 +33,8 @@ const store = createStore({
             if (response.status === 200) {
                 context.commit('setToken', response.data.token);
                 context.commit('setUser', response.data.user);
+                setLocalStorageToken(response.data.token);
+                setLocalStorageUser(response.data.user.user_id);
             } else {
                 throw new Error('Login failed');
             }

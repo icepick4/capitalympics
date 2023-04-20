@@ -52,7 +52,9 @@ const logIn = async () => {
 </script>
 
 <template>
-    <BlurContainer v-if="hasLoggedIn" :customComponent="Loader" />
+    <BlurContainer v-if="hasLoggedIn">
+        <Loader />
+    </BlurContainer>
     <section
         class="relative py-10 bg-gray-900 sm:py-16 lg:py-24 h-full flex items-center"
     >

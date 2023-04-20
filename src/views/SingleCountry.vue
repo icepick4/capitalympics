@@ -21,14 +21,20 @@ const props = defineProps<{
 }>();
 
 onBeforeMount(async () => {
-    state.country = await ApiService.getCountry(props.countryCode);
-    state.isLoading = false;
+    try {
+        state.country = await ApiService.getCountry(props.countryCode);
+        state.isLoading = false;
+    } catch (error) {
+        state.isLoading = false;
+    }
 });
 </script>
 
 <template>
-    <BlurContainer v-if="state.isLoading" :customComponent="Loader" />
-    <div class="flex flex-col gap-5">
+    <BlurContainer v-if="state.isLoading">
+        <Loader />
+    </BlurContainer>
+    <div class="flex flex-col gap-5 m-5">
         <Transition name="slide-fade" appear>
             <Country
                 v-if="state.country != undefined"

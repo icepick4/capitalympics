@@ -103,7 +103,9 @@ const isFormValid = () => {
 </script>
 
 <template>
-    <BlurContainer v-if="hasSignedUp" :customComponent="Loader" />
+    <BlurContainer v-if="hasSignedUp">
+        <Loader />
+    </BlurContainer>
     <section class="bg-primary h-full flex w-full justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
             <div
