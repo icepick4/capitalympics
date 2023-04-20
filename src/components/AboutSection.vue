@@ -1,27 +1,12 @@
 <script setup lang="ts">
 import VLazyImage from 'v-lazy-image';
-const props = defineProps({
-    text: {
-        type: String,
-        required: true
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    image: {
-        type: String,
-        required: true
-    },
-    alt: {
-        type: String,
-        required: true
-    },
-    link: {
-        type: String,
-        required: true
-    }
-});
+defineProps<{
+    text: string;
+    title: string;
+    image: string;
+    alt: string;
+    link: string;
+}>();
 </script>
 
 <template>

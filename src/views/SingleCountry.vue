@@ -16,12 +16,9 @@ const state: State = reactive({
     isLoading: true
 });
 
-const props = defineProps({
-    countryCode: {
-        type: String,
-        required: true
-    }
-});
+const props = defineProps<{
+    countryCode: string;
+}>();
 
 onBeforeMount(async () => {
     state.country = await ApiService.getCountry(props.countryCode);

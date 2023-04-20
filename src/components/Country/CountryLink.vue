@@ -1,20 +1,11 @@
 <script setup lang="ts">
 import VLazyImage from 'v-lazy-image';
 import { RouterLink } from 'vue-router';
-const props = defineProps({
-    countryName: {
-        type: String,
-        required: true
-    },
-    countryFlag: {
-        type: String,
-        required: true
-    },
-    countryCode: {
-        type: String,
-        required: true
-    }
-});
+defineProps<{
+    countryName: string;
+    countryFlag: string;
+    countryCode: string;
+}>();
 </script>
 
 <template>
