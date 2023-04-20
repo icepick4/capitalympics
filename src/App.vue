@@ -7,7 +7,7 @@ import Header from './components/Header.vue';
 <template>
     <div class="flex flex-col h-screen">
         <Header />
-        <div class="flex flex-col flex-grow justify-evenly relative">
+        <div class="flex flex-col flex-grow justify-evenly">
             <RouterView />
         </div>
         <Footer />

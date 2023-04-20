@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { AxiosResponse } from 'axios';
 import { createStore } from 'vuex';
 import ApiService from '../services/apiService';
 
@@ -27,15 +27,10 @@ const store = createStore({
     },
     actions: {
         async logIn(context, { username, password, last_activity }) {
-            const response = await axios.post(
-                `${ApiService.API_URL}/users/connect`,
-                {
-                    user: {
-                        name: username,
-                        password: password,
-                        last_activity: last_activity
-                    }
-                }
+            const response: AxiosResponse = await ApiService.logIn(
+                username,
+                password,
+                last_activity
             );
             if (response.status === 200) {
                 context.commit('setToken', response.data.token);

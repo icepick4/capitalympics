@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from '@vue/reactivity';
+import { reactive, ref } from '@vue/reactivity';
 import { onBeforeMount, watchEffect } from 'vue';
 import BlurContainer from '../components/BlurContainer.vue';
 import CountryLink from '../components/Country/CountryLink.vue';
@@ -25,6 +25,8 @@ const region = reactive({
     value: ''
 });
 
+const finishedWaited = ref(false);
+
 const filteredCountries = () => {
     if (search.value.length > 0 || region.value.length > 0) {
         return state.countries.filter((country) => {
@@ -41,7 +43,11 @@ const filteredCountries = () => {
 };
 
 onBeforeMount(async () => {
-    state.countries = await ApiService.getCountries();
+    try {
+        state.countries = await ApiService.getCountries();
+    } catch (error) {
+        finishedWaited.value = true;
+    }
     if (state.countries.length === 0) {
         state.message = 'No countries found';
     } else {
@@ -86,10 +92,9 @@ watchEffect(() => {
 
     <p class="text-center text-white text-2xl">{{ state.message }}</p>
 
-    <BlurContainer
-        v-if="filteredCountries().length === 0"
-        :customComponent="Loader"
-    />
+    <BlurContainer v-if="filteredCountries().length === 0 && !finishedWaited">
+        <Loader />
+    </BlurContainer>
     <div
         v-else
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-16 p-10"

@@ -23,7 +23,9 @@ const logOut = () => {
 </script>
 
 <template>
-    <BlurContainer v-if="hasLoggedOut" :customComponent="Loader" />
+    <BlurContainer v-if="hasLoggedOut">
+        <Loader/>
+    </BlurContainer>
     <div
         class="flex flex-row w-full justify-between h-auto bg-gray-100 border-b-2 border-black"
     >

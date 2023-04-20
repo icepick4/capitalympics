@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useStore } from 'vuex';
-import BlurContainer from '../components/BlurContainer.vue';
-import Modal from '../components/Modal.vue';
 import { Redirection } from '../types/Redirection';
 
 const store = useStore();
@@ -11,24 +9,25 @@ const user = ref(store.getters.user);
 //     user.value = store.getters.user;
 // });
 const redirection: Redirection = {
-    backgroundColor: 'error',
+    backgroundColor: 'primary',
     redirectionLink: '/countries',
-    text: 'Countries',
+    text: "Refaire l'inscription",
     textColor: 'black'
 };
 </script>
 
 <template>
-    <!-- <h1 class="text-white text-center text-6xl">Capitalympics !</h1> -->
-    <BlurContainer>
+    <h1 class="text-white text-center text-6xl">Capitalympics !</h1>
+    <!-- <BlurContainer>
         <Modal
-            :title="'TEST TITLE'"
-            :message="'TEST MESSAGE'"
+            :title="'Utilisateur déjà existant'"
+            :message="'Veuillez choisir un autre pseudo'"
             :backgroundColor="'white'"
-            :titleColor="'primary'"
+            :titleColor="'error'"
             :redirection="redirection"
-        />
-    </BlurContainer>
+        /
+        <Loader />
+    </BlurContainer> -->
     <div class="flex flex-col justify-center items-center" v-if="user">
         <h2 class="text-white text-center text-3xl">Welcome {{ user.name }}</h2>
         <h3 class="text-white text-center text-3xl">
