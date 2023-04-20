@@ -1,10 +1,28 @@
 <script setup lang="ts">
-import { Redirection } from '../types/Redirection';
+import { RouterLink } from 'vue-router';
+import { Color, Redirection } from '../types/Redirection';
 
-const props = defineProps<{
+defineProps<{
+    title: string;
     message: string;
+    backgroundColor: Color;
+    titleColor: Color;
     redirection: Redirection;
 }>();
 </script>
 
-<template></template>
+<template>
+    <div
+        class="flex flex-col px-10 p-5 justify-center items-center rounded-md gap-7"
+        :class="`bg-${backgroundColor}`"
+    >
+        <h1 class="text-2xl" :class="`text-${titleColor}`">{{ title }}</h1>
+        <p>{{ message }}</p>
+        <RouterLink
+            :to="redirection.redirectionLink"
+            class="p-5 rounded-lg"
+            :class="`bg-${redirection.backgroundColor} text-${redirection.textColor}`"
+            >{{ redirection.text }}
+        </RouterLink>
+    </div>
+</template>

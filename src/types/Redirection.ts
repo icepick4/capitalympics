@@ -1,8 +1,8 @@
 export type Redirection = {
-    backgroundColor: ColorRedirection;
+    backgroundColor: Color;
     text: string;
-    textColor: ColorRedirection;
+    textColor: Color;
     redirectionLink: string;
 };
 
-type ColorRedirection = '#0D8C5D' | '#A21c1c' | '#000' | '#fff';
+export type Color = 'primary' | 'error' | 'black' | 'white';
