@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { requireAuth } from '../utils/authMiddleware';
 import About from '../views/About.vue';
 import Countries from '../views/Countries.vue';
 import Home from '../views/Home.vue';
@@ -23,17 +24,20 @@ const routes = [
     {
         path: '/learn',
         name: 'Learn',
-        component: Learn
+        component: Learn,
+        beforeEnter: requireAuth
     },
     {
         path: '/learn/capitals',
         name: 'Capitals',
-        component: LearnTemplate
+        component: LearnTemplate,
+        beforeEnter: requireAuth
     },
     {
         path: '/learn/flags',
         name: 'Flags',
-        component: LearnTemplate
+        component: LearnTemplate,
+        beforeEnter: requireAuth
     },
     {
         path: '/signup',
@@ -57,10 +61,11 @@ const routes = [
         props: true
     },
     {
-        path: '/account',
+        path: '/profile',
         name: 'Profile',
         component: Profile,
-        props: true
+        props: true,
+        beforeEnter: requireAuth
     },
     {
         path: '/:catchAll(.*)',

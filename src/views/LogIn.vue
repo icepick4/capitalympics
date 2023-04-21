@@ -42,7 +42,7 @@ const logIn = async () => {
         });
         setTimeout(() => {
             hasLoggedIn.value = false;
-            router.push('/account');
+            router.push('/profile');
         }, 2000);
     } catch (e) {
         handleSignInError();

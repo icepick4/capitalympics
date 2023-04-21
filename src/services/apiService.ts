@@ -49,7 +49,7 @@ export default class ApiService {
     public static async logIn(
         username: string,
         password: string,
-        last_activity: Date
+        last_activity: string
     ): Promise<AxiosResponse> {
         try {
             const response = await axios.post(
@@ -59,6 +59,26 @@ export default class ApiService {
                         name: username,
                         password: password,
                         last_activity: last_activity
+                    }
+                }
+            );
+            return response;
+        } catch (error) {
+            throw new Error('Failed log in');
+        }
+    }
+
+    public static async reconnect(
+        user_id: number,
+        token: string
+    ): Promise<AxiosResponse> {
+        try {
+            const response = await axios.post(
+                `${ApiService.API_URL}/users/connect/${user_id}`,
+                null,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
                     }
                 }
             );

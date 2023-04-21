@@ -24,7 +24,7 @@ const logOut = () => {
 
 <template>
     <BlurContainer v-if="hasLoggedOut">
-        <Loader/>
+        <Loader />
     </BlurContainer>
     <div
         class="flex flex-row w-full justify-between h-auto bg-gray-100 border-b-2 border-black"
@@ -84,10 +84,10 @@ const logOut = () => {
         </div>
         <div v-else class="flex flex-row justify-center items-center w-1/4">
             <RouterLink
-                to="/account"
+                to="/profile"
                 class="w-full h-full flex justify-end items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
             >
-                Account</RouterLink
+                Profile</RouterLink
             >
             <div
                 class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out cursor-pointer"

@@ -3,12 +3,24 @@ import { RouterView } from 'vue-router';
 import { useStore } from 'vuex';
 import Footer from './components/Footer.vue';
 import Header from './components/Header.vue';
-import { getLocalStorageUser, isSetToken, isSetUser } from './utils/common';
+import {
+    getLocalStorageToken,
+    getLocalStorageUser,
+    isSetToken,
+    isSetUser
+} from './utils/common';
 
-if (isSetToken() && isSetUser()) {
+const reconnect = async () => {
     const store = useStore();
     const user_id: number = getLocalStorageUser();
-    //todo connecter avec le token du localStorage le user
+    const token: string = getLocalStorageToken();
+    try {
+        await store.dispatch('reconnect', { user_id, token });
+    } catch (error) {}
+};
+
+if (isSetToken() && isSetUser()) {
+    reconnect();
 }
 </script>
 
