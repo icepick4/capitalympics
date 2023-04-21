@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useStore } from 'vuex';
+import { User } from '../models/User';
 import { Redirection } from '../types/Redirection';
 
 const store = useStore();
-const user = ref(store.getters.user);
+const user: User = ref(store.getters.user);
+console.log(user);
 // watchEffect(() => {
 //     user.value = store.getters.user;
 // });

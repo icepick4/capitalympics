@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onBeforeMount, ref } from 'vue';
 import { RouterView } from 'vue-router';
 import { useStore } from 'vuex';
 import Footer from './components/Footer.vue';
@@ -9,6 +10,8 @@ import {
     isSetToken,
     isSetUser
 } from './utils/common';
+console.log('App.vue');
+const isReconnected = ref(false);
 
 const reconnect = async () => {
     const store = useStore();
@@ -16,19 +19,24 @@ const reconnect = async () => {
     const token: string = getLocalStorageToken();
     try {
         await store.dispatch('reconnect', { user_id, token });
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+        isReconnected.value = true;
+    }
 };
 
-if (isSetToken() && isSetUser()) {
-    reconnect();
-}
+onBeforeMount(async () => {
+    if (isSetUser() && isSetToken()) {
+        await reconnect();
+    }
+});
 </script>
 
 <template>
     <div class="flex flex-col h-screen">
         <Header />
         <div class="flex flex-col flex-grow justify-evenly">
-            <RouterView />
+            <RouterView v-if="isReconnected" />
         </div>
         <Footer />
     </div>

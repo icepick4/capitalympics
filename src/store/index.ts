@@ -49,7 +49,6 @@ const store = createStore({
                 token
             );
             if (response.status === 200) {
-                console.log(response.data.user);
                 context.commit('setUser', response.data.user);
                 setLocalStorageUser(response.data.user.id);
             } else {
