@@ -18,7 +18,7 @@ const logOut = () => {
         store.dispatch('logOut');
         hasLoggedOut.value = false;
         router.push('/');
-    }, 100000);
+    }, 1000);
 };
 </script>
 
