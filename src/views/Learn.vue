@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import LearnCapitals from '../components/Learning/Buttons/LearnCapitalsButton.vue';
-import LearnFlags from '../components/Learning/Buttons/LearnFlagsButton.vue';
 const router = useRouter();
 const store = useStore();
 const user = store.getters.user;
@@ -20,8 +18,16 @@ if (user === null) {
         <div
             class="flex flex-col lg:flex-row justify-center items-center w-1/2 gap-5"
         >
-            <LearnCapitals />
-            <LearnFlags />
+            <RouterLink
+                to="/learn/capitals"
+                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full"
+                >Learn Capitals 📍</RouterLink
+            >
+            <RouterLink
+                to="/learn/flags"
+                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full"
+                >Learn Flags 🇫🇷</RouterLink
+            >
         </div>
     </div>
 </template>

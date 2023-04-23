@@ -50,7 +50,7 @@ const store = createStore({
             );
             if (response.status === 200) {
                 context.commit('setUser', response.data.user);
-                setLocalStorageUser(response.data.user.id);
+                context.commit('setToken', token);
             } else {
                 throw new Error('Reconnect failed');
             }

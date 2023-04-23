@@ -1,41 +1,33 @@
 <script setup lang="ts">
+import { LearningState } from '../../../types/common';
 import ButtonTemplate from './ButtonTemplate.vue';
 
 defineProps<{
     countryCode: string;
+    user_id: number;
+    token: string;
+    click: (type: LearningState) => void;
 }>();
-
-const handleClickSuccess = () => {
-    console.log('Success');
-};
-
-const handleClickMedium = () => {
-    console.log('Medium');
-};
-
-const handleClickFailed = () => {
-    console.log('Failed');
-};
 </script>
 
 <template>
     <div
-        class="flex flex-col sm:flex-row w-full items-center justify-center gap-2"
+        class="flex flex-col sm:flex-row w-full items-center justify-center gap-2 lg:gap-5"
     >
         <ButtonTemplate
             :title="'Easy'"
             :color="'bg-blue-500'"
-            :onClick="handleClickSuccess"
+            @click="click('succeeded')"
         />
         <ButtonTemplate
             :title="'Medium'"
             :color="'bg-yellow-500'"
-            :onClick="handleClickMedium"
+            @click="click('medium')"
         />
         <ButtonTemplate
             :title="'Hard'"
             :color="'bg-red-500'"
-            :onClick="handleClickFailed"
+            @click="click('failed')"
         />
     </div>
 </template>
