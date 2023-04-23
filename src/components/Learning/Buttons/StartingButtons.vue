@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import ButtonTemplate from './ButtonTemplate.vue';
 
+defineProps<{
+    countryCode: string;
+}>();
+
 const handleClickSuccess = () => {
     console.log('Success');
 };

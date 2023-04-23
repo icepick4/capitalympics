@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { CountryI } from '../models/Country';
-
+import { LearningType } from '../types/common';
 export default class ApiService {
     public static readonly API_URL: string = 'http://localhost:3001';
 
@@ -94,6 +94,26 @@ export default class ApiService {
             return response.data.count;
         } catch (error) {
             throw new Error('Failed get user counter');
+        }
+    }
+
+    public static async getNewCountryToLearn(
+        user_id: number,
+        token: string,
+        learningType: LearningType
+    ): Promise<CountryI> {
+        try {
+            const response = await axios.get(
+                `${ApiService.API_URL}/users/${user_id}/country/play`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            return response.data.country;
+        } catch (error) {
+            throw new Error('Failed get new country');
         }
     }
 }

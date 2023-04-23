@@ -54,7 +54,6 @@ const signUp = async () => {
         hasSignedUp.value = true;
         router.push('/login');
     } catch (error) {
-        console.log('here');
         displaySignUpError.value = true;
     }
 };

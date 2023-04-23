@@ -28,7 +28,7 @@ export class Redirections {
         },
         {
             backgroundColor: 'black',
-            text: 'Learn',
+            text: 'Go back to learn',
             textColor: 'white',
             redirectionLink: '/learn'
         },

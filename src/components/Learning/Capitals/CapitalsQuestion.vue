@@ -1,21 +1,21 @@
 <script setup lang="ts">
+import { CountryI } from '../../../models/Country';
+
 defineProps<{
-    text: string;
-    countryName: string;
-    countryFlag: string;
+    country: CountryI;
 }>();
 </script>
 
 <template>
-    <div class="w-full h-full flex flex-col">
+    <div v-if="country" class="w-full h-full flex flex-col">
         <div
             class="flex flex-row w-full h-1/2 items-center justify-center gap-10"
         >
-            <h1 class="text-5xl">{{ countryName }}</h1>
-            <img :src="countryFlag" />
+            <h1 class="text-5xl">{{ country.name }}</h1>
+            <img class="rounded border-black border-2" :src="country.flag" />
         </div>
         <div class="flex flex-row w-full h-1/2 items-center justify-center">
-            <h1 class="text-2xl">{{ text }}</h1>
+            <h1 class="text-2xl">Find the capital !</h1>
         </div>
     </div>
 </template>
