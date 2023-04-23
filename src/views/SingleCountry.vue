@@ -32,7 +32,7 @@ onBeforeMount(async () => {
 
 <template>
     <BlurContainer v-if="state.isLoading">
-        <Loader />
+        <Loader :title="`Loading ${countryCode}`" />
     </BlurContainer>
     <div class="flex flex-col gap-5 m-5">
         <Transition name="slide-fade" appear>

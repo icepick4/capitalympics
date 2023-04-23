@@ -18,13 +18,13 @@ const logOut = () => {
         store.dispatch('logOut');
         hasLoggedOut.value = false;
         router.push('/');
-    }, 1000);
+    }, 100000);
 };
 </script>
 
 <template>
     <BlurContainer v-if="hasLoggedOut">
-        <Loader />
+        <Loader title="Logging out ..." />
     </BlurContainer>
     <div
         class="flex flex-row w-full justify-between h-auto bg-gray-100 border-b-2 border-black"

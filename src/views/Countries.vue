@@ -93,7 +93,7 @@ watchEffect(() => {
     <p class="text-center text-white text-2xl">{{ state.message }}</p>
 
     <BlurContainer v-if="filteredCountries().length === 0 && !finishedWaited">
-        <Loader />
+        <Loader title="Loading countries ..." />
     </BlurContainer>
     <div
         v-else

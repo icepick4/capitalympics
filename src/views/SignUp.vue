@@ -129,7 +129,7 @@ const isFormValid = () => {
             :redirection="null"
             @close="closeUserTakenModal"
         />
-        <Loader v-else />
+        <Loader v-else title="Signing up..." />
     </BlurContainer>
     <section class="bg-primary h-full flex w-full justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">

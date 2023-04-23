@@ -1,7 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+    title?: string;
+}>();
+</script>
 
 <template>
-    <div class="flex justify-center items-center h-full w-full">
+    <div class="flex flex-col justify-center items-center h-full w-full gap-5">
         <div
             class="flex flex-col justify-center items-center rounded-full bg-gray-600 w-52 h-52 scale-105"
         >
@@ -15,6 +19,9 @@
                 ></div>
             </div>
         </div>
+        <h1 v-if="title" class="text-2xl bg-white rounded-lg p-4">
+            {{ title }}
+        </h1>
     </div>
 </template>
 
