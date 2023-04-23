@@ -10,7 +10,6 @@ import {
     isSetToken,
     isSetUser
 } from './utils/common';
-console.log('App.vue');
 const isReconnected = ref(false);
 
 const reconnect = async () => {
@@ -28,6 +27,8 @@ const reconnect = async () => {
 onBeforeMount(async () => {
     if (isSetUser() && isSetToken()) {
         await reconnect();
+    } else {
+        isReconnected.value = true;
     }
 });
 </script>

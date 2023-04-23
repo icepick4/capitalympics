@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import BlurContainer from '../components/BlurContainer.vue';
 import Loader from '../components/Loader.vue';
+import Modal from '../components/Modal.vue';
 import ApiService from '../services/apiService';
 import { getCurrentMySQLDate } from '../utils/common';
 interface inputState {
@@ -24,31 +25,37 @@ const passwordConfirmation: inputState = reactive({
 const hasSignedUp = ref(false);
 const numberOfPeople = ref(0);
 const router = useRouter();
+const displaySignUpError = ref(false);
 
 const getNumberOfPeople = async () => {
     const response = await ApiService.getUsersCount();
     numberOfPeople.value = response;
 };
 
+const closeUserTakenModal = () => {
+    displaySignUpError.value = false;
+    hasSignedUp.value = false;
+};
+
 getNumberOfPeople();
 
 const signUp = async () => {
     if (!isFormValid()) {
+        hasSignedUp.value = true;
         return;
     }
-    const response = await ApiService.signUp(
-        username.content,
-        password.content,
-        getCurrentMySQLDate()
-    );
-    if (response) {
+    hasSignedUp.value = true;
+    try {
+        await ApiService.signUp(
+            username.content,
+            password.content,
+            getCurrentMySQLDate()
+        );
         hasSignedUp.value = true;
-        setTimeout(() => {
-            hasSignedUp.value = false;
-            router.push('/login');
-        }, 3000);
-    } else {
-        alert('Username already taken');
+        router.push('/login');
+    } catch (error) {
+        console.log('here');
+        displaySignUpError.value = true;
     }
 };
 
@@ -104,7 +111,25 @@ const isFormValid = () => {
 
 <template>
     <BlurContainer v-if="hasSignedUp">
-        <Loader />
+        <Modal
+            v-if="!isFormValid()"
+            title="Error while signing up"
+            message="Please fill all the fields correctly"
+            background-color="white"
+            title-color="error"
+            :redirection="null"
+            @close="hasSignedUp = false"
+        />
+        <Modal
+            v-else-if="displaySignUpError"
+            title="Error while signing up"
+            message="This username is already taken"
+            background-color="white"
+            title-color="error"
+            :redirection="null"
+            @close="closeUserTakenModal"
+        />
+        <Loader v-else />
     </BlurContainer>
     <section class="bg-primary h-full flex w-full justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">

@@ -6,7 +6,6 @@ import { Redirection } from '../types/Redirection';
 
 const store = useStore();
 const user: User = ref(store.getters.user);
-console.log(user);
 // watchEffect(() => {
 //     user.value = store.getters.user;
 // });

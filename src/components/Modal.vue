@@ -7,7 +7,7 @@ defineProps<{
     message: string;
     backgroundColor: Color;
     titleColor: Color;
-    redirection: Redirection;
+    redirection: Redirection | null;
 }>();
 </script>
 
@@ -19,10 +19,19 @@ defineProps<{
         <h1 class="text-2xl" :class="`text-${titleColor}`">{{ title }}</h1>
         <p>{{ message }}</p>
         <RouterLink
+            v-if="redirection"
             :to="redirection.redirectionLink"
             class="p-5 rounded-lg"
             :class="`bg-${redirection.backgroundColor} text-${redirection.textColor}`"
             >{{ redirection.text }}
         </RouterLink>
+        <div v-else>
+            <button
+                class="px-5 p-3 rounded-lg bg-primary text-black"
+                @click="$emit('close')"
+            >
+                Close
+            </button>
+        </div>
     </div>
 </template>

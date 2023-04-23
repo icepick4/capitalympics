@@ -8,14 +8,14 @@ export const getCurrentMySQLDate = (): string => {
 };
 
 export const isSetUser = (): boolean => {
-    if (localStorage.getItem('user_id') !== undefined) {
+    if (localStorage.getItem('user_id') !== null) {
         return true;
     }
     return false;
 };
 
 export const isSetToken = (): boolean => {
-    if (localStorage.getItem('token') !== undefined) {
+    if (localStorage.getItem('token') !== null) {
         return true;
     }
     return false;

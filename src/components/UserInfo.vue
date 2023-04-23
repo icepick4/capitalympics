@@ -4,6 +4,10 @@ defineProps<{
     user: User;
 }>();
 const formatDate = (date: Date) => {
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+        minutes = parseInt(`0${minutes}`);
+    }
     return `The ${date.getDate()} of ${date.toLocaleString('default', {
         month: 'long'
     })} of ${date.getFullYear()} at ${date.getHours()}:${date.getMinutes()}`;

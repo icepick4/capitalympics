@@ -4,10 +4,11 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import BlurContainer from '../components/BlurContainer.vue';
 import Loader from '../components/Loader.vue';
+import Modal from '../components/Modal.vue';
 import { getCurrentMySQLDate } from '../utils/common';
-
 const userFound = ref(false);
 const signed = ref(false);
+const displayErrorForm = ref(false);
 const username = ref('');
 const password = ref('');
 const router = useRouter();
@@ -20,7 +21,7 @@ const handleSignInError = () => {
 
 const validateForm = () => {
     if (!username.value || !password.value) {
-        alert('Please fill in both username and password fields');
+        displayErrorForm.value = true;
         return false;
     }
     return true;
@@ -54,6 +55,16 @@ const logIn = async () => {
 <template>
     <BlurContainer v-if="hasLoggedIn">
         <Loader />
+    </BlurContainer>
+    <BlurContainer v-if="displayErrorForm">
+        <Modal
+            title="Error"
+            message="Please fill all the fields"
+            background-color="white"
+            title-color="error"
+            :redirection="null"
+            @close="displayErrorForm = false"
+        />
     </BlurContainer>
     <section
         class="relative py-10 bg-gray-900 sm:py-16 lg:py-24 h-full flex items-center"
