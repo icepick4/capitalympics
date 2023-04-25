@@ -3,17 +3,22 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import LearnCapitals from '../components/Learning/Buttons/LearnCapitalsButton.vue';
 import LearnFlags from '../components/Learning/Buttons/LearnFlagsButton.vue';
+import ApiService from '../services/apiService';
 const router = useRouter();
 const store = useStore();
 const user = store.getters.user;
+const token = store.getters.token;
+let userScore: number = 0;
 if (user === null) {
     router.push('/login');
+} else {
+    userScore = await ApiService.getUserScore(user.id, token);
 }
 </script>
 
 <template>
     <div
-        v-if="user !== null"
+        v-if="user !== null && userScore !== 0"
         class="flex flex-col justify-center items-center gap-10"
     >
         <h1 class="text-white text-center text-6xl">Hi {{ user.name }} !</h1>

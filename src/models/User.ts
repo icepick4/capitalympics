@@ -18,13 +18,4 @@ export interface UserScore {
     token: string;
 }
 
-export enum Level {
-    Beginner = 0,
-    Intermediate = 1,
-    Advanced = 2,
-    Expert = 3,
-    Master = 4,
-    GrandMaster = 5,
-    God = 6,
-    Supreme = 7
-}
+export type Level = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;

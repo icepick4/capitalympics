@@ -96,4 +96,23 @@ export default class ApiService {
             throw new Error('Failed get user counter');
         }
     }
+
+    public static async getUserScore(
+        user_id: number,
+        token: string
+    ): Promise<number> {
+        try {
+            const response = await axios.get(
+                `${ApiService.API_URL}/users/${user_id}/score`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            return response.data.score;
+        } catch (error) {
+            throw new Error('Failed get user score');
+        }
+    }
 }
