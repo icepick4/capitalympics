@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { CountryI } from '../models/Country';
-
+import { LearningState, LearningType } from '../types/common';
 export default class ApiService {
     public static readonly API_URL: string = 'http://localhost:3001';
 
@@ -104,6 +104,48 @@ export default class ApiService {
         try {
             const response = await axios.get(
                 `${ApiService.API_URL}/users/${user_id}/score`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            return response.data.country;
+        } catch (error) {
+            throw new Error('Failed get new country');
+        }
+    }
+
+    public static async updateUserLearning(
+        user_id: number,
+        country_code: string,
+        token: string,
+        type: LearningState
+    ): Promise<AxiosResponse> {
+        try {
+            const response = await axios.put(
+                `${ApiService.API_URL}/users/${user_id}/score/${country_code}/new_${type}`,
+                null,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            return response;
+        } catch (error) {
+            throw new Error('Failed update user learning');
+        }
+    }
+
+    public static async getNewCountryToLearn(
+        user_id: number,
+        token: string,
+        learningType: LearningType
+    ): Promise<CountryI> {
+        try {
+            const response = await axios.get(
+                `${ApiService.API_URL}/users/${user_id}/country/play`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`

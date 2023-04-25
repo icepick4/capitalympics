@@ -8,19 +8,19 @@ import ApiService from '../services/apiService';
 import { getCurrentMySQLDate } from '../utils/common';
 interface inputState {
     content: string;
-    hasTyped: boolean;
+    hasFocused: boolean | undefined;
 }
 const username: inputState = reactive({
     content: '',
-    hasTyped: false
+    hasFocused: undefined
 });
 const password: inputState = reactive({
     content: '',
-    hasTyped: false
+    hasFocused: undefined
 });
 const passwordConfirmation: inputState = reactive({
     content: '',
-    hasTyped: false
+    hasFocused: undefined
 });
 const hasSignedUp = ref(false);
 const numberOfPeople = ref(0);
@@ -54,7 +54,6 @@ const signUp = async () => {
         hasSignedUp.value = true;
         router.push('/login');
     } catch (error) {
-        console.log('here');
         displaySignUpError.value = true;
     }
 };
@@ -69,7 +68,7 @@ const validatePassword = () => {
 };
 
 const typedPassword = () => {
-    password.hasTyped = true;
+    password.hasFocused = true;
 };
 
 const validatePasswordConfirmation = () => {
@@ -81,7 +80,7 @@ const validatePasswordConfirmation = () => {
 };
 
 const typedPasswordConfirmation = () => {
-    passwordConfirmation.hasTyped = true;
+    passwordConfirmation.hasFocused = true;
 };
 
 const validateUsername = () => {
@@ -93,7 +92,7 @@ const validateUsername = () => {
 };
 
 const typedUsername = () => {
-    username.hasTyped = true;
+    username.hasFocused = true;
 };
 
 const isFormValid = () => {
@@ -246,7 +245,8 @@ const isFormValid = () => {
                                 </label>
                                 <span
                                     v-if="
-                                        username.hasTyped && !validateUsername()
+                                        username.hasFocused === false &&
+                                        !validateUsername()
                                     "
                                     class="text-error text-sm ml-1 text-center"
                                     >Must be at least 1 character long</span
@@ -279,6 +279,8 @@ const isFormValid = () => {
                                         class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
                                         @input="typedUsername"
                                         v-model="username.content"
+                                        @focusin="username.hasFocused = true"
+                                        @focusout="username.hasFocused = false"
                                     />
                                 </div>
                             </div>
@@ -292,7 +294,8 @@ const isFormValid = () => {
                                 </label>
                                 <span
                                     v-if="
-                                        !validatePassword() && password.hasTyped
+                                        password.hasFocused === false &&
+                                        !validatePassword()
                                     "
                                     class="text-error text-sm ml-1 text-center"
                                     >Must be at least 8 characters long and
@@ -327,6 +330,8 @@ const isFormValid = () => {
                                         class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
                                         @input="typedPassword"
                                         v-model="password.content"
+                                        @focusin="password.hasFocused = true"
+                                        @focusout="password.hasFocused = false"
                                     />
                                 </div>
                             </div>
@@ -340,12 +345,14 @@ const isFormValid = () => {
                                 </label>
                                 <span
                                     v-if="
-                                        !validatePasswordConfirmation &&
-                                        password.hasTyped
+                                        passwordConfirmation.hasFocused ===
+                                            false &&
+                                        !validatePasswordConfirmation() &&
+                                        validatePassword()
                                     "
                                     class="text-error text-center text-sm ml-1"
                                 >
-                                    Does not match
+                                    Passwords do not match
                                 </span>
                                 <div
                                     class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
@@ -375,6 +382,12 @@ const isFormValid = () => {
                                         class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
                                         @input="typedPasswordConfirmation"
                                         v-model="passwordConfirmation.content"
+                                        @focusin="
+                                            passwordConfirmation.hasFocused = true
+                                        "
+                                        @focusout="
+                                            passwordConfirmation.hasFocused = false
+                                        "
                                     />
                                 </div>
                             </div>
