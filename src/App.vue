@@ -2,8 +2,10 @@
 import { onBeforeMount, ref } from 'vue';
 import { RouterView } from 'vue-router';
 import { useStore } from 'vuex';
+import BlurContainer from './components/BlurContainer.vue';
 import Footer from './components/Footer.vue';
 import Header from './components/Header.vue';
+import Loader from './components/Loader.vue';
 import {
     getLocalStorageToken,
     getLocalStorageUser,
@@ -38,6 +40,9 @@ onBeforeMount(async () => {
         <Header />
         <div class="flex flex-col flex-grow justify-evenly">
             <RouterView v-if="isReconnected" />
+            <BlurContainer v-else>
+                <Loader />
+            </BlurContainer>
         </div>
         <Footer />
     </div>

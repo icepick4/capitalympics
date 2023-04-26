@@ -1,25 +1,38 @@
 <script setup lang="ts">
+import { onBeforeMount, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import ApiService from '../services/apiService';
 const router = useRouter();
 const store = useStore();
 const user = store.getters.user;
-const token = store.getters.token;
-let userScore: number = 0;
-if (user === null) {
-    router.push('/login');
-} else {
-    userScore = await ApiService.getUserScore(user.id, token);
-}
+const userScore = ref(0);
+const getUserScore = async (
+    user_id: number,
+    token: string
+): Promise<number> => {
+    return await ApiService.getUserScore(user_id, token);
+};
+
+onBeforeMount(async () => {
+    if (user === null) {
+        router.push('/login');
+    } else {
+        const token = store.getters.token;
+        userScore.value = await getUserScore(user.id, token);
+    }
+});
 </script>
 
 <template>
     <div
-        v-if="user !== null && userScore !== 0"
+        v-if="user !== null && userScore !== -1"
         class="flex flex-col justify-center items-center gap-10"
     >
         <h1 class="text-white text-center text-6xl">Hi {{ user.name }} !</h1>
+        <h1 class="text-white text-center text-4xl">
+            Your current score is {{ userScore }} !
+        </h1>
         <div
             class="flex flex-col lg:flex-row justify-center items-center w-1/2 gap-5"
         >

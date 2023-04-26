@@ -72,6 +72,7 @@ export default class ApiService {
         user_id: number,
         token: string
     ): Promise<AxiosResponse> {
+        const timeout: number = 5000;
         try {
             const response = await axios.post(
                 `${ApiService.API_URL}/users/connect/${user_id}`,
@@ -79,7 +80,8 @@ export default class ApiService {
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
-                    }
+                    },
+                    timeout: timeout
                 }
             );
             return response;
@@ -110,9 +112,9 @@ export default class ApiService {
                     }
                 }
             );
-            return response.data.country;
+            return response.data.score;
         } catch (error) {
-            throw new Error('Failed get new country');
+            throw new Error('Failed get global score');
         }
     }
 
@@ -152,9 +154,9 @@ export default class ApiService {
                     }
                 }
             );
-            return response.data.score;
+            return response.data.country;
         } catch (error) {
-            throw new Error('Failed get user score');
+            throw new Error('Failed get new country');
         }
     }
 }
