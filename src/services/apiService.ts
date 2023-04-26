@@ -159,4 +159,28 @@ export default class ApiService {
             throw new Error('Failed get new country');
         }
     }
+
+    public static async resetScores(
+        user_id: number,
+        token: string
+    ): Promise<boolean> {
+        try {
+            const response = await axios.post(
+                `${ApiService.API_URL}/users/init/${user_id}`,
+                null,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            if (response.status != 200) {
+                return false;
+            }
+            return true;
+        } catch (error) {
+            console.log(error);
+            throw new Error('Failed reset scores');
+        }
+    }
 }

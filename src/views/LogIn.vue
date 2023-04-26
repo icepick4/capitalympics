@@ -189,7 +189,7 @@ const logIn = async () => {
                         </div>
 
                         <input
-                            class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-black transition-all duration-200 bg-white hover:scale-105 delay-100 rounded-md"
+                            class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-black transition-all duration-200 bg-white hover:scale-105 delay-100 rounded-md cursor-pointer"
                             type="submit"
                             value="Log in"
                         />
