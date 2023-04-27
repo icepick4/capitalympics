@@ -9,13 +9,14 @@ import { getCurrentMySQLDate } from '../utils/common';
 const userFound = ref(false);
 const signed = ref(false);
 const displayErrorForm = ref(false);
+const hasLoggedIn = ref(false);
 const username = ref('');
 const password = ref('');
 const router = useRouter();
 const store = useStore();
 
 const handleSignInError = () => {
-    userFound.value = false;
+    hasLoggedIn.value = false;
     signed.value = true;
 };
 
@@ -26,8 +27,6 @@ const validateForm = () => {
     }
     return true;
 };
-
-const hasLoggedIn = ref(false);
 
 const logIn = async () => {
     if (!validateForm()) {
@@ -46,24 +45,32 @@ const logIn = async () => {
             router.push('/profile');
         }, 2000);
     } catch (e) {
-        handleSignInError();
-        hasLoggedIn.value = false;
+        userFound.value = false;
+        signed.value = true;
     }
 };
 </script>
 
 <template>
-    <BlurContainer v-if="hasLoggedIn">
-        <Loader />
-    </BlurContainer>
-    <BlurContainer v-if="displayErrorForm">
+    <BlurContainer v-if="hasLoggedIn || displayErrorForm">
+        <Loader v-if="!displayErrorForm && !signed" />
         <Modal
+            v-else-if="displayErrorForm"
             title="Error"
             message="Please fill all the fields"
             background-color="white"
             title-color="error"
             :redirection="null"
             @close="displayErrorForm = false"
+        />
+        <Modal
+            v-else-if="!userFound && signed"
+            title="Error"
+            message="User not found or wrong password"
+            background-color="white"
+            title-color="error"
+            :redirection="null"
+            @close="handleSignInError"
         />
     </BlurContainer>
     <section
@@ -83,14 +90,6 @@ const logIn = async () => {
                 href="https://unsplash.com/fr/photos/6-jTZysYY_U?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
                 >Unsplash</a
             >
-        </div>
-        <div class="absolute inset-0 mt-10">
-            <h1
-                v-if="!userFound && signed"
-                class="text-2xl text-center text-white m-0 z-10"
-            >
-                User not found
-            </h1>
         </div>
 
         <div class="relative max-w-lg px-4 mx-auto sm:px-0">

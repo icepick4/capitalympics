@@ -4,17 +4,19 @@ import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import BlurContainer from '../components/BlurContainer.vue';
 import Loader from '../components/Loader.vue';
+import { Level } from '../models/User';
 import ApiService from '../services/apiService';
+import { getLevelName } from '../utils/common';
 const router = useRouter();
 const store = useStore();
 const user = store.getters.user;
 const token = store.getters.token;
 
-const userScore = ref(0);
+const userScore = ref('...');
 const initFirstTimeScores = ref(false);
-const getUserScore = async (): Promise<number> => {
+const getUserScore = async (): Promise<Level> => {
     try {
-        const score: number = await ApiService.getUserScore(user.id, token);
+        const score: Level = await ApiService.getUserScore(user.id, token);
         return score;
     } catch (error) {
         console.log(error);
@@ -30,7 +32,7 @@ const resetScores = async (): Promise<boolean> => {
         console.log(error);
     } finally {
         initFirstTimeScores.value = false;
-        userScore.value = await getUserScore();
+        userScore.value = getLevelName(await getUserScore());
     }
     return false;
 };
@@ -39,7 +41,7 @@ onBeforeMount(async () => {
     if (user === null) {
         router.push('/login');
     } else {
-        userScore.value = await getUserScore();
+        userScore.value = getLevelName(await getUserScore());
     }
 });
 </script>
@@ -47,7 +49,7 @@ onBeforeMount(async () => {
 <template>
     <div
         v-if="user !== null"
-        class="flex flex-col justify-center items-center gap-10"
+        class="flex flex-col justify-center items-center gap-10 my-5"
     >
         <h1 class="text-white text-center text-6xl">Hi {{ user.name }} !</h1>
         <BlurContainer v-if="initFirstTimeScores">
@@ -55,10 +57,10 @@ onBeforeMount(async () => {
         </BlurContainer>
         <div
             v-if="userScore != -1"
-            class="flex flex-col lg:flex-row justify-center items-center w-1/2 gap-5"
+            class="flex flex-col justify-center items-center w-5/6 sm:w-2/3 md:w-1/2 lg:w-1/3 gap-5"
         >
             <h1 class="text-white text-center text-4xl">
-                Your current score is {{ userScore }} !
+                Your current score status is {{ userScore }} !
             </h1>
             <RouterLink
                 to="/learn/capitals"
@@ -71,10 +73,10 @@ onBeforeMount(async () => {
                 >Learn Flags 🇫🇷</RouterLink
             >
             <div
-                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/2 cursor-pointer"
+                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
                 @click="resetScores"
             >
-                Rest all your scores by clicking here !
+                Rest all your scores ❌
             </div>
         </div>
         <div
@@ -82,7 +84,7 @@ onBeforeMount(async () => {
             class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/2 cursor-pointer"
             @click="resetScores"
         >
-            Init your scores by clicking here !
+            Init your scores ✅
         </div>
     </div>
 </template>

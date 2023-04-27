@@ -7,6 +7,7 @@ import ButtonTemplate from '../components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '../components/Learning/Buttons/ChoosingButtons.vue';
 import LearnCapitals from '../components/Learning/Capitals/CapitalsQuestion.vue';
 import LearnFlags from '../components/Learning/Flags/FlagsQuestion.vue';
+import Loader from '../components/Loader.vue';
 import Modal from '../components/Modal.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
@@ -19,6 +20,7 @@ const store = useStore();
 const currentLearning: LearningType = route.path.split('/')[2] as LearningType;
 const currentState = ref<CurrentState>('starting');
 const couldNotGetCountry = ref(false);
+const fetchingCountry = ref(false);
 
 const redirection: Redirection = Redirections.getRedirectionByLink('/learn');
 const user = store.getters.user;
@@ -26,11 +28,16 @@ const token = store.getters.token;
 const country = ref<CountryI>();
 const getNewCountry = async () => {
     try {
+        fetchingCountry.value = true;
         country.value = await ApiService.getNewCountryToLearn(
             user.id,
             token,
             currentLearning
         );
+        // To improve in the future with caching flags images
+        setTimeout(() => {
+            fetchingCountry.value = false;
+        }, 250);
     } catch (error) {
         couldNotGetCountry.value = true;
     }
@@ -66,8 +73,9 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <BlurContainer v-if="couldNotGetCountry">
+    <BlurContainer v-if="couldNotGetCountry || fetchingCountry">
         <Modal
+            v-if="couldNotGetCountry"
             title="Error while loading the country"
             text="Please try again later"
             message="Sorry for the inconvenience retry later"
@@ -76,9 +84,10 @@ onBeforeMount(() => {
             :redirection="redirection"
             @close="couldNotGetCountry = false"
         />
+        <Loader v-else-if="fetchingCountry" />
     </BlurContainer>
     <div
-        class="flex flex-col w-full md:w-auto md:h-auto justify-center items-center gap-20"
+        class="flex flex-col w-full md:w-auto md:h-auto justify-center items-center my-10 gap-10"
     >
         <div
             v-if="country != undefined"
@@ -125,13 +134,13 @@ onBeforeMount(() => {
         <div class="flex flex-row w-full justify-center gap-10 items-center">
             <RouterLink
                 :to="{ name: 'Profile' }"
-                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/4"
+                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-auto"
             >
                 Go back to your profile
             </RouterLink>
             <RouterLink
                 :to="{ name: 'Home' }"
-                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/4"
+                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-auto"
             >
                 Go back home
             </RouterLink>

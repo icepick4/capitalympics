@@ -3,7 +3,6 @@ import { LearningState } from '../../../types/common';
 import ButtonTemplate from './ButtonTemplate.vue';
 
 defineProps<{
-    countryCode: string;
     user_id: number;
     token: string;
     click: (type: LearningState) => void;

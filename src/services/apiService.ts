@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { CountryI } from '../models/Country';
+import { Level } from '../models/User';
 import { LearningState, LearningType } from '../types/common';
 export default class ApiService {
     public static readonly API_URL: string = 'http://localhost:3001';
@@ -51,6 +52,7 @@ export default class ApiService {
         password: string,
         last_activity: string
     ): Promise<AxiosResponse> {
+        const timeout: number = 5000;
         try {
             const response = await axios.post(
                 `${ApiService.API_URL}/users/connect`,
@@ -60,6 +62,9 @@ export default class ApiService {
                         password: password,
                         last_activity: last_activity
                     }
+                },
+                {
+                    timeout: timeout
                 }
             );
             return response;
@@ -102,7 +107,7 @@ export default class ApiService {
     public static async getUserScore(
         user_id: number,
         token: string
-    ): Promise<number> {
+    ): Promise<Level> {
         try {
             const response = await axios.get(
                 `${ApiService.API_URL}/users/${user_id}/score`,
@@ -112,7 +117,7 @@ export default class ApiService {
                     }
                 }
             );
-            return response.data.score;
+            return response.data.score as Level;
         } catch (error) {
             throw new Error('Failed get global score');
         }

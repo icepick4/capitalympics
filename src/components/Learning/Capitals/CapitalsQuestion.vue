@@ -24,7 +24,7 @@ defineProps<{
                 Find the capital !
             </h1>
             <h1 v-else class="text-4xl lg:text-6xl">
-                {{ country.capital }} ✔️
+                {{ country.capital }} ✅
             </h1>
         </div>
     </div>
