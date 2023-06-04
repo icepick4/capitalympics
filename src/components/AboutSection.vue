@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import VLazyImage from 'v-lazy-image';
 defineProps<{
     text: string;
     title: string;
@@ -32,7 +31,7 @@ defineProps<{
                     <div
                         class="bg-background shadow overflow-hidden hover:scale-110 hover:rotate-3 transform hover:shadow-2xl transition ease-in-out duration-300 relative"
                     >
-                        <VLazyImage
+                        <img
                             :src="image"
                             :alt="link.substring(1)"
                             class="w-full h-auto I-cover"

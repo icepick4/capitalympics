@@ -5,6 +5,7 @@ import Countries from '../views/Countries.vue';
 import Home from '../views/Home.vue';
 import Learn from '../views/Learn.vue';
 import LearnTemplate from '../views/LearnTemplate.vue';
+import LegalNotices from '../views/LegalNotices.vue';
 import LogIn from '../views/LogIn.vue';
 import NotFound from '../views/NotFound.vue';
 import Profile from '../views/Profile.vue';
@@ -66,6 +67,11 @@ const routes = [
         component: Profile,
         props: true,
         beforeEnter: requireAuth
+    },
+    {
+        path: '/legal-notices',
+        name: 'LegalNotices',
+        component: LegalNotices
     },
     {
         path: '/:catchAll(.*)',
