@@ -5,6 +5,7 @@ import Countries from '../views/Countries.vue';
 import Home from '../views/Home.vue';
 import Learn from '../views/Learn.vue';
 import LearnTemplate from '../views/LearnTemplate.vue';
+import LegalNotices from '../views/LegalNotices.vue';
 import LogIn from '../views/LogIn.vue';
 import NotFound from '../views/NotFound.vue';
 import Profile from '../views/Profile.vue';
@@ -69,9 +70,15 @@ const routes = [
         beforeEnter: requireAuth
     },
     {
+<<<<<<< HEAD
         path: '/quiz',
         name: 'Quiz',
         component: Quiz
+=======
+        path: '/legal-notices',
+        name: 'LegalNotices',
+        component: LegalNotices
+>>>>>>> c55b919ae21a14bc58352342be036d02600429ce
     },
     {
         path: '/:catchAll(.*)',

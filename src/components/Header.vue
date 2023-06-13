@@ -100,7 +100,7 @@ const logOut = () => {
                 class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out cursor-pointer"
                 @click="logOut"
             >
-                Log Out
+                Log out
             </div>
         </div>
     </div>
