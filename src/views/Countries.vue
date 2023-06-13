@@ -4,13 +4,19 @@ import { onBeforeMount, watchEffect } from 'vue';
 import BlurContainer from '../components/BlurContainer.vue';
 import CountryLink from '../components/Country/CountryLink.vue';
 import Loader from '../components/Loader.vue';
+import Modal from '../components/Modal.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
+import { Redirection } from '../types/Redirection';
+import { Redirections } from '../utils/redirections';
 interface State {
     countries: CountryI[];
     message: string;
 }
 const regions: string[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
+
+const noCountriesRedirection: Redirection =
+    Redirections.getRedirectionByLink('/home');
 
 const state: State = reactive({
     countries: [],
@@ -94,6 +100,17 @@ watchEffect(() => {
 
     <BlurContainer v-if="filteredCountries().length === 0 && !finishedWaited">
         <Loader title="Loading countries ..." />
+    </BlurContainer>
+    <BlurContainer
+        v-else-if="filteredCountries().length === 0 && finishedWaited"
+    >
+        <Modal
+            title="No countries found"
+            message="Try to check your network"
+            :backgroundColor="`white`"
+            :titleColor="`error`"
+            :redirection="noCountriesRedirection"
+        />
     </BlurContainer>
     <div
         v-else

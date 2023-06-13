@@ -21,7 +21,7 @@ const getUserScore = async (): Promise<Level> => {
     } catch (error) {
         console.log(error);
     }
-    return 0;
+    return -1;
 };
 
 const resetScores = async (): Promise<boolean> => {
@@ -56,7 +56,7 @@ onBeforeMount(async () => {
             <Loader title="Creating your scores... It may take a few seconds" />
         </BlurContainer>
         <div
-            v-if="userScore != -1"
+            v-if="userScore != 'No score'"
             class="flex flex-col justify-center items-center w-5/6 sm:w-2/3 md:w-1/2 lg:w-1/3 gap-5"
         >
             <h1 class="text-white text-center text-4xl">

@@ -8,6 +8,7 @@ import Loader from './Loader.vue';
 const router = useRouter();
 const store = useStore();
 const user = ref(store.getters.user);
+const displayMobileMenu = ref(false);
 watchEffect(() => {
     user.value = store.getters.user;
 });
@@ -53,6 +54,12 @@ const logOut = () => {
                 class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
             >
                 About
+            </RouterLink>
+            <RouterLink
+                to="/quiz"
+                class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
+            >
+                Quiz
             </RouterLink>
         </div>
         <RouterLink to="/">

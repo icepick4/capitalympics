@@ -8,6 +8,7 @@ import LearnTemplate from '../views/LearnTemplate.vue';
 import LogIn from '../views/LogIn.vue';
 import NotFound from '../views/NotFound.vue';
 import Profile from '../views/Profile.vue';
+import Quiz from '../views/Quiz.vue';
 import SignUp from '../views/SignUp.vue';
 import SingleCountry from '../views/SingleCountry.vue';
 const routes = [
@@ -66,6 +67,11 @@ const routes = [
         component: Profile,
         props: true,
         beforeEnter: requireAuth
+    },
+    {
+        path: '/quiz',
+        name: 'Quiz',
+        component: Quiz
     },
     {
         path: '/:catchAll(.*)',

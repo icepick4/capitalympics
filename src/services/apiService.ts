@@ -7,7 +7,10 @@ export default class ApiService {
 
     public static async getCountries(): Promise<CountryI[]> {
         try {
-            const response = await axios.get(`${ApiService.API_URL}/countries`);
+            const response = await axios.get(
+                `${ApiService.API_URL}/countries`,
+                { timeout: 5000 }
+            );
             return response.data.countries;
         } catch (error) {
             throw new Error('Failed get countries');
