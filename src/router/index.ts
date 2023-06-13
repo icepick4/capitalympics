@@ -70,15 +70,14 @@ const routes = [
         beforeEnter: requireAuth
     },
     {
-<<<<<<< HEAD
         path: '/quiz',
         name: 'Quiz',
         component: Quiz
-=======
+    },
+    {
         path: '/legal-notices',
         name: 'LegalNotices',
         component: LegalNotices
->>>>>>> c55b919ae21a14bc58352342be036d02600429ce
     },
     {
         path: '/:catchAll(.*)',
