@@ -8,17 +8,32 @@ import { RouterLink } from 'vue-router';
             class="flex flex-col sm:flex-row justify-evenly w-full h-auto bg-gray-100 border-t-2 border-black"
         >
             <div class="flex flex-col items-center justify-start m-6">
-                <h1 class="text-2xl">Follow us</h1>
+                <h1 class="text-2xl">Github</h1>
                 <a
                     href="https://github.com/icepick4/capitalympics"
                     class="text-primary no-underline hover:text-secondary"
-                    >GitHub</a
+                    >Webapp</a
                 >
                 <a
-                    href="#"
+                    href="https://github.com/icepick4/capitalympics-api"
                     class="text-primary no-underline hover:text-secondary"
-                    >Twitter</a
+                    >API</a
                 >
+            </div>
+            <div class="flex flex-col items-center justify-start m-6">
+                <h1 class="text-2xl text-center">Learn more about us</h1>
+                <div class="flex flex-col items-center justify-center">
+                    <RouterLink
+                        to="/about"
+                        class="text-primary no-underline hover:text-secondary"
+                        >About</RouterLink
+                    >
+                    <RouterLink
+                        to="/contact"
+                        class="text-primary no-underline hover:text-secondary"
+                        >Contact</RouterLink
+                    >
+                </div>
             </div>
             <div class="flex flex-col items-center justify-start m-6">
                 <h1 class="text-2xl">Legal notices</h1>

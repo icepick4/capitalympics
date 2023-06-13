@@ -1,8 +1,36 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import AboutSection from '../components/AboutSection.vue';
+import BlurContainer from '../components/BlurContainer.vue';
+import Loader from '../components/Loader.vue';
+
+const haveImagesLoaded = ref(false);
+
+onMounted(() => {
+    const images = document.querySelectorAll('img');
+    let loadedCount = 0;
+
+    const handleImageLoad = () => {
+        loadedCount++;
+        if (loadedCount === images.length) {
+            haveImagesLoaded.value = true;
+        }
+    };
+
+    images.forEach((image) => {
+        if (image.complete) {
+            handleImageLoad();
+        } else {
+            image.addEventListener('load', handleImageLoad);
+        }
+    });
+});
 </script>
 
 <template>
+    <BlurContainer v-if="!haveImagesLoaded">
+        <Loader title="Loading page ..." />
+    </BlurContainer>
     <div class="flex flex-col top-0 w-full">
         <div class="relative">
             <img
