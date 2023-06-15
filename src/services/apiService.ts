@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { CountryI } from '../models/Country';
-import { Level } from '../models/User';
+import { Level, UserScore } from '../models/User';
 import { LearningState, LearningType } from '../types/common';
 export default class ApiService {
     public static readonly API_URL: string = 'http://localhost:3001';
@@ -134,7 +134,7 @@ export default class ApiService {
     ): Promise<AxiosResponse> {
         try {
             const response = await axios.put(
-                `${ApiService.API_URL}/users/${user_id}/score/${country_code}/new_${type}`,
+                `${ApiService.API_URL}/users/${user_id}/${country_code}/score/${type}`,
                 null,
                 {
                     headers: {
@@ -165,6 +165,26 @@ export default class ApiService {
             return response.data.country;
         } catch (error) {
             throw new Error('Failed get new country');
+        }
+    }
+
+    public static async getBestScores(
+        user_id: number,
+        token: string,
+        length: number
+    ): Promise<UserScore[]> {
+        const url = `${ApiService.API_URL}/users/${user_id}/scores${
+            length === 0 ? '' : `/?max=${length}`
+        }`;
+        try {
+            const response = await axios.get(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.scores;
+        } catch (error) {
+            throw new Error('Failed get best scores');
         }
     }
 

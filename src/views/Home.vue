@@ -11,9 +11,6 @@ const user: User = ref(store.getters.user);
     <h1 class="text-white text-center text-6xl">Capitalympics !</h1>
     <div class="flex flex-col justify-center items-center" v-if="user">
         <h2 class="text-white text-center text-3xl">Welcome {{ user.name }}</h2>
-        <h3 class="text-white text-center text-3xl">
-            Your score is {{ user.level }}
-        </h3>
     </div>
 </template>
 

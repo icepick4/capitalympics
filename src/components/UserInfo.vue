@@ -1,8 +1,63 @@
 <script setup lang="ts">
-import { User } from '../models/User';
-defineProps<{
-    user: User;
-}>();
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
+import { useStore } from 'vuex';
+import { Level, User, UserScore } from '../models/User';
+import ApiService from '../services/apiService';
+import { getLevelName } from '../utils/common';
+
+const store = useStore();
+interface CountryDetails {
+    name: string;
+    alpha3Code: string;
+    flag: string;
+    level: Level;
+}
+
+const token = store.getters.token;
+const user: User = store.getters.user;
+const countries = ref<CountryDetails[]>([]);
+
+const getBestScores = async (user_id: number): Promise<UserScore[]> => {
+    const response = await ApiService.getBestScores(user_id, token, 3);
+    let scores: UserScore[] = [];
+    if (response) {
+        scores = response;
+    }
+    scores.forEach((element) => {
+        let countryDetails: CountryDetails = {
+            name: '',
+            flag: '',
+            alpha3Code: element.country_code,
+            level: element.level
+        };
+        getCountryDetails(element.country_code).then(({ name, flag }) => {
+            countryDetails.name = name;
+            countryDetails.flag = flag;
+            countries.value.push(countryDetails);
+        });
+    });
+    return scores;
+};
+
+const getCountryDetails = async (
+    country_code: string
+): Promise<{ name: string; flag: string }> => {
+    const response = await ApiService.getCountry(country_code);
+    if (response) {
+        let country = response;
+        return {
+            name: country.name,
+            flag: country.flag
+        };
+    } else {
+        return {
+            name: 'Unknown',
+            flag: 'assets/flags/unknown.png'
+        };
+    }
+};
+
 const formatDate = (date: Date) => {
     let minutes = date.getMinutes();
     if (minutes < 10) {
@@ -12,10 +67,74 @@ const formatDate = (date: Date) => {
         month: 'long'
     })} of ${date.getFullYear()} at ${date.getHours()}:${date.getMinutes()}`;
 };
+
+getBestScores(12);
 </script>
 
 <template>
-    <p>{{ user.name }}</p>
-    <p>{{ formatDate(new Date(user.created_at)) }}</p>
-    <p>Last activity at {{ formatDate(new Date(user.last_activity)) }}</p>
+    <div class="container mx-auto p-8">
+        <!-- Informations de l'utilisateur -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="flex items-center mb-4">
+                <img
+                    src="public/icons/default_profile.png"
+                    alt="User Avatar"
+                    class="w-10 h-10 rounded-full mr-4"
+                />
+                <h1 class="text-2xl mr-1 font-bold">{{ user.name }}</h1>
+            </div>
+            <p class="text-gray-500 mb-2">
+                {{ getLevelName(user.level) }}
+            </p>
+            <p class="text-gray-500 mb-2">
+                Last Activity:
+                {{ formatDate(new Date(user.last_activity)) }}
+            </p>
+            <p class="text-gray-500">
+                Joined: {{ formatDate(new Date(user.created_at)) }}
+            </p>
+        </div>
+
+        <!-- Scores de pays -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-bold mb-4">Top 3 Country Scores</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <RouterLink
+                    v-for="country in countries"
+                    :key="country.name"
+                    class="bg-white rounded-lg shadow-md p-4 hover:bg-gray-200 transition-colors duration-300 fade-in"
+                    :to="`/countries/${country.alpha3Code}`"
+                >
+                    <div class="flex items-center mb-2">
+                        <img
+                            :src="country.flag"
+                            alt="Country Flag"
+                            class="w-6 h-4 mr-2"
+                        />
+                        <h3 class="font-bold">{{ country.name }}</h3>
+                    </div>
+                    <p class="text-gray-500">
+                        {{ getLevelName(country.level) }}
+                    </p>
+                </RouterLink>
+            </div>
+        </div>
+    </div>
 </template>
+
+<style scoped>
+.fade-in {
+    animation: fadeIn ease 0.4s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+</style>

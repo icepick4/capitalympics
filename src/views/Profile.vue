@@ -8,5 +8,5 @@ const user: User = store.getters.user;
 </script>
 
 <template>
-    <UserInfo v-if="user" :user="user"></UserInfo>
+    <UserInfo></UserInfo>
 </template>

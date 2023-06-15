@@ -9,7 +9,7 @@ export interface User {
 
 export interface UserScore {
     user_id: number;
-    country_id: number;
+    country_code: string;
     succeeded_streak: number;
     failed_streak: number;
     succeeded: number;
