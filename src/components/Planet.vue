@@ -22,8 +22,7 @@ export default {
             };
 
             const animateSphere = () => {
-                sphere.rotation.x += 0.02;
-                sphere.rotation.y += 0.02;
+                planet.rotation.y -= 0.002;
             };
 
             scene = new THREE.Scene();
@@ -54,15 +53,35 @@ export default {
             renderer.setClearColor(0x000000, 0);
 
             //sphere geometry
-            const geometry = new THREE.SphereGeometry(1, 32, 32);
+            const geometry = new THREE.SphereGeometry(1, 30, 30);
             const material = new THREE.MeshBasicMaterial({
                 map: earthTexture
             });
-            material.map!.encoding = THREE.sRGBEncoding;
+            material.map!.colorSpace = THREE.SRGBColorSpace;
             material.map!.anisotropy = 16;
-            const sphere = new THREE.Mesh(geometry, material);
+            const planet = new THREE.Mesh(geometry, material);
 
-            scene.add(sphere);
+            function calculatePosition(latitude: number, longitude: number) {
+                let phi = (90 - latitude) * (Math.PI / 180);
+                let theta = (longitude + 180) * (Math.PI / 180);
+                let x = -(Math.sin(phi) * Math.cos(theta));
+                let z = Math.sin(phi) * Math.sin(theta);
+                let y = Math.cos(phi);
+                return { x, y, z };
+            }
+
+            let { x, y, z } = calculatePosition(45.75, 4.85);
+
+            let lyonPin = new THREE.Mesh(
+                new THREE.SphereGeometry(0.02, 30, 30),
+                new THREE.MeshBasicMaterial({ color: 0xff0000 })
+            );
+
+            lyonPin.position.set(x, y, z);
+            planet.rotation.y = -1.5;
+            planet.rotation.x = 0.5;
+            planet.add(lyonPin);
+            scene.add(planet);
             scene.add(camera);
 
             render();

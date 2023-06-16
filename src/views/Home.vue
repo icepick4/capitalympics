@@ -10,9 +10,13 @@ const user: User = ref(store.getters.user);
 
 <template>
     <h1 class="text-white text-center text-6xl">Capitalympics !</h1>
-    <div class="flex flex-col justify-center items-center" v-if="user">
-        <h2 class="text-white text-center text-3xl">Welcome {{ user.name }}</h2>
+    <div class="flex flex-col justify-center items-center">
         <Planet />
+        <div v-if="user">
+            <h2 class="text-white text-center text-3xl">
+                Welcome {{ user.name }}
+            </h2>
+        </div>
     </div>
 </template>
 
