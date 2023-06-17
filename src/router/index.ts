@@ -70,6 +70,13 @@ const routes = [
         beforeEnter: requireAuth
     },
     {
+        path: '/profile/settings',
+        name: 'Settings',
+        component: Profile,
+        props: true,
+        beforeEnter: requireAuth
+    },
+    {
         path: '/quiz',
         name: 'Quiz',
         component: Quiz

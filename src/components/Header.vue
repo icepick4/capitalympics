@@ -2,8 +2,6 @@
 import { ref, watchEffect } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import BlurContainer from './BlurContainer.vue';
-import Loader from './Loader.vue';
 
 const router = useRouter();
 const store = useStore();
@@ -12,21 +10,9 @@ const displayMobileMenu = ref(false);
 watchEffect(() => {
     user.value = store.getters.user;
 });
-const hasLoggedOut = ref(false);
-const logOut = () => {
-    hasLoggedOut.value = true;
-    setTimeout(() => {
-        store.dispatch('logOut');
-        hasLoggedOut.value = false;
-        router.push('/');
-    }, 1000);
-};
 </script>
 
 <template>
-    <BlurContainer v-if="hasLoggedOut">
-        <Loader title="Logging out ..." />
-    </BlurContainer>
     <div class="flex items-center justify-center w-full">
         <div class="flex flex-row w-1/2 justify-between h-auto">
             <RouterLink to="/" class="w-auto h-full p-4">

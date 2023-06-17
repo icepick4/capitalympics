@@ -19,7 +19,7 @@ defineProps<{
                 ></div>
             </div>
         </div>
-        <h1 v-if="title" class="text-2xl bg-white rounded-lg p-4">
+        <h1 v-if="title" class="text-2xl bg-gradient rounded-lg p-4">
             {{ title }}
         </h1>
     </div>

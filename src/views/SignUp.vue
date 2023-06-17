@@ -394,7 +394,7 @@ const isFormValid = () => {
 
                             <div>
                                 <input
-                                    class="inline-flex items-center text-black justify-center w-full px-4 py-4 text-base font-semibold transition-all duration-200 border border-transparent rounded-md bg-gray-300 cursor-pointer focus:outline-none hover:scale-105 delay-100"
+                                    class="inline-flex items-center text-black justify-center w-full px-4 py-4 text-base font-semibold transition-all duration-200 border border-transparent rounded-md bg-white cursor-pointer focus:outline-none hover:scale-105 delay-100"
                                     type="submit"
                                     value="Sign up"
                                 />
