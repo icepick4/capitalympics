@@ -142,7 +142,7 @@ const initThreeScene = () => {
         @mouseup="handleUserStopClicking"
     >
         <p
-            class="absolute right-0 bottom-0 select-none"
+            class="text-2xl absolute right-0 bottom-0 select-none hover:underline cursor-pointer"
             @click="setLyonCameraView"
         >
             Lyon, France

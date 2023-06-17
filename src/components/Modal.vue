@@ -27,7 +27,7 @@ defineProps<{
         </RouterLink>
         <div v-else>
             <button
-                class="px-5 p-3 rounded-lg bg-primary text-black"
+                class="px-5 p-3 rounded-lg bg-gradient text-black"
                 @click="$emit('close')"
             >
                 Close

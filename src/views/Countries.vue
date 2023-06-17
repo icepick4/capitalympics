@@ -58,6 +58,7 @@ onBeforeMount(async () => {
         state.message = 'No countries found';
     } else {
         state.message = `Found ${state.countries.length} countries`;
+        finishedWaited.value = true;
     }
 });
 
@@ -74,19 +75,27 @@ watchEffect(() => {
         <input
             type="text"
             v-model="search.value"
-            class="w-1/4 mx-auto p-2 placeholder-opacity-50 rounded-md"
+            class="w-1/4 mx-auto p-2 placeholder-opacity-50 rounded-md bg-gradient text-black placeholder-black"
             placeholder="Search by name"
         />
 
-        <select v-model="region.value" class="w-1/4 mx-auto p-2 rounded-md">
-            <option value="">All</option>
-            <option v-for="region in regions" :key="region" :value="region">
+        <select
+            v-model="region.value"
+            class="w-1/4 mx-auto p-2 rounded-md bg-gradient"
+        >
+            <option class="bg-white" value="">All</option>
+            <option
+                class="bg-white"
+                v-for="region in regions"
+                :key="region"
+                :value="region"
+            >
                 {{ region }}
             </option>
         </select>
 
         <button
-            class="w-1/4 mx-auto p-2 rounded-md bg-primary hover:bg-primaryhover text-white"
+            class="w-1/4 mx-auto p-2 rounded-md bg-gradient text-black active:bg-gray-700"
             @click="
                 search.value = '';
                 region.value = '';
@@ -98,11 +107,11 @@ watchEffect(() => {
 
     <p class="text-center text-white text-2xl">{{ state.message }}</p>
 
-    <BlurContainer v-if="filteredCountries().length === 0 && !finishedWaited">
+    <BlurContainer v-if="!finishedWaited && state.countries.length === 0">
         <Loader title="Loading countries ..." />
     </BlurContainer>
     <BlurContainer
-        v-else-if="filteredCountries().length === 0 && finishedWaited"
+        v-else-if="finishedWaited && state.countries.length === 0"
     >
         <Modal
             title="No countries found"

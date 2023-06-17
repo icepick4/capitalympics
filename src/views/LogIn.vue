@@ -94,7 +94,7 @@ const logIn = async () => {
 
         <div class="relative max-w-lg px-4 mx-auto sm:px-0">
             <div
-                class="overflow-hidden bg-primary rounded-md shadow-md p-0 sm:p-5 lg:p-8"
+                class="overflow-hidden bg-gradient rounded-md shadow-md p-0 sm:p-5 lg:p-8"
             >
                 <div class="px-4 py-6 sm:px-8 sm:py-7">
                     <div class="text-center">

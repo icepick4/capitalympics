@@ -11,8 +11,8 @@ import Loader from '../components/Loader.vue';
 import Modal from '../components/Modal.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
-import { CurrentState, LearningState, LearningType } from '../types/common';
 import { Redirection } from '../types/Redirection';
+import { CurrentState, LearningState, LearningType } from '../types/common';
 import { Redirections } from '../utils/redirections';
 const route = useRoute();
 const router = useRouter();
@@ -112,7 +112,7 @@ onBeforeMount(() => {
                     <div v-if="currentState === 'starting'">
                         <ButtonTemplate
                             :title="'See'"
-                            :color="'bg-primary'"
+                            :color="'bg-gradient'"
                             @click="handleClickSee"
                         />
                     </div>

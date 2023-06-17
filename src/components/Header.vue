@@ -73,18 +73,15 @@ const logOut = () => {
                 >
                 <RouterLink
                     to="/profile"
-                    class="flex justify-end items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    class="flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-75 ease-in-out"
                     v-if="user !== null"
                 >
-                    Profile</RouterLink
-                >
-                <div
-                    class="flex justify-center items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out cursor-pointer"
-                    @click="logOut"
-                    v-if="user !== null"
-                >
-                    Log out
-                </div>
+                    <img
+                        src="/icons/default_profile.png"
+                        alt="avatar"
+                        class="w-10 h-10 rounded-full"
+                    />
+                </RouterLink>
             </div>
         </div>
     </div>

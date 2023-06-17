@@ -29,7 +29,7 @@ defineProps<{
             <span
                 class="absolute w-full h-full bottom-0 left-0 right-0 text-white opacity-0 hover:opacity-100 transition ease-in-out duration-200"
             >
-                <p class="-translate-y-7">{{ countryName }}</p>
+                <p class="-translate-y-7 text-black">{{ countryName }}</p>
             </span>
         </div>
     </RouterLink>

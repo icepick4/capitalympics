@@ -74,7 +74,7 @@ getBestScores(12);
 <template>
     <div class="container mx-auto p-8">
         <!-- Informations de l'utilisateur -->
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <div class="bg-gradient rounded-lg shadow-lg p-6 mb-8">
             <div class="flex items-center mb-4">
                 <img
                     src="public/icons/default_profile.png"
@@ -83,20 +83,20 @@ getBestScores(12);
                 />
                 <h1 class="text-2xl mr-1 font-bold">{{ user.name }}</h1>
             </div>
-            <p class="text-gray-500 mb-2">
+            <p class="text-black mb-2">
                 {{ getLevelName(user.level) }}
             </p>
-            <p class="text-gray-500 mb-2">
+            <p class="text-black mb-2">
                 Last Activity:
                 {{ formatDate(new Date(user.last_activity)) }}
             </p>
-            <p class="text-gray-500">
+            <p class="text-black">
                 Joined: {{ formatDate(new Date(user.created_at)) }}
             </p>
         </div>
 
         <!-- Scores de pays -->
-        <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="bg-gradient rounded-lg shadow-lg p-6">
             <h2 class="text-xl font-bold mb-4">Top 3 Country Scores</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <RouterLink
@@ -113,7 +113,7 @@ getBestScores(12);
                         />
                         <h3 class="font-bold">{{ country.name }}</h3>
                     </div>
-                    <p class="text-gray-500">
+                    <p class="text-black">
                         {{ getLevelName(country.level) }}
                     </p>
                 </RouterLink>
