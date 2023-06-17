@@ -1,4 +1,5 @@
 import { Level } from '../models/User';
+import store from '../store';
 
 export const getCurrentMySQLDate = (): string => {
     let date = new Date();
@@ -40,6 +41,51 @@ export const setLocalStorageToken = (token: string) => {
 };
 
 export const getLevelName = (level: Level): string => {
+    const language = store.getters.language;
+    switch (language) {
+        case 'fr':
+            return getLevelNameFr(level);
+        case 'en':
+            return getLevelNameEn(level);
+        case 'es':
+            return getLevelNameEs(level);
+        default:
+            return getLevelNameEn(level);
+    }
+};
+
+const getLevelNameFr = (level: Level): string => {
+    switch (level) {
+        case -1: // -1 is for the user who has never played
+            return 'Pas de score';
+        case 0:
+            return 'Nouveau';
+        case 1:
+            return 'Débutant';
+        case 2:
+            return 'Apprenti';
+        case 3:
+            return 'Intermédiaire';
+        case 4:
+            return 'Moyen';
+        case 5:
+            return 'Normal';
+        case 6:
+            return 'Avancé';
+        case 7:
+            return 'Expert';
+        case 8:
+            return 'Maître';
+        case 9:
+            return 'Grand maître';
+        case 10:
+            return 'Légende';
+        default:
+            return 'Inconnu : erreur';
+    }
+};
+
+const getLevelNameEn = (level: Level): string => {
     switch (level) {
         case -1: // -1 is for the user who has never played
             return 'No score';
@@ -67,5 +113,36 @@ export const getLevelName = (level: Level): string => {
             return 'Legend';
         default:
             return 'Unknown : error';
+    }
+};
+
+const getLevelNameEs = (level: Level): string => {
+    switch (level) {
+        case -1: // -1 is for the user who has never played
+            return 'Sin puntuación';
+        case 0:
+            return 'Recién llegado';
+        case 1:
+            return 'Principiante';
+        case 2:
+            return 'Aprendiz';
+        case 3:
+            return 'Aprendiz';
+        case 4:
+            return 'Intermedio';
+        case 5:
+            return 'Promedio';
+        case 6:
+            return 'Avanzado';
+        case 7:
+            return 'Experto';
+        case 8:
+            return 'Maestro';
+        case 9:
+            return 'Gran maestro';
+        case 10:
+            return 'Leyenda';
+        default:
+            return 'Desconocido : error';
     }
 };

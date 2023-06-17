@@ -23,6 +23,8 @@ if (!supportedLocales.includes(defaultLocale)) {
     defaultLocale === 'en';
 }
 
+store.commit('setLanguage', defaultLocale);
+
 const i18n = createI18n({
     locale: defaultLocale,
     messages: {

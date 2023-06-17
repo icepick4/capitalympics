@@ -79,7 +79,7 @@ defineProps<{
                                     alt="Google Maps"
                                     class="w-12 h-12"
                                 />
-                                <p>Visit Google Maps</p>
+                                <p>{{ $t('visitGoogleMaps') }}</p>
                             </a>
                         </dd>
                     </div>

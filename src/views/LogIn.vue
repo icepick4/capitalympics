@@ -56,8 +56,8 @@ const logIn = async () => {
         <Loader v-if="!displayErrorForm && !signed" />
         <Modal
             v-else-if="displayErrorForm"
-            title="Error"
-            message="Please fill all the fields"
+            :title="$t('error')"
+            :message="$t('fillAllFields')"
             background-color="white"
             title-color="error"
             :redirection="null"
@@ -65,8 +65,8 @@ const logIn = async () => {
         />
         <Modal
             v-else-if="!userFound && signed"
-            title="Error"
-            message="User not found or wrong password"
+            :title="$t('error')"
+            message="$t('userNotFound')"
             background-color="white"
             title-color="error"
             :redirection="null"
@@ -99,14 +99,16 @@ const logIn = async () => {
                 <div class="px-4 py-6 sm:px-8 sm:py-7">
                     <div class="text-center">
                         <h2 class="text-3xl font-bold text-gray-900">
-                            Welcome back
+                            {{ $t('welcomeBack') }}
                         </h2>
                         <p class="mt-2 text-base text-black">
-                            Don't have an account ?
+                            {{ $t('noAccount') }}
                             <RouterLink
                                 to="/signup"
                                 class="text-black hover:underline italic"
-                                >Create one for free</RouterLink
+                            >
+                                {{ $t('createAccount') }}</RouterLink
+                            >
                             >
                         </p>
                     </div>
@@ -117,7 +119,7 @@ const logIn = async () => {
                                 for=""
                                 class="text-base font-medium text-gray-900"
                             >
-                                Username
+                                {{ $t('username') }}
                             </label>
                             <div
                                 class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
@@ -154,7 +156,7 @@ const logIn = async () => {
                                 for=""
                                 class="text-base font-medium text-gray-900"
                             >
-                                Password
+                                {{ $t('password') }}
                             </label>
                             <div
                                 class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"

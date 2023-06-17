@@ -53,30 +53,30 @@ onBeforeMount(async () => {
     >
         <h1 class="text-white text-center text-6xl">Hi {{ user.name }} !</h1>
         <BlurContainer v-if="initFirstTimeScores">
-            <Loader title="Creating your scores... It may take a few seconds" />
+            <Loader :title="$t('initScores')" />
         </BlurContainer>
         <div
-            v-if="userScore != 'No score'"
+            v-if="userScore != $t('noScores')"
             class="flex flex-col justify-center items-center w-5/6 sm:w-2/3 md:w-1/2 lg:w-1/3 gap-5"
         >
             <h1 class="text-white text-center text-4xl">
-                Your current score status is {{ userScore }} !
+                {{ $t('currentScore') }} {{ userScore }} !
             </h1>
             <RouterLink
                 to="/learn/capitals"
                 class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full"
-                >Learn Capitals 📍</RouterLink
+                >{{ $t('learnCapitalsTitle') }}</RouterLink
             >
             <RouterLink
                 to="/learn/flags"
                 class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full"
-                >Learn Flags 🇫🇷</RouterLink
+                >{{ $t('learnFlagsTitle') }}</RouterLink
             >
             <div
                 class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
                 @click="resetScores"
             >
-                Rest all your scores ❌
+                {{ $t('resetScores') }}
             </div>
         </div>
         <div
@@ -84,7 +84,7 @@ onBeforeMount(async () => {
             class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/2 cursor-pointer"
             @click="resetScores"
         >
-            Init your scores ✅
+            {{ $t('initScoresTitle') }}
         </div>
     </div>
 </template>

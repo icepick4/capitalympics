@@ -24,10 +24,13 @@ const randomRotation = () => {
                 v-if="!link.includes('https')"
                 :to="link"
                 class="text-primary hover:underline text-lg"
-                >Learn more</RouterLink
+                >{{ $t('learnMore') }}</RouterLink
             >
-            <a v-else :href="link" class="text-primary hover:underline text-lg"
-                >Learn more</a
+            <a
+                v-else
+                :href="link"
+                class="text-primary hover:underline text-lg"
+                >{{ $t('learnMore') }}</a
             >
         </div>
         <div class="relative">
@@ -45,7 +48,7 @@ const randomRotation = () => {
                         <div
                             class="absolute inset-0 flex items-center justify-center text-white opacity-0 hover:opacity-100 transition duration-300 z-10 hover:bg-black hover:bg-opacity-50"
                         >
-                            Learn more
+                            {{ $t('learnMore') }}
                         </div>
                     </div>
                 </RouterLink>

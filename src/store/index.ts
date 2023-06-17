@@ -5,7 +5,8 @@ import { setLocalStorageToken, setLocalStorageUser } from '../utils/common';
 const store = createStore({
     state: {
         user: null,
-        token: null
+        token: null,
+        language: 'en'
     },
     mutations: {
         setUser(state, user) {
@@ -13,6 +14,9 @@ const store = createStore({
         },
         setToken(state, token) {
             state.token = token;
+        },
+        setLanguage(state, language) {
+            state.language = language;
         },
         clearUser(state) {
             state.user = null;
@@ -62,6 +66,9 @@ const store = createStore({
         },
         token(state) {
             return state.token;
+        },
+        language(state) {
+            return state.language;
         }
     }
 });

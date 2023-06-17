@@ -30,7 +30,7 @@ defineProps<{
                 class="px-5 p-3 rounded-lg bg-gradient text-black"
                 @click="$emit('close')"
             >
-                Close
+                {{ $t('close') }}
             </button>
         </div>
     </div>

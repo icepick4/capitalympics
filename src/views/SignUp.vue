@@ -84,7 +84,7 @@ const typedPasswordConfirmation = () => {
 };
 
 const validateUsername = () => {
-    if (username.content.length < 1) {
+    if (username.content.length < 3 || username.content.length > 20) {
         return false;
     } else {
         return true;
@@ -112,8 +112,8 @@ const isFormValid = () => {
     <BlurContainer v-if="hasSignedUp">
         <Modal
             v-if="!isFormValid()"
-            title="Error while signing up"
-            message="Please fill all the fields correctly"
+            :title="$t('error')"
+            :message="$t('fillAllFields')"
             background-color="white"
             title-color="error"
             :redirection="null"
@@ -121,8 +121,8 @@ const isFormValid = () => {
         />
         <Modal
             v-else-if="displaySignUpError"
-            title="Error while signing up"
-            message="This username is already taken"
+            :title="$t('error')"
+            :message="$t('usernameTaken')"
             background-color="white"
             title-color="error"
             :redirection="null"
@@ -163,7 +163,7 @@ const isFormValid = () => {
                         class="w-full max-w-xl xl:w-full xl:mx-auto xl:pr-24 xl:max-w-xl"
                     >
                         <h3 class="text-4xl font-bold text-white">
-                            {{ numberOfPeople }} people are already using
+                            {{ numberOfPeople }} {{ $t('peopleUsing') }}
                             <br class="hidden xl:block" />
                             Capitalympics!
                         </h3>
@@ -177,7 +177,7 @@ const isFormValid = () => {
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
                                 <span class="text-xl font-medium text-white">
-                                    Play the quiz and learn more
+                                    {{ $t('signUpText1') }}
                                 </span>
                             </li>
                             <li class="flex items-center space-x-3">
@@ -187,7 +187,7 @@ const isFormValid = () => {
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
                                 <span class="text-xl font-medium text-white">
-                                    Access to the capitals learning process
+                                    {{ $t('signUpText2') }}
                                 </span>
                             </li>
                             <li class="flex items-center space-x-3">
@@ -197,7 +197,7 @@ const isFormValid = () => {
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
                                 <span class="text-xl font-medium text-white">
-                                    Access to the flags learning process
+                                    {{ $t('signUpText3') }}
                                 </span>
                             </li>
                             <li class="flex items-center space-x-3">
@@ -207,7 +207,7 @@ const isFormValid = () => {
                                     <img src="/icons/medal.png" alt="medal" />
                                 </div>
                                 <span class="text-xl font-medium text-white">
-                                    Many statistics all along your learning
+                                    {{ $t('signUpText4') }}
                                 </span>
                             </li>
                         </ul>
@@ -222,15 +222,15 @@ const isFormValid = () => {
                     <h2
                         class="text-3xl font-bold leading-tight text-black sm:text-4xl"
                     >
-                        Sign up to Capitalympics
+                        {{ $t('signUpTo') }} Capitalympics
                     </h2>
                     <p class="mt-2 text-base text-black">
-                        Already have an account ?
+                        {{ $t('alreadyHaveAccount') }}
                         <RouterLink
                             to="/login"
                             class="font-medium text-black italic hover:underline"
                         >
-                            Log in
+                            {{ $t('login') }}
                         </RouterLink>
                     </p>
 
@@ -241,7 +241,7 @@ const isFormValid = () => {
                                     for=""
                                     class="text-base font-medium text-gray-900"
                                 >
-                                    Username
+                                    {{ $t('username') }}
                                 </label>
                                 <span
                                     v-if="
@@ -249,8 +249,8 @@ const isFormValid = () => {
                                         !validateUsername()
                                     "
                                     class="text-error text-sm ml-1 text-center"
-                                    >Must be at least 1 character long</span
-                                >
+                                    >{{ $t('usernameRestriction') }}
+                                </span>
                                 <div
                                     class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
                                 >
@@ -275,7 +275,7 @@ const isFormValid = () => {
 
                                     <input
                                         type="text"
-                                        placeholder="Enter your name"
+                                        :placeholder="$t('usernamePlaceholder')"
                                         class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
                                         @input="typedUsername"
                                         v-model="username.content"
@@ -290,7 +290,7 @@ const isFormValid = () => {
                                     for=""
                                     class="text-base font-medium text-gray-900"
                                 >
-                                    Password
+                                    {{ $t('password') }}
                                 </label>
                                 <span
                                     v-if="
@@ -298,61 +298,8 @@ const isFormValid = () => {
                                         !validatePassword()
                                     "
                                     class="text-error text-sm ml-1 text-center"
-                                    >Must be at least 8 characters long and
-                                    contain at least one number and one capital
-                                    letter</span
                                 >
-                                <div
-                                    class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
-                                >
-                                    <div
-                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-                                    >
-                                        <svg
-                                            class="w-5 h-5"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
-                                            />
-                                        </svg>
-                                    </div>
-
-                                    <input
-                                        type="password"
-                                        placeholder="Enter your password"
-                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
-                                        @input="typedPassword"
-                                        v-model="password.content"
-                                        @focusin="password.hasFocused = true"
-                                        @focusout="password.hasFocused = false"
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label
-                                    for=""
-                                    class="text-base font-medium text-gray-900"
-                                >
-                                    Confirm password
-                                </label>
-                                <span
-                                    v-if="
-                                        passwordConfirmation.hasFocused ===
-                                            false &&
-                                        !validatePasswordConfirmation() &&
-                                        validatePassword()
-                                    "
-                                    class="text-error text-center text-sm ml-1"
-                                >
-                                    Passwords do not match
+                                    {{ $t('passwordRestriction') }}
                                 </span>
                                 <div
                                     class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
@@ -378,7 +325,63 @@ const isFormValid = () => {
 
                                     <input
                                         type="password"
-                                        placeholder="Confirm your password"
+                                        :placeholder="$t('passwordPlaceholder')"
+                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
+                                        @input="typedPassword"
+                                        v-model="password.content"
+                                        @focusin="password.hasFocused = true"
+                                        @focusout="password.hasFocused = false"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label
+                                    for=""
+                                    class="text-base font-medium text-gray-900"
+                                >
+                                    {{ $t('passwordConfirmation') }}
+                                </label>
+                                <span
+                                    v-if="
+                                        passwordConfirmation.hasFocused ===
+                                            false &&
+                                        !validatePasswordConfirmation() &&
+                                        validatePassword()
+                                    "
+                                    class="text-error text-center text-sm ml-1"
+                                >
+                                    {{ $t('passwordMatching') }}
+                                </span>
+                                <div
+                                    class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
+                                >
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                                    >
+                                        <svg
+                                            class="w-5 h-5"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
+                                            />
+                                        </svg>
+                                    </div>
+
+                                    <input
+                                        type="password"
+                                        :placeholder="
+                                            $t(
+                                                'passwordConfirmationPlaceholder'
+                                            )
+                                        "
                                         class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
                                         @input="typedPasswordConfirmation"
                                         v-model="passwordConfirmation.content"
@@ -396,7 +399,7 @@ const isFormValid = () => {
                                 <input
                                     class="inline-flex items-center text-black justify-center w-full px-4 py-4 text-base font-semibold transition-all duration-200 border border-transparent rounded-md bg-white cursor-pointer focus:outline-none hover:scale-105 delay-100"
                                     type="submit"
-                                    value="Sign up"
+                                    :value="$t('signup')"
                                 />
                             </div>
                         </div>

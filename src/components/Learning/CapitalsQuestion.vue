@@ -21,7 +21,7 @@ defineProps<{
         </div>
         <div class="text-center">
             <h1 v-if="currentState == 'starting'" class="text-3xl">
-                Find the capital !
+                {{ $t('findCapital') }}
             </h1>
             <h1 v-else class="text-4xl lg:text-6xl">
                 {{ country.capital }} ✅

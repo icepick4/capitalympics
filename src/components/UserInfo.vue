@@ -71,14 +71,21 @@ const getCountryDetails = async (
     }
 };
 
+const isDateNow = (date: Date) => {
+    const now = new Date();
+    // 10 minutes max
+    return now.getTime() - date.getTime() < 600000;
+};
+
 const formatDate = (date: Date) => {
     let minutes = date.getMinutes();
     if (minutes < 10) {
         minutes = parseInt(`0${minutes}`);
     }
-    return `The ${date.getDate()} of ${date.toLocaleString('default', {
-        month: 'long'
-    })} of ${date.getFullYear()} at ${date.getHours()}:${date.getMinutes()}`;
+    if (isDateNow(date)) {
+        return `Now`;
+    }
+    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} `;
 };
 
 getBestScores(12);
@@ -86,7 +93,7 @@ getBestScores(12);
 
 <template>
     <BlurContainer v-if="hasLoggedOut">
-        <Loader title="Logging out ..." />
+        <Loader :title="$t('loggingOut')" />
     </BlurContainer>
     <div class="container mx-auto p-8">
         <!-- Informations de l'utilisateur -->
@@ -96,41 +103,41 @@ getBestScores(12);
                     <img
                         src="public/icons/default_profile.png"
                         alt="User Avatar"
-                        class="w-10 h-10 rounded-full mr-4"
+                        class="w-16 h-16 rounded-full mr-4"
                     />
                     <h1 class="text-2xl mr-1 font-bold">{{ user.name }}</h1>
                 </div>
                 <div class="flex items-center gap-4">
-                    <img
-                        src="/icons/logout.png"
-                        alt="Logout"
-                        class="w-6 h-6 ml-auto cursor-pointer hover:scale-110 transition-all"
-                        @click="logOut"
-                    />
                     <RouterLink to="/profile/edit">
                         <img
                             src="/icons/settings.png"
                             alt="Edit account"
-                            class="w-7 h-7 ml-2 cursor-pointer hover:rotate-180 transition-all"
+                            class="w-8 h-8 ml-2 cursor-pointer hover:rotate-180 transition-all duration-500"
                         />
                     </RouterLink>
+                    <img
+                        src="/icons/logout.png"
+                        alt="Logout"
+                        class="w-8 h-8 ml-auto cursor-pointer hover:scale-110 transition-all"
+                        @click="logOut"
+                    />
                 </div>
             </div>
             <p class="text-black mb-2">
                 {{ getLevelName(user.level) }}
             </p>
             <p class="text-black mb-2">
-                Last Activity:
+                {{ $t('lastActivity') }} :
                 {{ formatDate(new Date(user.last_activity)) }}
             </p>
             <p class="text-black">
-                Joined: {{ formatDate(new Date(user.created_at)) }}
+                {{ $t('joined') }} : {{ formatDate(new Date(user.created_at)) }}
             </p>
         </div>
 
         <!-- Scores de pays -->
         <div class="bg-gradient rounded-lg shadow-lg p-6">
-            <h2 class="text-xl font-bold mb-4">Top 3 Country Scores</h2>
+            <h2 class="text-xl font-bold mb-4">{{ $t('topScores') }}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <RouterLink
                     v-for="country in countries"

@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
-import { RouterLink, useRouter } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import { useStore } from 'vuex';
 
-const router = useRouter();
 const store = useStore();
 const user = ref(store.getters.user);
-const displayMobileMenu = ref(false);
 watchEffect(() => {
     user.value = store.getters.user;
 });
@@ -23,39 +21,39 @@ watchEffect(() => {
                     to="/countries"
                     class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                 >
-                    Countries
+                    {{ $t('countries') }}
                 </RouterLink>
                 <RouterLink
                     to="/learn"
                     class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                 >
-                    Learn
+                    {{ $t('learn') }}
                 </RouterLink>
                 <RouterLink
                     to="/about"
                     class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                 >
-                    About
+                    {{ $t('about') }}
                 </RouterLink>
                 <RouterLink
                     to="/quiz"
                     class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                 >
-                    Quiz
+                    {{ $t('quiz') }}
                 </RouterLink>
                 <RouterLink
                     to="/login"
                     class="flex justify-end items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                     v-if="user === null"
                 >
-                    Log In</RouterLink
+                    {{ $t('login') }}</RouterLink
                 >
                 <RouterLink
                     to="/signup"
                     class="flex justify-center items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                     v-if="user === null"
                 >
-                    Sign Up</RouterLink
+                    {{ $t('signup') }}</RouterLink
                 >
                 <RouterLink
                     to="/profile"

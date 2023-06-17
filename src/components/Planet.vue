@@ -19,13 +19,10 @@ const handleUserStopClicking = () => {
 
 let now = new Date();
 let hours = now.getHours();
-let textureMap = 'public/planet/earth_texture_day.jpg';
-if (hours > 18 && hours < 6) {
-    const earthTexture: THREE.Texture = new THREE.TextureLoader().load(
-        'public/planet/earth_texture_night.jpg'
-    );
-    earthTexture.minFilter = THREE.LinearFilter;
-}
+let textureMap =
+    hours > 18 || hours < 6
+        ? 'public/planet/earth_texture_night.jpg'
+        : 'public/planet/earth_texture_day.jpg';
 let camera: THREE.PerspectiveCamera;
 const geometry = new THREE.SphereGeometry(1, 64, 64);
 const earthTexture: THREE.Texture = new THREE.TextureLoader().load(textureMap);
@@ -38,7 +35,7 @@ material.map!.anisotropy = 16;
 const planet = new THREE.Mesh(geometry, material);
 
 const setLyonCameraView = () => {
-    camera.position.set(0, 0, 2);
+    camera.position.set(0, 0, 2.25);
     camera.lookAt(0, 0, 0);
     planet.rotation.y = -1.5;
     planet.rotation.x = 0.5;
@@ -56,13 +53,7 @@ const initThreeScene = () => {
     };
 
     const animateSphere = () => {
-        const bounceAmplitude = 0.02;
-        const bounceSpeed = 0.004;
-
-        const bounceOffset =
-            Math.sin(Date.now() * bounceSpeed) * bounceAmplitude;
         if (!userClicking.value) {
-            planet.position.y = bounceOffset;
             planet.rotation.y -= 0.001;
         }
     };
@@ -74,7 +65,7 @@ const initThreeScene = () => {
         0.1,
         1000
     );
-    camera.position.z = 2;
+    camera.position.z = 2.25;
 
     renderer = new THREE.WebGLRenderer({
         alpha: true,

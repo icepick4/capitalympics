@@ -14,17 +14,17 @@ defineProps<{
         class="flex flex-col sm:flex-row w-full items-center justify-center gap-2 lg:gap-5"
     >
         <ButtonTemplate
-            :title="'Easy'"
+            :title="$t('easy')"
             :color="'bg-blue-500'"
             @click="click('succeeded')"
         />
         <ButtonTemplate
-            :title="'Medium'"
+            :title="$t('medium')"
             :color="'bg-yellow-500'"
             @click="click('medium')"
         />
         <ButtonTemplate
-            :title="'Hard'"
+            :title="$t('hard')"
             :color="'bg-red-500'"
             @click="click('failed')"
         />

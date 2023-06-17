@@ -1,8 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useStore } from 'vuex';
 import Planet from '../components/Planet.vue';
+import { CountryI } from '../models/Country';
 import { User } from '../models/User';
+import ApiService from '../services/apiService';
+
+interface State {
+    countries: CountryI[];
+}
+
+const state: State = {
+    countries: []
+};
 
 const store = useStore();
 const user: User = ref(store.getters.user);
@@ -15,6 +25,15 @@ const handlePlanetMouseDown = () => {
 const handlePlanetMouseUp = () => {
     planetMouseDown.value = false;
 };
+
+onBeforeMount(async () => {
+    try {
+        state.countries = await ApiService.getCountries();
+        console.log(state.countries);
+    } catch (error) {
+        console.log(error);
+    }
+});
 </script>
 
 <template>
@@ -24,7 +43,7 @@ const handlePlanetMouseUp = () => {
                 {{ $t('welcome') }}
             </h1>
             <p class="text-black text-2xl">
-                Learn capitals and flags of the world.
+                {{ $t('welcomeMessage') }}
             </p>
         </div>
         <Planet
