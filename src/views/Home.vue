@@ -18,8 +18,15 @@ const handlePlanetMouseUp = () => {
 </script>
 
 <template>
-    <h1 class="text-white text-center text-6xl">Capitalympics !</h1>
-    <div class="flex flex-col justify-center items-center">
+    <div class="flex flex-col items-center justify-center h-screen">
+        <div class="flex flex-col items-start">
+            <h1 class="text-6xl text-white mb-4 mt-4">
+                Welcome to Capitalympics!
+            </h1>
+            <p class="text-white text-2xl">
+                Learn capitals and flags of the world.
+            </p>
+        </div>
         <Planet
             class="cursor-grab lg:block hidden"
             @mousedown="handlePlanetMouseDown"
@@ -27,9 +34,7 @@ const handlePlanetMouseUp = () => {
             :class="{ 'cursor-grabbing': planetMouseDown }"
         />
         <div v-if="user">
-            <h2 class="text-white text-center text-3xl">
-                Welcome {{ user.name }}
-            </h2>
+            <h2 class="text-3xl text-white ml-4">Welcome {{ user.name }}!</h2>
         </div>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
-import { RouterView } from 'vue-router';
+import { RouterView, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import BlurContainer from './components/BlurContainer.vue';
 import Footer from './components/Footer.vue';
@@ -33,17 +33,23 @@ onBeforeMount(async () => {
         isReconnected.value = true;
     }
 });
+
+const route = useRoute();
+
+const isHome = () => {
+    return route.name === 'Home';
+};
 </script>
 
 <template>
     <div class="flex flex-col h-screen">
-        <Header />
+        <Header v-if="!isHome()" />
         <div class="flex flex-col flex-grow justify-evenly">
             <RouterView v-if="isReconnected" />
             <BlurContainer v-else>
                 <Loader />
             </BlurContainer>
         </div>
-        <Footer />
+        <Footer v-if="!isHome()" />
     </div>
 </template>

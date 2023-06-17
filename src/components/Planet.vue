@@ -17,24 +17,35 @@ const handleUserStopClicking = () => {
     userClicking.value = false;
 };
 
-const initThreeScene = () => {
-    let now = new Date();
-    let hours = now.getHours();
-    let textureMap = 'public/planet/earth_texture_day.jpg';
-    if (hours > 18 && hours < 6) {
-        const earthTexture: THREE.Texture = new THREE.TextureLoader().load(
-            'public/planet/earth_texture_night.jpg'
-        );
-        earthTexture.minFilter = THREE.LinearFilter;
-    }
-
+let now = new Date();
+let hours = now.getHours();
+let textureMap = 'public/planet/earth_texture_day.jpg';
+if (hours > 18 && hours < 6) {
     const earthTexture: THREE.Texture = new THREE.TextureLoader().load(
-        textureMap
+        'public/planet/earth_texture_night.jpg'
     );
     earthTexture.minFilter = THREE.LinearFilter;
+}
+let camera: THREE.PerspectiveCamera;
+const geometry = new THREE.SphereGeometry(1, 64, 64);
+const earthTexture: THREE.Texture = new THREE.TextureLoader().load(textureMap);
+earthTexture.minFilter = THREE.LinearFilter;
+const material = new THREE.MeshBasicMaterial({
+    map: earthTexture
+});
+material.map!.colorSpace = THREE.SRGBColorSpace;
+material.map!.anisotropy = 16;
+const planet = new THREE.Mesh(geometry, material);
 
+const setLyonCameraView = () => {
+    camera.position.set(0, 0, 2);
+    camera.lookAt(0, 0, 0);
+    planet.rotation.y = -1.5;
+    planet.rotation.x = 0.5;
+};
+
+const initThreeScene = () => {
     let renderer: THREE.WebGLRenderer,
-        camera: THREE.PerspectiveCamera,
         scene: THREE.Scene,
         controls: OrbitControls;
 
@@ -83,15 +94,6 @@ const initThreeScene = () => {
     renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
     renderer.setClearColor(0x000000, 0);
 
-    //sphere geometry
-    const geometry = new THREE.SphereGeometry(1, 64, 64);
-    const material = new THREE.MeshBasicMaterial({
-        map: earthTexture
-    });
-    material.map!.colorSpace = THREE.SRGBColorSpace;
-    material.map!.anisotropy = 16;
-    const planet = new THREE.Mesh(geometry, material);
-
     function calculatePosition(latitude: number, longitude: number) {
         let phi = (90 - latitude) * (Math.PI / 180);
         let theta = (longitude + 180) * (Math.PI / 180);
@@ -134,8 +136,16 @@ const initThreeScene = () => {
 
 <template>
     <div
+        class="relative"
         id="canvasContainer"
         @mousedown="handleUserClicking"
         @mouseup="handleUserStopClicking"
-    ></div>
+    >
+        <p
+            class="absolute right-0 bottom-0 select-none"
+            @click="setLyonCameraView"
+        >
+            Lyon, France
+        </p>
+    </div>
 </template>
