@@ -7,9 +7,22 @@ export default {
     },
     methods: {
         initThreeScene() {
+            let now = new Date();
+            let hours = now.getHours();
+            let textureMap = 'public/planet/earth_texture_day.jpg';
+            if (hours > 18 && hours < 6) {
+                const earthTexture: THREE.Texture =
+                    new THREE.TextureLoader().load(
+                        'public/planet/earth_texture_night.jpg'
+                    );
+                earthTexture.minFilter = THREE.LinearFilter;
+            }
+
             const earthTexture: THREE.Texture = new THREE.TextureLoader().load(
-                'public/planet/earth_texture.jpg'
+                textureMap
             );
+            earthTexture.minFilter = THREE.LinearFilter;
+
             let renderer: THREE.WebGLRenderer,
                 camera: THREE.PerspectiveCamera,
                 scene: THREE.Scene,
@@ -22,7 +35,7 @@ export default {
             };
 
             const animateSphere = () => {
-                planet.rotation.y -= 0.002;
+                planet.rotation.y -= 0.0015;
             };
 
             scene = new THREE.Scene();
@@ -53,7 +66,7 @@ export default {
             renderer.setClearColor(0x000000, 0);
 
             //sphere geometry
-            const geometry = new THREE.SphereGeometry(1, 30, 30);
+            const geometry = new THREE.SphereGeometry(1, 64, 64);
             const material = new THREE.MeshBasicMaterial({
                 map: earthTexture
             });
