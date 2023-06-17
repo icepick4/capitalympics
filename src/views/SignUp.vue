@@ -130,10 +130,10 @@ const isFormValid = () => {
         />
         <Loader v-else title="Signing up..." />
     </BlurContainer>
-    <section class="bg-primary h-full flex w-full justify-center">
+    <section class="h-full flex w-full justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
             <div
-                class="relative flex items-center px-4 pb-10 pt-10 sm:pb-16 md:justify-center lg:pb-24 bg-primary sm:px-6 lg:px-8"
+                class="relative flex items-center px-4 pb-10 pt-10 sm:pb-16 md:justify-center lg:pb-24 sm:px-6 lg:px-8"
             >
                 <div class="absolute top-0 right-1 text-white z-40">
                     Photo of
@@ -216,7 +216,7 @@ const isFormValid = () => {
             </div>
 
             <div
-                class="flex items-center justify-center px-4 py-10 bg-primary sm:px-6 lg:px-8 sm:py-16 lg:py-24"
+                class="flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8 sm:py-16 lg:py-24 bg-white border-t-2 border-black"
             >
                 <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
                     <h2
@@ -394,7 +394,7 @@ const isFormValid = () => {
 
                             <div>
                                 <input
-                                    class="inline-flex items-center bg-white justify-center w-full px-4 py-4 text-base font-semibold text-black transition-all duration-200 border border-transparent rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 focus:outline-none hover:scale-105 delay-100"
+                                    class="inline-flex items-center text-black justify-center w-full px-4 py-4 text-base font-semibold transition-all duration-200 border border-transparent rounded-md bg-gray-300 cursor-pointer focus:outline-none hover:scale-105 delay-100"
                                     type="submit"
                                     value="Sign up"
                                 />

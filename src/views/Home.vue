@@ -18,7 +18,7 @@ const handlePlanetMouseUp = () => {
 </script>
 
 <template>
-    <div class="flex flex-col items-center justify-center h-screen">
+    <div class="flex flex-col items-center justify-center">
         <div class="flex flex-col items-start">
             <h1 class="text-6xl text-white mb-4 mt-4">
                 Welcome to Capitalympics!

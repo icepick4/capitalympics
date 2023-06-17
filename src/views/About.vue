@@ -52,7 +52,7 @@ onMounted(() => {
             </span>
         </div>
         <div
-            class="flex flex-col justify-center items-center m-4 lg:flex-row lg:gap-8"
+            class="flex flex-col justify-center items-center lg:flex-row lg:gap-8 bg-gradient"
         >
             <h1 class="text-3xl">
                 🌎 Learn the Capitals and Flags of the World
@@ -110,7 +110,9 @@ onMounted(() => {
                 alt='Photo of Soumil Kumar on <a href="https://www.pexels.com/fr-fr/photo/photo-de-personne-tapant-sur-le-clavier-de-l-ordinateur-735911/">Pexels</a>'
                 link="https://github.com/icepick4/capitalympics"
             />
-            <h1 class="text-3xl text-center mt-10 lg:w-1/2">
+        </div>
+        <div class="w-full h-52 flex justify-center items-center bg-gradient">
+            <h1 class="text-3xl text-center lg:w-1/2">
                 We hope you enjoy using Capitalympics as much as we enjoyed
                 creating it. Happy learning ! 🌍🚀
             </h1>

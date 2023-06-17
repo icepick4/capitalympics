@@ -27,83 +27,88 @@ const logOut = () => {
     <BlurContainer v-if="hasLoggedOut">
         <Loader title="Logging out ..." />
     </BlurContainer>
-    <div
-        class="flex flex-row w-full justify-between h-auto bg-gray-100 border-b-2 border-black"
-    >
-        <div class="flex flex-row justify-center items-center">
-            <RouterLink
-                to="/"
-                class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
-            >
-                Home
-            </RouterLink>
-            <RouterLink
-                to="/countries"
-                class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
-            >
-                Countries
-            </RouterLink>
-            <RouterLink
-                to="/learn"
-                class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
-            >
-                Learn
-            </RouterLink>
-            <RouterLink
-                to="/about"
-                class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
-            >
-                About
-            </RouterLink>
-            <RouterLink
-                to="/quiz"
-                class="w-full h-full flex items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
-            >
-                Quiz
-            </RouterLink>
-        </div>
-        <RouterLink to="/">
-            <div class="flex items-center group">
+    <div class="flex items-center justify-center w-full">
+        <div class="flex flex-row w-1/2 justify-between h-auto">
+            <RouterLink to="/" class="w-auto h-full p-4">
                 <img src="/logo.png" alt="logo" class="w-28 h-28" />
-                <h1
-                    class="font-medium text-primary text-xl group-hover:text-secondary group- transition-all duration-75 ease-in-out"
+            </RouterLink>
+            <div class="flex flex-row justify-center items-center gap-7">
+                <RouterLink
+                    to="/countries"
+                    class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                 >
-                    Capitalympics
-                </h1>
-            </div>
-        </RouterLink>
-        <div
-            v-if="user === null"
-            class="flex flex-row justify-center items-center w-1/4"
-        >
-            <RouterLink
-                to="/login"
-                class="w-full h-full flex justify-end items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
-            >
-                Log In</RouterLink
-            >
-            <RouterLink
-                to="/signup"
-                class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
-            >
-                Sign Up</RouterLink
-            >
-        </div>
-        <div v-else class="flex flex-row justify-center items-center w-1/4">
-            <RouterLink
-                to="/profile"
-                class="w-full h-full flex justify-end items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out"
-            >
-                Profile</RouterLink
-            >
-            <div
-                class="w-full h-full flex justify-center items-center p-4 font-medium text-primary no-underline hover:text-secondary text-xl transition-all duration-75 ease-in-out cursor-pointer"
-                @click="logOut"
-            >
-                Log out
+                    Countries
+                </RouterLink>
+                <RouterLink
+                    to="/learn"
+                    class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                >
+                    Learn
+                </RouterLink>
+                <RouterLink
+                    to="/about"
+                    class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                >
+                    About
+                </RouterLink>
+                <RouterLink
+                    to="/quiz"
+                    class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                >
+                    Quiz
+                </RouterLink>
+                <RouterLink
+                    to="/login"
+                    class="flex justify-end items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    v-if="user === null"
+                >
+                    Log In</RouterLink
+                >
+                <RouterLink
+                    to="/signup"
+                    class="flex justify-center items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    v-if="user === null"
+                >
+                    Sign Up</RouterLink
+                >
+                <RouterLink
+                    to="/profile"
+                    class="flex justify-end items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    v-if="user !== null"
+                >
+                    Profile</RouterLink
+                >
+                <div
+                    class="flex justify-center items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out cursor-pointer"
+                    @click="logOut"
+                    v-if="user !== null"
+                >
+                    Log out
+                </div>
             </div>
         </div>
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.center-underline {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+}
+.center-underline::after {
+    content: '';
+    background-color: #000;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    transition: all 0.2s ease-in-out;
+    transform: scaleX(0);
+}
+
+.center-underline:hover::after {
+    transform: scaleX(1);
+}
+</style>

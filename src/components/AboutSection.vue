@@ -6,6 +6,11 @@ defineProps<{
     alt: string;
     link: string;
 }>();
+
+const randomRotation = () => {
+    const rotations = ['hover:rotate-3', 'hover:-rotate-3'];
+    return rotations[Math.floor(Math.random() * rotations.length)];
+};
 </script>
 
 <template>
@@ -29,7 +34,8 @@ defineProps<{
             <div class="overflow-hidden">
                 <RouterLink :to="link" class="scale-1">
                     <div
-                        class="bg-background shadow overflow-hidden hover:scale-110 hover:rotate-3 transform hover:shadow-2xl transition ease-in-out duration-300 relative"
+                        class="bg-background shadow overflow-hidden hover:scale-110 transform hover:shadow-2xl transition ease-in-out duration-300 relative"
+                        :class="randomRotation()"
                     >
                         <img
                             :src="image"
