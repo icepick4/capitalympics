@@ -6,12 +6,26 @@ import { User } from '../models/User';
 
 const store = useStore();
 const user: User = ref(store.getters.user);
+const planetMouseDown = ref(false);
+
+const handlePlanetMouseDown = () => {
+    planetMouseDown.value = true;
+};
+
+const handlePlanetMouseUp = () => {
+    planetMouseDown.value = false;
+};
 </script>
 
 <template>
     <h1 class="text-white text-center text-6xl">Capitalympics !</h1>
     <div class="flex flex-col justify-center items-center">
-        <Planet />
+        <Planet
+            class="cursor-grab lg:block hidden"
+            @mousedown="handlePlanetMouseDown"
+            @mouseup="handlePlanetMouseUp"
+            :class="{ 'cursor-grabbing': planetMouseDown }"
+        />
         <div v-if="user">
             <h2 class="text-white text-center text-3xl">
                 Welcome {{ user.name }}
@@ -19,5 +33,3 @@ const user: User = ref(store.getters.user);
         </div>
     </div>
 </template>
-
-<style scoped></style>
