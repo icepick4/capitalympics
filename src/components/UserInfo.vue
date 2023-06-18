@@ -142,7 +142,7 @@ getBestScores(12);
                 <RouterLink
                     v-for="country in countries"
                     :key="country.name"
-                    class="bg-white rounded-lg shadow-md p-4 hover:bg-gray-200 transition-colors duration-300 fade-in"
+                    class="bg-white rounded-lg shadow-md p-4 hover:bg-gray-200 transition-colors duration-300 fade-up"
                     :to="`/countries/${country.alpha3Code}`"
                 >
                     <div class="flex items-center mb-2">
@@ -163,21 +163,6 @@ getBestScores(12);
 </template>
 
 <style scoped>
-.fade-in {
-    animation: fadeIn ease 0.4s;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0px);
-    }
-}
-
 @keyframes rotate {
     from {
         transform: rotate(-360deg);

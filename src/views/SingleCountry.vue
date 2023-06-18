@@ -43,7 +43,7 @@ onBeforeMount(async () => {
         </Transition>
         <RouterLink
             to="/countries"
-            class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-gradient scale-[1.01] hover:scale-105 rounded-md w-1/2 md:w-1/4 mx-auto"
+            class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-gradient hover:scale-105 rounded-md w-1/2 md:w-1/4 mx-auto"
         >
             {{ $t('back') }}
         </RouterLink>

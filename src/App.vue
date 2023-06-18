@@ -42,7 +42,7 @@ const isHome = () => {
 </script>
 
 <template>
-    <div class="flex flex-col h-screen" :class="{ 'bg-gradient': isHome() }">
+    <div class="flex flex-col h-screen">
         <Header />
         <div class="flex flex-col flex-grow justify-evenly">
             <RouterView v-if="isReconnected" />

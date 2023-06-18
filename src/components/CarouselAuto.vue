@@ -20,13 +20,13 @@
 .carousel-container:after {
     background: linear-gradient(
         to right,
-        rgb(188, 240, 211) 0%,
+        rgb(182, 232, 242) 0%,
         rgba(255, 255, 255, 0) 100%
     );
     content: '';
     height: 100%;
     position: absolute;
-    width: 200px;
+    width: 100px;
     z-index: 2;
 }
 
@@ -43,7 +43,7 @@
 
 .carousel-items {
     display: flex;
-    animation: carousel 12s linear infinite;
+    animation: carousel 10s linear infinite;
     transition: all 0.25s ease-in-out;
 }
 
