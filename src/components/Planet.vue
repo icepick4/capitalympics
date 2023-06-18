@@ -7,6 +7,8 @@ onMounted(() => {
     initThreeScene();
 });
 
+const emit = defineEmits(['finishedLoading']);
+
 const userClicking = ref(false);
 
 const handleUserClicking = () => {
@@ -25,7 +27,12 @@ let textureMap =
         : '/planet/earth_texture_day.jpg';
 let camera: THREE.PerspectiveCamera;
 const geometry = new THREE.SphereGeometry(1, 64, 64);
-const earthTexture: THREE.Texture = new THREE.TextureLoader().load(textureMap);
+const earthTexture: THREE.Texture = new THREE.TextureLoader().load(
+    textureMap,
+    () => {
+        emit('finishedLoading');
+    }
+);
 earthTexture.minFilter = THREE.LinearFilter;
 const material = new THREE.MeshBasicMaterial({
     map: earthTexture

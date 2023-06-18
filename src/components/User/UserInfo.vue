@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { Level, User, UserScore } from '../../models/User';
@@ -34,25 +34,29 @@ const user: User = store.getters.user;
 const countries = ref<CountryDetails[]>([]);
 
 const getBestScores = async (user_id: number): Promise<UserScore[]> => {
-    const response = await ApiService.getBestScores(user_id, token, 3);
-    let scores: UserScore[] = [];
-    if (response) {
-        scores = response;
-    }
-    scores.forEach((element) => {
-        let countryDetails: CountryDetails = {
-            name: '',
-            flag: '',
-            alpha3Code: element.country_code,
-            level: element.level
-        };
-        getCountryDetails(element.country_code).then(({ name, flag }) => {
-            countryDetails.name = name;
-            countryDetails.flag = flag;
-            countries.value.push(countryDetails);
+    try {
+        const response = await ApiService.getBestScores(user_id, token, 3);
+        let scores: UserScore[] = [];
+        if (response) {
+            scores = response;
+        }
+        scores.forEach((element) => {
+            let countryDetails: CountryDetails = {
+                name: '',
+                flag: '',
+                alpha3Code: element.country_code,
+                level: element.level
+            };
+            getCountryDetails(element.country_code).then(({ name, flag }) => {
+                countryDetails.name = name;
+                countryDetails.flag = flag;
+                countries.value.push(countryDetails);
+            });
         });
-    });
-    return scores;
+        return scores;
+    } catch (error) {
+        return [];
+    }
 };
 
 const getCountryDetails = async (
@@ -103,7 +107,9 @@ const formatDate = (date: Date) => {
     return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} `;
 };
 
-getBestScores(12);
+onMounted(() => {
+    getBestScores(user.id);
+});
 </script>
 
 <template>

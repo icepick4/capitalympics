@@ -2,7 +2,9 @@
 import { onBeforeMount, onUnmounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import BlurContainer from '../components/BlurContainer.vue';
 import CarouselAuto from '../components/CarouselAuto.vue';
+import Loader from '../components/Loader.vue';
 import Planet from '../components/Planet.vue';
 import { CountryI } from '../models/Country';
 import { User } from '../models/User';
@@ -14,6 +16,7 @@ const router = useRouter();
 const user: User = ref(store.getters.user);
 const planetMouseDown = ref(false);
 const currentCountryHovered = ref<CountryI | null>(null);
+const planetLoaded = ref(false);
 
 const handlePlanetMouseDown = () => {
     planetMouseDown.value = true;
@@ -76,6 +79,9 @@ const handleScroll = () => {
 </script>
 
 <template>
+    <BlurContainer v-if="!planetLoaded">
+        <Loader />
+    </BlurContainer>
     <div class="flex flex-col items-center justify-center h-screen relative">
         <div class="flex flex-col items-start w-3/4 lg:w-1/2">
             <h1 class="text-4xl sm:text-6xl text-black mb-4 mt-4">
@@ -90,6 +96,7 @@ const handleScroll = () => {
             @mousedown="handlePlanetMouseDown"
             @mouseup="handlePlanetMouseUp"
             :class="{ 'cursor-grabbing': planetMouseDown }"
+            @finishedLoading="planetLoaded = true"
         />
         <div class="absolute bottom-52">
             <svg
