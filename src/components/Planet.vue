@@ -21,8 +21,8 @@ let now = new Date();
 let hours = now.getHours();
 let textureMap =
     hours > 18 || hours < 6
-        ? 'public/planet/earth_texture_night.jpg'
-        : 'public/planet/earth_texture_day.jpg';
+        ? '/planet/earth_texture_night.jpg'
+        : '/planet/earth_texture_day.jpg';
 let camera: THREE.PerspectiveCamera;
 const geometry = new THREE.SphereGeometry(1, 64, 64);
 const earthTexture: THREE.Texture = new THREE.TextureLoader().load(textureMap);

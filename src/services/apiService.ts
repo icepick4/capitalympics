@@ -5,12 +5,12 @@ import { LearningState, LearningType } from '../types/common';
 export default class ApiService {
     public static readonly API_URL: string = 'http://localhost:3001';
 
-    public static async getCountries(): Promise<CountryI[]> {
+    public static async getCountries(max: number = 0): Promise<CountryI[]> {
+        const url = `${ApiService.API_URL}/countries${
+            max === 0 ? '' : `?max=${max}`
+        }`;
         try {
-            const response = await axios.get(
-                `${ApiService.API_URL}/countries`,
-                { timeout: 5000 }
-            );
+            const response = await axios.get(url, { timeout: 5000 });
             return response.data.countries;
         } catch (error) {
             throw new Error('Failed get countries');
@@ -171,7 +171,7 @@ export default class ApiService {
     public static async getBestScores(
         user_id: number,
         token: string,
-        length: number
+        length: number = 0
     ): Promise<UserScore[]> {
         const url = `${ApiService.API_URL}/users/${user_id}/scores${
             length === 0 ? '' : `/?max=${length}`

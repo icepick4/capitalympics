@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import CarouselAuto from '../components/CarouselAuto.vue';
 import Planet from '../components/Planet.vue';
 import { CountryI } from '../models/Country';
 import { User } from '../models/User';
 import ApiService from '../services/apiService';
 
-interface State {
-    countries: CountryI[];
-}
-
-const state: State = {
-    countries: []
-};
-
+const countries = ref<CountryI[]>([]);
 const store = useStore();
+const router = useRouter();
 const user: User = ref(store.getters.user);
 const planetMouseDown = ref(false);
 
@@ -26,10 +22,17 @@ const handlePlanetMouseUp = () => {
     planetMouseDown.value = false;
 };
 
+const navigateToCountry = (country: CountryI) => {
+    router.push(`/countries/${country.alpha3Code}`);
+};
+
 onBeforeMount(async () => {
     try {
-        state.countries = await ApiService.getCountries();
-        console.log(state.countries);
+        let fetchedCountries = await ApiService.getCountries(8);
+        countries.value = fetchedCountries
+            .concat(fetchedCountries)
+            .concat(fetchedCountries);
+        console.log(countries.value.length);
     } catch (error) {
         console.log(error);
     }
@@ -53,4 +56,25 @@ onBeforeMount(async () => {
             :class="{ 'cursor-grabbing': planetMouseDown }"
         />
     </div>
+    <CarouselAuto v-if="countries.length > 0">
+        <template v-for="country in countries" :key="country.name">
+            <img
+                :src="country.flag"
+                class="carousel-item cursor-pointer"
+                @click="navigateToCountry(country)"
+            />
+        </template>
+    </CarouselAuto>
 </template>
+
+<style scoped>
+.carousel-item {
+    filter: grayscale(60%);
+    transition: all 0.25s ease-in-out;
+    object-fit: cover;
+}
+.carousel-item:hover {
+    filter: grayscale(0%);
+    animation-play-state: paused;
+}
+</style>
