@@ -77,11 +77,11 @@ const handleScroll = () => {
 
 <template>
     <div class="flex flex-col items-center justify-center h-screen relative">
-        <div class="flex flex-col items-start w-1/2">
-            <h1 class="text-6xl text-black mb-4 mt-4">
+        <div class="flex flex-col items-start w-3/4 lg:w-1/2">
+            <h1 class="text-4xl sm:text-6xl text-black mb-4 mt-4">
                 {{ $t('welcome') }}
             </h1>
-            <p class="text-black text-2xl">
+            <p class="text-black text-xl sm:text-2xl">
                 {{ $t('welcomeMessage') }}
             </p>
         </div>
@@ -110,21 +110,25 @@ const handleScroll = () => {
         </div>
     </div>
     <div
-        class="w-full h-screen flex flex-col justify-center items-center relative gap-32"
+        class="w-full h-screen flex flex-col justify-center items-center relative gap-16"
         id="home-description"
     >
-        <div class="flex flex-col justify-start items-start w-1/2">
-            <h1 class="text-5xl text-black mt-4">
+        <div class="flex flex-col justify-start items-start w-3/4 lg:w-1/2">
+            <h1 class="text-3xl sm:text-5xl text-black mt-4">
                 Découvrez le monde à travers les capitales et les drapeaux des
                 pays.
             </h1>
-            <h1 class="text-3xl text-black mb-4 mt-2">
+            <h1 class="text-xl sm:text-3xl text-black mb-4 mt-2">
                 Apprenez, jouez et devenez un champion de Capitalympics !
             </h1>
         </div>
-        <div class="flex flex-row gap-5 items-center justify-center">
-            <img src="/home/countries-home.svg" class="w-2/5" />
-            <h1 class="text-4xl">Découvrez tous les pays !</h1>
+        <div
+            class="flex flex-col sm:flex-row gap-5 items-center justify-center"
+        >
+            <img src="/home/countries-home.svg" class="lg:w-1/2" />
+            <h1 class="text-2xl sm:text-4xl text-center">
+                Découvrez tous les pays !
+            </h1>
         </div>
         <div class="flex flex-col items-center justify-center">
             <CarouselAuto v-if="countries.length > 0">
@@ -138,7 +142,7 @@ const handleScroll = () => {
                     />
                 </template>
             </CarouselAuto>
-            <h1 class="text-3xl text-black mb-4 mt-4 h-16">
+            <h1 class="text-3xl text-black mb-4 mt-4 h-10">
                 {{ currentCountryHovered ? currentCountryHovered.name : '' }}
                 <h1 class="text-xl" v-if="currentCountryHovered">
                     {{ currentCountryHovered.capital }}
@@ -165,50 +169,52 @@ const handleScroll = () => {
         </div>
     </div>
     <div
-        class="w-full h-screen flex flex-col justify-center items-center gap-20 relative"
+        class="w-full h-screen flex flex-col justify-center items-center gap-10 lg:gap-20 relative"
         id="home-buttons"
     >
-        <div class="flex flex-col justify-start w-1/2">
-            <h1 class="text-5xl text-black mt-4">
+        <div class="flex flex-col justify-start w-3/4 lg:w-1/2">
+            <h1 class="text-3xl sm:text-5xl text-black mt-4">
                 Essayez Capitalympics gratuitement dès maintenant !
             </h1>
-            <h1 class="text-3xl text-black mb-4 mt-2">
-                Prêt à explorer le monde ? Inscrivez-vous dès maintenant et
-                commencez votre aventure avec Capitalympics !
+            <h1 class="text-xl sm:text-3xl text-black mb-4 mt-2">
+                Inscrivez-vous dès maintenant et commencez votre aventure avec
+                Capitalympics !
             </h1>
         </div>
         <h1 class="text-center text-5xl">Prêt ?</h1>
-        <div class="w-3/4 flex flex-row bg-gradient rounded-lg">
+        <div
+            class="w-4/5 lg:w-3/4 flex flex-col lg:flex-row lg:[bg-gradient] rounded-lg gap-10"
+        >
             <div
-                class="w-1/2 flex flex-row justify-center items-center p-10 gap-10"
+                class="w-full lg:w-1/2 flex flex-row justify-center items-center lg:p-10 gap-3 sm:gap-10"
             >
-                <img src="/home/login-home.svg" class="w-1/3" />
+                <img src="/home/login-home.svg" class="w-1/2" />
                 <div class="flex flex-col gap-5 items-center justify-center">
-                    <p class="text-center text-xl">
+                    <p class="text-center text-lg sm:text-xl">
                         Connectez-vous pour commencer à vous entrainez !
                     </p>
                     <RouterLink
-                        class="bg-white text-black text-4xl text-center p-6 hover:bg-gray-200 rounded-lg shadow-md transition-all"
+                        class="bg-white text-black text-2xl sm:text-4xl text-center p-3 xl:p-6 hover:bg-gray-200 rounded-lg shadow-md transition-all"
                         to="/login"
                     >
-                        Se connecter
+                        Connexion
                     </RouterLink>
                 </div>
             </div>
             <div
-                class="w-1/2 p-10 flex flex-row justify-center items-center gap-5"
+                class="w-full lg:w-1/2 lg:p-10 flex flex-row justify-center items-center gap-3 sm:gap-10"
             >
-                <img src="/home/register-home.svg" class="w-1/3" />
+                <img src="/home/register-home.svg" class="w-1/2" />
 
                 <div class="flex flex-col gap-5 items-center justify-center">
-                    <p class="text-center text-xl">
+                    <p class="text-center text-lg sm:text-xl">
                         Rejoignez nous dès maintenant !
                     </p>
                     <RouterLink
-                        class="bg-white text-black text-4xl text-center p-6 hover:bg-gray-200 rounded-lg shadow-md transition-all"
+                        class="bg-white text-black text-2xl sm:text-4xl text-center p-3 xl:p-6 hover:bg-gray-200 rounded-lg shadow-md transition-all"
                         to="/signup"
                     >
-                        S'inscrire
+                        Inscription
                     </RouterLink>
                 </div>
             </div>
