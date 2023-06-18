@@ -5,6 +5,7 @@ export interface User {
     level: Level;
     last_activity: Date;
     created_at: Date;
+    language: string;
 }
 
 export interface UserScore {

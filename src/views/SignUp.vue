@@ -276,7 +276,7 @@ const isFormValid = () => {
                                     <input
                                         type="text"
                                         :placeholder="$t('usernamePlaceholder')"
-                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
+                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50"
                                         @input="typedUsername"
                                         v-model="username.content"
                                         @focusin="username.hasFocused = true"
@@ -326,7 +326,7 @@ const isFormValid = () => {
                                     <input
                                         type="password"
                                         :placeholder="$t('passwordPlaceholder')"
-                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
+                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50"
                                         @input="typedPassword"
                                         v-model="password.content"
                                         @focusin="password.hasFocused = true"
@@ -382,7 +382,7 @@ const isFormValid = () => {
                                                 'passwordConfirmationPlaceholder'
                                             )
                                         "
-                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-blue-600"
+                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50"
                                         @input="typedPasswordConfirmation"
                                         v-model="passwordConfirmation.content"
                                         @focusin="

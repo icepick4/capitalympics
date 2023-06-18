@@ -2,11 +2,11 @@
 import { ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import { Level, User, UserScore } from '../models/User';
-import ApiService from '../services/apiService';
-import { getLevelName } from '../utils/common';
-import BlurContainer from './BlurContainer.vue';
-import Loader from './Loader.vue';
+import { Level, User, UserScore } from '../../models/User';
+import ApiService from '../../services/apiService';
+import { getLevelName } from '../../utils/common';
+import BlurContainer from '../BlurContainer.vue';
+import Loader from '../Loader.vue';
 
 const store = useStore();
 const router = useRouter();
@@ -16,6 +16,8 @@ interface CountryDetails {
     flag: string;
     level: Level;
 }
+
+defineEmits(['close']);
 
 const hasLoggedOut = ref(false);
 const logOut = () => {
@@ -71,6 +73,10 @@ const getCountryDetails = async (
     }
 };
 
+const getCurrentLanguage = () => {
+    return store.getters.language;
+};
+
 const isDateNow = (date: Date) => {
     const now = new Date();
     // 10 minutes max
@@ -83,7 +89,16 @@ const formatDate = (date: Date) => {
         minutes = parseInt(`0${minutes}`);
     }
     if (isDateNow(date)) {
-        return `Now`;
+        switch (getCurrentLanguage()) {
+            case 'fr':
+                return 'Maintenant';
+            case 'en':
+                return 'Now';
+            case 'es':
+                return 'Ahora';
+            default:
+                return 'Now';
+        }
     }
     return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} `;
 };
@@ -101,7 +116,7 @@ getBestScores(12);
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
                     <img
-                        src="public/icons/default_profile.png"
+                        src="/icons/default_profile.png"
                         alt="User Avatar"
                         class="w-16 h-16 rounded-full mr-4"
                     />
@@ -113,6 +128,7 @@ getBestScores(12);
                             src="/icons/settings.png"
                             alt="Edit account"
                             class="w-8 h-8 ml-2 cursor-pointer hover:rotate-180 transition-all duration-500"
+                            @click="$emit('close')"
                         />
                     </RouterLink>
                     <img
@@ -157,6 +173,11 @@ getBestScores(12);
                         {{ getLevelName(country.level) }}
                     </p>
                 </RouterLink>
+                <div v-if="countries.length === 0">
+                    <h1 class="text-xl font-bold mb-4">
+                        {{ $t('noScores') }}
+                    </h1>
+                </div>
             </div>
         </div>
     </div>

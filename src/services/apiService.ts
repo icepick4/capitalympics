@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { CountryI } from '../models/Country';
-import { Level, UserScore } from '../models/User';
+import { Level, User, UserScore } from '../models/User';
 import { LearningState, LearningType } from '../types/common';
 export default class ApiService {
     public static readonly API_URL: string = 'http://localhost:3001';
@@ -145,6 +145,32 @@ export default class ApiService {
             return response;
         } catch (error) {
             throw new Error('Failed update user learning');
+        }
+    }
+
+    public static async updateUser(
+        user_id: number,
+        token: string,
+        user: User
+    ): Promise<boolean> {
+        try {
+            const response = await axios.put(
+                `${ApiService.API_URL}/users/${user_id}`,
+                {
+                    user: user
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            if (response.status === 200) {
+                return true;
+            }
+            return false;
+        } catch (error) {
+            throw new Error('Failed update user');
         }
     }
 

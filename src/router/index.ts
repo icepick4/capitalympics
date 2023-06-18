@@ -66,13 +66,12 @@ const routes = [
         path: '/profile',
         name: 'Profile',
         component: Profile,
-        props: true,
-        beforeEnter: requireAuth
-    },
-    {
-        path: '/profile/settings',
-        name: 'Settings',
-        component: Profile,
+        children: [
+            {
+                path: 'edit',
+                component: Profile
+            }
+        ],
         props: true,
         beforeEnter: requireAuth
     },

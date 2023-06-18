@@ -70,5 +70,10 @@
     "loggingOut": "Logging out...",
     "lastActivity": "Last activity",
     "joined": "Joined ",
-    "topScores": "Top scores"
+    "topScores": "Top scores",
+    "editProfile": "Edit your profile",
+    "language": "Language",
+    "saveProfile": "Save profile",
+    "profileSaved": "Profile saved",
+    "success": "Success"
 }

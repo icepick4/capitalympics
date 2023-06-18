@@ -70,5 +70,10 @@
     "loggingOut": "Déconnexion en cours...",
     "lastActivity": "Dernière activité",
     "joined": "Rejoint",
-    "topScores": "Meilleurs scores"
+    "topScores": "Meilleurs scores",
+    "editProfile": "Modifier votre profil",
+    "language": "Langue",
+    "saveProfile": "Enregistrer les modifications",
+    "profileSaved": "Profil enregistré avec succès",
+    "success": "Succès"
 }
