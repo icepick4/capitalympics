@@ -60,7 +60,7 @@ onBeforeMount(async () => {
 
 <template>
     <div class="flex flex-col gap-5 m-5">
-        <h1 class="text-4xl font-bold text-center text-white">
+        <h1 class="text-4xl font-bold text-center text-black">
             {{ $t('countries') }}
         </h1>
         <input

@@ -77,13 +77,13 @@ const handleScroll = () => {
 
     if (scrollDelta > 0) {
         // Scrolling down, zoom in
-        imageScale.value += 0.013;
+        imageScale.value += 0.008;
         if (imageScale.value > 2.5) {
             imageScale.value = 2.5;
         }
     } else {
         // Scrolling up, zoom out
-        imageScale.value -= 0.013;
+        imageScale.value -= 0.008;
         if (imageScale.value < 1) {
             imageScale.value = 1;
         }
@@ -119,10 +119,10 @@ const handleScroll = () => {
             <img
                 src="/home/landing2.jpg"
                 alt="about"
-                class="w-full h-[26rem] object-cover"
+                class="w-full h-[26rem] object-cover transition-all duration-100 ease-linear"
                 :style="{ transform: `scale(${imageScale})` }"
             />
-            <span class="right-1 bottom-0 text-white absolute text-sm">
+            <!-- <span class="right-1 bottom-0 text-white absolute text-sm">
                 Photo of
                 <a
                     href="https://unsplash.com/@ryankim246?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
@@ -133,7 +133,7 @@ const handleScroll = () => {
                     href="https://unsplash.com/fr/photos/_AydCUsXwoI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
                     >Unsplash</a
                 >
-            </span>
+            </span> -->
         </div>
         <div class="absolute bottom-52">
             <svg
@@ -241,7 +241,7 @@ const handleScroll = () => {
                         Connectez-vous pour commencer à vous entrainez !
                     </p>
                     <RouterLink
-                        class="bg-white text-black text-2xl sm:text-4xl text-center p-3 xl:p-6 hover:bg-gray-200 rounded-lg shadow-md transition-all"
+                        class="bg-white text-black text-2xl sm:text-4xl text-center p-3 xl:p-6 hover:bg-gray-200 rounded-lg shadow-md transition-all hover:scale-95 ease-in-out duration-300"
                         to="/login"
                     >
                         Connexion
@@ -258,7 +258,7 @@ const handleScroll = () => {
                         Rejoignez nous dès maintenant !
                     </p>
                     <RouterLink
-                        class="bg-white text-black text-2xl sm:text-4xl text-center p-3 xl:p-6 hover:bg-gray-200 rounded-lg shadow-md transition-all"
+                        class="bg-white text-black text-2xl sm:text-4xl text-center p-3 xl:p-6 hover:bg-gray-200 rounded-lg shadow-md transition-all hover:scale-95 ease-in-out duration-300"
                         to="/signup"
                     >
                         Inscription
@@ -288,10 +288,11 @@ const handleScroll = () => {
 
 <style scoped>
 .carousel-item {
-    filter: grayscale(60%);
+    filter: grayscale(100%);
     transition: all 0.25s ease-in-out;
 }
 .carousel-item:hover {
+    transform: scale(0.96);
     filter: grayscale(0%);
     animation-play-state: paused;
 }

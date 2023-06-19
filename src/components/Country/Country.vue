@@ -24,7 +24,7 @@ defineProps<{
                         <img
                             :src="country.flag"
                             alt="Flag"
-                            class="w-28 h-auto border-2 border-black rounded"
+                            class="w-28 h-auto"
                         />
                     </dd>
                 </div>

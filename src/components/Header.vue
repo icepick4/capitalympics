@@ -19,10 +19,11 @@ function toggleDropdown() {
 <template>
     <div class="flex items-center justify-center w-full">
         <div
-            class="header flex flex-row w-full sm:w-full md:w-3/4 2xl:w-3/5 justify-between h-auto relative p-7"
+            class="header flex flex-row w-full sm:w-full md:w-4/5 xl:2/3 2xl:w-3/5 justify-between h-auto relative p-7"
         >
             <RouterLink to="/" class="w-auto h-full hidden sm:block">
-                <img src="/logo2.svg" alt="logo" class="w-52 h-auto" />
+                <!-- <img src="/logo2.svg" alt="logo" class="w-52 h-auto" /> -->
+                <h1 class="text-4xl font-bold">Capitalympics</h1>
             </RouterLink>
 
             <div class="header flex flex-row justify-center items-center gap-7">
@@ -66,7 +67,7 @@ function toggleDropdown() {
                 >
                 <RouterLink
                     to="/profile"
-                    class="flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-75 ease-in-out"
+                    class="flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
                     v-if="user !== null"
                 >
                     <img
@@ -77,7 +78,7 @@ function toggleDropdown() {
                 </RouterLink>
                 <RouterLink
                     to="/learn"
-                    class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    class="xl:hidden flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                     v-if="user !== null"
                 >
                     {{ $t('learn') }}

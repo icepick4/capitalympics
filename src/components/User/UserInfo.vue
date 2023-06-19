@@ -87,6 +87,15 @@ const isDateNow = (date: Date) => {
     return now.getTime() - date.getTime() < 600000;
 };
 
+const isDateToday = (date: Date) => {
+    const now = new Date();
+    return (
+        now.getDate() === date.getDate() &&
+        now.getMonth() === date.getMonth() &&
+        now.getFullYear() === date.getFullYear()
+    );
+};
+
 const formatDate = (date: Date) => {
     let minutes = date.getMinutes();
     if (minutes < 10) {
@@ -102,6 +111,15 @@ const formatDate = (date: Date) => {
                 return 'Ahora';
             default:
                 return 'Now';
+        }
+    } else if (isDateToday(date)) {
+        switch (getCurrentLanguage()) {
+            case 'fr':
+                return "Aujourd'hui";
+            case 'en':
+                return 'Today';
+            case 'es':
+                return 'Hoy';
         }
     }
     return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} `;

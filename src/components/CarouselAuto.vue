@@ -26,7 +26,7 @@
     content: '';
     height: 100%;
     position: absolute;
-    width: 100px;
+    width: 300px;
     z-index: 2;
 }
 

@@ -23,7 +23,7 @@ defineProps<{
             <VLazyImage
                 :src="countryFlag"
                 :alt="`Flag of ${countryName}`"
-                class="w-full h-auto I-cover rounded shadow transition ease-in-out duration-300 border-2 border-black"
+                class="w-full h-auto shadow transition ease-in-out duration-300"
                 :title="countryName"
             />
             <span
