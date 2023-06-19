@@ -75,5 +75,6 @@
     "language": "Language",
     "saveProfile": "Save profile",
     "profileSaved": "Profile saved",
-    "success": "Success"
+    "success": "Success",
+    "profile": "Profile"
 }

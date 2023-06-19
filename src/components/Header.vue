@@ -19,7 +19,7 @@ function toggleDropdown() {
 <template>
     <div class="flex items-center justify-center w-full">
         <div
-            class="header flex flex-row w-full sm:w-2/3 2xl:w-1/2 justify-between h-auto relative p-7"
+            class="header flex flex-row w-full sm:w-full md:w-3/4 2xl:w-3/5 justify-between h-auto relative p-7"
         >
             <RouterLink to="/" class="w-auto h-full hidden sm:block">
                 <img src="/logo2.svg" alt="logo" class="w-52 h-auto" />
@@ -66,7 +66,7 @@ function toggleDropdown() {
                 >
                 <RouterLink
                     to="/profile"
-                    class="hidden xl:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-75 ease-in-out"
+                    class="flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-75 ease-in-out"
                     v-if="user !== null"
                 >
                     <img
@@ -74,6 +74,13 @@ function toggleDropdown() {
                         alt="avatar"
                         class="w-10 h-10 rounded-full"
                     />
+                </RouterLink>
+                <RouterLink
+                    to="/learn"
+                    class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    v-if="user !== null"
+                >
+                    {{ $t('learn') }}
                 </RouterLink>
             </div>
             <div
@@ -134,6 +141,7 @@ function toggleDropdown() {
                     <RouterLink
                         to="/learn"
                         class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                        v-if="user === null"
                     >
                         {{ $t('learn') }}
                     </RouterLink>
@@ -163,13 +171,6 @@ function toggleDropdown() {
                     >
                         {{ $t('signup') }}</RouterLink
                     > -->
-                    <RouterLink
-                        to="/profile"
-                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
-                        v-if="user !== null"
-                    >
-                        {{ $t('profile') }}
-                    </RouterLink>
                 </div>
             </div>
         </div>

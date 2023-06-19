@@ -115,13 +115,25 @@ const handleScroll = () => {
             :class="{ 'cursor-grabbing': planetMouseDown }"
             @finishedLoading="planetLoaded = true"
         />
-        <div class="w-full mt-20 -z-10 xl:hidden">
+        <div class="relative w-full mt-20 -z-10 xl:hidden">
             <img
                 src="/home/landing2.jpg"
                 alt="about"
                 class="w-full h-[26rem] object-cover"
                 :style="{ transform: `scale(${imageScale})` }"
             />
+            <span class="right-1 bottom-0 text-white absolute text-sm">
+                Photo of
+                <a
+                    href="https://unsplash.com/@ryankim246?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                    >Ryan Kim</a
+                >
+                on
+                <a
+                    href="https://unsplash.com/fr/photos/_AydCUsXwoI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                    >Unsplash</a
+                >
+            </span>
         </div>
         <div class="absolute bottom-52">
             <svg
@@ -159,8 +171,7 @@ const handleScroll = () => {
         >
             <img
                 src="/home/countries-home.svg"
-                class="lg:w-1/2 -z-10"
-                :style="{ transform: `scale(${0.25 + imageScale * 0.5})` }"
+                class="w-full sm:w-2/5 lg:w-1/2 -z-10 scale-110"
             />
             <h1 class="text-2xl sm:text-4xl text-center">
                 Découvrez tous les pays !
@@ -273,18 +284,6 @@ const handleScroll = () => {
             </svg>
         </div>
     </div>
-    <span class="right-5 bottom-0 text-white absolute text-sm">
-        Photo of
-        <a
-            href="https://unsplash.com/@ryankim246?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-            >Ryan Kim</a
-        >
-        on
-        <a
-            href="https://unsplash.com/fr/photos/_AydCUsXwoI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-            >Unsplash</a
-        >
-    </span>
 </template>
 
 <style scoped>
