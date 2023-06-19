@@ -78,7 +78,7 @@ const getCountryDetails = async (
 };
 
 const getCurrentLanguage = () => {
-    return store.getters.language;
+    return user.language;
 };
 
 const isDateNow = (date: Date) => {

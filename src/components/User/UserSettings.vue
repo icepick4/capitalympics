@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import { useStore } from 'vuex';
 import { User } from '../../models/User';
@@ -23,6 +24,7 @@ const username: inputState = reactive({
 const language = ref(user.language);
 const hasSaved = ref(false);
 const displaySaveError = ref(false);
+const t = useI18n();
 
 const validateUsername = () => {
     if (username.content.length < 3 || username.content.length > 20) {
@@ -53,9 +55,11 @@ const saveProfile = () => {
     hasSaved.value = true;
     if (validateUsername()) {
         user.name = username.content;
+        user.language = language.value;
         try {
             ApiService.updateUser(user.id, store.getters.token, user);
             store.commit('setUser', user);
+            t.locale.value = language.value;
         } catch (error) {
             displaySaveError.value = true;
         }
@@ -93,10 +97,12 @@ const saveProfile = () => {
             @close="hasSaved = false"
         />
     </BlurContainer>
-    <div class="container mx-auto p-8">
+    <div
+        class="w-11/12 sm:w-4/5 xl:w-2/3 2xl:w-1/2 mx-auto p-0 sm:p-8 flex-col"
+    >
         <!-- Informations de l'utilisateur -->
         <div
-            class="bg-gradient rounded-lg shadow-lg p-6 mb-8 flex flex-col gap-10"
+            class="bg-gradient rounded-lg shadow-lg p-4 sm:p-6 mb-8 flex flex-col gap-10"
         >
             <div class="flex flex-row justify-between items-center">
                 <h1 class="text-2xl">{{ $t('editProfile') }}</h1>
@@ -109,15 +115,17 @@ const saveProfile = () => {
                     />
                 </RouterLink>
             </div>
-            <div class="flex flex-row justify-between">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-10">
+            <div class="flex flex-col lg:flex-row justify-between">
+                <div class="flex items-center justify-between mb-8">
+                    <div
+                        class="flex flex-col lg:flex-row items-center gap-10 w-full"
+                    >
                         <img
                             src="/icons/default_profile.png"
                             alt="User Avatar"
                             class="w-16 h-16 rounded-full mr-4"
                         />
-                        <div class="flex flex-col gap-3">
+                        <div class="flex flex-col gap-3 w-full md:w-1/2">
                             <label
                                 for=""
                                 class="text-base font-medium text-gray-900"
@@ -140,7 +148,7 @@ const saveProfile = () => {
                                 @focusout="username.hasFocused = false"
                             />
                         </div>
-                        <div class="flex flex-col gap-3">
+                        <div class="flex flex-col gap-3 w-full md:w-1/2">
                             <label
                                 for=""
                                 class="text-base font-medium text-gray-900"
@@ -149,6 +157,7 @@ const saveProfile = () => {
                             </label>
                             <select
                                 class="block w-full p-2 text-black duration-200 border border-gray-200 rounded-md bg-gray-50"
+                                v-model="language"
                             >
                                 <option value="en">English</option>
                                 <option value="fr">Français</option>

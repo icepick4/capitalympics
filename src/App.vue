@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { RouterView, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import BlurContainer from './components/BlurContainer.vue';
@@ -20,11 +21,14 @@ const reconnect = async () => {
     const token: string = getLocalStorageToken();
     try {
         await store.dispatch('reconnect', { user_id, token });
+        t.locale.value = store.getters.user.language;
     } catch (error) {
     } finally {
         isReconnected.value = true;
     }
 };
+
+const t = useI18n();
 
 onBeforeMount(async () => {
     if (isSetUser() && isSetToken()) {

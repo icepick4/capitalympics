@@ -56,4 +56,18 @@
         transform: translateX(-2560px);
     }
 }
+
+@media (max-width: 1250px) {
+    .carousel-container:before,
+    .carousel-container:after {
+        width: 200px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .carousel-container:before,
+    .carousel-container:after {
+        width: 0px;
+    }
+}
 </style>

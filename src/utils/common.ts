@@ -1,4 +1,4 @@
-import { Level } from '../models/User';
+import { Level, User } from '../models/User';
 import store from '../store';
 
 export const getCurrentMySQLDate = (): string => {
@@ -41,7 +41,8 @@ export const setLocalStorageToken = (token: string) => {
 };
 
 export const getLevelName = (level: Level): string => {
-    const language = store.getters.language;
+    const user: User = store.getters.user;
+    const language = user ? user.language : 'en';
     switch (language) {
         case 'fr':
             return getLevelNameFr(level);

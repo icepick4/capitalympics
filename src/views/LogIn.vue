@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import BlurContainer from '../components/BlurContainer.vue';
@@ -14,6 +15,7 @@ const username = ref('');
 const password = ref('');
 const router = useRouter();
 const store = useStore();
+const t = useI18n();
 
 const handleSignInError = () => {
     hasLoggedIn.value = false;
@@ -40,6 +42,7 @@ const logIn = async () => {
             password: password.value,
             last_activity: getCurrentMySQLDate()
         });
+        t.locale.value = store.getters.user.language;
         setTimeout(() => {
             hasLoggedIn.value = false;
             router.push('/profile');

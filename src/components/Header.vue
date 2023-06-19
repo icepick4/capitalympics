@@ -89,7 +89,7 @@ function toggleDropdown() {
             >
                 <button
                     @click="toggleDropdown"
-                    class="focus:outline-none"
+                    class="focus:scale-75 hover:scale-110 transition-all duration-150 ease-in-out"
                     v-if="!isDropdownOpen"
                 >
                     <svg
@@ -109,7 +109,7 @@ function toggleDropdown() {
                 </button>
                 <button
                     @click="toggleDropdown"
-                    class="focus:outline-none"
+                    class="focus:scale-75 hover:scale-110 transition-all duration-150 ease-in-out"
                     v-if="isDropdownOpen"
                 >
                     <svg
@@ -130,7 +130,10 @@ function toggleDropdown() {
             </div>
             <div
                 class="menu w-40 bg-white rounded-lg shadow-lg xl:hidden z-20 absolute top-16 sm:top-20 right-3 sm:right-0"
-                v-if="isDropdownOpen"
+                v-show="isDropdownOpen"
+                :class="{
+                    'fade-left': isDropdownOpen
+                }"
             >
                 <div class="py-2">
                     <RouterLink
