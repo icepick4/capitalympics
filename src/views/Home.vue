@@ -17,6 +17,8 @@ const user: User = ref(store.getters.user);
 const planetMouseDown = ref(false);
 const currentCountryHovered = ref<CountryI | null>(null);
 const planetLoaded = ref(false);
+const imageScale = ref(1);
+const previousScrollTop = ref(0);
 
 const handlePlanetMouseDown = () => {
     planetMouseDown.value = true;
@@ -38,6 +40,7 @@ const scrollTo = (id: string) => {
             behavior: 'smooth'
         });
     } else if (id === 'top') {
+        imageScale.value = 1;
         document.body.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -67,13 +70,27 @@ onUnmounted(() => {
 });
 
 const handleScroll = () => {
-    const scrollPosition = document.body.scrollTop;
-    const scrollHeight = document.body.scrollHeight;
-    const windowHeight = window.innerHeight;
-    if (scrollPosition + windowHeight >= scrollHeight) {
-        scrollTo('#top');
-    } else if (scrollPosition === 0) {
-        scrollTo('#bottom');
+    const scrollPosition =
+        document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollDelta = scrollPosition - previousScrollTop.value;
+    previousScrollTop.value = scrollPosition;
+
+    if (scrollDelta > 0) {
+        // Scrolling down, zoom in
+        imageScale.value += 0.012;
+        if (imageScale.value > 2.75) {
+            imageScale.value = 2.75;
+        }
+    } else {
+        // Scrolling up, zoom out
+        imageScale.value -= 0.012;
+        if (imageScale.value < 1) {
+            imageScale.value = 1;
+        }
+    }
+
+    if (scrollPosition == 0) {
+        imageScale.value = 1;
     }
 };
 </script>
@@ -83,7 +100,7 @@ const handleScroll = () => {
         <Loader />
     </BlurContainer>
     <div class="flex flex-col items-center justify-center h-screen relative">
-        <div class="flex flex-col items-start w-3/4 lg:w-1/2">
+        <div class="flex flex-col items-start w-3/4 lg:w-1/2 z-10">
             <h1 class="text-4xl sm:text-6xl text-black mb-4 mt-4">
                 {{ $t('welcome') }}
             </h1>
@@ -98,6 +115,26 @@ const handleScroll = () => {
             :class="{ 'cursor-grabbing': planetMouseDown }"
             @finishedLoading="planetLoaded = true"
         />
+        <div class="relative w-full mt-20 lg:hidden">
+            <img
+                src="/home/landing.jpg"
+                alt="about"
+                class="w-full h-96 object-cover"
+                :style="{ transform: `scale(${imageScale})` }"
+            />
+            <span class="right-1 bottom-0 text-white absolute text-sm">
+                Photo of
+                <a
+                    href="https://unsplash.com/@ryankim246?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                    >Ryan Kim</a
+                >
+                on
+                <a
+                    href="https://unsplash.com/fr/photos/_AydCUsXwoI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                    >Unsplash</a
+                >
+            </span>
+        </div>
         <div class="absolute bottom-52">
             <svg
                 class="arrow-icon w-12 h-12 mt-10 animate-bounce cursor-pointer"
@@ -132,7 +169,11 @@ const handleScroll = () => {
         <div
             class="flex flex-col sm:flex-row gap-5 items-center justify-center"
         >
-            <img src="/home/countries-home.svg" class="lg:w-1/2" />
+            <img
+                src="/home/countries-home.svg"
+                class="lg:w-1/2 -z-10"
+                :style="{ transform: `scale(${0.25 + imageScale * 0.5})` }"
+            />
             <h1 class="text-2xl sm:text-4xl text-center">
                 Découvrez tous les pays !
             </h1>
