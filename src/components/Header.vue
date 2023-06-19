@@ -8,36 +8,45 @@ const user = ref(store.getters.user);
 watchEffect(() => {
     user.value = store.getters.user;
 });
+
+const isDropdownOpen = ref(false);
+
+function toggleDropdown() {
+    isDropdownOpen.value = !isDropdownOpen.value;
+}
 </script>
 
 <template>
     <div class="flex items-center justify-center w-full">
-        <div class="flex flex-row w-1/2 justify-between h-auto">
-            <RouterLink to="/" class="w-auto h-full p-4">
-                <img src="/logo.png" alt="logo" class="w-28 h-28" />
+        <div
+            class="header flex flex-row w-full sm:w-2/3 2xl:w-1/2 justify-between h-auto relative p-7"
+        >
+            <RouterLink to="/" class="w-auto h-full hidden sm:block">
+                <img src="/logo2.svg" alt="logo" class="w-52 h-auto" />
             </RouterLink>
-            <div class="flex flex-row justify-center items-center gap-7">
+
+            <div class="header flex flex-row justify-center items-center gap-7">
                 <RouterLink
                     to="/countries"
-                    class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                 >
                     {{ $t('countries') }}
                 </RouterLink>
                 <RouterLink
                     to="/learn"
-                    class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                 >
                     {{ $t('learn') }}
                 </RouterLink>
                 <RouterLink
                     to="/about"
-                    class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                 >
                     {{ $t('about') }}
                 </RouterLink>
                 <RouterLink
                     to="/quiz"
-                    class="flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                 >
                     {{ $t('quiz') }}
                 </RouterLink>
@@ -57,7 +66,7 @@ watchEffect(() => {
                 >
                 <RouterLink
                     to="/profile"
-                    class="flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-75 ease-in-out"
+                    class="hidden xl:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-75 ease-in-out"
                     v-if="user !== null"
                 >
                     <img
@@ -67,13 +76,109 @@ watchEffect(() => {
                     />
                 </RouterLink>
             </div>
+            <div
+                class="flex flex-row justify-center items-center gap-7 xl:hidden"
+            >
+                <button
+                    @click="toggleDropdown"
+                    class="focus:outline-none"
+                    v-if="!isDropdownOpen"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-6 h-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"
+                        ></path>
+                    </svg>
+                </button>
+                <button
+                    @click="toggleDropdown"
+                    class="focus:outline-none"
+                    v-if="isDropdownOpen"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-6 h-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                        ></path>
+                    </svg>
+                </button>
+            </div>
+            <div
+                class="menu w-40 bg-white rounded-lg shadow-lg xl:hidden z-20 absolute top-16 sm:top-20 right-3 sm:right-0"
+                v-if="isDropdownOpen"
+            >
+                <div class="py-2">
+                    <RouterLink
+                        to="/countries"
+                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
+                        {{ $t('countries') }}
+                    </RouterLink>
+                    <RouterLink
+                        to="/learn"
+                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
+                        {{ $t('learn') }}
+                    </RouterLink>
+                    <RouterLink
+                        to="/about"
+                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
+                        {{ $t('about') }}
+                    </RouterLink>
+                    <RouterLink
+                        to="/quiz"
+                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
+                        {{ $t('quiz') }}
+                    </RouterLink>
+                    <!-- <RouterLink
+                        to="/login"
+                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out"
+                        v-if="user === null"
+                    >
+                        {{ $t('login') }}</RouterLink
+                    >
+                    <RouterLink
+                        to="/signup"
+                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out"
+                        v-if="user === null"
+                    >
+                        {{ $t('signup') }}</RouterLink
+                    > -->
+                    <RouterLink
+                        to="/profile"
+                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                        v-if="user !== null"
+                    >
+                        {{ $t('profile') }}
+                    </RouterLink>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
 .center-underline {
-    display: inline-block;
+    /* display: inline-block; */
     position: relative;
     text-decoration: none;
 }
@@ -91,5 +196,19 @@ watchEffect(() => {
 
 .center-underline:hover::after {
     transform: scaleX(1);
+}
+
+@media (max-width: 350px) {
+    .header {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .menu {
+        width: 100%;
+        height: 100%;
+        right: 0;
+        top: 100%;
+    }
 }
 </style>

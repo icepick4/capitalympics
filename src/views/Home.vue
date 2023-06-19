@@ -77,13 +77,13 @@ const handleScroll = () => {
 
     if (scrollDelta > 0) {
         // Scrolling down, zoom in
-        imageScale.value += 0.012;
-        if (imageScale.value > 2.75) {
-            imageScale.value = 2.75;
+        imageScale.value += 0.013;
+        if (imageScale.value > 2.5) {
+            imageScale.value = 2.5;
         }
     } else {
         // Scrolling up, zoom out
-        imageScale.value -= 0.012;
+        imageScale.value -= 0.013;
         if (imageScale.value < 1) {
             imageScale.value = 1;
         }
@@ -100,7 +100,7 @@ const handleScroll = () => {
         <Loader />
     </BlurContainer>
     <div class="flex flex-col items-center justify-center h-screen relative">
-        <div class="flex flex-col items-start w-3/4 lg:w-1/2 z-10">
+        <div class="flex flex-col items-start w-3/4 lg:w-1/2">
             <h1 class="text-4xl sm:text-6xl text-black mb-4 mt-4">
                 {{ $t('welcome') }}
             </h1>
@@ -109,31 +109,19 @@ const handleScroll = () => {
             </p>
         </div>
         <Planet
-            class="cursor-grab lg:block hidden"
+            class="cursor-grab hidden xl:block"
             @mousedown="handlePlanetMouseDown"
             @mouseup="handlePlanetMouseUp"
             :class="{ 'cursor-grabbing': planetMouseDown }"
             @finishedLoading="planetLoaded = true"
         />
-        <div class="relative w-full mt-20 lg:hidden">
+        <div class="w-full mt-20 -z-10 xl:hidden">
             <img
-                src="/home/landing.jpg"
+                src="/home/landing2.jpg"
                 alt="about"
-                class="w-full h-96 object-cover"
+                class="w-full h-[26rem] object-cover"
                 :style="{ transform: `scale(${imageScale})` }"
             />
-            <span class="right-1 bottom-0 text-white absolute text-sm">
-                Photo of
-                <a
-                    href="https://unsplash.com/@ryankim246?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-                    >Ryan Kim</a
-                >
-                on
-                <a
-                    href="https://unsplash.com/fr/photos/_AydCUsXwoI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-                    >Unsplash</a
-                >
-            </span>
         </div>
         <div class="absolute bottom-52">
             <svg
@@ -167,7 +155,7 @@ const handleScroll = () => {
             </h1>
         </div>
         <div
-            class="flex flex-col sm:flex-row gap-5 items-center justify-center"
+            class="flex flex-col sm:flex-row gap-10 sm:gap-5 items-center justify-center"
         >
             <img
                 src="/home/countries-home.svg"
@@ -285,6 +273,18 @@ const handleScroll = () => {
             </svg>
         </div>
     </div>
+    <span class="right-5 bottom-0 text-white absolute text-sm">
+        Photo of
+        <a
+            href="https://unsplash.com/@ryankim246?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+            >Ryan Kim</a
+        >
+        on
+        <a
+            href="https://unsplash.com/fr/photos/_AydCUsXwoI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+            >Unsplash</a
+        >
+    </span>
 </template>
 
 <style scoped>
