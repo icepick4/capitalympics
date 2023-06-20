@@ -99,8 +99,10 @@ const handleScroll = () => {
     <BlurContainer v-if="!planetLoaded">
         <Loader />
     </BlurContainer>
-    <div class="flex flex-col items-center justify-center h-screen relative">
-        <div class="flex flex-col items-start w-3/4 lg:w-1/2">
+    <div
+        class="flex flex-col items-center justify-center h-full sm:h-screen relative"
+    >
+        <div class="flex flex-col items-start w-11/12 md:w-5/6 lg:w-1/2">
             <h1 class="text-4xl sm:text-6xl text-black mb-4 mt-4">
                 {{ $t('welcome') }}
             </h1>
@@ -109,17 +111,17 @@ const handleScroll = () => {
             </p>
         </div>
         <Planet
-            class="cursor-grab hidden xl:block"
+            class="cursor-grab hidden 2xl:block"
             @mousedown="handlePlanetMouseDown"
             @mouseup="handlePlanetMouseUp"
             :class="{ 'cursor-grabbing': planetMouseDown }"
             @finishedLoading="planetLoaded = true"
         />
-        <div class="relative w-full mt-20 -z-10 xl:hidden">
+        <div class="relative w-full mt-20 -z-10 2xl:hidden">
             <img
                 src="/home/landing2.jpg"
                 alt="about"
-                class="w-full h-[26rem] object-cover transition-all duration-100 ease-linear"
+                class="w-full h-[35rem] sm:h-[26rem] object-cover transition-all duration-100 ease-linear"
                 :style="{ transform: `scale(${imageScale})` }"
             />
             <!-- <span class="right-1 bottom-0 text-white absolute text-sm">
@@ -154,15 +156,15 @@ const handleScroll = () => {
         </div>
     </div>
     <div
-        class="w-full h-screen flex flex-col justify-center items-center relative gap-16"
+        class="w-full h-full sm:h-screen flex flex-col justify-center items-center relative gap-16"
         id="home-description"
     >
         <div class="flex flex-col justify-start items-start w-3/4 lg:w-1/2">
-            <h1 class="text-3xl sm:text-5xl text-black mt-4">
+            <h1 class="text-3xl sm:text-5xl text-white sm:text-black mt-4">
                 Découvrez le monde à travers les capitales et les drapeaux des
                 pays.
             </h1>
-            <h1 class="text-xl sm:text-3xl text-black mb-4 mt-2">
+            <h1 class="text-xl sm:text-3xl text-white sm:text-black mb-4 mt-2">
                 Apprenez, jouez et devenez un champion de Capitalympics !
             </h1>
         </div>
@@ -171,7 +173,7 @@ const handleScroll = () => {
         >
             <img
                 src="/home/countries-home.svg"
-                class="w-full sm:w-2/5 lg:w-1/2 -z-10 scale-110"
+                class="w-2/3 sm:w-2/5 lg:w-1/2 -z-10 scale-110"
             />
             <h1 class="text-2xl sm:text-4xl text-center">
                 Découvrez tous les pays !
@@ -216,7 +218,7 @@ const handleScroll = () => {
         </div>
     </div>
     <div
-        class="w-full h-screen flex flex-col justify-center items-center gap-10 lg:gap-20 relative"
+        class="w-full h-full sm:h-screen flex flex-col justify-center items-center gap-10 lg:gap-20 relative"
         id="home-buttons"
     >
         <div class="flex flex-col justify-start w-3/4 lg:w-1/2">
@@ -295,5 +297,11 @@ const handleScroll = () => {
     transform: scale(0.96);
     filter: grayscale(0%);
     animation-play-state: paused;
+}
+
+@media (max-width: 640px) {
+    .carousel-item {
+        filter: grayscale(0%);
+    }
 }
 </style>
