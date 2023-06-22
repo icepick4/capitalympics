@@ -78,22 +78,57 @@ onBeforeMount(async () => {
             </div>
             <div class="flex flex-row gap-10">
                 <div class="flex flex-col items-center gap-5">
+                    <h1>{{ $t('capitals') }}</h1>
                     <RouterLink
                         to="/learn/capitals"
                         class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md hover:scale-105"
                     >
-                        <img src="/learn/capitals.jpg" class="h-full w-auto" />
+                        <div class="relative w-full h-full">
+                            <img
+                                src="/learn/capitals.jpg"
+                                class="h-full w-auto"
+                            />
+                            <span
+                                class="absolute -bottom-6 right-0 p-1 text-xs text-white bg-black bg-opacity-50 font-extralight"
+                            >
+                                Photo of
+                                <a
+                                    href="https://unsplash.com/@jaeh?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                                    >Jaeh</a
+                                >
+                                on
+                                <a
+                                    href="https://unsplash.com/fr/photos/tpdPRCLKvoY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                                    >Unsplash</a
+                                >
+                            </span>
+                        </div>
                     </RouterLink>
-                    <h1>{{ $t('capitals') }}</h1>
                 </div>
                 <div class="flex flex-col items-center gap-5">
+                    <h1>{{ $t('flags') }}</h1>
                     <RouterLink
                         to="/learn/flags"
                         class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md hover:scale-105"
                     >
-                        <img src="/learn/flags.jpg" class="h-full w-auto" />
+                        <div class="relative w-full h-full">
+                            <img src="/learn/flags.jpg" class="h-full w-auto" />
+                            <span
+                                class="absolute -bottom-6 right-0 p-1 text-xs text-white bg-black bg-opacity-50 font-extralight"
+                            >
+                                Photo of
+                                <a
+                                    href="https://unsplash.com/@tony_cm__?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                                    >Anthony Choren</a
+                                >
+                                on
+                                <a
+                                    href="https://unsplash.com/fr/photos/lYzap0eubDY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+                                    >Unsplash</a
+                                >
+                            </span>
+                        </div>
                     </RouterLink>
-                    <h1>{{ $t('flags') }}</h1>
                 </div>
             </div>
             <div
