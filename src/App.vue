@@ -46,7 +46,7 @@ const isHome = () => {
 </script>
 
 <template>
-    <div class="flex flex-col">
+    <div class="flex flex-col h-screen min-h-screen">
         <Header />
         <div class="flex flex-col flex-grow justify-evenly">
             <RouterView v-if="isReconnected" />

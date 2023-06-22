@@ -1,17 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useStore } from 'vuex';
+import { onMounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import UserInfo from '../components/User/UserInfo.vue';
 import UserSettings from '../components/User/UserSettings.vue';
-import { User } from '../models/User';
 
-const store = useStore();
-const user: User = store.getters.user;
 const displayUserSettings = ref(false);
+const router = useRouter();
+
+function isEditProfileRoute() {
+    return router.currentRoute.value.path === '/profile/edit';
+}
+
+watch(
+    () => router.currentRoute.value,
+    (newRoute) => {
+        displayUserSettings.value = isEditProfileRoute();
+    }
+);
+
+onMounted(() => {
+    displayUserSettings.value = isEditProfileRoute();
+});
 </script>
 
 <template>
-    <!-- <div :class="{ 'flip-container': !displayUserSettings }"></div> -->
     <UserInfo
         v-if="!displayUserSettings"
         @close="displayUserSettings = true"

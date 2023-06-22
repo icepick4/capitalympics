@@ -108,7 +108,7 @@ const saveProfile = () => {
                 <h1 class="text-2xl">{{ $t('editProfile') }}</h1>
                 <RouterLink to="/profile">
                     <img
-                        src="/icons/default_profile.png"
+                        src="/icons/close.png"
                         alt="Account"
                         class="w-10 h-10 ml-2 cursor-pointer hover:scale-110 transition-all"
                         @click="$emit('close')"
@@ -161,7 +161,7 @@ const saveProfile = () => {
                             >
                                 <option value="en">English</option>
                                 <option value="fr">Français</option>
-                                <option value="es">Español</option>
+                                <option value="es">Spanish</option>
                             </select>
                         </div>
                     </div>

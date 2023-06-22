@@ -19,11 +19,18 @@ function toggleDropdown() {
 <template>
     <div class="flex items-center justify-center w-full">
         <div
-            class="header flex flex-row w-full sm:w-full md:w-4/5 xl:2/3 2xl:w-3/5 justify-between h-auto relative p-7"
+            class="header flex flex-row w-full sm:w-full md:w-3/4 2xl:w-1/2 justify-between h-auto relative p-7"
         >
-            <RouterLink to="/" class="w-auto h-full hidden sm:block">
-                <!-- <img src="/logo2.svg" alt="logo" class="w-52 h-auto" /> -->
-                <h1 class="text-4xl font-bold">Capitalympics</h1>
+            <RouterLink
+                to="/"
+                class="w-auto h-full flex justify-center items-center"
+            >
+                <img
+                    src="/logo2.png"
+                    alt="logo"
+                    class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-22 xl:h-22"
+                />
+                <!-- <h1 class="text-4xl font-bold">Capitalympics</h1> -->
             </RouterLink>
 
             <div class="header flex flex-row justify-center items-center gap-7">
@@ -129,7 +136,7 @@ function toggleDropdown() {
                 </button>
             </div>
             <div
-                class="menu w-40 bg-white rounded-lg shadow-lg xl:hidden z-20 absolute top-16 sm:top-20 right-3 sm:right-0"
+                class="menu w-40 bg-white rounded-lg shadow-lg xl:hidden z-50 absolute top-16 sm:top-20 right-3 sm:right-0"
                 v-show="isDropdownOpen"
                 :class="{
                     'fade-left': isDropdownOpen
@@ -183,7 +190,6 @@ function toggleDropdown() {
 
 <style scoped>
 .center-underline {
-    /* display: inline-block; */
     position: relative;
     text-decoration: none;
 }
@@ -203,7 +209,7 @@ function toggleDropdown() {
     transform: scaleX(1);
 }
 
-@media (max-width: 350px) {
+@media (max-width: 375px) {
     .header {
         flex-direction: column;
         gap: 2rem;

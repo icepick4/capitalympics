@@ -100,7 +100,7 @@ const handleScroll = () => {
         <Loader />
     </BlurContainer>
     <div
-        class="flex flex-col items-center justify-center h-full sm:h-screen relative"
+        class="flex flex-col items-center justify-center h-full sm:h-screen gap-10"
     >
         <div class="flex flex-col items-start w-11/12 md:w-5/6 lg:w-1/2">
             <h1 class="text-4xl sm:text-6xl text-black mb-4 mt-4">
@@ -124,7 +124,7 @@ const handleScroll = () => {
                 class="w-full h-[35rem] sm:h-[26rem] object-cover transition-all duration-100 ease-linear"
                 :style="{ transform: `scale(${imageScale})` }"
             />
-            <!-- <span class="right-1 bottom-0 text-white absolute text-sm">
+            <span class="right-1 top-0 text-white absolute text-sm">
                 Photo of
                 <a
                     href="https://unsplash.com/@ryankim246?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
@@ -135,11 +135,11 @@ const handleScroll = () => {
                     href="https://unsplash.com/fr/photos/_AydCUsXwoI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
                     >Unsplash</a
                 >
-            </span> -->
+            </span>
         </div>
-        <div class="absolute bottom-52">
+        <div class="flex justify-center items-center">
             <svg
-                class="arrow-icon w-12 h-12 mt-10 animate-bounce cursor-pointer"
+                class="arrow-icon w-12 h-12 animate-bounce cursor-pointer"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -156,7 +156,7 @@ const handleScroll = () => {
         </div>
     </div>
     <div
-        class="w-full h-full sm:h-screen flex flex-col justify-center items-center relative gap-16"
+        class="w-full h-auto sm:h-screen flex flex-col justify-center items-center gap-16"
         id="home-description"
     >
         <div class="flex flex-col justify-start items-start w-3/4 lg:w-1/2">
@@ -197,28 +197,27 @@ const handleScroll = () => {
                     {{ currentCountryHovered.capital }}
                 </h1>
             </h1>
-        </div>
-
-        <div class="absolute bottom-10">
-            <svg
-                class="arrow-icon w-12 h-12 mt-10 animate-bounce cursor-pointer"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                @click="scrollTo('#home-buttons')"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                ></path>
-            </svg>
+            <div class="flex justify-center items-center">
+                <svg
+                    class="arrow-icon w-12 h-12 mb-10 mt-10 animate-bounce cursor-pointer"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    @click="scrollTo('#home-buttons')"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                    ></path>
+                </svg>
+            </div>
         </div>
     </div>
     <div
-        class="w-full h-full sm:h-screen flex flex-col justify-center items-center gap-10 lg:gap-20 relative"
+        class="w-full h-full sm:h-screen flex flex-col justify-center items-center gap-10 lg:gap-20"
         id="home-buttons"
     >
         <div class="flex flex-col justify-start w-3/4 lg:w-1/2">
@@ -268,9 +267,9 @@ const handleScroll = () => {
                 </div>
             </div>
         </div>
-        <div class="absolute bottom-10 rotate-180">
+        <div class="flex justify-center items-center rotate-180">
             <svg
-                class="arrow-icon w-12 h-12 mt-10 animate-bounce cursor-pointer"
+                class="arrow-icon w-12 h-12 animate-bounce cursor-pointer"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
