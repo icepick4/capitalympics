@@ -19,7 +19,9 @@ defineProps<{
                     <p class="text-gray-500">{{ country.alpha3Code }}</p>
                 </div>
                 <div class="col-span-1">
-                    <dt class="text-gray-500 hidden lg:visible">Flag</dt>
+                    <dt class="text-gray-500 hidden lg:visible">
+                        {{ $t('flag') }}
+                    </dt>
                     <dd>
                         <img
                             :src="country.flag"
@@ -32,27 +34,27 @@ defineProps<{
             <div class="px-4 py-2 bg-white">
                 <dl class="mt-2 grid grid-cols-2 gap-x-4 gap-y-2">
                     <div class="col-span-1">
-                        <dt class="text-gray-500">Capital</dt>
+                        <dt class="text-gray-500">{{ $t('capital') }}</dt>
                         <dd class="text-gray-900">{{ country.capital }}</dd>
                     </div>
                     <div class="col-span-1">
-                        <dt class="text-gray-500">Region</dt>
+                        <dt class="text-gray-500">{{ $t('region') }}</dt>
                         <dd class="text-gray-900">{{ country.region }}</dd>
                     </div>
                     <div class="col-span-1">
-                        <dt class="text-gray-500">Population</dt>
+                        <dt class="text-gray-500">{{ $t('population') }}</dt>
                         <dd class="text-gray-900">
                             {{ Intl.NumberFormat().format(country.population) }}
                         </dd>
                     </div>
                     <div class="col-span-1">
-                        <dt class="text-gray-500">Subregion</dt>
+                        <dt class="text-gray-500">{{ $t('subregion') }}</dt>
                         <dd class="text-gray-900">
                             {{ country.subregion }}
                         </dd>
                     </div>
                     <div class="col-span-1">
-                        <dt class="text-gray-500">Currencies</dt>
+                        <dt class="text-gray-500">{{ $t('currencies') }}</dt>
                         <dd class="text-gray-900">
                             <ul>
                                 <li

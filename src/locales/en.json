@@ -78,5 +78,11 @@
     "success": "Success",
     "profile": "Profile",
     "capitals": "Capitals",
-    "flags": "Flags"
+    "flags": "Flags",
+    "capital": "Capital",
+    "flag": "Flag",
+    "region": "Region",
+    "subregion": "Subregion",
+    "population": "Population",
+    "currencies": "Currencies"
 }
