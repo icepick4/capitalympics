@@ -76,5 +76,7 @@
     "saveProfile": "Save profile",
     "profileSaved": "Profile saved",
     "success": "Success",
-    "profile": "Profile"
+    "profile": "Profile",
+    "capitals": "Capitals",
+    "flags": "Flags"
 }

@@ -13,7 +13,7 @@ defineProps<{
         <div
             class="flex flex-col sm:flex-row w-full items-center justify-center gap-5 lg:gap-10"
         >
-            <h1 class="text-3xl lg:text-5xl">{{ country.name }}</h1>
+            <h1 class="text-3xl lg:text-5xl text-center">{{ country.name }}</h1>
             <img
                 class="w-36 lg:w-52 h-auto border-2 border-black rounded"
                 :src="country.flag"
@@ -24,7 +24,7 @@ defineProps<{
                 {{ $t('findCapital') }}
             </h1>
             <h1 v-else class="text-4xl lg:text-6xl">
-                {{ country.capital }} ✅
+                {{ country.capital }}
             </h1>
         </div>
     </div>

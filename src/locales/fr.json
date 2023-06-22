@@ -76,5 +76,7 @@
     "saveProfile": "Enregistrer les modifications",
     "profileSaved": "Profil enregistré avec succès",
     "success": "Succès",
-    "profile": "Profil"
+    "profile": "Profil",
+    "capitals": "Capitales",
+    "flags": "Drapeaux"
 }

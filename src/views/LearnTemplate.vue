@@ -94,7 +94,7 @@ onBeforeMount(() => {
             class="w-5/6 md:w-auto h-full flex flex-col items-center justify-center"
         >
             <div
-                class="flex flex-col w-full h-full justify-between items-center border-[3px] border-black rounded-3xl bg-white p-5 md:p-10 lg:p-14 gap-5 md:gap-7 lg:gap-10"
+                class="flex flex-col w-full h-full justify-between items-center border-[3px] border-black rounded-3xl bg-white p-5 md:p-10 lg:p-14 gap-7 md:gap-9 lg:gap-12"
             >
                 <div
                     v-if="currentLearning === 'capitals'"
@@ -120,7 +120,6 @@ onBeforeMount(() => {
                         v-else-if="currentState === 'choosing'"
                         class="text-center flex flex-col gap-5 lg:gap-10"
                     >
-                        <h1 class="text-3xl">It was :</h1>
                         <ChoosingButtons
                             :countryCode="'FRA'"
                             :user_id="user.id"
