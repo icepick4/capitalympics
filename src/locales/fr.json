@@ -84,5 +84,6 @@
     "region": "Région",
     "subregion": "Sous-région",
     "population": "Population",
-    "currencies": "Devises"
+    "currencies": "Devises",
+    "worstScores": "Moins bons scores"
 }

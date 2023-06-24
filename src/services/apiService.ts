@@ -194,13 +194,14 @@ export default class ApiService {
         }
     }
 
-    public static async getBestScores(
+    public static async getScores(
         user_id: number,
         token: string,
-        length: number = 0
+        length: number = 0,
+        sort: string
     ): Promise<UserScore[]> {
         const url = `${ApiService.API_URL}/users/${user_id}/scores${
-            length === 0 ? '' : `/?max=${length}`
+            length === 0 ? '' : `/?max=${length}&sort=${sort}`
         }`;
         try {
             const response = await axios.get(url, {
@@ -210,7 +211,7 @@ export default class ApiService {
             });
             return response.data.scores;
         } catch (error) {
-            throw new Error('Failed get best scores');
+            throw new Error('Failed get scores');
         }
     }
 

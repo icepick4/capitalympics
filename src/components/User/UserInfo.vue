@@ -7,10 +7,11 @@ import ApiService from '../../services/apiService';
 import { getLevelName } from '../../utils/common';
 import BlurContainer from '../BlurContainer.vue';
 import Loader from '../Loader.vue';
+import ScoresDisplay from './ScoresDisplay.vue';
 
 const store = useStore();
 const router = useRouter();
-interface CountryDetails {
+export interface CountryDetails {
     name: string;
     alpha3Code: string;
     flag: string;
@@ -31,11 +32,15 @@ const logOut = () => {
 
 const token = store.getters.token;
 const user: User = store.getters.user;
-const countries = ref<CountryDetails[]>([]);
+const bestCountries = ref<CountryDetails[]>([]);
+const worstCountries = ref<CountryDetails[]>([]);
 
-const getBestScores = async (user_id: number): Promise<UserScore[]> => {
+const getScores = async (
+    user_id: number,
+    sort: string
+): Promise<UserScore[]> => {
     try {
-        const response = await ApiService.getBestScores(user_id, token, 3);
+        const response = await ApiService.getScores(user_id, token, 3, sort);
         let scores: UserScore[] = [];
         if (response) {
             scores = response;
@@ -50,7 +55,11 @@ const getBestScores = async (user_id: number): Promise<UserScore[]> => {
             getCountryDetails(element.country_code).then(({ name, flag }) => {
                 countryDetails.name = name;
                 countryDetails.flag = flag;
-                countries.value.push(countryDetails);
+                if (sort === 'DESC') {
+                    bestCountries.value.push(countryDetails);
+                } else {
+                    worstCountries.value.push(countryDetails);
+                }
             });
         });
         return scores;
@@ -126,7 +135,8 @@ const formatDate = (date: Date) => {
 };
 
 onMounted(() => {
-    getBestScores(user.id);
+    getScores(user.id, 'DESC');
+    getScores(user.id, 'ASC');
 });
 </script>
 
@@ -174,35 +184,15 @@ onMounted(() => {
                 {{ $t('joined') }} : {{ formatDate(new Date(user.created_at)) }}
             </p>
         </div>
-
-        <!-- Scores de pays -->
-        <div class="bg-gradient rounded-lg shadow-lg p-6">
-            <h2 class="text-xl font-bold mb-4">{{ $t('topScores') }}</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <RouterLink
-                    v-for="country in countries"
-                    :key="country.name"
-                    class="bg-white rounded-lg shadow-md p-4 hover:bg-gray-200 transition-colors duration-300 fade-up"
-                    :to="`/countries/${country.alpha3Code}`"
-                >
-                    <div class="flex items-center mb-2">
-                        <img
-                            :src="country.flag"
-                            alt="Country Flag"
-                            class="w-6 h-4 mr-2"
-                        />
-                        <h3 class="font-bold">{{ country.name }}</h3>
-                    </div>
-                    <p class="text-black">
-                        {{ getLevelName(country.level) }}
-                    </p>
-                </RouterLink>
-                <div v-if="countries.length === 0">
-                    <h1 class="text-xl font-bold mb-4">
-                        {{ $t('noScores') }}
-                    </h1>
-                </div>
-            </div>
+        <div class="flex flex-col gap-7">
+            <ScoresDisplay
+                :countries="bestCountries"
+                :title="$t('topScores')"
+            ></ScoresDisplay>
+            <ScoresDisplay
+                :countries="worstCountries"
+                :title="$t('worstScores')"
+            ></ScoresDisplay>
         </div>
     </div>
 </template>

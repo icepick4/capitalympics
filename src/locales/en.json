@@ -84,5 +84,6 @@
     "region": "Region",
     "subregion": "Subregion",
     "population": "Population",
-    "currencies": "Currencies"
+    "currencies": "Currencies",
+    "worstScores": "Lower scores"
 }
