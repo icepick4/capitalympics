@@ -1,3 +1,3 @@
-export type LearningType = 'capitals' | 'flags';
+export type LearningType = 'capital' | 'flag';
 export type CurrentState = 'starting' | 'choosing';
-export type LearningState = 'succeeded' | 'failed' | 'medium';
+export type ScoreType = 'succeeded' | 'failed' | 'medium';

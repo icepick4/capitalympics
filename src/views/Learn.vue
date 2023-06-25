@@ -80,7 +80,7 @@ onBeforeMount(async () => {
                 <div class="flex flex-col items-center gap-5">
                     <h1>{{ $t('capitals') }}</h1>
                     <RouterLink
-                        to="/learn/capitals"
+                        to="/learn/capital"
                         class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md hover:scale-105"
                     >
                         <div class="relative w-full h-full">
@@ -108,7 +108,7 @@ onBeforeMount(async () => {
                 <div class="flex flex-col items-center gap-5">
                     <h1>{{ $t('flags') }}</h1>
                     <RouterLink
-                        to="/learn/flags"
+                        to="/learn/flag"
                         class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md hover:scale-105"
                     >
                         <div class="relative w-full h-full">

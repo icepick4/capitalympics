@@ -5,14 +5,14 @@ import { useStore } from 'vuex';
 import BlurContainer from '../components/BlurContainer.vue';
 import ButtonTemplate from '../components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '../components/Learning/Buttons/ChoosingButtons.vue';
-import LearnCapitals from '../components/Learning/CapitalsQuestion.vue';
-import LearnFlags from '../components/Learning/FlagsQuestion.vue';
+import CapitalsQuestion from '../components/Learning/CapitalsQuestion.vue';
+import FlagsQuestion from '../components/Learning/FlagsQuestion.vue';
 import Loader from '../components/Loader.vue';
 import Modal from '../components/Modal.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
 import { Redirection } from '../types/Redirection';
-import { CurrentState, LearningState, LearningType } from '../types/common';
+import { CurrentState, LearningType, ScoreType } from '../types/common';
 import { Redirections } from '../utils/redirections';
 const route = useRoute();
 const router = useRouter();
@@ -43,14 +43,15 @@ const getNewCountry = async () => {
     }
 };
 
-const handleClick = (type: LearningState) => {
+const handleClick = (type: ScoreType) => {
     try {
         if (country.value) {
             ApiService.updateUserLearning(
                 user.id,
                 country.value.alpha3Code,
                 token,
-                type
+                type,
+                currentLearning
             );
         } else {
             throw new Error('Country is undefined');
@@ -96,17 +97,17 @@ onBeforeMount(() => {
             <div
                 class="flex flex-col w-full h-full justify-between items-center border-[3px] border-black rounded-3xl bg-white p-5 md:p-10 lg:p-14 gap-7 md:gap-9 lg:gap-12"
             >
-                <div
-                    v-if="currentLearning === 'capitals'"
-                    class="w-full h-full"
-                >
-                    <LearnCapitals
+                <div v-if="currentLearning === 'capital'" class="w-full h-full">
+                    <CapitalsQuestion
                         :country="country"
                         :currentState="currentState"
                     />
                 </div>
-                <div v-else-if="currentLearning === 'flags'">
-                    <LearnFlags />
+                <div v-else-if="currentLearning === 'flag'">
+                    <FlagsQuestion
+                        :country="country"
+                        :currentState="currentState"
+                    />
                 </div>
                 <div class="w-full">
                     <div v-if="currentState === 'starting'">

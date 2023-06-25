@@ -30,13 +30,13 @@ const routes = [
         beforeEnter: requireAuth
     },
     {
-        path: '/learn/capitals',
+        path: '/learn/capital',
         name: 'Capitals',
         component: LearnTemplate,
         beforeEnter: requireAuth
     },
     {
-        path: '/learn/flags',
+        path: '/learn/flag',
         name: 'Flags',
         component: LearnTemplate,
         beforeEnter: requireAuth
