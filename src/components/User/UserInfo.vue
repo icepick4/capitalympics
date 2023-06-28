@@ -35,7 +35,6 @@ const user: User = store.getters.user;
 const bestCountries = ref<CountryDetails[]>([]);
 const worstCountries = ref<CountryDetails[]>([]);
 const learningType = ref<LearningType>('flag');
-
 const getScores = async (
     user_id: number,
     sort: Sort,
@@ -148,11 +147,18 @@ const switchLearningType = () => {
     } else {
         learningType.value = 'flag';
     }
+    updateScores();
+};
+
+const updateScores = () => {
+    bestCountries.value = [];
+    worstCountries.value = [];
+    getScores(user.id, 'DESC', learningType.value);
+    getScores(user.id, 'ASC', learningType.value);
 };
 
 onMounted(() => {
-    getScores(user.id, 'DESC', learningType.value);
-    getScores(user.id, 'ASC', learningType.value);
+    updateScores();
 });
 </script>
 
@@ -172,14 +178,6 @@ onMounted(() => {
                     />
                     <h1 class="text-2xl mr-1 font-bold">{{ user.name }}</h1>
                 </div>
-                <p class="text-black mb-2 text-xl">
-                    {{ $t('flags') }} :
-                    {{ getLevelName(user.flag_level) }}
-                </p>
-                <p class="text-black mb-2 text-xl">
-                    {{ $t('capitals') }} :
-                    {{ getLevelName(user.capital_level) }}
-                </p>
                 <div class="flex items-center gap-4">
                     <RouterLink to="/profile/edit">
                         <img
@@ -206,6 +204,29 @@ onMounted(() => {
                 {{ $t('joined') }} : {{ formatDate(new Date(user.created_at)) }}
             </p>
         </div>
+        <div class="w-full flex justify-center items-center">
+            <h1 class="text-4xl font-bold text-center mb-4">
+                <div
+                    v-if="learningType === 'flag'"
+                    class="flex flex-row gap-10"
+                >
+                    <p>
+                        {{ $t('flags') }}
+                    </p>
+                    <p>
+                        {{ getLevelName(user.flag_level) }}
+                    </p>
+                </div>
+                <div v-else class="flex flex-row gap-10">
+                    <p>
+                        {{ $t('capitals') }}
+                    </p>
+                    <p>
+                        {{ getLevelName(user.capital_level) }}
+                    </p>
+                </div>
+            </h1>
+        </div>
         <div class="flex flex-col gap-4 mb-5">
             <ScoresDisplay
                 :countries="bestCountries"
@@ -221,7 +242,12 @@ onMounted(() => {
                 @click="switchLearningType"
                 class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-gradient rounded-md w-1/4 hover:scale-105"
             >
-                {{ $t('switchLearningType') }}
+                <p v-if="learningType === 'flag'">
+                    {{ $t('seeCapitals') }}
+                </p>
+                <p v-else>
+                    {{ $t('seeFlags') }}
+                </p>
             </button>
         </div>
     </div>

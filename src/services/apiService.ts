@@ -120,7 +120,10 @@ export default class ApiService {
                     }
                 }
             );
-            return response.data.score as Level;
+            let flag_score = response.data.flag_score as Level;
+            let capital_score = response.data.capital_score as Level;
+            const avg = (flag_score + capital_score) / 2;
+            return Math.round(avg) as Level;
         } catch (error) {
             throw new Error('Failed get global score');
         }

@@ -69,7 +69,7 @@ const logIn = async () => {
         <Modal
             v-else-if="!userFound && signed"
             :title="$t('error')"
-            message="$t('userNotFound')"
+            :message="$t('userNotFound')"
             background-color="white"
             title-color="error"
             :redirection="null"

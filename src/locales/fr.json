@@ -87,5 +87,7 @@
     "population": "Population",
     "currencies": "Devises",
     "worstScores": "Moins bons scores",
-    "switchLearningType": "Changer de type d'apprentissage"
+    "switchLearningType": "Changer de type d'apprentissage",
+    "seeCapitals": "Voir les scores des capitales",
+    "seeFlags": "Voir les scores des drapeaux"
 }
