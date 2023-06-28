@@ -4,11 +4,11 @@ import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { Level, User, UserScore } from '../../models/User';
 import ApiService from '../../services/apiService';
+import { LearningType, Sort } from '../../types/common';
 import { getLevelName } from '../../utils/common';
 import BlurContainer from '../BlurContainer.vue';
 import Loader from '../Loader.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
-
 const store = useStore();
 const router = useRouter();
 export interface CountryDetails {
@@ -34,13 +34,21 @@ const token = store.getters.token;
 const user: User = store.getters.user;
 const bestCountries = ref<CountryDetails[]>([]);
 const worstCountries = ref<CountryDetails[]>([]);
+const learningType = ref<LearningType>('flag');
 
 const getScores = async (
     user_id: number,
-    sort: string
+    sort: Sort,
+    scoreType: LearningType
 ): Promise<UserScore[]> => {
     try {
-        const response = await ApiService.getScores(user_id, token, 3, sort);
+        const response = await ApiService.getScores(
+            user_id,
+            token,
+            3,
+            sort,
+            scoreType
+        );
         let scores: UserScore[] = [];
         if (response) {
             scores = response;
@@ -134,9 +142,17 @@ const formatDate = (date: Date) => {
     return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} `;
 };
 
+const switchLearningType = () => {
+    if (learningType.value === 'flag') {
+        learningType.value = 'capital';
+    } else {
+        learningType.value = 'flag';
+    }
+};
+
 onMounted(() => {
-    getScores(user.id, 'DESC');
-    getScores(user.id, 'ASC');
+    getScores(user.id, 'DESC', learningType.value);
+    getScores(user.id, 'ASC', learningType.value);
 });
 </script>
 
@@ -146,7 +162,7 @@ onMounted(() => {
     </BlurContainer>
     <div class="container mx-auto p-8">
         <!-- Informations de l'utilisateur -->
-        <div class="bg-gradient rounded-lg shadow-lg p-6 mb-8">
+        <div class="bg-gradient rounded-lg shadow-lg p-6 mb-4">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
                     <img
@@ -156,6 +172,14 @@ onMounted(() => {
                     />
                     <h1 class="text-2xl mr-1 font-bold">{{ user.name }}</h1>
                 </div>
+                <p class="text-black mb-2 text-xl">
+                    {{ $t('flags') }} :
+                    {{ getLevelName(user.flag_level) }}
+                </p>
+                <p class="text-black mb-2 text-xl">
+                    {{ $t('capitals') }} :
+                    {{ getLevelName(user.capital_level) }}
+                </p>
                 <div class="flex items-center gap-4">
                     <RouterLink to="/profile/edit">
                         <img
@@ -173,9 +197,7 @@ onMounted(() => {
                     />
                 </div>
             </div>
-            <p class="text-black mb-2">
-                {{ getLevelName(user.level) }}
-            </p>
+
             <p class="text-black mb-2">
                 {{ $t('lastActivity') }} :
                 {{ formatDate(new Date(user.last_activity)) }}
@@ -184,7 +206,7 @@ onMounted(() => {
                 {{ $t('joined') }} : {{ formatDate(new Date(user.created_at)) }}
             </p>
         </div>
-        <div class="flex flex-col gap-7">
+        <div class="flex flex-col gap-4 mb-5">
             <ScoresDisplay
                 :countries="bestCountries"
                 :title="$t('topScores')"
@@ -193,6 +215,14 @@ onMounted(() => {
                 :countries="worstCountries"
                 :title="$t('worstScores')"
             ></ScoresDisplay>
+        </div>
+        <div class="w-full flex justify-center items-center">
+            <button
+                @click="switchLearningType"
+                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-gradient rounded-md w-1/4 hover:scale-105"
+            >
+                {{ $t('switchLearningType') }}
+            </button>
         </div>
     </div>
 </template>

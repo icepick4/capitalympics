@@ -86,5 +86,6 @@
     "subregion": "Subregion",
     "population": "Population",
     "currencies": "Currencies",
-    "worstScores": "Lower scores"
+    "worstScores": "Lower scores",
+    "switchLearningType": "Switch learning type"
 }

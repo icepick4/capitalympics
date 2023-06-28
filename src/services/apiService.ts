@@ -199,9 +199,12 @@ export default class ApiService {
         user_id: number,
         token: string,
         length: number = 0,
-        sort: string
+        sort: string,
+        learning_type: LearningType
     ): Promise<UserScore[]> {
-        const url = `${ApiService.API_URL}/users/${user_id}/scores${
+        const url = `${
+            ApiService.API_URL
+        }/users/${user_id}/${learning_type}/scores${
             length === 0 ? '' : `/?max=${length}&sort=${sort}`
         }`;
         try {
