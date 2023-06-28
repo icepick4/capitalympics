@@ -89,5 +89,7 @@
     "worstScores": "Lower scores",
     "switchLearningType": "Switch learning type",
     "seeCapitals": "See capitals scores",
-    "seeFlags": "See flags scores"
+    "seeFlags": "See flags scores",
+    "seeMore": "See more",
+    "seeLess": "See less"
 }

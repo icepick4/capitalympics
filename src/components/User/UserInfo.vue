@@ -32,19 +32,49 @@ const logOut = () => {
 
 const token = store.getters.token;
 const user: User = store.getters.user;
-const bestCountries = ref<CountryDetails[]>([]);
-const worstCountries = ref<CountryDetails[]>([]);
+const countries = ref<CountryDetails[]>([]);
 const learningType = ref<LearningType>('flag');
+const currentMax = ref(3);
+const currentSort = ref<Sort>('DESC');
+
+const increaseMax = () => {
+    currentMax.value += 3;
+    updateScores();
+};
+
+const decreaseMax = () => {
+    currentMax.value -= 3;
+    if (currentMax.value < 3) {
+        currentMax.value = 3;
+    }
+    updateScores();
+};
+
+const resetMax = () => {
+    currentMax.value = 3;
+    updateScores();
+};
+
+const switchSort = () => {
+    if (currentSort.value === 'DESC') {
+        currentSort.value = 'ASC';
+    } else {
+        currentSort.value = 'DESC';
+    }
+    updateScores();
+};
+
 const getScores = async (
     user_id: number,
     sort: Sort,
+    max: number,
     scoreType: LearningType
 ): Promise<UserScore[]> => {
     try {
         const response = await ApiService.getScores(
             user_id,
             token,
-            3,
+            max,
             sort,
             scoreType
         );
@@ -62,11 +92,7 @@ const getScores = async (
             getCountryDetails(element.country_code).then(({ name, flag }) => {
                 countryDetails.name = name;
                 countryDetails.flag = flag;
-                if (sort === 'DESC') {
-                    bestCountries.value.push(countryDetails);
-                } else {
-                    worstCountries.value.push(countryDetails);
-                }
+                countries.value.push(countryDetails);
             });
         });
         return scores;
@@ -151,10 +177,8 @@ const switchLearningType = () => {
 };
 
 const updateScores = () => {
-    bestCountries.value = [];
-    worstCountries.value = [];
-    getScores(user.id, 'DESC', learningType.value);
-    getScores(user.id, 'ASC', learningType.value);
+    countries.value = [];
+    getScores(user.id, currentSort.value, currentMax.value, learningType.value);
 };
 
 onMounted(() => {
@@ -227,28 +251,47 @@ onMounted(() => {
                 </div>
             </h1>
         </div>
-        <div class="flex flex-col gap-4 mb-5">
-            <ScoresDisplay
-                :countries="bestCountries"
-                :title="$t('topScores')"
-            ></ScoresDisplay>
-            <ScoresDisplay
-                :countries="worstCountries"
-                :title="$t('worstScores')"
-            ></ScoresDisplay>
-        </div>
-        <div class="w-full flex justify-center items-center">
+        <div class="w-full flex justify-center items-center gap-5 mb-4">
             <button
                 @click="switchLearningType"
-                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-gradient rounded-md w-1/4 hover:scale-105"
+                class="rounded-full bg-white hover:scale-110 transition-all duration-300"
             >
-                <p v-if="learningType === 'flag'">
-                    {{ $t('seeCapitals') }}
-                </p>
-                <p v-else>
-                    {{ $t('seeFlags') }}
-                </p>
+                <img src="/icons/switch.png" alt="switch" class="w-10 h-10" />
             </button>
+            <button
+                @click="increaseMax"
+                class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+            >
+                <img src="/icons/plus.png" alt="more" class="w-10 h-10" />
+            </button>
+            <button
+                @click="decreaseMax"
+                class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+            >
+                <img src="/icons/less.png" alt="less" class="w-10 h-10" />
+            </button>
+            <button
+                @click="resetMax"
+                class="rounded-full bg-white hover:scale-110 transition-all duration-300 rotate-45"
+            >
+                <img src="/icons/plus.png" alt="reset" class="w-10 h-10" />
+            </button>
+            <button
+                @click="switchSort"
+                class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+            >
+                <img
+                    :src="`/icons/sort_${currentSort}.png`"
+                    alt="sort"
+                    class="w-10 h-10 rounded-full bg-white hover:scale-110 transition-all duration-300"
+                />
+            </button>
+        </div>
+        <div class="flex flex-col gap-4 mb-5">
+            <ScoresDisplay
+                :countries="countries"
+                :title="$t('topScores')"
+            ></ScoresDisplay>
         </div>
     </div>
 </template>

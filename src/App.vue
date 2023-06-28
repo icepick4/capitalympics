@@ -4,7 +4,6 @@ import { useI18n } from 'vue-i18n';
 import { RouterView, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import BlurContainer from './components/BlurContainer.vue';
-import Footer from './components/Footer.vue';
 import Header from './components/Header.vue';
 import Loader from './components/Loader.vue';
 import {
@@ -54,6 +53,6 @@ const isHome = () => {
                 <Loader />
             </BlurContainer>
         </div>
-        <Footer v-if="!isHome()" />
+        <!-- <Footer v-if="!isHome()" /> -->
     </div>
 </template>

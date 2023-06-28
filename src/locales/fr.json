@@ -88,6 +88,8 @@
     "currencies": "Devises",
     "worstScores": "Moins bons scores",
     "switchLearningType": "Changer de type d'apprentissage",
-    "seeCapitals": "Voir les scores des capitales",
-    "seeFlags": "Voir les scores des drapeaux"
+    "seeCapitals": "Voir les capitales",
+    "seeFlags": "Voir les drapeaux",
+    "seeMore": "Voir plus",
+    "seeLess": "Voir moins"
 }
