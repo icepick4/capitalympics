@@ -31,12 +31,14 @@ export default class ApiService {
     public static async signUp(
         username: string,
         password: string,
+        lang: string,
         created_at: string
     ): Promise<boolean> {
         try {
             const response = await axios.post(`${ApiService.API_URL}/users`, {
                 user: {
                     name: username,
+                    language: lang,
                     password,
                     created_at
                 }

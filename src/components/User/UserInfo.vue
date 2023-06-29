@@ -290,7 +290,7 @@ onMounted(() => {
         <div class="flex flex-col gap-4 mb-5">
             <ScoresDisplay
                 :countries="countries"
-                :title="$t('topScores')"
+                :title="$t('scores')"
             ></ScoresDisplay>
         </div>
     </div>

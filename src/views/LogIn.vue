@@ -112,7 +112,6 @@ const logIn = async () => {
                             >
                                 {{ $t('createAccount') }}</RouterLink
                             >
-                            >
                         </p>
                     </div>
 

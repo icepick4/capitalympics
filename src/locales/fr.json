@@ -71,7 +71,7 @@
     "loggingOut": "Déconnexion en cours...",
     "lastActivity": "Dernière activité",
     "joined": "Rejoint",
-    "topScores": "Meilleurs scores",
+    "scores": "Vos scores",
     "editProfile": "Modifier votre profil",
     "language": "Langue",
     "saveProfile": "Enregistrer les modifications",
@@ -86,10 +86,10 @@
     "subregion": "Sous-région",
     "population": "Population",
     "currencies": "Devises",
-    "worstScores": "Moins bons scores",
     "switchLearningType": "Changer de type d'apprentissage",
     "seeCapitals": "Voir les capitales",
     "seeFlags": "Voir les drapeaux",
     "seeMore": "Voir plus",
-    "seeLess": "Voir moins"
+    "seeLess": "Voir moins",
+    "languagePlaceholder": "Sélectionnez votre langue"
 }

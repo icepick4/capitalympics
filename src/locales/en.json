@@ -71,7 +71,7 @@
     "loggingOut": "Logging out...",
     "lastActivity": "Last activity",
     "joined": "Joined ",
-    "topScores": "Top scores",
+    "scores": "Your scores",
     "editProfile": "Edit your profile",
     "language": "Language",
     "saveProfile": "Save profile",
@@ -86,10 +86,10 @@
     "subregion": "Subregion",
     "population": "Population",
     "currencies": "Currencies",
-    "worstScores": "Lower scores",
     "switchLearningType": "Switch learning type",
     "seeCapitals": "See capitals scores",
     "seeFlags": "See flags scores",
     "seeMore": "See more",
-    "seeLess": "See less"
+    "seeLess": "See less",
+    "languagePlaceholder": "Select your language"
 }

@@ -40,6 +40,12 @@ export const setLocalStorageToken = (token: string) => {
     localStorage.setItem('token', token);
 };
 
+export const languages = [
+    { value: 'en', text: 'English' },
+    { value: 'fr', text: 'Français' },
+    { value: 'es', text: 'Español' }
+];
+
 export const getLevelName = (level: Level): string => {
     const user: User = store.getters.user;
     const language = user ? user.language : 'en';
