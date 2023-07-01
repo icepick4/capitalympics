@@ -67,6 +67,7 @@ const switchSort = () => {
     } else {
         currentSort.value = 'DESC';
     }
+    countries.value = [];
     updateScores();
 };
 
@@ -97,7 +98,7 @@ const getScores = async (
         scores.forEach((element, index) => {
             if (
                 index >= max ||
-                index < max - 3 ||
+                (index < max - 3 && countries.value.length > 0) ||
                 countries.value.length >= max
             ) {
                 return;
@@ -191,6 +192,7 @@ const switchLearningType = () => {
     } else {
         learningType.value = 'flag';
     }
+    countries.value = [];
     updateScores();
 };
 

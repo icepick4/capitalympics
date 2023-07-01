@@ -1,5 +1,6 @@
 import { Level, User } from '../models/User';
 import store from '../store';
+import { Lang } from '../types/common';
 
 export const getCurrentMySQLDate = (): string => {
     let date = new Date();
@@ -38,6 +39,15 @@ export const setLocalStorageUser = (user_id: string) => {
 };
 export const setLocalStorageToken = (token: string) => {
     localStorage.setItem('token', token);
+};
+
+export const getLanguage = (): Lang => {
+    const user: User = store.getters.user;
+    if (user) {
+        return user.language as Lang;
+    }
+    const browserLanguage = navigator.language;
+    return browserLanguage.substring(0, 2) as Lang;
 };
 
 export const languages = [

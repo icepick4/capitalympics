@@ -8,6 +8,7 @@ import Modal from '../components/Modal.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
 import { Redirection } from '../types/Redirection';
+import { getLanguage } from '../utils/common';
 import { Redirections } from '../utils/redirections';
 interface State {
     countries: CountryI[];
@@ -47,8 +48,9 @@ const filteredCountries = () => {
 };
 
 onBeforeMount(async () => {
+    let lang = getLanguage();
     try {
-        state.countries = await ApiService.getCountries();
+        state.countries = await ApiService.getCountries(0, lang);
     } catch (error) {
         finishedWaited.value = true;
     }

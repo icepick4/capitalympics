@@ -12,6 +12,11 @@ defineProps<{
 <template>
     <div class="bg-gradient rounded-lg shadow-lg p-6">
         <h2 class="text-xl font-bold mb-4">{{ title }}</h2>
+        <div v-if="countries.length === 0">
+            <h1 class="text-xl font-bold mb-4">
+                {{ $t('noScores') }}
+            </h1>
+        </div>
         <transition-group
             name="fade"
             tag="div"
@@ -36,11 +41,6 @@ defineProps<{
                 </p>
             </RouterLink>
         </transition-group>
-        <div v-if="countries.length === 0">
-            <h1 class="text-xl font-bold mb-4">
-                {{ $t('noScores') }}
-            </h1>
-        </div>
     </div>
 </template>
 

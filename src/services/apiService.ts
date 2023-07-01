@@ -5,9 +5,12 @@ import { Lang, LearningType, ScoreType } from '../types/common';
 export default class ApiService {
     public static readonly API_URL: string = 'http://localhost:3001';
 
-    public static async getCountries(max: number = 0): Promise<CountryI[]> {
-        const url = `${ApiService.API_URL}/countries${
-            max === 0 ? '' : `?max=${max}`
+    public static async getCountries(
+        max: number = 0,
+        lang: Lang
+    ): Promise<CountryI[]> {
+        const url = `${ApiService.API_URL}/countries?lang=${lang}${
+            max === 0 ? '' : `&max=${max}`
         }`;
         try {
             const response = await axios.get(url, { timeout: 5000 });
