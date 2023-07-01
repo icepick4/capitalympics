@@ -36,8 +36,12 @@ const countries = ref<CountryDetails[]>([]);
 const learningType = ref<LearningType>('flag');
 const currentMax = ref(3);
 const currentSort = ref<Sort>('DESC');
+const isMax = ref(false);
 
 const increaseMax = () => {
+    if (isMax.value) {
+        return;
+    }
     currentMax.value += 3;
     updateScores();
 };
@@ -47,12 +51,14 @@ const decreaseMax = () => {
     if (currentMax.value < 3) {
         currentMax.value = 3;
     }
-    updateScores();
+    countries.value = countries.value.slice(0, currentMax.value);
+    isMax.value = false;
 };
 
 const resetMax = () => {
     currentMax.value = 3;
-    updateScores();
+    countries.value = countries.value.slice(0, currentMax.value);
+    isMax.value = false;
 };
 
 const switchSort = () => {
@@ -69,7 +75,7 @@ const getScores = async (
     sort: Sort,
     max: number,
     scoreType: LearningType
-): Promise<UserScore[]> => {
+) => {
     try {
         const response = await ApiService.getScores(
             user_id,
@@ -81,8 +87,21 @@ const getScores = async (
         let scores: UserScore[] = [];
         if (response) {
             scores = response;
+            if (scores.length < max) {
+                isMax.value = true;
+            } else {
+                isMax.value = false;
+            }
         }
-        scores.forEach((element) => {
+
+        scores.forEach((element, index) => {
+            if (
+                index >= max ||
+                index < max - 3 ||
+                countries.value.length >= max
+            ) {
+                return;
+            }
             let countryDetails: CountryDetails = {
                 name: '',
                 flag: '',
@@ -95,16 +114,15 @@ const getScores = async (
                 countries.value.push(countryDetails);
             });
         });
-        return scores;
     } catch (error) {
-        return [];
+        console.log(error);
     }
 };
 
 const getCountryDetails = async (
     country_code: string
 ): Promise<{ name: string; flag: string }> => {
-    const response = await ApiService.getCountry(country_code);
+    const response = await ApiService.getCountry(country_code, user.language);
     if (response) {
         let country = response;
         return {
@@ -177,7 +195,6 @@ const switchLearningType = () => {
 };
 
 const updateScores = () => {
-    countries.value = [];
     getScores(user.id, currentSort.value, currentMax.value, learningType.value);
 };
 
@@ -190,108 +207,117 @@ onMounted(() => {
     <BlurContainer v-if="hasLoggedOut">
         <Loader :title="$t('loggingOut')" />
     </BlurContainer>
-    <div class="container mx-auto p-8">
-        <!-- Informations de l'utilisateur -->
-        <div class="bg-gradient rounded-lg shadow-lg p-6 mb-4">
-            <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center">
-                    <img
-                        src="/icons/default_profile.png"
-                        alt="User Avatar"
-                        class="w-16 h-16 rounded-full mr-4"
-                    />
-                    <h1 class="text-2xl mr-1 font-bold">{{ user.name }}</h1>
-                </div>
-                <div class="flex items-center gap-4">
-                    <RouterLink to="/profile/edit">
+    <div
+        class="w-full h-full flex flex-col items-start justify-start mt-10 mb-10"
+    >
+        <div class="container mx-auto p-8">
+            <!-- Informations de l'utilisateur -->
+            <div class="bg-gradient rounded-lg shadow-lg p-6 mb-4">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
                         <img
-                            src="/icons/settings.png"
-                            alt="Edit account"
-                            class="w-8 h-8 ml-2 cursor-pointer hover:rotate-180 transition-all duration-500"
-                            @click="$emit('close')"
+                            src="/icons/default_profile.png"
+                            alt="User Avatar"
+                            class="w-16 h-16 rounded-full mr-4"
                         />
-                    </RouterLink>
-                    <img
-                        src="/icons/logout.png"
-                        alt="Logout"
-                        class="w-8 h-8 ml-auto cursor-pointer hover:scale-110 transition-all"
-                        @click="logOut"
-                    />
+                        <h1 class="text-2xl mr-1 font-bold">{{ user.name }}</h1>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <RouterLink to="/profile/edit">
+                            <img
+                                src="/icons/settings.png"
+                                alt="Edit account"
+                                class="w-8 h-8 ml-2 cursor-pointer hover:rotate-180 transition-all duration-500"
+                                @click="$emit('close')"
+                            />
+                        </RouterLink>
+                        <img
+                            src="/icons/logout.png"
+                            alt="Logout"
+                            class="w-8 h-8 ml-auto cursor-pointer hover:scale-110 transition-all"
+                            @click="logOut"
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <p class="text-black mb-2">
-                {{ $t('lastActivity') }} :
-                {{ formatDate(new Date(user.last_activity)) }}
-            </p>
-            <p class="text-black">
-                {{ $t('joined') }} : {{ formatDate(new Date(user.created_at)) }}
-            </p>
-        </div>
-        <div class="w-full flex justify-center items-center">
-            <h1 class="text-4xl font-bold text-center mb-4">
-                <div
-                    v-if="learningType === 'flag'"
-                    class="flex flex-row gap-10"
+                <p class="text-black mb-2">
+                    {{ $t('lastActivity') }} :
+                    {{ formatDate(new Date(user.last_activity)) }}
+                </p>
+                <p class="text-black">
+                    {{ $t('joined') }} :
+                    {{ formatDate(new Date(user.created_at)) }}
+                </p>
+            </div>
+            <div class="w-full flex justify-center items-center">
+                <h1 class="text-4xl font-bold text-center mb-4">
+                    <div
+                        v-if="learningType === 'flag'"
+                        class="flex flex-row gap-10"
+                    >
+                        <p>
+                            {{ $t('flags') }}
+                        </p>
+                        <p>
+                            {{ getLevelName(user.flag_level) }}
+                        </p>
+                    </div>
+                    <div v-else class="flex flex-row gap-10">
+                        <p>
+                            {{ $t('capitals') }}
+                        </p>
+                        <p>
+                            {{ getLevelName(user.capital_level) }}
+                        </p>
+                    </div>
+                </h1>
+            </div>
+            <div class="w-full flex justify-center items-center gap-5 mb-4">
+                <button
+                    @click="switchLearningType"
+                    class="rounded-full bg-white hover:scale-110 transition-all duration-300"
                 >
-                    <p>
-                        {{ $t('flags') }}
-                    </p>
-                    <p>
-                        {{ getLevelName(user.flag_level) }}
-                    </p>
-                </div>
-                <div v-else class="flex flex-row gap-10">
-                    <p>
-                        {{ $t('capitals') }}
-                    </p>
-                    <p>
-                        {{ getLevelName(user.capital_level) }}
-                    </p>
-                </div>
-            </h1>
-        </div>
-        <div class="w-full flex justify-center items-center gap-5 mb-4">
-            <button
-                @click="switchLearningType"
-                class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-            >
-                <img src="/icons/switch.png" alt="switch" class="w-10 h-10" />
-            </button>
-            <button
-                @click="increaseMax"
-                class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-            >
-                <img src="/icons/plus.png" alt="more" class="w-10 h-10" />
-            </button>
-            <button
-                @click="decreaseMax"
-                class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-            >
-                <img src="/icons/less.png" alt="less" class="w-10 h-10" />
-            </button>
-            <button
-                @click="resetMax"
-                class="rounded-full bg-white hover:scale-110 transition-all duration-300 rotate-45"
-            >
-                <img src="/icons/plus.png" alt="reset" class="w-10 h-10" />
-            </button>
-            <button
-                @click="switchSort"
-                class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-            >
-                <img
-                    :src="`/icons/sort_${currentSort}.png`"
-                    alt="sort"
-                    class="w-10 h-10 rounded-full bg-white hover:scale-110 transition-all duration-300"
-                />
-            </button>
-        </div>
-        <div class="flex flex-col gap-4 mb-5">
-            <ScoresDisplay
-                :countries="countries"
-                :title="$t('scores')"
-            ></ScoresDisplay>
+                    <img
+                        src="/icons/switch.png"
+                        alt="switch"
+                        class="w-10 h-10"
+                    />
+                </button>
+                <button
+                    @click="increaseMax"
+                    class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                >
+                    <img src="/icons/plus.png" alt="more" class="w-10 h-10" />
+                </button>
+                <button
+                    @click="decreaseMax"
+                    class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                >
+                    <img src="/icons/less.png" alt="less" class="w-10 h-10" />
+                </button>
+                <button
+                    @click="resetMax"
+                    class="rounded-full bg-white hover:scale-110 transition-all duration-300 rotate-45"
+                >
+                    <img src="/icons/plus.png" alt="reset" class="w-10 h-10" />
+                </button>
+                <button
+                    @click="switchSort"
+                    class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                >
+                    <img
+                        :src="`/icons/sort_${currentSort}.png`"
+                        alt="sort"
+                        class="w-10 h-10 rounded-full bg-white hover:scale-110 transition-all duration-300"
+                    />
+                </button>
+            </div>
+            <div class="flex flex-col gap-4 mb-5">
+                <ScoresDisplay
+                    :countries="countries"
+                    :title="$t('scores')"
+                ></ScoresDisplay>
+            </div>
         </div>
     </div>
 </template>

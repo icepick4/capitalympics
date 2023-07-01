@@ -4,12 +4,12 @@ import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import BlurContainer from '../components/BlurContainer.vue';
 import Loader from '../components/Loader.vue';
-import { Level } from '../models/User';
+import { Level, User } from '../models/User';
 import ApiService from '../services/apiService';
 import { getLevelName } from '../utils/common';
 const router = useRouter();
 const store = useStore();
-const user = store.getters.user;
+const user: User = store.getters.user;
 const token = store.getters.token;
 
 const userScore = ref('');

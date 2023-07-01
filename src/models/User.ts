@@ -1,3 +1,5 @@
+import { Lang } from '../types/common';
+
 export interface User {
     id: number;
     name: string;
@@ -7,7 +9,7 @@ export interface User {
     capital_level: Level;
     last_activity: string;
     created_at: string;
-    language: string;
+    language: Lang;
 }
 
 export interface UserScore {

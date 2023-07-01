@@ -2,9 +2,10 @@
 import { ref, watchEffect } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useStore } from 'vuex';
+import { User } from '../models/User';
 
 const store = useStore();
-const user = ref(store.getters.user);
+const user = ref<User | null>(store.getters.user);
 watchEffect(() => {
     user.value = store.getters.user;
 });

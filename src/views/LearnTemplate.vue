@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import BlurContainer from '../components/BlurContainer.vue';
 import ButtonTemplate from '../components/Learning/Buttons/ButtonTemplate.vue';
@@ -10,12 +10,12 @@ import FlagsQuestion from '../components/Learning/FlagsQuestion.vue';
 import Loader from '../components/Loader.vue';
 import Modal from '../components/Modal.vue';
 import { CountryI } from '../models/Country';
+import { User } from '../models/User';
 import ApiService from '../services/apiService';
 import { Redirection } from '../types/Redirection';
 import { CurrentState, LearningType, ScoreType } from '../types/common';
 import { Redirections } from '../utils/redirections';
 const route = useRoute();
-const router = useRouter();
 const store = useStore();
 const currentLearning: LearningType = route.path.split('/')[2] as LearningType;
 const currentState = ref<CurrentState>('starting');
@@ -23,7 +23,7 @@ const couldNotGetCountry = ref(false);
 const fetchingCountry = ref(false);
 
 const redirection: Redirection = Redirections.getRedirectionByLink('/learn');
-const user = store.getters.user;
+const user: User = store.getters.user;
 const token = store.getters.token;
 const country = ref<CountryI>();
 const getNewCountry = async () => {
@@ -32,7 +32,8 @@ const getNewCountry = async () => {
         country.value = await ApiService.getNewCountryToLearn(
             user.id,
             token,
-            currentLearning
+            currentLearning,
+            user.language
         );
         // To improve in the future with caching flags images
         setTimeout(() => {

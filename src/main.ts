@@ -7,6 +7,7 @@ import fr from './locales/fr.json';
 import router from './router';
 import store from './store';
 import './style.css';
+import { Lang } from './types/common';
 
 const app = createApp(App, {
     compilerOptions: {
@@ -15,9 +16,9 @@ const app = createApp(App, {
 });
 
 const browserLanguage = navigator.language;
-const defaultLocale = browserLanguage.substring(0, 2);
+const defaultLocale = browserLanguage.substring(0, 2) as Lang;
 
-const supportedLocales = ['fr', 'en', 'es'];
+const supportedLocales: Lang[] = ['en', 'fr', 'es'];
 
 if (!supportedLocales.includes(defaultLocale)) {
     defaultLocale === 'en';

@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { onBeforeMount, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
+import { useStore } from 'vuex';
 import BlurContainer from '../components/BlurContainer.vue';
 import Country from '../components/Country/Country.vue';
 import Loader from '../components/Loader.vue';
 import { CountryI } from '../models/Country';
+import { User } from '../models/User';
 import ApiService from '../services/apiService';
+import { Lang } from '../types/common';
 interface State {
     country: CountryI | undefined;
     isLoading: boolean;
@@ -20,9 +23,16 @@ const props = defineProps<{
     countryCode: string;
 }>();
 
+const store = useStore();
+
 onBeforeMount(async () => {
+    const user: User = store.getters.user;
+    let lang = 'en' as Lang;
+    if (user !== null) {
+        lang = user.language;
+    }
     try {
-        state.country = await ApiService.getCountry(props.countryCode);
+        state.country = await ApiService.getCountry(props.countryCode, lang);
         state.isLoading = false;
     } catch (error) {
         state.isLoading = false;
