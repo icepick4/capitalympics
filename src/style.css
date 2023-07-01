@@ -56,7 +56,7 @@ body {
 }
 
 .fade-down {
-    animation: fade-down ease 0.4s;
+    animation: fadeDown ease 0.4s;
 }
 
 @keyframes fadeUp {
@@ -95,7 +95,7 @@ body {
     }
 }
 
-@keyframes fade-down {
+@keyframes fadeDown {
     0% {
         opacity: 1;
         transform: translateY(0);
