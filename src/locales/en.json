@@ -31,6 +31,8 @@
     "resetScores": "Rest all your scores ❌",
     "initScoresTitle": "Init your scores ✅",
     "error": "Error",
+    "tryAgain": "Try again",
+    "errorCountry": "Error while loading the country",
     "fillAllFields": "Please fill all the fields",
     "userNotFound": "User not found or wrong password",
     "welcomeBack": "Welcome back",
@@ -95,5 +97,13 @@
     "leave": "Leave",
     "see": "See",
     "mode": "Mode",
-    "level": "Level"
+    "level": "Level",
+    "yes": "Yes",
+    "no": "No",
+    "logOutConfirmation": "Are you sure you want to log out ?",
+    "loginPageRedirect": "You will be redirected to the login page",
+    "resetScoresConfirmation": "Are you sure you want to reset all your scores ?",
+    "resetScoresMessage": "This action is irreversible and will reset all your scores (capitals and flags).",
+    "myLevel": "My level",
+    "seeScores": "See my scores 🏆"
 }

@@ -8,6 +8,7 @@ import { LearningType, Sort } from '../../types/common';
 import { getLevelName } from '../../utils/common';
 import BlurContainer from '../BlurContainer.vue';
 import Loader from '../Loader.vue';
+import Modal from '../Modal.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
 const store = useStore();
 const router = useRouter();
@@ -21,12 +22,18 @@ export interface CountryDetails {
 defineEmits(['close']);
 
 const hasLoggedOut = ref(false);
+const confirmingLogOut = ref(false);
+
+const logOutConfirmation = () => {
+    confirmingLogOut.value = true;
+};
+
 const logOut = () => {
     hasLoggedOut.value = true;
     setTimeout(() => {
         store.dispatch('logOut');
         hasLoggedOut.value = false;
-        router.push('/');
+        router.push('/login');
     }, 500);
 };
 
@@ -208,8 +215,19 @@ onMounted(() => {
 </script>
 
 <template>
-    <BlurContainer v-if="hasLoggedOut">
-        <Loader :title="$t('loggingOut')" />
+    <BlurContainer v-if="hasLoggedOut || confirmingLogOut">
+        <Modal
+            v-if="confirmingLogOut && !hasLoggedOut"
+            :title="$t('logOutConfirmation')"
+            :message="$t('loginPageRedirect')"
+            background-color="white"
+            title-color="black"
+            :redirection="null"
+            :confirmationDialog="true"
+            @confirm="logOut"
+            @cancel="confirmingLogOut = false"
+        />
+        <Loader v-if="hasLoggedOut" :title="$t('loggingOut')" />
     </BlurContainer>
     <div
         class="w-full h-full flex flex-col items-start justify-start mt-10 mb-10"
@@ -239,7 +257,7 @@ onMounted(() => {
                             src="/icons/logout.png"
                             alt="Logout"
                             class="w-8 h-8 ml-auto cursor-pointer hover:scale-110 transition-all"
-                            @click="logOut"
+                            @click="logOutConfirmation"
                         />
                     </div>
                 </div>

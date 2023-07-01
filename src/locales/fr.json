@@ -31,6 +31,8 @@
     "resetScores": "Réinitialiser mes scores ❌",
     "initScoresTitle": "Initialisez vos scores ✅",
     "error": "Erreur",
+    "tryAgain": "Veuillez réessayer",
+    "errorCountry": "Une erreur s'est produite lors du chargement des pays",
     "fillAllFields": "Veuillez remplir tous les champs",
     "userNotFound": "Utilisateur introuvable ou mot de passe incorrect",
     "welcomeBack": "Bon retour parmi nous",
@@ -95,5 +97,13 @@
     "leave": "Quitter",
     "see": "Dévoiler",
     "mode": "Mode",
-    "level": "Niveau"
+    "level": "Niveau",
+    "yes": "Oui",
+    "no": "Non",
+    "logOutConfirmation": "Êtes-vous sûr de vouloir vous déconnecter ?",
+    "loginPageRedirect": "Vous allez être redirigé vers la page de connexion",
+    "resetScoresConfirmation": "Êtes-vous sûr de vouloir réinitialiser vos scores ?",
+    "resetScoresMessage": "Cette action est irréversible et va supprimer tous vos scores (Capitales et Drapeaux).",
+    "myLevel": "Mon niveau",
+    "seeScores": "Voir mes scores 🏆"
 }

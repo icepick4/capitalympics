@@ -8,6 +8,7 @@ defineProps<{
     backgroundColor: Color;
     titleColor: Color;
     redirection: Redirection | null;
+    confirmationDialog?: boolean;
 }>();
 </script>
 
@@ -25,9 +26,23 @@ defineProps<{
             :class="`bg-${redirection.backgroundColor} text-${redirection.textColor}`"
             >{{ redirection.text }}
         </RouterLink>
+        <div v-else-if="confirmationDialog" class="flex flex-row gap-5">
+            <button
+                class="px-5 p-3 rounded-lg bg-gradient text-black hover:scale-105 transition-all duration-300"
+                @click="$emit('confirm')"
+            >
+                {{ $t('yes') }}
+            </button>
+            <button
+                class="px-5 p-3 rounded-lg bg-gradient text-black hover:scale-105 transition-all duration-300"
+                @click="$emit('cancel')"
+            >
+                {{ $t('no') }}
+            </button>
+        </div>
         <div v-else>
             <button
-                class="px-5 p-3 rounded-lg bg-gradient text-black"
+                class="px-5 p-3 rounded-lg bg-gradient text-black hover:scale-105 transition-all duration-300"
                 @click="$emit('close')"
             >
                 {{ $t('close') }}

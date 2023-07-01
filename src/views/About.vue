@@ -75,7 +75,7 @@ Avec ces modifica
 
 <template>
     <BlurContainer v-if="!haveImagesLoaded">
-        <Loader title="Loading page ..." />
+        <Loader :title="$t('loading')" />
     </BlurContainer>
     <div class="flex flex-col top-0 w-full">
         <div class="relative overflow-hidden">

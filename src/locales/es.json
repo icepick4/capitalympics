@@ -31,6 +31,8 @@
     "resetScores": "Restablecer mis puntuaciones ❌",
     "initScoresTitle": "Inicializa tus puntuaciones ✅",
     "error": "Error",
+    "tryAgain": "Por favor, inténtalo de nuevo más tarde",
+    "errorCountry": "Error al cargar el país",
     "fillAllFields": "Por favor, completa todos los campos",
     "userNotFound": "Usuario no encontrado o contraseña incorrecta",
     "welcomeBack": "Bienvenido de nuevo",
@@ -95,5 +97,13 @@
     "leave": "Salir",
     "see": "Mostrar",
     "mode": "Modo",
-    "level": "Nivel"
+    "level": "Nivel",
+    "yes": "Sí",
+    "no": "No",
+    "logOutConfirmation": "¿Estás seguro de que quieres cerrar sesión?",
+    "loginPageRedirect": "Serás redirigido a la página de inicio de sesión",
+    "resetScoresConfirmation": "¿Estás seguro de que quieres restablecer tus puntuaciones?",
+    "resetScoresMessage": "Esta acción es irreversible y restablecerá todas tus puntuaciones (capitales y banderas).",
+    "myLevel": "Mi nivel",
+    "seeScores": "Ver puntuaciones 🏆"
 }

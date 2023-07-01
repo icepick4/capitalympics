@@ -78,9 +78,8 @@ onBeforeMount(() => {
     <BlurContainer v-if="couldNotGetCountry || fetchingCountry">
         <Modal
             v-if="couldNotGetCountry"
-            title="Error while loading the country"
-            text="Please try again later"
-            message="Sorry for the inconvenience retry later"
+            :title="$t('errorCountry')"
+            :message="$t('tryAgain')"
             background-color="white"
             title-color="error"
             :redirection="redirection"
