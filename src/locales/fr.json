@@ -91,5 +91,9 @@
     "seeFlags": "Voir les drapeaux",
     "seeMore": "Voir plus",
     "seeLess": "Voir moins",
-    "languagePlaceholder": "Sélectionnez votre langue"
+    "languagePlaceholder": "Sélectionnez votre langue",
+    "leave": "Quitter",
+    "see": "Dévoiler",
+    "mode": "Mode",
+    "level": "Niveau"
 }

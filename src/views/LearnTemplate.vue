@@ -113,7 +113,7 @@ onBeforeMount(() => {
                 <div class="w-full">
                     <div v-if="currentState === 'starting'">
                         <ButtonTemplate
-                            :title="'See'"
+                            :title="$t('see')"
                             :color="'bg-gradient'"
                             @click="handleClickSee"
                         />
@@ -134,16 +134,10 @@ onBeforeMount(() => {
         </div>
         <div class="flex flex-row w-full justify-center gap-10 items-center">
             <RouterLink
-                :to="{ name: 'Profile' }"
+                to="/learn"
                 class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-auto"
             >
-                Go back to your profile
-            </RouterLink>
-            <RouterLink
-                :to="{ name: 'Home' }"
-                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-auto"
-            >
-                Go back home
+                {{ $t('leave') }}
             </RouterLink>
         </div>
     </div>

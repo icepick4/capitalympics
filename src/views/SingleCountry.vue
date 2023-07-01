@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onBeforeMount, reactive } from 'vue';
-import { RouterLink } from 'vue-router';
 import BlurContainer from '../components/BlurContainer.vue';
 import Country from '../components/Country/Country.vue';
 import Loader from '../components/Loader.vue';
@@ -30,6 +29,10 @@ onBeforeMount(async () => {
         state.isLoading = false;
     }
 });
+
+const goBack = () => {
+    window.history.go(-1);
+};
 </script>
 
 <template>
@@ -43,12 +46,12 @@ onBeforeMount(async () => {
                 :country="state.country"
             />
         </Transition>
-        <RouterLink
-            to="/countries"
+        <button
+            @click="goBack"
             class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-gradient hover:scale-105 rounded-md w-1/2 md:w-1/4 mx-auto"
         >
             {{ $t('back') }}
-        </RouterLink>
+        </button>
     </div>
 </template>
 

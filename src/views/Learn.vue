@@ -131,11 +131,19 @@ onBeforeMount(async () => {
                     </RouterLink>
                 </div>
             </div>
-            <div
-                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
-                @click="resetScores"
-            >
-                {{ $t('resetScores') }}
+            <div class="flex flex-col gap-5">
+                <div
+                    class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
+                    @click="resetScores"
+                >
+                    {{ $t('resetScores') }}
+                </div>
+                <RouterLink
+                    to="/profile"
+                    class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
+                >
+                    {{ $t('profile') }}
+                </RouterLink>
             </div>
         </div>
         <div

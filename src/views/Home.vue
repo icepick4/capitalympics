@@ -55,7 +55,7 @@ const scrollTo = (id: string) => {
 
 onBeforeMount(async () => {
     try {
-        let fetchedCountries = await ApiService.getCountries(8);
+        let fetchedCountries = await ApiService.getCountries(8, 'en');
         countries.value = fetchedCountries
             .concat(fetchedCountries)
             .concat(fetchedCountries);

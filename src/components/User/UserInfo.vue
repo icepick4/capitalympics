@@ -35,6 +35,7 @@ const user: User = store.getters.user;
 const countries = ref<CountryDetails[]>([]);
 const learningType = ref<LearningType>('flag');
 const currentMax = ref(3);
+const clickedSwitchLearningType = ref(false);
 const currentSort = ref<Sort>('DESC');
 const isMax = ref(false);
 
@@ -187,6 +188,7 @@ const formatDate = (date: Date) => {
 };
 
 const switchLearningType = () => {
+    clickedSwitchLearningType.value = !clickedSwitchLearningType.value;
     if (learningType.value === 'flag') {
         learningType.value = 'capital';
     } else {
@@ -251,40 +253,77 @@ onMounted(() => {
                     {{ formatDate(new Date(user.created_at)) }}
                 </p>
             </div>
-            <div class="w-full flex justify-center items-center">
-                <h1 class="text-4xl font-bold text-center mb-4">
-                    <div
-                        v-if="learningType === 'flag'"
-                        class="flex flex-row gap-10"
+            <div class="w-full flex justify-between items-center mb-4">
+                <div class="flex flex-row gap-5">
+                    <h1 class="text-4xl font-bold text-center">
+                        <template v-if="learningType === 'flag'">
+                            <div class="flex flex-col gap-5">
+                                <div class="flex flex-row items-start gap-2">
+                                    <p class="font-normal">
+                                        {{ $t('mode') }} :
+                                    </p>
+                                    <p>{{ $t('flags') }}</p>
+                                </div>
+                                <div class="flex flex-row gap-2">
+                                    <p class="font-normal">
+                                        {{ $t('level') }} :
+                                    </p>
+                                    <p>{{ getLevelName(user.flag_level) }}</p>
+                                </div>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="flex flex-col gap-5">
+                                <div class="flex flex-row gap-2">
+                                    <p class="font-normal">
+                                        {{ $t('mode') }} :
+                                    </p>
+                                    <p>{{ $t('capitals') }}</p>
+                                </div>
+                                <div class="flex flex-row gap-2">
+                                    <p class="font-normal">
+                                        {{ $t('level') }} :
+                                    </p>
+                                    <p>
+                                        {{ getLevelName(user.capital_level) }}
+                                    </p>
+                                </div>
+                            </div>
+                        </template>
+                    </h1>
+                </div>
+                <div class="flex flex-row gap-5">
+                    <button
+                        @click="switchLearningType"
+                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                        :class="{ '-rotate-180': clickedSwitchLearningType }"
                     >
-                        <p>
-                            {{ $t('flags') }}
-                        </p>
-                        <p>
-                            {{ getLevelName(user.flag_level) }}
-                        </p>
-                    </div>
-                    <div v-else class="flex flex-row gap-10">
-                        <p>
-                            {{ $t('capitals') }}
-                        </p>
-                        <p>
-                            {{ getLevelName(user.capital_level) }}
-                        </p>
-                    </div>
-                </h1>
+                        <img
+                            src="/icons/switch.png"
+                            alt="switch"
+                            class="w-10 h-10"
+                        />
+                    </button>
+
+                    <button
+                        @click="switchSort"
+                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                    >
+                        <img
+                            :src="`/icons/sort_${currentSort}.png`"
+                            alt="sort"
+                            class="w-10 h-10 rounded-full bg-white hover:scale-110 transition-all duration-300"
+                        />
+                    </button>
+                </div>
             </div>
-            <div class="w-full flex justify-center items-center gap-5 mb-4">
-                <button
-                    @click="switchLearningType"
-                    class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-                >
-                    <img
-                        src="/icons/switch.png"
-                        alt="switch"
-                        class="w-10 h-10"
-                    />
-                </button>
+            <div class="flex flex-col gap-4 mb-5">
+                <ScoresDisplay
+                    :countries="countries"
+                    :title="$t('scores')"
+                ></ScoresDisplay>
+            </div>
+            <div class="w-full flex flex-row justify-center items-center gap-5">
                 <button
                     @click="increaseMax"
                     class="rounded-full bg-white hover:scale-110 transition-all duration-300"
@@ -303,22 +342,6 @@ onMounted(() => {
                 >
                     <img src="/icons/plus.png" alt="reset" class="w-10 h-10" />
                 </button>
-                <button
-                    @click="switchSort"
-                    class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-                >
-                    <img
-                        :src="`/icons/sort_${currentSort}.png`"
-                        alt="sort"
-                        class="w-10 h-10 rounded-full bg-white hover:scale-110 transition-all duration-300"
-                    />
-                </button>
-            </div>
-            <div class="flex flex-col gap-4 mb-5">
-                <ScoresDisplay
-                    :countries="countries"
-                    :title="$t('scores')"
-                ></ScoresDisplay>
             </div>
         </div>
     </div>
