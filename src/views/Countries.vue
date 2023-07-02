@@ -68,13 +68,13 @@ onBeforeMount(async () => {
         <input
             type="text"
             v-model="search.value"
-            class="w-1/4 mx-auto p-2 placeholder-opacity-50 rounded-md bg-gradient text-black placeholder-black"
+            class="w-4/5 md:w-1/4 mx-auto p-2 placeholder-opacity-50 rounded-md bg-gradient text-black placeholder-black"
             :placeholder="$t('searchPlaceholder')"
         />
 
         <select
             v-model="region.value"
-            class="w-1/4 mx-auto p-2 rounded-md bg-gradient"
+            class="w-4/5 md:w-1/4 mx-auto p-2 rounded-md bg-gradient"
         >
             <option class="bg-white" value="">{{ $t('all') }}</option>
             <option
@@ -88,7 +88,7 @@ onBeforeMount(async () => {
         </select>
 
         <button
-            class="w-1/4 mx-auto p-2 rounded-md bg-gradient text-black active:bg-gray-700"
+            class="w-4/5 md:w-1/4 mx-auto p-2 rounded-md bg-gradient text-black active:bg-gray-700"
             @click="
                 search.value = '';
                 region.value = '';

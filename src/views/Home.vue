@@ -77,15 +77,21 @@ const handleScroll = () => {
     const scrollDelta = scrollPosition - previousScrollTop.value;
     previousScrollTop.value = scrollPosition;
 
+    let isDeviceMobile = window.innerWidth < 768;
+    let scaling = 0.008;
+    if (isDeviceMobile) {
+        scaling = 0.02;
+    }
+
     if (scrollDelta > 0) {
         // Scrolling down, zoom in
-        imageScale.value += 0.008;
+        imageScale.value += scaling;
         if (imageScale.value > 2.5) {
             imageScale.value = 2.5;
         }
     } else {
         // Scrolling up, zoom out
-        imageScale.value -= 0.008;
+        imageScale.value -= scaling / 2;
         if (imageScale.value < 1) {
             imageScale.value = 1;
         }

@@ -1,9 +1,10 @@
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
+import compression from 'vite-plugin-compression';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue()],
+    plugins: [vue(), compression()],
     server: {
         port: 3000
     },
@@ -13,6 +14,6 @@ export default defineConfig({
         __INTLIFY_PROD_DEVTOOLS__: false
     },
     build: {
-        outDir: '/var/www/html/dist/capitalympics'
+        outDir: 'dist'
     }
 });
