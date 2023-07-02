@@ -267,7 +267,7 @@ const handleScroll = () => {
                 </div>
             </div>
         </div>
-        <div class="flex justify-center items-center rotate-180">
+        <div class="flex justify-center items-center rotate-180 mb-10">
             <svg
                 class="arrow-icon w-12 h-12 animate-bounce cursor-pointer"
                 xmlns="http://www.w3.org/2000/svg"

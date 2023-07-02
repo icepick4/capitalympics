@@ -169,20 +169,6 @@ function toggleDropdown() {
                     >
                         {{ $t('quiz') }}
                     </RouterLink>
-                    <!-- <RouterLink
-                        to="/login"
-                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out"
-                        v-if="user === null"
-                    >
-                        {{ $t('login') }}</RouterLink
-                    >
-                    <RouterLink
-                        to="/signup"
-                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out"
-                        v-if="user === null"
-                    >
-                        {{ $t('signup') }}</RouterLink
-                    > -->
                 </div>
             </div>
         </div>
@@ -218,7 +204,7 @@ function toggleDropdown() {
 
     .menu {
         width: 100%;
-        height: 100%;
+        height: auto;
         right: 0;
         top: 100%;
     }

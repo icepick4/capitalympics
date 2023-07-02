@@ -79,7 +79,7 @@ defineProps<{
                                 <img
                                     src="/icons/google-maps.png"
                                     alt="Google Maps"
-                                    class="w-12 h-12"
+                                    class="w-8 h-8 sm:w-12 sm:h-12"
                                 />
                                 <p>{{ $t('visitGoogleMaps') }}</p>
                             </a>

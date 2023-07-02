@@ -105,5 +105,6 @@
     "resetScoresConfirmation": "¿Estás seguro de que quieres restablecer tus puntuaciones?",
     "resetScoresMessage": "Esta acción es irreversible y restablecerá todas tus puntuaciones (capitales y banderas).",
     "myLevel": "Mi nivel",
-    "seeScores": "Ver puntuaciones 🏆"
+    "seeScores": "Ver puntuaciones 🏆",
+    "nextLevel": "Siguiente nivel"
 }

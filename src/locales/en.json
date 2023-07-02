@@ -105,5 +105,6 @@
     "resetScoresConfirmation": "Are you sure you want to reset all your scores ?",
     "resetScoresMessage": "This action is irreversible and will reset all your scores (capitals and flags).",
     "myLevel": "My level",
-    "seeScores": "See my scores 🏆"
+    "seeScores": "See my scores 🏆",
+    "nextLevel": "Next level"
 }

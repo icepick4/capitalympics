@@ -191,7 +191,7 @@ const formatDate = (date: Date) => {
                 return 'Hoy';
         }
     }
-    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} `;
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} `;
 };
 
 const switchLearningType = () => {
@@ -232,31 +232,35 @@ onMounted(() => {
     <div
         class="w-full h-full flex flex-col items-start justify-start mt-10 mb-10"
     >
-        <div class="container mx-auto p-8">
+        <div class="container mx-auto p-4 sm:p-8">
             <!-- Informations de l'utilisateur -->
-            <div class="bg-gradient rounded-lg shadow-lg p-6 mb-4">
-                <div class="flex items-center justify-between mb-4">
+            <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-4">
+                <div
+                    class="flex column flex-row items-center justify-center mb-4 gap-4"
+                >
                     <div class="flex items-center">
                         <img
                             src="/icons/default_profile.png"
                             alt="User Avatar"
-                            class="w-16 h-16 rounded-full mr-4"
+                            class="w-10 h-10 sm:w-10 sm:h-10 rounded-full mr-4"
                         />
                         <h1 class="text-2xl mr-1 font-bold">{{ user.name }}</h1>
                     </div>
-                    <div class="flex items-center gap-4">
+                    <div
+                        class="flex items-center center justify-end gap-4 w-full"
+                    >
                         <RouterLink to="/profile/edit">
                             <img
                                 src="/icons/settings.png"
                                 alt="Edit account"
-                                class="w-8 h-8 ml-2 cursor-pointer hover:rotate-180 transition-all duration-500"
+                                class="w-8 h-8 cursor-pointer hover:rotate-180 transition-all duration-500"
                                 @click="$emit('close')"
                             />
                         </RouterLink>
                         <img
                             src="/icons/logout.png"
                             alt="Logout"
-                            class="w-8 h-8 ml-auto cursor-pointer hover:scale-110 transition-all"
+                            class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
                             @click="logOutConfirmation"
                         />
                     </div>
@@ -271,9 +275,11 @@ onMounted(() => {
                     {{ formatDate(new Date(user.created_at)) }}
                 </p>
             </div>
-            <div class="w-full flex justify-between items-center mb-4">
+            <div
+                class="w-full flex flex-col md:flex-row justify-between items-center gap-3 mb-4"
+            >
                 <div class="flex flex-row gap-5">
-                    <h1 class="text-4xl font-bold text-center">
+                    <h1 class="text-xl md:text-4xl font-bold text-center">
                         <template v-if="learningType === 'flag'">
                             <div class="flex flex-col gap-5">
                                 <div class="flex flex-row items-start gap-2">
@@ -372,6 +378,16 @@ onMounted(() => {
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 340px) {
+    .column {
+        flex-direction: column;
+    }
+
+    .center {
+        justify-content: center;
     }
 }
 </style>

@@ -13,13 +13,15 @@ const store = useStore();
 const user: User = store.getters.user;
 const token = store.getters.token;
 
-const userScore = ref('');
+const userScore = ref(<Level>-1);
+const nextUserLevel = ref(-1);
 const noScores = ref(false);
 const initFirstTimeScores = ref(false);
 const confirmingResetScores = ref(false);
 const getUserScore = async (): Promise<Level> => {
     try {
         const score: Level = await ApiService.getUserScore(user.id, token);
+        nextUserLevel.value = score + 1;
         if (score === -1) {
             noScores.value = true;
         } else {
@@ -45,7 +47,7 @@ const resetScores = async (): Promise<boolean> => {
         console.log(error);
     } finally {
         initFirstTimeScores.value = false;
-        userScore.value = getLevelName(await getUserScore());
+        userScore.value = (await getUserScore()) as Level;
     }
     return false;
 };
@@ -54,7 +56,7 @@ onBeforeMount(async () => {
     if (user === null) {
         router.push('/login');
     } else {
-        userScore.value = getLevelName(await getUserScore());
+        userScore.value = (await getUserScore()) as Level;
     }
 });
 </script>
@@ -66,7 +68,7 @@ onBeforeMount(async () => {
     >
         <BlurContainer
             v-if="
-                initFirstTimeScores || userScore == '' || confirmingResetScores
+                initFirstTimeScores || userScore == -1 || confirmingResetScores
             "
             class="w-1/2"
         >
@@ -90,16 +92,21 @@ onBeforeMount(async () => {
         >
             <div class="flex flex-col gap-5">
                 <h1 class="text-center text-2xl">{{ $t('myLevel') }} :</h1>
-                <div
-                    v-if="userScore != ''"
-                    class="bg-gradient rounded-lg shadow-lg p-6 mb-8"
-                >
-                    <h1 class="text-black text-center text-4xl">
-                        {{ userScore }}
-                    </h1>
+                <div v-if="userScore != -1">
+                    <div class="bg-gradient rounded-lg shadow-lg p-6 mb-8">
+                        <h1 class="text-black text-center text-4xl">
+                            {{ getLevelName(userScore) }}
+                        </h1>
+                    </div>
+                    <div class="flex flex-col justify-center items-center">
+                        {{ $t('nextLevel') }} :
+                        <span class="text-xl">{{
+                            getLevelName(nextUserLevel as Level)
+                        }}</span>
+                    </div>
                 </div>
             </div>
-            <div class="flex flex-row gap-10">
+            <div class="flex flex-col md:flex-row gap-10">
                 <div class="flex flex-col items-center gap-5">
                     <h1>{{ $t('capitals') }}</h1>
                     <RouterLink
