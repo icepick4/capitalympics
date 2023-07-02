@@ -120,22 +120,10 @@ const handleScroll = () => {
         <div class="relative w-full mt-20 -z-10 2xl:hidden">
             <img
                 src="/home/landing2.jpg"
-                alt="about"
+                alt="Photo of Ryan Kim on Unsplash"
                 class="w-full h-[35rem] sm:h-[26rem] object-cover transition-all duration-100 ease-linear"
                 :style="{ transform: `scale(${imageScale})` }"
             />
-            <span class="right-1 top-0 text-white absolute text-sm">
-                Photo of
-                <a
-                    href="https://unsplash.com/@ryankim246?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-                    >Ryan Kim</a
-                >
-                on
-                <a
-                    href="https://unsplash.com/fr/photos/_AydCUsXwoI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-                    >Unsplash</a
-                >
-            </span>
         </div>
         <div class="flex justify-center items-center">
             <svg

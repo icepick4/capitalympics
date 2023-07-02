@@ -3,7 +3,7 @@ import { CountryI } from '../models/Country';
 import { Level, User, UserScore } from '../models/User';
 import { Lang, LearningType, ScoreType } from '../types/common';
 export default class ApiService {
-    public static readonly API_URL: string = 'http://192.168.1.44:3001';
+    public static readonly API_URL: string = 'https://capitalympics.com/api';
 
     public static async getCountries(
         max: number = 0,
