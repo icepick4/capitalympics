@@ -9,6 +9,7 @@ import Planet from '../components/Planet.vue';
 import { CountryI } from '../models/Country';
 import { User } from '../models/User';
 import ApiService from '../services/apiService';
+import { getLanguage } from '../utils/common';
 
 const countries = ref<CountryI[]>([]);
 const store = useStore();
@@ -54,8 +55,9 @@ const scrollTo = (id: string) => {
 };
 
 onBeforeMount(async () => {
+    let lang = getLanguage();
     try {
-        let fetchedCountries = await ApiService.getCountries(8, 'en');
+        let fetchedCountries = await ApiService.getCountries(8, lang);
         countries.value = fetchedCountries
             .concat(fetchedCountries)
             .concat(fetchedCountries);
