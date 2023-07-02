@@ -13,7 +13,7 @@ const store = useStore();
 const user: User = store.getters.user;
 const token = store.getters.token;
 
-const userScore = ref(<Level>-1);
+const userScore = ref(<Level>-2);
 const nextUserLevel = ref(-1);
 const noScores = ref(false);
 const initFirstTimeScores = ref(false);
@@ -68,7 +68,10 @@ onBeforeMount(async () => {
     >
         <BlurContainer
             v-if="
-                initFirstTimeScores || userScore == -1 || confirmingResetScores
+                (initFirstTimeScores ||
+                    userScore == -1 ||
+                    confirmingResetScores) &&
+                (!noScores || initFirstTimeScores)
             "
             class="w-1/2"
         >
@@ -83,7 +86,7 @@ onBeforeMount(async () => {
                 @confirm="resetScores"
                 @cancel="confirmingResetScores = false"
             />
-            <Loader v-else :title="$t('loading')" />
+            <Loader v-else-if="initFirstTimeScores" :title="$t('loading')" />
         </BlurContainer>
 
         <div

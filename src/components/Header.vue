@@ -56,7 +56,7 @@ onUnmounted(() => {
                 class="w-auto h-full flex justify-center items-center"
             >
                 <img
-                    src="/logo2.png"
+                    src="/logo.png"
                     alt="logo"
                     class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-22 xl:h-22"
                 />

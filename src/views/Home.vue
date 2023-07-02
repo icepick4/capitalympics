@@ -121,7 +121,7 @@ const handleScroll = () => {
         />
         <div class="relative w-full mt-20 -z-10 2xl:hidden">
             <img
-                src="/home/landing2.jpg"
+                src="/home/landing.jpg"
                 alt="Photo of Ryan Kim on Unsplash"
                 class="w-full h-[35rem] sm:h-[26rem] object-cover transition-all duration-100 ease-linear"
                 :style="{ transform: `scale(${imageScale})` }"
