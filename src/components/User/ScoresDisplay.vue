@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import { CountryDetails } from '../../types/common';
 import { getLevelName } from '../../utils/common';
-import { CountryDetails } from './UserInfo.vue';
 
 defineProps<{
     countries: CountryDetails[];

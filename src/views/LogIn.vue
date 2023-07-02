@@ -43,10 +43,8 @@ const logIn = async () => {
             last_activity: getCurrentMySQLDate()
         });
         t.locale.value = store.getters.user.language;
-        setTimeout(() => {
-            hasLoggedIn.value = false;
-            router.push('/profile');
-        }, 2000);
+        hasLoggedIn.value = false;
+        router.push('/profile');
     } catch (e) {
         userFound.value = false;
         signed.value = true;

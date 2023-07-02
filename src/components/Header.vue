@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { onMounted, onUnmounted, ref, watchEffect } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useStore } from 'vuex';
 import { User } from '../models/User';
@@ -11,10 +11,39 @@ watchEffect(() => {
 });
 
 const isDropdownOpen = ref(false);
+const clickCount = ref(0);
 
 function toggleDropdown() {
     isDropdownOpen.value = !isDropdownOpen.value;
+    if (isDropdownOpen.value) {
+        document.addEventListener('click', closeMenuOnClickOutside);
+    } else {
+        clickCount.value = 0;
+        document.removeEventListener('click', closeMenuOnClickOutside);
+    }
 }
+
+const closeMenuOnClickOutside = (event: MouseEvent) => {
+    clickCount.value++;
+    if (clickCount.value === 1) {
+        return;
+    }
+    if (menuRef.value && !menuRef.value.contains(event.target as Node)) {
+        isDropdownOpen.value = false;
+        clickCount.value = 0;
+        document.removeEventListener('click', closeMenuOnClickOutside);
+    }
+};
+
+const menuRef = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+    menuRef.value = document.querySelector('.menu');
+});
+
+onUnmounted(() => {
+    document.removeEventListener('click', closeMenuOnClickOutside);
+});
 </script>
 
 <template>
@@ -142,8 +171,9 @@ function toggleDropdown() {
                 :class="{
                     'fade-left': isDropdownOpen
                 }"
+                ref="menu"
             >
-                <div class="py-2">
+                <div class="py-2" @click="toggleDropdown">
                     <RouterLink
                         to="/countries"
                         class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"

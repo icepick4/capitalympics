@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { LearningState } from '../../../types/common';
+import { ScoreType } from '../../../types/common';
 import ButtonTemplate from './ButtonTemplate.vue';
 
 defineProps<{
     user_id: number;
     token: string;
-    click: (type: LearningState) => void;
+    click: (type: ScoreType) => void;
 }>();
 </script>
 

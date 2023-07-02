@@ -2,9 +2,9 @@
 import { onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import { Level, User, UserScore } from '../../models/User';
+import { User, UserScore } from '../../models/User';
 import ApiService from '../../services/apiService';
-import { LearningType, Sort } from '../../types/common';
+import { CountryDetails, LearningType, Sort } from '../../types/common';
 import { getLevelName } from '../../utils/common';
 import BlurContainer from '../BlurContainer.vue';
 import Loader from '../Loader.vue';
@@ -12,12 +12,6 @@ import Modal from '../Modal.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
 const store = useStore();
 const router = useRouter();
-export interface CountryDetails {
-    name: string;
-    alpha3Code: string;
-    flag: string;
-    level: Level;
-}
 
 defineEmits(['close']);
 
@@ -34,7 +28,7 @@ const logOut = () => {
         store.dispatch('logOut');
         hasLoggedOut.value = false;
         router.push('/login');
-    }, 500);
+    }, 200);
 };
 
 const token = store.getters.token;
