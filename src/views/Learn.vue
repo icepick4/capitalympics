@@ -13,6 +13,8 @@ const store = useStore();
 const user: User = store.getters.user;
 const token = store.getters.token;
 
+const loading = ref(true);
+
 const userScore = ref(<Level>-2);
 const nextUserLevel = ref(-1);
 const noScores = ref(false);
@@ -27,6 +29,7 @@ const getUserScore = async (): Promise<Level> => {
         } else {
             noScores.value = false;
         }
+        loading.value = false;
         return score;
     } catch (error) {
         console.log(error);
@@ -62,6 +65,9 @@ onBeforeMount(async () => {
 </script>
 
 <template>
+    <BlurContainer v-if="loading">
+        <Loader :title="$t('loading')" />
+    </BlurContainer>
     <div
         v-if="user !== null"
         class="flex flex-col justify-center items-center gap-20 my-5 h-full"
