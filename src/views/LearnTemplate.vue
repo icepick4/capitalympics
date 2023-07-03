@@ -13,7 +13,8 @@ import { CountryI } from '../models/Country';
 import { User } from '../models/User';
 import ApiService from '../services/apiService';
 import { Redirection } from '../types/Redirection';
-import { CurrentState, LearningType, ScoreType } from '../types/common';
+import { CurrentState, LearningType, Region, ScoreType } from '../types/common';
+import { getLanguage, regions } from '../utils/common';
 import { Redirections } from '../utils/redirections';
 const route = useRoute();
 const store = useStore();
@@ -26,14 +27,17 @@ const redirection: Redirection = Redirections.getRedirectionByLink('/learn');
 const user: User = store.getters.user;
 const token = store.getters.token;
 const country = ref<CountryI>();
-const getNewCountry = async () => {
+const currentRegion = ref<Region>('World');
+
+const getNewCountry = async (region: Region) => {
     try {
         fetchingCountry.value = true;
         country.value = await ApiService.getNewCountryToLearn(
             user.id,
             token,
             currentLearning,
-            user.language
+            user.language,
+            region
         );
         // To improve in the future with caching flags images
         setTimeout(() => {
@@ -61,7 +65,7 @@ const handleClick = (type: ScoreType) => {
         console.log(error);
     } finally {
         currentState.value = 'starting';
-        getNewCountry();
+        getNewCountry(currentRegion.value);
     }
 };
 
@@ -70,7 +74,7 @@ const handleClickSee = () => {
 };
 
 onBeforeMount(() => {
-    getNewCountry();
+    getNewCountry(currentRegion.value);
 });
 </script>
 
@@ -90,6 +94,20 @@ onBeforeMount(() => {
     <div
         class="flex flex-col w-full md:w-auto md:h-auto justify-center items-center my-10 gap-10"
     >
+        <select
+            v-model="currentRegion"
+            class="w-4/5 md:w-1/4 mx-auto p-2 rounded-md bg-gradient"
+            @change="getNewCountry(currentRegion)"
+        >
+            <option
+                class="bg-white"
+                v-for="region in regions[getLanguage()]"
+                :key="region[0]"
+                :value="region[1]"
+            >
+                {{ region[0] }}
+            </option>
+        </select>
         <div
             v-if="country != undefined"
             class="w-5/6 md:w-auto h-full flex flex-col items-center justify-center"

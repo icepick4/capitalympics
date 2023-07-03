@@ -17,6 +17,7 @@ defineEmits(['close']);
 
 const store = useStore();
 const user: User = store.getters.user;
+const firstUsername = user.name;
 const username: inputState = reactive({
     content: user.name,
     hasFocused: undefined
@@ -68,6 +69,7 @@ const saveProfile = async () => {
             hasSaved.value = true;
             if (!response) {
                 usernameAlreadyTaken.value = true;
+                user.name = firstUsername;
             } else {
                 usernameAlreadyTaken.value = false;
                 store.commit('setUser', user);

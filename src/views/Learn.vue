@@ -91,7 +91,7 @@ onBeforeMount(async () => {
 
         <div
             v-if="!noScores"
-            class="flex flex-col justify-center items-center w-5/6 sm:w-2/3 md:w-1/2 lg:w-1/3 gap-20"
+            class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-20"
         >
             <div class="flex flex-col gap-5">
                 <h1 class="text-center text-2xl">{{ $t('myLevel') }} :</h1>

@@ -56,6 +56,33 @@ export const languages = [
     { value: 'es', text: 'Español' }
 ];
 
+export const regions = {
+    fr: [
+        ['Monde', 'World'],
+        ['Afrique', 'Africa'],
+        ['Amériques', 'Americas'],
+        ['Asie', 'Asia'],
+        ['Europe', 'Europe'],
+        ['Océanie', 'Oceania']
+    ],
+    en: [
+        ['World', 'World'],
+        ['Africa', 'Africa'],
+        ['Americas', 'Americas'],
+        ['Asia', 'Asia'],
+        ['Europe', 'Europe'],
+        ['Oceania', 'Oceania']
+    ],
+    es: [
+        ['Mundo', 'World'],
+        ['África', 'Africa'],
+        ['Américas', 'Americas'],
+        ['Asia', 'Asia'],
+        ['Europa', 'Europe'],
+        ['Oceanía', 'Oceania']
+    ]
+};
+
 export const getLevelName = (level: Level): string => {
     const user: User = store.getters.user;
     const language = user ? user.language : 'en';

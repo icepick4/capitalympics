@@ -8,12 +8,11 @@ import Modal from '../components/Modal.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
 import { Redirection } from '../types/Redirection';
-import { getLanguage } from '../utils/common';
+import { getLanguage, regions } from '../utils/common';
 import { Redirections } from '../utils/redirections';
 interface State {
     countries: CountryI[];
 }
-const regions: string[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
 const noCountriesRedirection: Redirection =
     Redirections.getRedirectionByLink('/home');
@@ -33,7 +32,10 @@ const region = reactive({
 const finishedWaited = ref(false);
 
 const filteredCountries = () => {
-    if (search.value.length > 0 || region.value.length > 0) {
+    if (
+        search.value.length > 0 ||
+        (region.value.length > 0 && region.value !== 'World')
+    ) {
         return state.countries.filter((country) => {
             return (
                 country.name
@@ -48,7 +50,7 @@ const filteredCountries = () => {
 };
 
 onBeforeMount(async () => {
-    let lang = getLanguage();
+    const lang = getLanguage();
     try {
         state.countries = await ApiService.getCountries(0, lang);
     } catch (error) {
@@ -76,14 +78,13 @@ onBeforeMount(async () => {
             v-model="region.value"
             class="w-4/5 md:w-1/4 mx-auto p-2 rounded-md bg-gradient"
         >
-            <option class="bg-white" value="">{{ $t('all') }}</option>
             <option
                 class="bg-white"
-                v-for="region in regions"
-                :key="region"
-                :value="region"
+                v-for="region in regions[getLanguage()]"
+                :key="region[0]"
+                :value="region[1]"
             >
-                {{ region }}
+                {{ region[0] }}
             </option>
         </select>
 

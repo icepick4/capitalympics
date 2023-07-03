@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { CountryI } from '../models/Country';
 import { Level, User, UserScore } from '../models/User';
-import { Lang, LearningType, ScoreType } from '../types/common';
+import { Lang, LearningType, Region, ScoreType } from '../types/common';
 export default class ApiService {
     public static readonly API_URL: string = 'http://localhost:3001/api';
 
@@ -190,11 +190,12 @@ export default class ApiService {
         user_id: number,
         token: string,
         learning_type: LearningType,
-        lang: Lang
+        lang: Lang,
+        region: Region
     ): Promise<CountryI> {
         try {
             const response = await axios.get(
-                `${ApiService.API_URL}/users/${user_id}/country/play/${learning_type}?lang=${lang}`,
+                `${ApiService.API_URL}/users/${user_id}/country/play/${learning_type}?lang=${lang}&region=${region}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`

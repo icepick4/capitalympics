@@ -11,3 +11,10 @@ export interface CountryDetails {
     flag: string;
     level: Level;
 }
+export type Region =
+    | 'Africa'
+    | 'Americas'
+    | 'Asia'
+    | 'Europe'
+    | 'Oceania'
+    | 'World';
