@@ -3,7 +3,7 @@ import { CountryI } from '../models/Country';
 import { Level, User, UserScore } from '../models/User';
 import { Lang, LearningType, ScoreType } from '../types/common';
 export default class ApiService {
-    public static readonly API_URL: string = 'https://capitalympics.com/api';
+    public static readonly API_URL: string = 'http://localhost:3001/api';
 
     public static async getCountries(
         max: number = 0,
@@ -182,7 +182,7 @@ export default class ApiService {
             }
             return false;
         } catch (error) {
-            throw new Error('Failed update user');
+            return false;
         }
     }
 

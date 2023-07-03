@@ -107,5 +107,6 @@
     "resetScoresMessage": "Esta acción es irreversible y restablecerá todas tus puntuaciones (capitales y banderas).",
     "myLevel": "Mi nivel",
     "seeScores": "Ver puntuaciones 🏆",
-    "nextLevel": "Siguiente nivel"
+    "nextLevel": "Siguiente nivel",
+    "errorSavingProfile": "Error al guardar el perfil"
 }

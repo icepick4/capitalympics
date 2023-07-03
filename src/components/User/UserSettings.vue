@@ -24,6 +24,7 @@ const username: inputState = reactive({
 const language = ref(user.language);
 const hasSaved = ref(false);
 const displaySaveError = ref(false);
+const usernameAlreadyTaken = ref(false);
 const t = useI18n();
 
 const validateUsername = () => {
@@ -48,18 +49,30 @@ const typedUsername = () => {
 
 const closeUserTakenModal = () => {
     displaySaveError.value = false;
+    usernameAlreadyTaken.value = false;
     hasSaved.value = false;
 };
 
-const saveProfile = () => {
-    hasSaved.value = true;
+const saveProfile = async () => {
     if (validateUsername()) {
-        user.name = username.content;
+        if (user.name != username.content) {
+            user.name = username.content;
+        }
         user.language = language.value;
         try {
-            ApiService.updateUser(user.id, store.getters.token, user);
-            store.commit('setUser', user);
-            t.locale.value = language.value;
+            let response = await ApiService.updateUser(
+                user.id,
+                store.getters.token,
+                user
+            );
+            hasSaved.value = true;
+            if (!response) {
+                usernameAlreadyTaken.value = true;
+            } else {
+                usernameAlreadyTaken.value = false;
+                store.commit('setUser', user);
+                t.locale.value = language.value;
+            }
         } catch (error) {
             displaySaveError.value = true;
         }
@@ -81,6 +94,15 @@ const saveProfile = () => {
         <Modal
             v-else-if="displaySaveError"
             :title="$t('error')"
+            :message="$t('errorSavingProfile')"
+            background-color="white"
+            title-color="error"
+            :redirection="null"
+            @close="closeUserTakenModal"
+        />
+        <Modal
+            v-else-if="usernameAlreadyTaken"
+            :title="$t('error')"
             :message="$t('usernameTaken')"
             background-color="white"
             title-color="error"
@@ -98,14 +120,13 @@ const saveProfile = () => {
         />
     </BlurContainer>
     <div
-        class="w-11/12 sm:w-4/5 xl:w-2/3 2xl:w-1/2 mx-auto p-0 sm:p-8 flex-col"
+        class="w-11/12 sm:w-5/6 xl:w-3/4 2xl:w-2/3 mx-auto p-0 sm:p-8 flex-col"
     >
-        <!-- Informations de l'utilisateur -->
         <div
             class="bg-gradient rounded-lg shadow-lg p-4 sm:p-6 mb-8 flex flex-col gap-10"
         >
             <div class="flex flex-row justify-between items-center">
-                <h1 class="text-2xl">{{ $t('editProfile') }}</h1>
+                <h1 class="text-xl sm:text-2xl">{{ $t('editProfile') }}</h1>
                 <RouterLink to="/profile">
                     <img
                         src="/icons/close.png"
@@ -115,7 +136,10 @@ const saveProfile = () => {
                     />
                 </RouterLink>
             </div>
-            <div class="flex flex-col lg:flex-row justify-between">
+            <form
+                @submit.prevent="saveProfile"
+                class="flex flex-col lg:flex-row justify-between"
+            >
                 <div class="flex items-center justify-between mb-8">
                     <div
                         class="flex flex-col lg:flex-row items-center gap-10 w-full"
@@ -167,15 +191,14 @@ const saveProfile = () => {
                     </div>
                 </div>
                 <div class="flex justify-center items-center">
-                    <button
+                    <input
                         class="block h-auto p-2 text-black duration-200 border border-gray-200 rounded-md bg-gray-50 hover:bg-gray-300"
-                        @click="saveProfile"
                         :disabled="areInputsSame()"
-                    >
-                        {{ $t('saveProfile') }}
-                    </button>
+                        :value="$t('saveProfile')"
+                        type="submit"
+                    />
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </template>

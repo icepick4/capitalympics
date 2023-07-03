@@ -107,5 +107,6 @@
     "resetScoresMessage": "Cette action est irréversible et va supprimer tous vos scores (Capitales et Drapeaux).",
     "myLevel": "Mon niveau",
     "seeScores": "Voir mes scores 🏆",
-    "nextLevel": "Prochain niveau"
+    "nextLevel": "Prochain niveau",
+    "errorSavingProfile": "Une erreur s'est produite lors de l'enregistrement de votre profil"
 }

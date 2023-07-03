@@ -107,5 +107,6 @@
     "resetScoresMessage": "This action is irreversible and will reset all your scores (capitals and flags).",
     "myLevel": "My level",
     "seeScores": "See my scores 🏆",
-    "nextLevel": "Next level"
+    "nextLevel": "Next level",
+    "errorSavingProfile": "Error while saving your profile"
 }
