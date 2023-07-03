@@ -153,7 +153,7 @@ const isFormValid = () => {
                     <img
                         class="object-cover w-full h-full"
                         src="/signup.jpg"
-                        alt=""
+                        alt="background"
                     />
                 </div>
                 <div

@@ -78,7 +78,11 @@ const logIn = async () => {
         class="relative py-10 bg-gray-900 sm:py-16 lg:py-24 h-full flex items-center"
     >
         <div class="absolute inset-0">
-            <img class="object-cover w-full h-full" src="/signup.jpg" alt="" />
+            <img
+                class="object-cover w-full h-full"
+                src="/signup.jpg"
+                alt="background"
+            />
         </div>
         <div class="absolute bottom-0 right-1 text-white z-10">
             Photo of
@@ -145,7 +149,7 @@ const logIn = async () => {
 
                                 <input
                                     type="text"
-                                    placeholder="Enter your name"
+                                    :placeholder="$t('usernamePlaceholder')"
                                     class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-black"
                                     v-model="username"
                                 />
@@ -182,7 +186,7 @@ const logIn = async () => {
 
                                 <input
                                     type="password"
-                                    placeholder="Enter your password"
+                                    :placeholder="$t('passwordPlaceholder')"
                                     class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-black"
                                     v-model="password"
                                 />

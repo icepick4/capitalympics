@@ -120,6 +120,7 @@ onBeforeMount(async () => {
                             <img
                                 src="/learn/capitals.jpg"
                                 class="h-full w-auto"
+                                alt="capitals button image"
                             />
                             <span
                                 class="absolute -bottom-6 right-0 p-1 text-xs text-white bg-black bg-opacity-50 font-extralight"
@@ -145,7 +146,11 @@ onBeforeMount(async () => {
                         class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md hover:scale-105"
                     >
                         <div class="relative w-full h-full">
-                            <img src="/learn/flags.jpg" class="h-full w-auto" />
+                            <img
+                                src="/learn/flags.jpg"
+                                class="h-full w-auto"
+                                alt="flags button image"
+                            />
                             <span
                                 class="absolute -bottom-6 right-0 p-1 text-xs text-white bg-black bg-opacity-50 font-extralight"
                             >

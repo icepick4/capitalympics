@@ -14,6 +14,6 @@ export default defineConfig({
         __INTLIFY_PROD_DEVTOOLS__: false
     },
     build: {
-        outDir: 'dist'
+        outDir: '/var/www/html/dist/capitalympics'
     }
 });

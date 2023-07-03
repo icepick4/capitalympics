@@ -17,6 +17,7 @@ defineProps<{
             <img
                 class="w-36 lg:w-52 h-auto border-2 border-black rounded"
                 :src="country.flag"
+                :alt="country.name"
             />
         </div>
         <div class="text-center">

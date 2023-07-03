@@ -1,25 +1,22 @@
 <script setup lang="ts">
 import { onBeforeMount, onUnmounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
 import BlurContainer from '../components/BlurContainer.vue';
 import CarouselAuto from '../components/CarouselAuto.vue';
 import Loader from '../components/Loader.vue';
 import Planet from '../components/Planet.vue';
 import { CountryI } from '../models/Country';
-import { User } from '../models/User';
 import ApiService from '../services/apiService';
 import { getLanguage } from '../utils/common';
 
 const countries = ref<CountryI[]>([]);
-const store = useStore();
 const router = useRouter();
-const user: User = ref(store.getters.user);
 const planetMouseDown = ref(false);
 const currentCountryHovered = ref<CountryI | null>(null);
 const planetLoaded = ref(false);
 const imageScale = ref(1);
 const previousScrollTop = ref(0);
+const displayPlanet = ref(window.innerWidth > 1536);
 
 const handlePlanetMouseDown = () => {
     planetMouseDown.value = true;
@@ -104,7 +101,7 @@ const handleScroll = () => {
 </script>
 
 <template>
-    <BlurContainer v-if="!planetLoaded">
+    <BlurContainer v-if="(!planetLoaded && displayPlanet) || !countries.length">
         <Loader />
     </BlurContainer>
     <div
@@ -119,13 +116,14 @@ const handleScroll = () => {
             </p>
         </div>
         <Planet
-            class="cursor-grab hidden 2xl:block"
+            v-if="displayPlanet"
+            class="cursor-grab"
             @mousedown="handlePlanetMouseDown"
             @mouseup="handlePlanetMouseUp"
             :class="{ 'cursor-grabbing': planetMouseDown }"
             @finishedLoading="planetLoaded = true"
         />
-        <div class="relative w-full mt-20 -z-10 2xl:hidden">
+        <div v-else class="relative w-full mt-20 -z-10">
             <img
                 src="/home/landing.jpg"
                 alt="Photo of Ryan Kim on Unsplash"
@@ -170,6 +168,7 @@ const handleScroll = () => {
             <img
                 src="/home/countries-home.svg"
                 class="w-2/3 sm:w-2/5 lg:w-1/2 -z-10 scale-110"
+                alt="Countries"
             />
             <h1 class="text-2xl sm:text-4xl text-center">
                 Découvrez tous les pays !
@@ -180,7 +179,8 @@ const handleScroll = () => {
                 <template v-for="country in countries" :key="country.name">
                     <img
                         :src="country.flag"
-                        class="carousel-item cursor-pointer"
+                        :alt="country.name"
+                        class="carousel-item cursor-pointer w-auto h-auto"
                         @click="navigateToCountry(country)"
                         @mouseover="currentCountryHovered = country"
                         @mouseleave="currentCountryHovered = null"
@@ -232,7 +232,11 @@ const handleScroll = () => {
             <div
                 class="w-full lg:w-1/2 flex flex-row justify-center items-center lg:p-10 gap-3 sm:gap-10"
             >
-                <img src="/home/login-home.svg" class="w-1/2" />
+                <img
+                    src="/home/login-home.svg"
+                    class="w-1/2"
+                    alt="Login home image"
+                />
                 <div class="flex flex-col gap-5 items-center justify-center">
                     <p class="text-center text-lg sm:text-xl">
                         Connectez-vous pour commencer à vous entrainez !
@@ -248,7 +252,11 @@ const handleScroll = () => {
             <div
                 class="w-full lg:w-1/2 lg:p-10 flex flex-row justify-center items-center gap-3 sm:gap-10"
             >
-                <img src="/home/register-home.svg" class="w-1/2" />
+                <img
+                    src="/home/register-home.svg"
+                    class="w-1/2"
+                    alt="Register home image"
+                />
 
                 <div class="flex flex-col gap-5 items-center justify-center">
                     <p class="text-center text-lg sm:text-xl">
