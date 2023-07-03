@@ -4,9 +4,8 @@
 
 <img src="https://raw.githubusercontent.com/icepick4/capitalympics/main/public/logo.png" alt="Capitalympics Logo" width="200" />
 
-_This images has been generated with MidJourney_
 
-With this site learn all the capitals and flags of the world, search filtered and sorted countries and learn more about them through the user interface!
+Learn flags and capitals of the world !
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-vue.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
@@ -14,37 +13,62 @@ With this site learn all the capitals and flags of the world, search filtered an
 
 </div>
 
-# Vue 3 + TypeScript + Vite + TailwindCSS
+🌍 Capitalympics is a web application that helps you learn the flags and capitals of countries around the world. It provides a filtered learning experience by allowing you to focus on specific regions of the world. You can track your progress with individual scores for each country as well as an overall score. The application also allows you to view your statistics on your profile and sort and filter them by category.
 
-This project is built with Vite, Vue.js 3, and TailwindCSS and is intended as a learning project. Vite provides a modern development experience with fast builds and instant hot module replacement. Vue.js is a popular progressive JavaScript framework for building user interfaces, and TailwindCSS is a utility-first CSS framework that provides a set of pre-defined CSS classes to help you quickly build custom designs. Together, these frameworks offer a great opportunity to learn modern web development techniques.
+📊 Get ready to challenge yourself, improve your knowledge, and become a global expert!
 
-## How to Run in Development Mode
+# Features
 
-To run the project in development mode, follow these steps:
+✅ Learn flags and capitals of countries worldwide \
+✅ Filter learning by regions of the world \
+✅ Track scores for each country and overall progress \
+✅ View comprehensive statistics on your profile \
+✅ Sort and filter statistics by category \
+✅ Create an account to unlock enhanced features \
+✅ Accessible country information, including:
+  - 🌐 Name
+  - 🏛️ Official name
+  - 🌆 Capital
+  - 🌍 Region
+  - 🔍 Subregion
+  - 👥 Population
+  - 🗺️ Google Maps link
+  - 🚩 Flag
+  - 🌍 Alpha-3 code
+  - 💰 Currencies
 
-1. Clone the repository or fork this project.
-2. Install dependencies using `npm install`.
-3. Run the development server using `npm run dev`.
+🌐 Capitalympics is fully translated into multiple languages (English, French, and Spanish). \ 
+If your preferred language is not supported, please open an issue on the repository to request a new language.
 
-This will start a local server at `http://localhost:3000/` where you can view the app.
+# Technologies Used
 
-## How to Build for Production
+🚀 Built with Vue.js 3, Vite, Tailwind CSS, and TypeScript
 
-To build the project for production, follow these steps:
+# Getting Started
 
-1. Clone the repository or fork this project.
-2. Install dependencies using `npm install`.
-3. Build the project using `npm run build`.
+1.  Visit the [Capitalympics website](https://capitalympics.com).
+2.  Sign up for an account to unlock the learning features.
+3.  Explore the vast collection of country information, which is accessible without an account.
+4.  Start your learning journey by selecting a region.
+5.  Track your progress and delve into statistics on your profile page.
 
-This will generate a `dist` directory containing the production-ready code.
+# Screenshots
 
-# Other Features
+## Home
 
-Aside from learning the capitals and flags of the world, the app also allows you to filter and sort countries based on different criteria. You can also view additional information about each country, such as its population, area, and official currencies.
+![image](https://github.com/icepick4/capitalympics/assets/82316285/8247184b-b2ab-4592-9f50-63c2e0675767)
+
+## Statistics
+
+![image](https://github.com/icepick4/capitalympics/assets/82316285/dbb8e136-bb31-400c-82df-2f5315990f36)
+
+## Country Information
+
+![image](https://github.com/icepick4/capitalympics/assets/82316285/b29df73e-7537-4d2c-ab38-3c4a5806193f)
 
 # License
 
-This project is licensed under the MIT license. See the `LICENSE` file for more details.
+📝 This project is licensed under the MIT license. See the `LICENSE` file for more details.
 
 # Author
 
@@ -52,7 +76,7 @@ This project was created by [icepick4](https://github.com/icepick4). If you have
 
 # Contributing
 
-Contributions are always welcome! Here are some ways you can contribute:
+🤝 Contributions are always welcome! Here are some ways you can contribute:
 
 -   Report bugs by creating an issue.
 -   Submit pull requests to fix bugs or add new features.
