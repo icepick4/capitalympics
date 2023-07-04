@@ -1,10 +1,49 @@
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
 import compression from 'vite-plugin-compression';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue(), compression()],
+    plugins: [
+        vue(),
+        compression(),
+        VitePWA({
+            manifest: {
+                name: 'Capitalympics',
+                short_name: 'Capitalympics',
+                description:
+                    'Learn the capitals and flags of the world in a fun way!',
+                icons: [
+                    {
+                        src: 'pwa-192x192.png',
+                        sizes: '192x192',
+                        type: 'image/png'
+                    },
+                    {
+                        src: 'pwa-512x512.png',
+                        sizes: '512x512',
+                        type: 'image/png'
+                    },
+                    {
+                        src: 'pwa-512x512.png',
+                        sizes: '512x512',
+                        type: 'image/png',
+                        purpose: 'any maskable'
+                    }
+                ],
+                start_url: '/',
+                display: 'standalone',
+                background_color: '#000000',
+                theme_color: '#000000',
+                lang: 'en',
+                orientation: 'portrait-primary'
+            },
+            registerType: 'prompt',
+            includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png']
+        })
+    ],
+
     server: {
         port: 3000
     },
