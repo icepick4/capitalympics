@@ -71,12 +71,6 @@ onUnmounted(() => {
                     {{ $t('countries') }}
                 </RouterLink>
                 <RouterLink
-                    to="/learn"
-                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
-                >
-                    {{ $t('learn') }}
-                </RouterLink>
-                <RouterLink
                     to="/about"
                     class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                 >
