@@ -103,6 +103,13 @@ onUnmounted(() => {
                     {{ $t('signup') }}</RouterLink
                 >
                 <RouterLink
+                    to="/learn"
+                    class="hidden sm:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    v-if="user !== null"
+                >
+                    {{ $t('learn') }}
+                </RouterLink>
+                <RouterLink
                     to="/profile"
                     class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
                     v-if="user !== null"
@@ -112,13 +119,6 @@ onUnmounted(() => {
                         alt="avatar"
                         class="w-10 h-10 rounded-full"
                     />
-                </RouterLink>
-                <RouterLink
-                    to="/learn"
-                    class="hidden sm:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
-                    v-if="user !== null"
-                >
-                    {{ $t('learn') }}
                 </RouterLink>
             </div>
             <div
