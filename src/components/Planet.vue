@@ -41,7 +41,7 @@ material.map!.colorSpace = THREE.SRGBColorSpace;
 material.map!.anisotropy = 16;
 const planet = new THREE.Mesh(geometry, material);
 
-const setLyonCameraView = () => {
+const setParisCameraView = () => {
     camera.position.set(0, 0, 2.25);
     camera.lookAt(0, 0, 0);
     planet.rotation.y = -1.5;
@@ -101,17 +101,17 @@ const initThreeScene = () => {
         return { x, y, z };
     }
 
-    let { x, y, z } = calculatePosition(45.75, 4.85);
+    let { x, y, z } = calculatePosition(48.864716, 2.349014);
 
-    let lyonPin = new THREE.Mesh(
+    let parisPin = new THREE.Mesh(
         new THREE.SphereGeometry(0.02, 30, 30),
         new THREE.MeshBasicMaterial({ color: 0xff0000 })
     );
 
-    lyonPin.position.set(x, y, z);
+    parisPin.position.set(x, y, z);
     planet.rotation.y = -1.5;
     planet.rotation.x = 0.5;
-    planet.add(lyonPin);
+    planet.add(parisPin);
     scene.add(planet);
     scene.add(camera);
 
@@ -141,9 +141,9 @@ const initThreeScene = () => {
     >
         <p
             class="text-2xl absolute right-0 bottom-0 select-none hover:underline cursor-pointer"
-            @click="setLyonCameraView"
+            @click="setParisCameraView"
         >
-            Lyon, France
+            Paris, France
         </p>
     </div>
 </template>

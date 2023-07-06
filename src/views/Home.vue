@@ -105,7 +105,7 @@ const handleScroll = () => {
         <Loader />
     </BlurContainer>
     <div
-        class="flex flex-col items-center justify-center h-full sm:h-screen gap-10"
+        class="flex flex-col items-center justify-center h-full gap-10 mt-20 mb-20"
     >
         <div class="flex flex-col items-start w-11/12 md:w-5/6 lg:w-1/2">
             <h1 class="text-4xl sm:text-6xl text-black mb-4 mt-4">
@@ -150,7 +150,7 @@ const handleScroll = () => {
         </div>
     </div>
     <div
-        class="w-full h-auto sm:h-screen flex flex-col justify-center items-center gap-16"
+        class="w-full h-full flex flex-col justify-center items-center gap-16 mt-20 mb-20"
         id="home-description"
     >
         <div class="flex flex-col justify-start items-start w-3/4 lg:w-1/2">
@@ -212,7 +212,7 @@ const handleScroll = () => {
         </div>
     </div>
     <div
-        class="w-full h-full sm:h-screen flex flex-col justify-center items-center gap-10 lg:gap-20"
+        class="w-full h-full flex flex-col justify-center items-center gap-10 lg:gap-20 mt-20 mb-20"
         id="home-buttons"
     >
         <div class="flex flex-col justify-start w-3/4 lg:w-1/2">
