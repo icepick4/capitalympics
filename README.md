@@ -4,7 +4,6 @@
 
 <img src="https://raw.githubusercontent.com/icepick4/capitalympics/main/public/logo.png" alt="Capitalympics Logo" width="200" />
 
-
 Learn flags and capitals of the world !
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-vue.svg)](https://forthebadge.com)
@@ -26,18 +25,19 @@ Learn flags and capitals of the world !
 ✅ Sort and filter statistics by category \
 ✅ Create an account to unlock enhanced features \
 ✅ Accessible country information, including:
-  - 🌐 Name
-  - 🏛️ Official name
-  - 🌆 Capital
-  - 🌍 Region
-  - 🔍 Subregion
-  - 👥 Population
-  - 🗺️ Google Maps link
-  - 🚩 Flag
-  - 🌍 Alpha-3 code
-  - 💰 Currencies
 
-🌐 Capitalympics is fully translated into multiple languages (English, French, and Spanish). \ 
+-   🌐 Name
+-   🏛️ Official name
+-   🌆 Capital
+-   🌍 Region
+-   🔍 Subregion
+-   👥 Population
+-   🗺️ Google Maps link
+-   🚩 Flag
+-   🌍 Alpha-3 code
+-   💰 Currencies
+
+🌐 Capitalympics is fully translated into multiple languages (English, French, Spanish and Italiano). \
 If your preferred language is not supported, please open an issue on the repository to request a new language.
 
 # Technologies Used

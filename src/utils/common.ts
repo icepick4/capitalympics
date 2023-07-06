@@ -53,7 +53,8 @@ export const getLanguage = (): Lang => {
 export const languages = [
     { value: 'en', text: 'English' },
     { value: 'fr', text: 'Français' },
-    { value: 'es', text: 'Español' }
+    { value: 'es', text: 'Español' },
+    { value: 'it', text: 'Italiano' }
 ];
 
 export const regions = {

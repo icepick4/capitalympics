@@ -108,5 +108,13 @@
     "myLevel": "Mi nivel",
     "seeScores": "Ver puntuaciones 🏆",
     "nextLevel": "Siguiente nivel",
-    "errorSavingProfile": "Error al guardar el perfil"
+    "errorSavingProfile": "Error al guardar el perfil",
+    "homeTitle1": "Descubra el mundo a través de sus capitales y banderas.",
+    "homeTitle2": "¡Pruebe Capitalympics gratis ahora!",
+    "homeDescription1": "¡Aprende, juega y conviértete en campeón de las Capitalympics!",
+    "homeDescription2": "¡Inscríbete ahora y comienza tu aventura con Capitalympics!",
+    "discoverCountries": "Descubra todos los países",
+    "ready?": "¿Preparado?",
+    "loginToStart": "Inicia sesión para empezar a entrenar",
+    "joinUs": "Únase a nosotros"
 }

@@ -28,7 +28,7 @@
     "currentScore": "Your current score status is",
     "learnCapitalsTitle": "Learn the Capitals📍",
     "learnFlagsTitle": "Learn the Flags 🇫🇷",
-    "resetScores": "Rest all your scores ❌",
+    "resetScores": "Reset all your scores ❌",
     "initScoresTitle": "Init your scores ✅",
     "error": "Error",
     "tryAgain": "Try again",
@@ -108,5 +108,13 @@
     "myLevel": "My level",
     "seeScores": "See my scores 🏆",
     "nextLevel": "Next level",
-    "errorSavingProfile": "Error while saving your profile"
+    "errorSavingProfile": "Error while saving your profile",
+    "homeTitle1": "Discover the world through its capitals and flags.",
+    "homeTitle2": "Try Capitalympics free now!",
+    "homeDescription1": "Learn, play and become a Capitalympics champion!",
+    "homeDescription2": "Register now and start your adventure with Capitalympics!",
+    "discoverCountries": "Discover all the countries!",
+    "ready?": "Ready to go?",
+    "loginToStart": "Log in to start training!",
+    "joinUs": "Join us today!"
 }

@@ -5,6 +5,7 @@ import { RouterLink } from 'vue-router';
 import { useStore } from 'vuex';
 import { User } from '../../models/User';
 import ApiService from '../../services/apiService';
+import { languages } from '../../utils/common';
 import BlurContainer from '../BlurContainer.vue';
 import Modal from '../Modal.vue';
 
@@ -181,9 +182,12 @@ const saveProfile = async () => {
                                 class="block w-full p-2 text-black duration-200 border border-gray-200 rounded-md bg-gray-50"
                                 v-model="language"
                             >
-                                <option value="en">English</option>
-                                <option value="fr">Français</option>
-                                <option value="es">Spanish</option>
+                                <option
+                                    v-for="lang in languages"
+                                    :value="lang.value"
+                                >
+                                    {{ lang.text }}
+                                </option>
                             </select>
                         </div>
                     </div>
