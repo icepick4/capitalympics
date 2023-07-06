@@ -90,21 +90,21 @@ onUnmounted(() => {
                 </RouterLink>
                 <RouterLink
                     to="/login"
-                    class="flex justify-end items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    class="hidden sm:flex justify-end items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                     v-if="user === null"
                 >
                     {{ $t('login') }}</RouterLink
                 >
                 <RouterLink
                     to="/signup"
-                    class="flex justify-center items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    class="hidden sm:flex justify-center items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                     v-if="user === null"
                 >
                     {{ $t('signup') }}</RouterLink
                 >
                 <RouterLink
                     to="/profile"
-                    class="flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
+                    class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
                     v-if="user !== null"
                 >
                     <img
@@ -115,7 +115,7 @@ onUnmounted(() => {
                 </RouterLink>
                 <RouterLink
                     to="/learn"
-                    class="xl:hidden flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    class="hidden sm:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
                     v-if="user !== null"
                 >
                     {{ $t('learn') }}
@@ -175,6 +175,33 @@ onUnmounted(() => {
             >
                 <div class="py-2" @click="toggleDropdown">
                     <RouterLink
+                        to="/profile"
+                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                        v-if="user !== null"
+                    >
+                        {{ $t('profile') }}</RouterLink
+                    >
+                    <RouterLink
+                        to="/login"
+                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                        v-if="user === null"
+                    >
+                        {{ $t('login') }}</RouterLink
+                    >
+                    <RouterLink
+                        to="/signup"
+                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                        v-if="user === null"
+                    >
+                        {{ $t('signup') }}</RouterLink
+                    >
+                    <RouterLink
+                        to="/learn"
+                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
+                        {{ $t('learn') }}</RouterLink
+                    >
+                    <RouterLink
                         to="/countries"
                         class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
                     >
@@ -228,7 +255,7 @@ onUnmounted(() => {
 
 @media (max-width: 375px) {
     .header {
-        flex-direction: column;
+        /* flex-direction: column; */
         gap: 2rem;
     }
 
