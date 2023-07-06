@@ -81,6 +81,14 @@ export const regions = {
         ['Asia', 'Asia'],
         ['Europa', 'Europe'],
         ['Oceanía', 'Oceania']
+    ],
+    it: [
+        ['Mondo', 'World'],
+        ['Africa', 'Africa'],
+        ['Americhe', 'Americas'],
+        ['Asia', 'Asia'],
+        ['Europa', 'Europe'],
+        ['Oceania', 'Oceania']
     ]
 };
 
@@ -189,5 +197,36 @@ const getLevelNameEs = (level: Level): string => {
             return 'Leyenda';
         default:
             return 'Desconocido : error';
+    }
+};
+
+const getLevelNameIt = (level: Level): string => {
+    switch (level) {
+        case -1: // -1 is for the user who has never played
+            return 'Nessun punteggio';
+        case 0:
+            return 'Nuovo arrivato';
+        case 1:
+            return 'Principiante';
+        case 2:
+            return 'Apprendista';
+        case 3:
+            return 'Apprendista';
+        case 4:
+            return 'Intermedio';
+        case 5:
+            return 'Medio';
+        case 6:
+            return 'Avanzato';
+        case 7:
+            return 'Esperto';
+        case 8:
+            return 'Maestro';
+        case 9:
+            return 'Gran maestro';
+        case 10:
+            return 'Leggenda';
+        default:
+            return 'Sconosciuto : errore';
     }
 };

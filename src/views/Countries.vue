@@ -48,6 +48,7 @@ onBeforeMount(async () => {
     const lang = getLanguage();
     try {
         state.countries = await ApiService.getCountries(0, lang);
+        console.log(state.countries.length);
     } catch (error) {
         finishedWaited.value = true;
     }

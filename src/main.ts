@@ -4,6 +4,7 @@ import App from './App.vue';
 import en from './locales/en.json';
 import es from './locales/es.json';
 import fr from './locales/fr.json';
+import it from './locales/it.json';
 import router from './router';
 import store from './store';
 import './style.css';
@@ -18,7 +19,7 @@ const app = createApp(App, {
 const browserLanguage = navigator.language;
 const defaultLocale = browserLanguage.substring(0, 2) as Lang;
 
-const supportedLocales: Lang[] = ['en', 'fr', 'es'];
+const supportedLocales: Lang[] = ['en', 'fr', 'es', 'it'];
 
 if (!supportedLocales.includes(defaultLocale)) {
     defaultLocale === 'en';
@@ -29,7 +30,8 @@ const i18n = createI18n({
     messages: {
         fr: fr,
         en: en,
-        es: es
+        es: es,
+        it: it
     }
 });
 
