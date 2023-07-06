@@ -7,15 +7,10 @@ import Loader from '../components/Loader.vue';
 import Modal from '../components/Modal.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
-import { Redirection } from '../types/Redirection';
 import { getLanguage, regions } from '../utils/common';
-import { Redirections } from '../utils/redirections';
 interface State {
     countries: CountryI[];
 }
-
-const noCountriesRedirection: Redirection =
-    Redirections.getRedirectionByLink('/home');
 
 const state: State = reactive({
     countries: []
@@ -108,7 +103,6 @@ onBeforeMount(async () => {
             :message="$t('checkNetworkConnection')"
             :backgroundColor="`white`"
             :titleColor="`error`"
-            :redirection="noCountriesRedirection"
         />
     </BlurContainer>
     <div

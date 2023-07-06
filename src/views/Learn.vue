@@ -87,7 +87,6 @@ onBeforeMount(async () => {
                 :message="$t('resetScoresMessage')"
                 background-color="white"
                 title-color="black"
-                :redirection="null"
                 :confirmationDialog="true"
                 @confirm="resetScores"
                 @cancel="confirmingResetScores = false"

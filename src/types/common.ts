@@ -18,3 +18,5 @@ export type Region =
     | 'Europe'
     | 'Oceania'
     | 'World';
+
+export type Color = 'primary' | 'error' | 'black' | 'white';

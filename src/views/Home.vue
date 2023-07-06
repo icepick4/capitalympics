@@ -155,11 +155,10 @@ const handleScroll = () => {
     >
         <div class="flex flex-col justify-start items-start w-3/4 lg:w-1/2">
             <h1 class="text-3xl sm:text-5xl text-white sm:text-black mt-4">
-                Découvrez le monde à travers les capitales et les drapeaux des
-                pays.
+                {{ $t('homeTitle1') }}
             </h1>
             <h1 class="text-xl sm:text-3xl text-white sm:text-black mb-4 mt-2">
-                Apprenez, jouez et devenez un champion de Capitalympics !
+                {{ $t('homeDescription1') }}
             </h1>
         </div>
         <div
@@ -171,7 +170,7 @@ const handleScroll = () => {
                 alt="Countries"
             />
             <h1 class="text-2xl sm:text-4xl text-center">
-                Découvrez tous les pays !
+                {{ $t('discoverCountries') }}
             </h1>
         </div>
         <div class="flex flex-col items-center justify-center">
@@ -218,14 +217,13 @@ const handleScroll = () => {
     >
         <div class="flex flex-col justify-start w-3/4 lg:w-1/2">
             <h1 class="text-3xl sm:text-5xl text-black mt-4">
-                Essayez Capitalympics gratuitement dès maintenant !
+                {{ $t('homeTitle2') }}
             </h1>
             <h1 class="text-xl sm:text-3xl text-black mb-4 mt-2">
-                Inscrivez-vous dès maintenant et commencez votre aventure avec
-                Capitalympics !
+                {{ $t('homeDescription2') }}
             </h1>
         </div>
-        <h1 class="text-center text-5xl">Prêt ?</h1>
+        <h1 class="text-center text-5xl">{{ $t('ready?') }}</h1>
         <div
             class="w-4/5 lg:w-3/4 flex flex-col lg:flex-row lg:[bg-gradient] rounded-lg gap-10"
         >
@@ -239,13 +237,13 @@ const handleScroll = () => {
                 />
                 <div class="flex flex-col gap-5 items-center justify-center">
                     <p class="text-center text-lg sm:text-xl">
-                        Connectez-vous pour commencer à vous entrainez !
+                        {{ $t('loginToStart') }}
                     </p>
                     <RouterLink
                         class="bg-white text-black text-2xl sm:text-4xl text-center p-3 xl:p-6 hover:bg-gray-200 rounded-lg shadow-md transition-all hover:scale-95 ease-in-out duration-300"
                         to="/login"
                     >
-                        Connexion
+                        {{ $t('login') }}
                     </RouterLink>
                 </div>
             </div>
@@ -260,13 +258,13 @@ const handleScroll = () => {
 
                 <div class="flex flex-col gap-5 items-center justify-center">
                     <p class="text-center text-lg sm:text-xl">
-                        Rejoignez nous dès maintenant !
+                        {{ $t('joinUs') }}
                     </p>
                     <RouterLink
                         class="bg-white text-black text-2xl sm:text-4xl text-center p-3 xl:p-6 hover:bg-gray-200 rounded-lg shadow-md transition-all hover:scale-95 ease-in-out duration-300"
                         to="/signup"
                     >
-                        Inscription
+                        {{ $t('signup') }}
                     </RouterLink>
                 </div>
             </div>

@@ -90,7 +90,6 @@ const saveProfile = async () => {
             :message="$t('usernameRestriction')"
             background-color="white"
             title-color="error"
-            :redirection="null"
             @close="hasSaved = false"
         />
         <Modal
@@ -99,7 +98,6 @@ const saveProfile = async () => {
             :message="$t('errorSavingProfile')"
             background-color="white"
             title-color="error"
-            :redirection="null"
             @close="closeUserTakenModal"
         />
         <Modal
@@ -108,7 +106,6 @@ const saveProfile = async () => {
             :message="$t('usernameTaken')"
             background-color="white"
             title-color="error"
-            :redirection="null"
             @close="closeUserTakenModal"
         />
         <Modal
@@ -117,7 +114,6 @@ const saveProfile = async () => {
             :message="$t('profileSaved')"
             background-color="white"
             title-color="primary"
-            :redirection="null"
             @close="hasSaved = false"
         />
     </BlurContainer>

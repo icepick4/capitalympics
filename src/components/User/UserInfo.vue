@@ -216,7 +216,6 @@ onMounted(() => {
             :message="$t('loginPageRedirect')"
             background-color="white"
             title-color="black"
-            :redirection="null"
             :confirmationDialog="true"
             @confirm="logOut"
             @cancel="confirmingLogOut = false"

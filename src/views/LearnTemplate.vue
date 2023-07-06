@@ -12,10 +12,8 @@ import Modal from '../components/Modal.vue';
 import { CountryI } from '../models/Country';
 import { User } from '../models/User';
 import ApiService from '../services/apiService';
-import { Redirection } from '../types/Redirection';
 import { CurrentState, LearningType, Region, ScoreType } from '../types/common';
 import { getLanguage, regions } from '../utils/common';
-import { Redirections } from '../utils/redirections';
 const route = useRoute();
 const store = useStore();
 const currentLearning: LearningType = route.path.split('/')[2] as LearningType;
@@ -23,7 +21,6 @@ const currentState = ref<CurrentState>('starting');
 const couldNotGetCountry = ref(false);
 const fetchingCountry = ref(false);
 
-const redirection: Redirection = Redirections.getRedirectionByLink('/learn');
 const user: User = store.getters.user;
 const token = store.getters.token;
 const country = ref<CountryI>();
@@ -86,7 +83,6 @@ onBeforeMount(() => {
             :message="$t('tryAgain')"
             background-color="white"
             title-color="error"
-            :redirection="redirection"
             @close="couldNotGetCountry = false"
         />
         <Loader v-else-if="fetchingCountry" />

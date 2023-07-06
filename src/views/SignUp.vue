@@ -118,7 +118,6 @@ const isFormValid = () => {
             :message="$t('fillAllFields')"
             background-color="white"
             title-color="error"
-            :redirection="null"
             @close="hasSignedUp = false"
         />
         <Modal
@@ -127,7 +126,6 @@ const isFormValid = () => {
             :message="$t('usernameTaken')"
             background-color="white"
             title-color="error"
-            :redirection="null"
             @close="closeUserTakenModal"
         />
         <Loader v-else :title="$t('signingUp')" />
