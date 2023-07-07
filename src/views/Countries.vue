@@ -21,22 +21,31 @@ const search = reactive({
 });
 
 const region = reactive({
-    value: ''
+    value: 'World'
 });
 
 const finishedWaited = ref(false);
+const displaySum41 = ref(false);
 
 const filteredCountries = () => {
-    if (
-        search.value.length > 0 ||
-        (region.value.length > 0 && region.value !== 'World')
-    ) {
+    if (search.value.length > 0 || region.value.length > 0) {
+        if (search.value == 'sum') {
+            displaySum41.value = true;
+        } else {
+            displaySum41.value = false;
+        }
+        let currentRegion: string;
+        if (region.value == 'World') {
+            currentRegion = '';
+        } else {
+            currentRegion = region.value;
+        }
         return state.countries.filter((country) => {
             return (
                 country.name
                     .toLowerCase()
                     .includes(search.value.toLowerCase()) &&
-                country.region.includes(region.value)
+                country.region.includes(currentRegion)
             );
         });
     } else {
@@ -48,7 +57,6 @@ onBeforeMount(async () => {
     const lang = getLanguage();
     try {
         state.countries = await ApiService.getCountries(0, lang);
-        console.log(state.countries.length);
     } catch (error) {
         finishedWaited.value = true;
     }
@@ -94,7 +102,9 @@ onBeforeMount(async () => {
             {{ $t('resetFilters') }}
         </button>
     </div>
-
+    <div v-if="displaySum41" class="flex justify-center">
+        <h1 class="text-4xl font-bold text-center text-black">41</h1>
+    </div>
     <BlurContainer v-if="!finishedWaited && state.countries.length === 0">
         <Loader :title="$t('loading')" />
     </BlurContainer>

@@ -17,6 +17,7 @@ const planetLoaded = ref(false);
 const imageScale = ref(1);
 const previousScrollTop = ref(0);
 const displayPlanet = ref(window.innerWidth > 1536);
+const isDeviceMobile = ref(window.innerWidth < 500);
 
 const handlePlanetMouseDown = () => {
     planetMouseDown.value = true;
@@ -74,7 +75,6 @@ const handleScroll = () => {
     const scrollDelta = scrollPosition - previousScrollTop.value;
     previousScrollTop.value = scrollPosition;
 
-    let isDeviceMobile = window.innerWidth < 768;
     let scaling = 0.008;
     if (isDeviceMobile) {
         scaling = 0.02;
@@ -105,7 +105,7 @@ const handleScroll = () => {
         <Loader />
     </BlurContainer>
     <div
-        class="flex flex-col items-center justify-center h-full gap-10 mt-20 mb-20"
+        class="flex flex-col items-center justify-center h-full gap-5 mt-20 xs:mb-20"
     >
         <div class="flex flex-col items-start w-11/12 md:w-5/6 lg:w-1/2">
             <h1 class="text-4xl sm:text-6xl text-black mb-4 mt-4">
@@ -123,15 +123,25 @@ const handleScroll = () => {
             :class="{ 'cursor-grabbing': planetMouseDown }"
             @finishedLoading="planetLoaded = true"
         />
-        <div v-else class="relative w-full mt-20 -z-10">
+        <div v-else class="relative w-full mt-14 -z-10">
             <img
-                src="/home/landing.jpg"
-                alt="Photo of Ryan Kim on Unsplash"
-                class="w-full h-[35rem] sm:h-[26rem] object-cover transition-all duration-100 ease-linear"
+                :src="
+                    isDeviceMobile
+                        ? '/home/landing-phone.jpg'
+                        : '/home/landing.jpg'
+                "
+                :alt="
+                    isDeviceMobile
+                        ? 'Photo of Thomas Kelley on Unsplash'
+                        : 'Photo of Ryan Kim on Unsplash'
+                "
+                class="w-full h-[26rem] object-cover transition-all duration-100 ease-linear brightness-75 xs:brightness-100"
                 :style="{ transform: `scale(${imageScale})` }"
             />
         </div>
-        <div class="flex justify-center items-center">
+        <div
+            class="flex justify-center items-center invert xxl:filter-none -translate-y-40 xs:-translate-y-20 xxl:translate-y-0"
+        >
             <svg
                 class="arrow-icon w-12 h-12 animate-bounce cursor-pointer"
                 xmlns="http://www.w3.org/2000/svg"
@@ -150,14 +160,29 @@ const handleScroll = () => {
         </div>
     </div>
     <div
-        class="w-full h-full flex flex-col justify-center items-center gap-16 mt-20 mb-20"
+        class="w-full h-full flex flex-col justify-center items-center gap-16 mb-20"
         id="home-description"
+        :class="{ 'mt-40': !isDeviceMobile }"
     >
-        <div class="flex flex-col justify-start items-start w-3/4 lg:w-1/2">
-            <h1 class="text-3xl sm:text-5xl text-white sm:text-black mt-4">
+        <div
+            class="flex flex-col justify-start items-start w-11/12 lg:w-1/2 mt-5"
+        >
+            <h1
+                class="text-3xl mt-4"
+                :class="{
+                    'text-white': isDeviceMobile,
+                    'xs:text-5xl': !isDeviceMobile
+                }"
+            >
                 {{ $t('homeTitle1') }}
             </h1>
-            <h1 class="text-xl sm:text-3xl text-white sm:text-black mb-4 mt-2">
+            <h1
+                class="text-xl mb-4 mt-2"
+                :class="{
+                    'text-white': isDeviceMobile,
+                    'xs:text-3xl': !isDeviceMobile
+                }"
+            >
                 {{ $t('homeDescription1') }}
             </h1>
         </div>
