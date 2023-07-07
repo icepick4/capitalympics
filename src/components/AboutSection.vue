@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AboutImage from './AboutImage.vue';
 defineProps<{
     text: string;
     title: string;
@@ -6,11 +7,6 @@ defineProps<{
     alt: string;
     link: string;
 }>();
-
-const randomRotation = () => {
-    const rotations = ['hover:rotate-3', 'hover:-rotate-3'];
-    return rotations[Math.floor(Math.random() * rotations.length)];
-};
 </script>
 
 <template>
@@ -35,23 +31,16 @@ const randomRotation = () => {
         </div>
         <div class="relative">
             <div class="overflow-hidden">
-                <RouterLink :to="link" class="scale-1">
-                    <div
-                        class="bg-background shadow overflow-hidden hover:scale-110 transform hover:shadow-2xl transition ease-in-out duration-300 relative"
-                        :class="randomRotation()"
-                    >
-                        <img
-                            :src="image"
-                            :alt="link.substring(1)"
-                            class="w-full h-auto I-cover"
-                        />
-                        <div
-                            class="absolute inset-0 flex items-center justify-center text-white opacity-0 hover:opacity-100 transition duration-300 z-10 hover:bg-black hover:bg-opacity-50"
-                        >
-                            {{ $t('learnMore') }}
-                        </div>
-                    </div>
+                <RouterLink
+                    v-if="!link.includes('https')"
+                    :to="link"
+                    class="scale-1"
+                >
+                    <AboutImage :image="image" :link="link" :alt="alt" />
                 </RouterLink>
+                <a v-else :href="link" class="scale-1">
+                    <AboutImage :image="image" :link="link" :alt="alt" />
+                </a>
             </div>
             <span
                 class="absolute -bottom-5 right-0 text-black text-sm"
