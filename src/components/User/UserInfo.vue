@@ -310,28 +310,43 @@ onMounted(() => {
                     </h1>
                 </div>
                 <div class="flex flex-row gap-5">
-                    <button
-                        @click="switchLearningType"
-                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-                        :class="{ '-rotate-180': clickedSwitchLearningType }"
+                    <div
+                        class="flex flex-col gap-2 justify-center items-center"
                     >
-                        <img
-                            src="/icons/switch.png"
-                            alt="switch"
-                            class="w-10 h-10"
-                        />
-                    </button>
-
-                    <button
-                        @click="switchSort"
-                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                        <button
+                            @click="switchLearningType"
+                            class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                            :class="{
+                                '-rotate-180': clickedSwitchLearningType
+                            }"
+                        >
+                            <img
+                                src="/icons/switch.png"
+                                alt="switch"
+                                class="w-10 h-10"
+                            />
+                        </button>
+                        <span class="text-center text-sm">
+                            {{ $t('switch') }}
+                        </span>
+                    </div>
+                    <div
+                        class="flex flex-col gap-2 justify-center items-center"
                     >
-                        <img
-                            :src="`/icons/sort_${currentSort}.png`"
-                            alt="sort"
-                            class="w-10 h-10 rounded-full bg-white hover:scale-110 transition-all duration-300"
-                        />
-                    </button>
+                        <button
+                            @click="switchSort"
+                            class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                        >
+                            <img
+                                :src="`/icons/sort_${currentSort}.png`"
+                                alt="sort"
+                                class="w-10 h-10 rounded-full bg-white hover:scale-110 transition-all duration-300"
+                            />
+                        </button>
+                        <span class="text-center text-sm">
+                            {{ $t('sort') }}
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="flex flex-col gap-4 mb-5">
@@ -341,24 +356,45 @@ onMounted(() => {
                 ></ScoresDisplay>
             </div>
             <div class="w-full flex flex-row justify-center items-center gap-5">
-                <button
-                    @click="increaseMax"
-                    class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-                >
-                    <img src="/icons/plus.png" alt="more" class="w-10 h-10" />
-                </button>
-                <button
-                    @click="decreaseMax"
-                    class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-                >
-                    <img src="/icons/less.png" alt="less" class="w-10 h-10" />
-                </button>
-                <button
-                    @click="resetMax"
-                    class="rounded-full bg-white hover:scale-110 transition-all duration-300 rotate-45"
-                >
-                    <img src="/icons/plus.png" alt="reset" class="w-10 h-10" />
-                </button>
+                <div class="flex flex-col gap-2 justify-center items-center">
+                    <button
+                        @click="increaseMax"
+                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                    >
+                        <img
+                            src="/icons/plus.png"
+                            alt="more"
+                            class="w-10 h-10"
+                        />
+                    </button>
+                    <span class="text-center text-sm">{{ $t('more') }}</span>
+                </div>
+                <div class="flex flex-col gap-2 justify-center items-center">
+                    <button
+                        @click="decreaseMax"
+                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                    >
+                        <img
+                            src="/icons/less.png"
+                            alt="less"
+                            class="w-10 h-10"
+                        />
+                    </button>
+                    <span class="text-center text-sm">{{ $t('less') }}</span>
+                </div>
+                <div class="flex flex-col gap-2 justify-center items-center">
+                    <button
+                        @click="resetMax"
+                        class="rounded-full bg-white hover:scale-110 transition-all duration-300 rotate-45"
+                    >
+                        <img
+                            src="/icons/plus.png"
+                            alt="reset"
+                            class="w-10 h-10"
+                        />
+                    </button>
+                    <span class="text-center text-sm">{{ $t('reset') }}</span>
+                </div>
             </div>
         </div>
     </div>

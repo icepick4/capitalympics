@@ -116,5 +116,10 @@
     "discoverCountries": "Descubra todos los países",
     "ready?": "¿Preparado?",
     "loginToStart": "Inicia sesión para empezar a entrenar",
-    "joinUs": "Únase a nosotros"
+    "joinUs": "Únase a nosotros",
+    "switch": "Cambiar modo",
+    "sort": "Ordenar",
+    "more": "Más",
+    "less": "Menos",
+    "reset": "Restablecer"
 }

@@ -37,7 +37,7 @@ const goBack = () => {
 
 <template>
     <BlurContainer v-if="state.isLoading">
-        <Loader :title="`Loading ${countryCode}`" />
+        <Loader :title="$t('loading') + countryCode" />
     </BlurContainer>
     <div class="flex flex-col gap-5 m-1 sm:m-5">
         <Transition name="slide-fade" appear>
