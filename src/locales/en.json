@@ -116,5 +116,10 @@
     "discoverCountries": "Discover all the countries!",
     "ready?": "Ready to go?",
     "loginToStart": "Log in to start training!",
-    "joinUs": "Join us today!"
+    "joinUs": "Join us today!",
+    "switch": "Switch mode",
+    "sort": "Sort scores",
+    "more": "More",
+    "less": "Less",
+    "reset": "Reset"
 }
