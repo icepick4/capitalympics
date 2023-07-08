@@ -96,7 +96,7 @@ onBeforeMount(async () => {
             class="w-4/5 md:w-1/4 mx-auto p-2 rounded-md bg-gradient text-black active:bg-gray-700"
             @click="
                 search.value = '';
-                region.value = '';
+                region.value = 'World';
             "
         >
             {{ $t('resetFilters') }}
@@ -114,6 +114,10 @@ onBeforeMount(async () => {
             :message="$t('checkNetworkConnection')"
             :backgroundColor="`white`"
             :titleColor="`error`"
+            @close="
+                finishedWaited = false;
+                $router.push('/');
+            "
         />
     </BlurContainer>
     <div

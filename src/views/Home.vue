@@ -4,6 +4,7 @@ import { RouterLink, useRouter } from 'vue-router';
 import BlurContainer from '../components/BlurContainer.vue';
 import CarouselAuto from '../components/CarouselAuto.vue';
 import Loader from '../components/Loader.vue';
+import Modal from '../components/Modal.vue';
 import Planet from '../components/Planet.vue';
 import { CountryI } from '../models/Country';
 import ApiService from '../services/apiService';
@@ -18,6 +19,7 @@ const imageScale = ref(1);
 const previousScrollTop = ref(0);
 const displayPlanet = ref(window.innerWidth > 1536);
 const isDeviceMobile = ref(window.innerWidth < 500);
+const finishedWaited = ref(false);
 
 const handlePlanetMouseDown = () => {
     planetMouseDown.value = true;
@@ -59,8 +61,10 @@ onBeforeMount(async () => {
         countries.value = fetchedCountries
             .concat(fetchedCountries)
             .concat(fetchedCountries);
+        finishedWaited.value = true;
     } catch (error) {
         console.log(error);
+        finishedWaited.value = true;
     }
     document.body.addEventListener('scroll', handleScroll);
 });
@@ -102,7 +106,18 @@ const handleScroll = () => {
 
 <template>
     <BlurContainer v-if="(!planetLoaded && displayPlanet) || !countries.length">
-        <Loader />
+        <Loader v-if="!finishedWaited" />
+        <Modal
+            v-else-if="!countries.length && finishedWaited"
+            :title="$t('noCountriesFound')"
+            :message="$t('checkNetworkConnection')"
+            :backgroundColor="`white`"
+            :titleColor="`error`"
+            @close="
+                finishedWaited = false;
+                countries.length = 1;
+            "
+        />
     </BlurContainer>
     <div
         class="flex flex-col items-center justify-center h-full gap-5 mt-20 xs:mb-20"
@@ -199,7 +214,7 @@ const handleScroll = () => {
             </h1>
         </div>
         <div class="flex flex-col items-center justify-center">
-            <CarouselAuto v-if="countries.length > 0">
+            <CarouselAuto v-if="countries.length > 1">
                 <template v-for="country in countries" :key="country.name">
                     <img
                         :src="country.flag"

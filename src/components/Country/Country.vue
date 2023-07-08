@@ -59,9 +59,9 @@ defineProps<{
                             <ul>
                                 <li
                                     v-for="currency in country.currencies"
-                                    :key="currency.currency_name"
+                                    :key="currency.name"
                                 >
-                                    {{ currency.currency_name }}
+                                    {{ currency.name }}
                                     {{ currency.symbol }}
                                 </li>
                             </ul>

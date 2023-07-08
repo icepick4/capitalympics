@@ -12,6 +12,6 @@ export interface CountryI {
 }
 
 export interface Currency {
-    currency_name: string;
+    name: string;
     symbol: string;
 }
