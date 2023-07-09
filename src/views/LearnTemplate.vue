@@ -2,8 +2,7 @@
 import BlurContainer from '@/components/BlurContainer.vue';
 import ButtonTemplate from '@/components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
-import CapitalsQuestion from '@/components/Learning/CapitalsQuestion.vue';
-import FlagsQuestion from '@/components/Learning/FlagsQuestion.vue';
+import Question from '@/components/Learning/Question.vue';
 import Loader from '@/components/Loader.vue';
 import Modal from '@/components/Modal.vue';
 import { CountryI } from '@/models/Country';
@@ -113,15 +112,17 @@ onBeforeMount(() => {
                 class="flex flex-col w-full h-full justify-between items-center border-[3px] border-black rounded-3xl bg-white p-5 md:p-10 lg:p-14 gap-7 md:gap-9 lg:gap-12"
             >
                 <div v-if="currentLearning === 'capital'" class="w-full h-full">
-                    <CapitalsQuestion
+                    <Question
                         :country="country"
-                        :currentState="currentState"
+                        :state="currentState"
+                        :type="'capital'"
                     />
                 </div>
                 <div v-else-if="currentLearning === 'flag'">
-                    <FlagsQuestion
+                    <Question
                         :country="country"
-                        :currentState="currentState"
+                        :state="currentState"
+                        :type="'flag'"
                     />
                 </div>
                 <div class="w-full">
