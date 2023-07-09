@@ -1,6 +1,6 @@
 import { Level, User } from '@/models/User';
 import store from '@/store';
-import { Lang } from '@/types/common';
+import { Lang, Translation } from '@/types/common';
 
 export const getCurrentMySQLDate = (): string => {
     let date = new Date();
@@ -92,141 +92,25 @@ export const regions = {
     ]
 };
 
-export const getLevelName = (level: Level): string => {
+export function getLevelName(level: Level): string
+{
     const user: User = store.getters.user;
     const language = user ? user.language : 'en';
-    switch (language) {
-        case 'fr':
-            return getLevelNameFr(level);
-        case 'en':
-            return getLevelNameEn(level);
-        case 'es':
-            return getLevelNameEs(level);
-        default:
-            return getLevelNameEn(level);
-    }
+
+    return Ranks[level][language];
 };
 
-const getLevelNameFr = (level: Level): string => {
-    switch (level) {
-        case -1: // -1 is for the user who has never played
-            return 'Pas de score';
-        case 0:
-            return 'Nouveau';
-        case 1:
-            return 'Débutant';
-        case 2:
-            return 'Apprenti';
-        case 3:
-            return 'Intermédiaire';
-        case 4:
-            return 'Moyen';
-        case 5:
-            return 'Normal';
-        case 6:
-            return 'Avancé';
-        case 7:
-            return 'Expert';
-        case 8:
-            return 'Maître';
-        case 9:
-            return 'Grand maître';
-        case 10:
-            return 'Légende';
-        default:
-            return 'Inconnu : erreur';
-    }
-};
-
-const getLevelNameEn = (level: Level): string => {
-    switch (level) {
-        case -1: // -1 is for the user who has never played
-            return 'No score';
-        case 0:
-            return 'Newcomer';
-        case 1:
-            return 'Beginner';
-        case 2:
-            return 'Learner';
-        case 3:
-            return 'Apprentice';
-        case 4:
-            return 'Intermediate';
-        case 5:
-            return 'Average';
-        case 6:
-            return 'Advanced';
-        case 7:
-            return 'Expert';
-        case 8:
-            return 'Master';
-        case 9:
-            return 'Grandmaster';
-        case 10:
-            return 'Legend';
-        default:
-            return 'Unknown : error';
-    }
-};
-
-const getLevelNameEs = (level: Level): string => {
-    switch (level) {
-        case -1: // -1 is for the user who has never played
-            return 'Sin puntuación';
-        case 0:
-            return 'Recién llegado';
-        case 1:
-            return 'Principiante';
-        case 2:
-            return 'Aprendiz';
-        case 3:
-            return 'Aprendiz';
-        case 4:
-            return 'Intermedio';
-        case 5:
-            return 'Promedio';
-        case 6:
-            return 'Avanzado';
-        case 7:
-            return 'Experto';
-        case 8:
-            return 'Maestro';
-        case 9:
-            return 'Gran maestro';
-        case 10:
-            return 'Leyenda';
-        default:
-            return 'Desconocido : error';
-    }
-};
-
-const getLevelNameIt = (level: Level): string => {
-    switch (level) {
-        case -1: // -1 is for the user who has never played
-            return 'Nessun punteggio';
-        case 0:
-            return 'Nuovo arrivato';
-        case 1:
-            return 'Principiante';
-        case 2:
-            return 'Apprendista';
-        case 3:
-            return 'Apprendista';
-        case 4:
-            return 'Intermedio';
-        case 5:
-            return 'Medio';
-        case 6:
-            return 'Avanzato';
-        case 7:
-            return 'Esperto';
-        case 8:
-            return 'Maestro';
-        case 9:
-            return 'Gran maestro';
-        case 10:
-            return 'Leggenda';
-        default:
-            return 'Sconosciuto : errore';
-    }
+const Ranks: Record<Level, Translation> = {
+    [-1]: { en: "No score", es: "Sin puntuación", fr: "Pas de score", it: "Nessun punteggio" },
+    [0]: { en: "Newcomer", es: "Recién llegado", fr: "Nouveau", it: "Nuovo arrivato" },
+    [1]: { en: "Beginner", es: "Principiante", fr: "Débutant", it: "Principiante" },
+    [2]: { en: "Learner", es: "Aprendiz", fr: "Apprenti", it: "Apprendista" },
+    [3]: { en: "Apprentice", es: "Aprendiz", fr: "Intermédiaire", it: "Apprendista" },
+    [4]: { en: "Intermediate", es: "Intermedio", fr: "Moyen", it: "Intermedio" },
+    [5]: { en: "Average", es: "Promedio", fr: "Normal", it: "Medio" },
+    [6]: { en: "Advanced", es: "Avanzado", fr: "Avancé", it: "Avanzato" },
+    [7]: { en: "Expert", es: "Experto", fr: "Expert", it: "Esperto" },
+    [8]: { en: "Master", es: "Maestro", fr: "Maître", it: "Maestro" },
+    [9]: { en: "Grandmaster", es: "Gran maestro", fr: "Grand maître", it: "Gran maestro" },
+    [10]: { en: "Legend", es: "Leyenda", fr: "Légende", it: "Leggenda" },
 };
