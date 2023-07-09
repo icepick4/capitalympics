@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import BlurContainer from '@/components/BlurContainer.vue';
+import Loader from '@/components/Loader.vue';
+import Modal from '@/components/Modal.vue';
+import { getCurrentMySQLDate } from '@/utils/common';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import BlurContainer from '../components/BlurContainer.vue';
-import Loader from '../components/Loader.vue';
-import Modal from '../components/Modal.vue';
-import { getCurrentMySQLDate } from '../utils/common';
+
 const userFound = ref(false);
 const signed = ref(false);
 const displayErrorForm = ref(false);

@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import UserInfo from '@/components/User/UserInfo.vue';
+import UserSettings from '@/components/User/UserSettings.vue';
 import { onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import UserInfo from '../components/User/UserInfo.vue';
-import UserSettings from '../components/User/UserSettings.vue';
 
 const displayUserSettings = ref(false);
 const router = useRouter();

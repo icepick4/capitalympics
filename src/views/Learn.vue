@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import BlurContainer from '@/components/BlurContainer.vue';
+import Loader from '@/components/Loader.vue';
+import Modal from '@/components/Modal.vue';
+import { Level, User } from '@/models/User';
+import ApiService from '@/services/apiService';
+import { getLevelName } from '@/utils/common';
 import { onBeforeMount, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import BlurContainer from '../components/BlurContainer.vue';
-import Loader from '../components/Loader.vue';
-import Modal from '../components/Modal.vue';
-import { Level, User } from '../models/User';
-import ApiService from '../services/apiService';
-import { getLevelName } from '../utils/common';
+
 const router = useRouter();
 const store = useStore();
 const user: User = store.getters.user;

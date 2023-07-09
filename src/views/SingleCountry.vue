@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import BlurContainer from '@/components/BlurContainer.vue';
+import Country from '@/components/Country/Country.vue';
+import Loader from '@/components/Loader.vue';
+import { CountryI } from '@/models/Country';
+import ApiService from '@/services/apiService';
+import { getLanguage } from '@/utils/common';
 import { onBeforeMount, reactive } from 'vue';
-import BlurContainer from '../components/BlurContainer.vue';
-import Country from '../components/Country/Country.vue';
-import Loader from '../components/Loader.vue';
-import { CountryI } from '../models/Country';
-import ApiService from '../services/apiService';
-import { getLanguage } from '../utils/common';
+
 interface State {
     country: CountryI | undefined;
     isLoading: boolean;

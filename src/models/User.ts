@@ -1,4 +1,4 @@
-import { Lang } from '../types/common';
+import { Lang } from '@/types/common';
 
 export interface User {
     id: number;

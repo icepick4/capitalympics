@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import AboutSection from '@/components/AboutSection.vue';
+import BlurContainer from '@/components/BlurContainer.vue';
+import Loader from '@/components/Loader.vue';
 import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
-import AboutSection from '../components/AboutSection.vue';
-import BlurContainer from '../components/BlurContainer.vue';
-import Loader from '../components/Loader.vue';
 
 const haveImagesLoaded = ref(false);
 
@@ -71,7 +71,6 @@ const handleScroll = () => {
     }
 };
 </script>
-Avec ces modifica
 
 <template>
     <BlurContainer v-if="!haveImagesLoaded">

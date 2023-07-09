@@ -1,19 +1,20 @@
 <script setup lang="ts">
+import BlurContainer from '@/components/BlurContainer.vue';
+import ButtonTemplate from '@/components/Learning/Buttons/ButtonTemplate.vue';
+import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
+import CapitalsQuestion from '@/components/Learning/CapitalsQuestion.vue';
+import FlagsQuestion from '@/components/Learning/FlagsQuestion.vue';
+import Loader from '@/components/Loader.vue';
+import Modal from '@/components/Modal.vue';
+import { CountryI } from '@/models/Country';
+import { User } from '@/models/User';
+import ApiService from '@/services/apiService';
+import { CurrentState, LearningType, Region, ScoreType } from '@/types/common';
+import { getLanguage, regions } from '@/utils/common';
 import { onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
-import BlurContainer from '../components/BlurContainer.vue';
-import ButtonTemplate from '../components/Learning/Buttons/ButtonTemplate.vue';
-import ChoosingButtons from '../components/Learning/Buttons/ChoosingButtons.vue';
-import CapitalsQuestion from '../components/Learning/CapitalsQuestion.vue';
-import FlagsQuestion from '../components/Learning/FlagsQuestion.vue';
-import Loader from '../components/Loader.vue';
-import Modal from '../components/Modal.vue';
-import { CountryI } from '../models/Country';
-import { User } from '../models/User';
-import ApiService from '../services/apiService';
-import { CurrentState, LearningType, Region, ScoreType } from '../types/common';
-import { getLanguage, regions } from '../utils/common';
+
 const route = useRoute();
 const store = useStore();
 const currentLearning: LearningType = route.path.split('/')[2] as LearningType;

@@ -1,4 +1,4 @@
-import { Level } from '../models/User';
+import { Level } from '@/models/User';
 
 export type LearningType = 'capital' | 'flag';
 export type CurrentState = 'starting' | 'choosing';

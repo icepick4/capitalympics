@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
     <div class="flex justify-center w-2/5">
         <div class="w-full bg-gray-300 rounded-lg shadow-lg overflow-hidden">

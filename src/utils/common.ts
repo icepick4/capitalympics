@@ -1,6 +1,6 @@
-import { Level, User } from '../models/User';
-import store from '../store';
-import { Lang } from '../types/common';
+import { Level, User } from '@/models/User';
+import store from '@/store';
+import { Lang } from '@/types/common';
 
 export const getCurrentMySQLDate = (): string => {
     let date = new Date();

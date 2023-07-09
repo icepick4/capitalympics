@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import BlurContainer from '@/components/BlurContainer.vue';
+import CountryLink from '@/components/Country/CountryLink.vue';
+import Loader from '@/components/Loader.vue';
+import Modal from '@/components/Modal.vue';
+import { CountryI } from '@/models/Country';
+import ApiService from '@/services/apiService';
+import { getLanguage, regions } from '@/utils/common';
 import { reactive, ref } from '@vue/reactivity';
 import { onBeforeMount } from 'vue';
-import BlurContainer from '../components/BlurContainer.vue';
-import CountryLink from '../components/Country/CountryLink.vue';
-import Loader from '../components/Loader.vue';
-import Modal from '../components/Modal.vue';
-import { CountryI } from '../models/Country';
-import ApiService from '../services/apiService';
-import { getLanguage, regions } from '../utils/common';
+
 interface State {
     countries: CountryI[];
 }

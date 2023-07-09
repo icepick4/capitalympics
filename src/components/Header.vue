@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { User } from '@/models/User';
 import { onMounted, onUnmounted, ref, watchEffect } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useStore } from 'vuex';
-import { User } from '../models/User';
 
 const store = useStore();
 const user = ref<User | null>(store.getters.user);

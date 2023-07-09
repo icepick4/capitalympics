@@ -1,27 +1,32 @@
 <script setup lang="ts">
+import BlurContainer from '@/components/BlurContainer.vue';
+import Loader from '@/components/Loader.vue';
+import Modal from '@/components/Modal.vue';
+import ApiService from '@/services/apiService';
+import { getCurrentMySQLDate, languages } from '@/utils/common';
 import { reactive, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
-import BlurContainer from '../components/BlurContainer.vue';
-import Loader from '../components/Loader.vue';
-import Modal from '../components/Modal.vue';
-import ApiService from '../services/apiService';
-import { getCurrentMySQLDate, languages } from '../utils/common';
+
 interface inputState {
     content: string;
     hasFocused: boolean | undefined;
 }
+
 const username: inputState = reactive({
     content: '',
     hasFocused: undefined
 });
+
 const password: inputState = reactive({
     content: '',
     hasFocused: undefined
 });
+
 const passwordConfirmation: inputState = reactive({
     content: '',
     hasFocused: undefined
 });
+
 const language = ref('en');
 const hasSignedUp = ref(false);
 const numberOfPeople = ref(0);

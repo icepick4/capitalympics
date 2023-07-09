@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
     <div
         class="absolute backdrop-blur-sm w-screen h-screen z-50 overflow-hidden top-0"

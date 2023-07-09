@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Color } from '../types/common';
+import { Color } from '@/types/common';
 
 defineProps<{
     title: string;

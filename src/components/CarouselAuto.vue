@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
     <div class="carousel-container">
         <div class="carousel-items">
