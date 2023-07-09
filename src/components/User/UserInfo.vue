@@ -1,15 +1,16 @@
 <script setup lang="ts">
+import { User, UserScore } from '@/models/User';
+import ApiService from '@/services/apiService';
+import { CountryDetails, LearningType, Sort } from '@/types/common';
+import { getLevelName } from '@/utils/common';
 import { onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import { User, UserScore } from '../../models/User';
-import ApiService from '../../services/apiService';
-import { CountryDetails, LearningType, Sort } from '../../types/common';
-import { getLevelName } from '../../utils/common';
 import BlurContainer from '../BlurContainer.vue';
 import Loader from '../Loader.vue';
 import Modal from '../Modal.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
+
 const store = useStore();
 const router = useRouter();
 

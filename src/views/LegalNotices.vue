@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
     <div class="flex flex-col flex-start h-auto gap-10 p-10">
         <div>

@@ -1,4 +1,5 @@
 import vue from '@vitejs/plugin-vue';
+import path from 'path';
 import { defineConfig } from 'vite';
 import compression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -54,5 +55,10 @@ export default defineConfig({
     },
     build: {
         outDir: '/var/www/html/dist/capitalympics'
-    }
+    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src'),
+        },
+    },
 });

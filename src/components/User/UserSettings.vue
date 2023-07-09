@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { User } from '@/models/User';
+import ApiService from '@/services/apiService';
+import { languages } from '@/utils/common';
 import { reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import { useStore } from 'vuex';
-import { User } from '../../models/User';
-import ApiService from '../../services/apiService';
-import { languages } from '../../utils/common';
 import BlurContainer from '../BlurContainer.vue';
 import Modal from '../Modal.vue';
 

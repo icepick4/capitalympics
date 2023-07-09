@@ -1,14 +1,14 @@
 <script setup lang="ts">
+import BlurContainer from '@/components/BlurContainer.vue';
+import CarouselAuto from '@/components/CarouselAuto.vue';
+import Loader from '@/components/Loader.vue';
+import Modal from '@/components/Modal.vue';
+import Planet from '@/components/Planet.vue';
+import { CountryI } from '@/models/Country';
+import ApiService from '@/services/apiService';
+import { getLanguage } from '@/utils/common';
 import { onBeforeMount, onUnmounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
-import BlurContainer from '../components/BlurContainer.vue';
-import CarouselAuto from '../components/CarouselAuto.vue';
-import Loader from '../components/Loader.vue';
-import Modal from '../components/Modal.vue';
-import Planet from '../components/Planet.vue';
-import { CountryI } from '../models/Country';
-import ApiService from '../services/apiService';
-import { getLanguage } from '../utils/common';
 
 const countries = ref<CountryI[]>([]);
 const router = useRouter();

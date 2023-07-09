@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
     <div class="flex justify-center items-center w-full">
         <div class="bg-white p-6 rounded-lg shadow-md w-1/2">

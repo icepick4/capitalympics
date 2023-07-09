@@ -4,6 +4,7 @@ defineProps<{
     link: string;
     alt: string;
 }>();
+
 const randomRotation = () => {
     const rotations = ['hover:rotate-3', 'hover:-rotate-3'];
     return rotations[Math.floor(Math.random() * rotations.length)];

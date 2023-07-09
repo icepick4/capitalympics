@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import VLazyImage from 'v-lazy-image';
 import { RouterLink } from 'vue-router';
+
 defineProps<{
     countryName: string;
     countryFlag: string;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ScoreType } from '../../../types/common';
+import { ScoreType } from '@/types/common';
 import ButtonTemplate from './ButtonTemplate.vue';
 
 defineProps<{

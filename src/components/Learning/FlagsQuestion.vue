@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CountryI } from '../../models/Country';
-import { CurrentState } from '../../types/common';
+import { CountryI } from '@/models/Country';
+import { CurrentState } from '@/types/common';
 
 defineProps<{
     country: CountryI;

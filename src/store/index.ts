@@ -1,7 +1,8 @@
+import ApiService from '@/services/apiService';
+import { setLocalStorageToken, setLocalStorageUser } from '@/utils/common';
 import { AxiosResponse } from 'axios';
 import { createStore } from 'vuex';
-import ApiService from '../services/apiService';
-import { setLocalStorageToken, setLocalStorageUser } from '../utils/common';
+
 const store = createStore({
     state: {
         user: null,
