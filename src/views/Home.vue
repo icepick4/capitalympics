@@ -337,7 +337,6 @@ const handleScroll = () => {
 .carousel-item:hover {
     transform: scale(0.96);
     filter: grayscale(0%);
-    animation-play-state: paused;
 }
 
 @media (max-width: 640px) {

@@ -1,6 +1,16 @@
+<script setup lang="ts">
+import { onBeforeMount, ref } from 'vue';
+
+const isFirefox = ref(false);
+
+onBeforeMount(() => {
+    isFirefox.value = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+});
+</script>
+
 <template>
     <div class="carousel-container">
-        <div class="carousel-items">
+        <div class="carousel-items" :class="{ 'no-hover': isFirefox }">
             <slot></slot>
         </div>
     </div>
@@ -45,7 +55,7 @@
     transition: all 0.25s ease-in-out;
 }
 
-.carousel-items:hover {
+.carousel-items:not(.no-hover):hover {
     animation-play-state: paused;
 }
 

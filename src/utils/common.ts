@@ -95,6 +95,7 @@ export const regions = {
 export function getLevelName(score: number): string {
     const user: User = store.getters.user;
     const language = user ? user.language : 'en';
+    console.log(fromScoreToLevel(score));
     return Ranks[fromScoreToLevel(score)][language];
 }
 
