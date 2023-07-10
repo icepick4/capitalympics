@@ -20,3 +20,5 @@ export type Region =
     | 'World';
 
 export type Color = 'primary' | 'error' | 'black' | 'white';
+
+export type Translation = Record<Lang, string>;
