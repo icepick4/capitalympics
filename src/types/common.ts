@@ -1,5 +1,3 @@
-import { Level } from '@/models/User';
-
 export type LearningType = 'capital' | 'flag';
 export type CurrentState = 'starting' | 'choosing';
 export type ScoreType = 'succeeded' | 'failed' | 'medium';
@@ -9,7 +7,7 @@ export interface CountryDetails {
     name: string;
     alpha3Code: string;
     flag: string;
-    level: Level;
+    score: number;
 }
 export type Region =
     | 'Africa'

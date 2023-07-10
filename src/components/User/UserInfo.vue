@@ -110,7 +110,7 @@ const getScores = async (
                 name: '',
                 flag: '',
                 alpha3Code: element.country_code,
-                level: element.level
+                score: element.score
             };
             getCountryDetails(element.country_code).then(({ name, flag }) => {
                 countryDetails.name = name;
@@ -286,7 +286,7 @@ onMounted(() => {
                                     <p class="font-normal">
                                         {{ $t('level') }} :
                                     </p>
-                                    <p>{{ getLevelName(user.flag_level) }}</p>
+                                    <p>{{ getLevelName(user.flag_score) }}</p>
                                 </div>
                             </div>
                         </template>
@@ -303,7 +303,7 @@ onMounted(() => {
                                         {{ $t('level') }} :
                                     </p>
                                     <p>
-                                        {{ getLevelName(user.capital_level) }}
+                                        {{ getLevelName(user.capital_score) }}
                                     </p>
                                 </div>
                             </div>

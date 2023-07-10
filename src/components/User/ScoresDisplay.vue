@@ -37,7 +37,7 @@ defineProps<{
                     <h3 class="font-bold">{{ country.name }}</h3>
                 </div>
                 <p class="text-black">
-                    {{ getLevelName(country.level) }}
+                    {{ getLevelName(country.score) }}
                 </p>
             </RouterLink>
         </transition-group>

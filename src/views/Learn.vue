@@ -24,7 +24,7 @@ const confirmingResetScores = ref(false);
 const getUserScore = async (): Promise<Level> => {
     try {
         const score: Level = await ApiService.getUserScore(user.id, token);
-        nextUserLevel.value = score + 1;
+        nextUserLevel.value = score + 10;
         if (score === -1) {
             noScores.value = true;
         } else {
