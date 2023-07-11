@@ -1,9 +1,40 @@
 <script setup lang="ts">
 import { CountryI } from '@/models/Country';
+import { User } from '@/models/User';
+import ApiService from '@/services/apiService';
+import { getLevelName } from '@/utils/common';
+import { onBeforeMount, ref } from 'vue';
+import { useStore } from 'vuex';
+import Badge from '../Badge.vue';
 
-defineProps<{
+const store = useStore();
+
+const user: User = store.getters.user;
+const token = store.getters.token;
+const flagScore = ref(-1);
+const capitalScore = ref(-1);
+
+const props = defineProps<{
     country: CountryI;
 }>();
+
+onBeforeMount(async () => {
+    if (user !== null) {
+        flagScore.value = await ApiService.getSingleScore(
+            user.id,
+            token,
+            'flag',
+            props.country.alpha3Code
+        );
+
+        capitalScore.value = await ApiService.getSingleScore(
+            user.id,
+            token,
+            'capital',
+            props.country.capital
+        );
+    }
+});
 </script>
 
 <template>
@@ -12,13 +43,24 @@ defineProps<{
             class="w-5/6 md:w-3/5 lg:w-2/5 bg-gray-300 rounded-lg shadow-lg overflow-hidden"
         >
             <div
-                class="p-2 lg:p-4 flex flex-col justify-center items-center lg:flex-row lg:justify-between"
+                class="p-2 lg:p-4 flex flex-col justify-center items-center lg:flex-row lg:justify-between gap-3"
             >
-                <div class="flex flex-col items-center lg:items-start">
+                <div class="flex flex-col items-center lg:items-start gap-1">
                     <h1 class="text-4xl font-bold">{{ country.name }}</h1>
                     <p>{{ country.official_name }}</p>
                     <p class="text-gray-500">{{ country.alpha3Code }}</p>
+                    <Badge
+                        v-if="flagScore !== -1"
+                        :text="getLevelName(flagScore)"
+                        learningType="flag"
+                    />
+                    <Badge
+                        v-if="capitalScore !== -1"
+                        :text="getLevelName(capitalScore)"
+                        learningType="capital"
+                    />
                 </div>
+
                 <div class="col-span-1">
                     <dt class="text-gray-500 hidden lg:visible">
                         {{ $t('flag') }}

@@ -233,6 +233,25 @@ export default class ApiService {
         }
     }
 
+    public static async getSingleScore(
+        user_id: number,
+        token: string,
+        learning_type: LearningType,
+        country_code: string
+    ): Promise<number> {
+        const url = `${ApiService.API_URL}/users/${user_id}/${country_code}/${learning_type}/score`;
+        try {
+            const response = await axios.get(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.score;
+        } catch (error) {
+            throw new Error('Failed get single score');
+        }
+    }
+
     public static async resetScores(
         user_id: number,
         token: string
