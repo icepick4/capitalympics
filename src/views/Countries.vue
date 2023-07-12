@@ -3,9 +3,10 @@ import BlurContainer from '@/components/BlurContainer.vue';
 import CountryLink from '@/components/Country/CountryLink.vue';
 import Loader from '@/components/Loader.vue';
 import Modal from '@/components/Modal.vue';
+import Regions from '@/components/Regions.vue';
 import { CountryI } from '@/models/Country';
 import ApiService from '@/services/apiService';
-import { getLanguage, regions } from '@/utils/common';
+import { getLanguage } from '@/utils/common';
 import { reactive, ref } from '@vue/reactivity';
 import { onBeforeMount } from 'vue';
 
@@ -17,13 +18,9 @@ const state: State = reactive({
     countries: []
 });
 
-const search = reactive({
-    value: ''
-});
+const search = ref('');
 
-const region = reactive({
-    value: 'World'
-});
+const region = ref('World');
 
 const finishedWaited = ref(false);
 const displaySum41 = ref(false);
@@ -74,30 +71,18 @@ onBeforeMount(async () => {
         </h1>
         <input
             type="text"
-            v-model="search.value"
+            v-model="search"
             class="w-4/5 md:w-1/4 mx-auto p-2 placeholder-opacity-50 rounded-md bg-gradient text-black placeholder-black"
             :placeholder="$t('searchPlaceholder')"
         />
 
-        <select
-            v-model="region.value"
-            class="w-4/5 md:w-1/4 mx-auto p-2 rounded-md bg-gradient"
-        >
-            <option
-                class="bg-white"
-                v-for="region in regions[getLanguage()]"
-                :key="region[0]"
-                :value="region[1]"
-            >
-                {{ region[0] }}
-            </option>
-        </select>
+        <Regions v-model="region" />
 
         <button
             class="w-4/5 md:w-1/4 mx-auto p-2 rounded-md bg-gradient text-black active:bg-gray-700"
             @click="
-                search.value = '';
-                region.value = 'World';
+                search = '';
+                region = 'World';
             "
         >
             {{ $t('resetFilters') }}

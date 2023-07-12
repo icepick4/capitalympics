@@ -1,8 +1,10 @@
+import { Region } from '@/types/common';
+
 export interface CountryI {
     name: string;
     official_name: string;
     capital: string;
-    region: string;
+    region: Region;
     subregion: string;
     population: number;
     google_maps_link: string;

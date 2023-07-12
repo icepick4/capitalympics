@@ -8,6 +8,7 @@ export interface CountryDetails {
     alpha3Code: string;
     flag: string;
     score: number;
+    region: Region;
 }
 export type Region =
     | 'Africa'

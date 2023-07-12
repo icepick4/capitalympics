@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { User, UserScore } from '@/models/User';
 import ApiService from '@/services/apiService';
-import { CountryDetails, LearningType, Sort } from '@/types/common';
+import { CountryDetails, LearningType, Region, Sort } from '@/types/common';
 import { getLevelName } from '@/utils/common';
 import { computed, onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
@@ -10,6 +10,7 @@ import Badge from '../Badge.vue';
 import BlurContainer from '../BlurContainer.vue';
 import Loader from '../Loader.vue';
 import Modal from '../Modal.vue';
+import Regions from '../Regions.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
 
 const store = useStore();
@@ -41,6 +42,8 @@ const currentMax = ref(3);
 const clickedSwitchLearningType = ref(false);
 const currentSort = ref<Sort>('DESC');
 const isMax = ref(false);
+const region = ref<Region>('World');
+const lastRegion = ref<Region>('World');
 
 const flagScore = computed(() => getLevelName(user.flag_score));
 const capitalScore = computed(() => getLevelName(user.capital_score));
@@ -82,7 +85,8 @@ const getScores = async (
     user_id: number,
     sort: Sort,
     max: number,
-    scoreType: LearningType
+    scoreType: LearningType,
+    region: Region
 ) => {
     try {
         const response = await ApiService.getScores(
@@ -90,7 +94,8 @@ const getScores = async (
             token,
             max,
             sort,
-            scoreType
+            scoreType,
+            region
         );
         let scores: UserScore[] = [];
         if (response) {
@@ -100,6 +105,10 @@ const getScores = async (
             } else {
                 isMax.value = false;
             }
+        }
+
+        if (lastRegion.value !== region) {
+            countries.value = [];
         }
 
         scores.forEach((element, index) => {
@@ -114,14 +123,19 @@ const getScores = async (
                 name: '',
                 flag: '',
                 alpha3Code: element.country_code,
-                score: element.score
+                score: element.score,
+                region: 'World'
             };
-            getCountryDetails(element.country_code).then(({ name, flag }) => {
-                countryDetails.name = name;
-                countryDetails.flag = flag;
-                countries.value.push(countryDetails);
-            });
+            getCountryDetails(element.country_code).then(
+                ({ name, flag, region }) => {
+                    countryDetails.name = name;
+                    countryDetails.flag = flag;
+                    countryDetails.region = region;
+                    countries.value.push(countryDetails);
+                }
+            );
         });
+        lastRegion.value = region;
     } catch (error) {
         console.log(error);
     }
@@ -129,18 +143,20 @@ const getScores = async (
 
 const getCountryDetails = async (
     country_code: string
-): Promise<{ name: string; flag: string }> => {
+): Promise<{ name: string; flag: string; region: Region }> => {
     const response = await ApiService.getCountry(country_code, user.language);
     if (response) {
         let country = response;
         return {
             name: country.name,
-            flag: country.flag
+            flag: country.flag,
+            region: country.region as Region
         };
     } else {
         return {
             name: 'Unknown',
-            flag: 'assets/flags/unknown.png'
+            flag: 'assets/flags/unknown.png',
+            region: 'World'
         };
     }
 };
@@ -205,11 +221,28 @@ const switchLearningType = () => {
 };
 
 const updateScores = () => {
-    getScores(user.id, currentSort.value, currentMax.value, learningType.value);
+    getScores(
+        user.id,
+        currentSort.value,
+        currentMax.value,
+        learningType.value,
+        region.value
+    );
 };
 
 onMounted(() => {
     updateScores();
+});
+
+const filteredCountries = computed(() => {
+    if (region.value === 'World') {
+        return countries.value;
+    }
+    return countries.value.filter((country: CountryDetails) => {
+        return country.region
+            .toLowerCase()
+            .includes(region.value.toLowerCase());
+    });
 });
 
 const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
@@ -310,7 +343,12 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                         </template>
                     </h1>
                 </div>
-                <div class="flex flex-row gap-5">
+                <div class="flex flex-row gap-5 justify-center items-center">
+                    <Regions
+                        v-model="region"
+                        @change="updateScores"
+                        class="mr-10"
+                    />
                     <div
                         class="flex flex-col gap-2 justify-center items-center"
                     >
@@ -351,13 +389,13 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 </div>
             </div>
             <div
-                class="flex flex-col items-center md:flex-row gap-2 w-full justify-center mb-4"
+                class="grid items-center md:flex-row gap-2 w-full justify-center mb-4"
             >
                 <Badge v-for="score in scoreValues" :score="score" />
             </div>
             <div class="flex flex-col gap-4 mb-5">
                 <ScoresDisplay
-                    :countries="countries"
+                    :countries="filteredCountries"
                     :title="$t('scores')"
                 ></ScoresDisplay>
             </div>

@@ -56,13 +56,13 @@ const color = computed(() => {
             [1]: 'bg-yellow-100 text-yellow-700',
             [2]: 'bg-yellow-200 text-yellow-800',
             [3]: 'bg-yellow-300 text-yellow-900',
-            [4]: 'bg-green-100 text-green-700',
-            [5]: 'bg-green-200 text-green-800',
-            [6]: 'bg-green-300 text-green-900',
-            [7]: 'bg-blue-100 text-blue-700',
-            [8]: 'bg-blue-200 text-blue-800',
-            [9]: 'bg-blue-300 text-blue-900',
-            [10]: 'bg-purple-100 text-purple-700'
+            [4]: 'bg-green-200 text-green-700',
+            [5]: 'bg-green-300 text-green-800',
+            [6]: 'bg-green-400 text-green-900',
+            [7]: 'bg-blue-200 text-blue-700',
+            [8]: 'bg-blue-300 text-blue-800',
+            [9]: 'bg-blue-400 text-blue-900',
+            [10]: 'bg-gradient text-purple-700'
         }[level.value] ?? defaultColor
     );
 });

@@ -214,14 +214,16 @@ export default class ApiService {
         token: string,
         length: number = 0,
         sort: string,
-        learning_type: LearningType
+        learning_type: LearningType,
+        region: Region
     ): Promise<UserScore[]> {
         const url = `${
             ApiService.API_URL
         }/users/${user_id}/${learning_type}/scores${
-            length === 0 ? '' : `/?max=${length}&sort=${sort}`
+            length === 0 ? '' : `/?max=${length}&sort=${sort}&region=${region}`
         }`;
         try {
+            console.log(url);
             const response = await axios.get(url, {
                 headers: {
                     Authorization: `Bearer ${token}`

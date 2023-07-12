@@ -5,11 +5,11 @@ import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Question from '@/components/Learning/Question.vue';
 import Loader from '@/components/Loader.vue';
 import Modal from '@/components/Modal.vue';
+import Regions from '@/components/Regions.vue';
 import { CountryI } from '@/models/Country';
 import { User } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { CurrentState, LearningType, Region, ScoreType } from '@/types/common';
-import { getLanguage, regions } from '@/utils/common';
 import { onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
@@ -90,20 +90,10 @@ onBeforeMount(() => {
     <div
         class="flex flex-col w-full md:w-auto md:h-auto justify-center items-center my-10 gap-10"
     >
-        <select
-            v-model="currentRegion"
-            class="w-4/5 md:w-1/4 mx-auto p-2 rounded-md bg-gradient"
+        <Regions
             @change="getNewCountry(currentRegion)"
-        >
-            <option
-                class="bg-white"
-                v-for="region in regions[getLanguage()]"
-                :key="region[0]"
-                :value="region[1]"
-            >
-                {{ region[0] }}
-            </option>
-        </select>
+            v-model="currentRegion"
+        />
         <div
             v-if="country != undefined"
             class="w-5/6 md:w-auto h-full flex flex-col items-center justify-center"
