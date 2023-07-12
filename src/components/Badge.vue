@@ -52,14 +52,14 @@ const color = computed(() => {
     return (
         {
             [-1]: 'bg-gray-100 text-gray-700',
-            [0]: 'bg-gray-100 text-gray-700',
-            [1]: 'bg-yellow-100 text-yellow-700',
-            [2]: 'bg-yellow-200 text-yellow-800',
-            [3]: 'bg-yellow-300 text-yellow-900',
-            [4]: 'bg-green-200 text-green-700',
-            [5]: 'bg-green-300 text-green-800',
-            [6]: 'bg-green-400 text-green-900',
-            [7]: 'bg-blue-200 text-blue-700',
+            [0]: 'bg-gray-200 text-gray-800',
+            [1]: 'bg-gray-300 text-gray-900',
+            [2]: 'bg-yellow-100 text-yellow-700',
+            [3]: 'bg-yellow-200 text-yellow-800',
+            [4]: 'bg-yellow-300 text-yellow-900',
+            [5]: 'bg-green-200 text-green-700',
+            [6]: 'bg-green-300 text-green-800',
+            [7]: 'bg-green-400 text-green-900',
             [8]: 'bg-blue-300 text-blue-800',
             [9]: 'bg-blue-400 text-blue-900',
             [10]: 'bg-gradient text-purple-700'
@@ -69,9 +69,7 @@ const color = computed(() => {
 </script>
 
 <template>
-    <div
-        class="flex flex-col lg:flex-row justify-start items-center select-none"
-    >
+    <div class="flex justify-start items-center select-none">
         <p class="w-28 text-center lg:text-start" v-if="learningType">
             {{ $t(learningType) }}
         </p>

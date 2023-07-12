@@ -343,11 +343,13 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                         </template>
                     </h1>
                 </div>
-                <div class="flex flex-row gap-5 justify-center items-center">
+                <div
+                    class="flex flex-col sm:flex-row gap-5 justify-center items-center"
+                >
                     <Regions
                         v-model="region"
                         @change="updateScores"
-                        class="mr-10"
+                        class="sm:mr-10 items-center"
                     />
                     <div
                         class="flex flex-col gap-2 justify-center items-center"
@@ -389,7 +391,8 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 </div>
             </div>
             <div
-                class="grid items-center md:flex-row gap-2 w-full justify-center mb-4"
+                class="grid sm:grid-cols-4 grid-rows-6 sm:grid-rows-3 2xl:flex items-center gap-2 w-full justify-center mb-4"
+                style="grid-auto-flow: column"
             >
                 <Badge v-for="score in scoreValues" :score="score" />
             </div>
