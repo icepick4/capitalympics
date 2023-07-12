@@ -25,7 +25,7 @@ defineProps<{
             <RouterLink
                 v-for="country in countries"
                 :key="country.name"
-                class="bg-white rounded-lg shadow-md p-4 hover:bg-gray-200 transition-colors duration-300 fade-up"
+                class="bg-white rounded-lg shadow-md p-4 hover:bg-gray-200 transition-colors duration-300 fade-up flex justify-between"
                 :to="`/countries/${country.alpha3Code}`"
             >
                 <div class="flex items-center mb-2">
