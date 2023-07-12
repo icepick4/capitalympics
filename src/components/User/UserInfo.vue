@@ -3,9 +3,10 @@ import { User, UserScore } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { CountryDetails, LearningType, Sort } from '@/types/common';
 import { getLevelName } from '@/utils/common';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import Badge from '../Badge.vue';
 import BlurContainer from '../BlurContainer.vue';
 import Loader from '../Loader.vue';
 import Modal from '../Modal.vue';
@@ -40,6 +41,9 @@ const currentMax = ref(3);
 const clickedSwitchLearningType = ref(false);
 const currentSort = ref<Sort>('DESC');
 const isMax = ref(false);
+
+const flagScore = computed(() => getLevelName(user.flag_score));
+const capitalScore = computed(() => getLevelName(user.capital_score));
 
 const increaseMax = () => {
     if (isMax.value) {
@@ -207,6 +211,8 @@ const updateScores = () => {
 onMounted(() => {
     updateScores();
 });
+
+const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 </script>
 
 <template>
@@ -277,33 +283,27 @@ onMounted(() => {
                         <template v-if="learningType === 'flag'">
                             <div class="flex flex-col gap-5">
                                 <div class="flex flex-row items-start gap-2">
-                                    <p class="font-normal">
-                                        {{ $t('mode') }} :
-                                    </p>
-                                    <p>{{ $t('flags') }}</p>
+                                    <p>{{ $t('mode') }} :</p>
+                                    <p class="font-normal">{{ $t('flags') }}</p>
                                 </div>
                                 <div class="flex flex-row gap-2">
-                                    <p class="font-normal">
-                                        {{ $t('level') }} :
-                                    </p>
-                                    <p>{{ getLevelName(user.flag_score) }}</p>
+                                    <p>{{ $t('level') }} :</p>
+                                    <p class="font-normal">{{ flagScore }}</p>
                                 </div>
                             </div>
                         </template>
                         <template v-else>
                             <div class="flex flex-col gap-5">
                                 <div class="flex flex-row gap-2">
+                                    <p>{{ $t('mode') }} :</p>
                                     <p class="font-normal">
-                                        {{ $t('mode') }} :
+                                        {{ $t('capitals') }}
                                     </p>
-                                    <p>{{ $t('capitals') }}</p>
                                 </div>
                                 <div class="flex flex-row gap-2">
+                                    <p>{{ $t('level') }} :</p>
                                     <p class="font-normal">
-                                        {{ $t('level') }} :
-                                    </p>
-                                    <p>
-                                        {{ getLevelName(user.capital_score) }}
+                                        {{ capitalScore }}
                                     </p>
                                 </div>
                             </div>
@@ -349,6 +349,11 @@ onMounted(() => {
                         </span>
                     </div>
                 </div>
+            </div>
+            <div
+                class="flex flex-col items-center md:flex-row gap-2 w-full justify-center mb-4"
+            >
+                <Badge v-for="score in scoreValues" :score="score" />
             </div>
             <div class="flex flex-col gap-4 mb-5">
                 <ScoresDisplay

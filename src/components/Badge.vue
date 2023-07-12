@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Level } from '@/models/User';
 import { LearningType } from '@/types/common';
 import { fromScoreToLevel, getLevelName } from '@/utils/common';
 import {
@@ -16,62 +15,71 @@ import {
     IconWorld,
     IconWorldStar
 } from '@tabler/icons-vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
     score: number;
-    learningType: LearningType;
+    learningType?: LearningType;
 }>();
 
-const level = fromScoreToLevel(props.score);
-const text = getLevelName(props.score);
+const level = computed(() => fromScoreToLevel(props.score));
+const text = computed(() => getLevelName(props.score));
 
-const icon = (level: Level) => {
-    switch (level) {
-        case -1:
-            return IconUserQuestion;
-        case 0:
-            return IconSparkles;
-        case 1:
-            return IconSchool;
-        case 2:
-            return IconMapPin;
-        case 3:
-            return IconMapPinStar;
-        case 4:
-            return IconMap;
-        case 5:
-            return IconCompass;
-        case 6:
-            return IconWorld;
-        case 7:
-            return IconWorldStar;
-        case 8:
-            return IconGlobe;
-        case 9:
-            return IconCrown;
-        case 10:
-            return IconPlanet;
-        default:
-            return IconUserQuestion;
-    }
-};
+const icon = computed(() => {
+    const defaultIcon = IconSparkles;
+
+    return (
+        {
+            [-1]: IconUserQuestion,
+            [0]: IconSparkles,
+            [1]: IconSchool,
+            [2]: IconMapPin,
+            [3]: IconMapPinStar,
+            [4]: IconMap,
+            [5]: IconCompass,
+            [6]: IconGlobe,
+            [7]: IconWorld,
+            [8]: IconWorldStar,
+            [9]: IconCrown,
+            [10]: IconPlanet
+        }[level.value] ?? defaultIcon
+    );
+});
+
+const color = computed(() => {
+    const defaultColor = 'bg-gray-100 text-gray-700';
+
+    return (
+        {
+            [-1]: 'bg-gray-100 text-gray-700',
+            [0]: 'bg-gray-100 text-gray-700',
+            [1]: 'bg-yellow-100 text-yellow-700',
+            [2]: 'bg-yellow-200 text-yellow-800',
+            [3]: 'bg-yellow-300 text-yellow-900',
+            [4]: 'bg-green-100 text-green-700',
+            [5]: 'bg-green-200 text-green-800',
+            [6]: 'bg-green-300 text-green-900',
+            [7]: 'bg-blue-100 text-blue-700',
+            [8]: 'bg-blue-200 text-blue-800',
+            [9]: 'bg-blue-300 text-blue-900',
+            [10]: 'bg-purple-100 text-purple-700'
+        }[level.value] ?? defaultColor
+    );
+});
 </script>
 
 <template>
-    <div class="flex flex-col lg:flex-row justify-start items-center">
-        <p v-if="learningType == 'flag'" class="w-28 text-center lg:text-start">
-            {{ $t('flag') }}
-        </p>
-        <p
-            v-if="learningType == 'capital'"
-            class="w-28 text-center lg:text-start"
-        >
-            {{ $t('capital') }}
+    <div
+        class="flex flex-col lg:flex-row justify-start items-center select-none"
+    >
+        <p class="w-28 text-center lg:text-start" v-if="learningType">
+            {{ $t(learningType) }}
         </p>
         <span
-            class="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10"
+            class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ring-purple-700/10"
+            :class="color"
         >
-            <component :is="icon(level)" class="w-6 h-6 mr-1" />
+            <component :is="icon" class="w-6 h-6 mr-1" />
             {{ text }}
         </span>
     </div>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { CountryDetails } from '@/types/common';
-import { getLevelName } from '@/utils/common';
 import { RouterLink } from 'vue-router';
+import Badge from '../Badge.vue';
 
 defineProps<{
     countries: CountryDetails[];
@@ -36,9 +36,7 @@ defineProps<{
                     />
                     <h3 class="font-bold">{{ country.name }}</h3>
                 </div>
-                <p class="text-black">
-                    {{ getLevelName(country.score) }}
-                </p>
+                <Badge :score="country.score" />
             </RouterLink>
         </transition-group>
     </div>
