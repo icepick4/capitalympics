@@ -2,7 +2,6 @@
 import { CountryI } from '@/models/Country';
 import { User } from '@/models/User';
 import ApiService from '@/services/apiService';
-import { getLevelName } from '@/utils/common';
 import { onBeforeMount, ref } from 'vue';
 import { useStore } from 'vuex';
 import Badge from '../Badge.vue';
@@ -49,16 +48,18 @@ onBeforeMount(async () => {
                     <h1 class="text-4xl font-bold">{{ country.name }}</h1>
                     <p>{{ country.official_name }}</p>
                     <p class="text-gray-500">{{ country.alpha3Code }}</p>
-                    <Badge
-                        v-if="flagScore !== -1"
-                        :text="getLevelName(flagScore)"
-                        learningType="flag"
-                    />
-                    <Badge
-                        v-if="capitalScore !== -1"
-                        :text="getLevelName(capitalScore)"
-                        learningType="capital"
-                    />
+                    <div class="flex flex-col gap-2">
+                        <Badge
+                            v-if="flagScore !== -1"
+                            :score="flagScore"
+                            learningType="flag"
+                        />
+                        <Badge
+                            v-if="capitalScore !== -1"
+                            :score="capitalScore"
+                            learningType="capital"
+                        />
+                    </div>
                 </div>
 
                 <div class="col-span-1">

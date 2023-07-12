@@ -7,6 +7,7 @@
         "build": "vue-tsc && vite build --emptyOutDir"
     },
     "dependencies": {
+        "@tabler/icons-vue": "^2.24.0",
         "aos": "^2.3.4",
         "axios": "^1.3.4",
         "three": "^0.153.0",
