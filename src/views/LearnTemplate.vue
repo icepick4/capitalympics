@@ -8,59 +8,49 @@ import Modal from '@/components/Modal.vue';
 import Regions from '@/components/Regions.vue';
 import { CountryI } from '@/models/Country';
 import { User } from '@/models/User';
-import ApiService from '@/services/apiService';
+import { useStore } from '@/store';
 import { CurrentState, LearningType, Region, ScoreType } from '@/types/common';
-import { onBeforeMount, ref } from 'vue';
+import ApiClient from '@/utils/ApiClient';
+import { storeToRefs } from 'pinia';
+import { Ref, onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { useStore } from 'vuex';
 
 const route = useRoute();
 const store = useStore();
+
+// This page is protected by a guard, so we can assume that the user is logged in and defined
+const user = storeToRefs(store).user as Ref<User>;
+
+const isLoading = ref(false);
+
 const currentLearning: LearningType = route.path.split('/')[2] as LearningType;
 const currentState = ref<CurrentState>('starting');
 const couldNotGetCountry = ref(false);
-const fetchingCountry = ref(false);
 
-const user: User = store.getters.user;
-const token = store.getters.token;
 const country = ref<CountryI>();
 const currentRegion = ref<Region>('World');
 
-const getNewCountry = async (region: Region) => {
-    try {
-        fetchingCountry.value = true;
-        country.value = await ApiService.getNewCountryToLearn(
-            user.id,
-            token,
-            currentLearning,
-            user.language,
-            region
-        );
-        // To improve in the future with caching flags images
-        setTimeout(() => {
-            fetchingCountry.value = false;
-        }, 250);
-    } catch (error) {
+async function getNewCountry(region: Region)
+{
+    isLoading.value = true;
+    const queryParameters = { lang: user.value.language, region };
+    const response = await ApiClient.get<{ country: CountryI }>(`/users/${user.value.id}/country/play/${currentLearning}`, queryParameters);
+    isLoading.value = false;
+
+    if (response.success) {
+        country.value = response.data.country;
+        currentState.value = 'starting';
+    } else {
         couldNotGetCountry.value = true;
     }
 };
 
-const handleClick = (type: ScoreType) => {
-    try {
-        if (country.value) {
-            ApiService.updateUserLearning(
-                user.id,
-                country.value.alpha3Code,
-                token,
-                type,
-                currentLearning
-            );
-        } else {
-            throw new Error('Country is undefined');
-        }
-    } catch (error) {
-        console.log(error);
-    } finally {
+async function handleClick(score: ScoreType)
+{
+    if (!country.value) return;
+    const response = await ApiClient.put<any>(`/users/${user.value.id}/${country.value.alpha3Code}/${currentLearning}/score/${score}`);
+
+    if (response.success) {
         currentState.value = 'starting';
         getNewCountry(currentRegion.value);
     }
@@ -76,7 +66,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <BlurContainer v-if="couldNotGetCountry || fetchingCountry">
+    <BlurContainer v-if="couldNotGetCountry || isLoading">
         <Modal
             v-if="couldNotGetCountry"
             :title="$t('errorCountry')"
@@ -85,7 +75,7 @@ onBeforeMount(() => {
             title-color="error"
             @close="couldNotGetCountry = false"
         />
-        <Loader v-else-if="fetchingCountry" />
+        <Loader v-else-if="isLoading" />
     </BlurContainer>
     <div
         class="flex flex-col w-full md:w-auto md:h-auto justify-center items-center my-10 gap-10"
@@ -127,12 +117,7 @@ onBeforeMount(() => {
                         v-else-if="currentState === 'choosing'"
                         class="text-center flex flex-col gap-5 lg:gap-10"
                     >
-                        <ChoosingButtons
-                            :countryCode="'FRA'"
-                            :user_id="user.id"
-                            :token="token"
-                            :click="handleClick"
-                        />
+                        <ChoosingButtons @click="handleClick" />
                     </div>
                 </div>
             </div>

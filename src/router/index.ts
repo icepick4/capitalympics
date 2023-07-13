@@ -1,4 +1,4 @@
-import { requireAuth } from '@/utils/authMiddleware';
+import { useStore } from '@/store';
 import About from '@/views/About.vue';
 import Countries from '@/views/Countries.vue';
 import Home from '@/views/Home.vue';
@@ -11,7 +11,8 @@ import Profile from '@/views/Profile.vue';
 import Quiz from '@/views/Quiz.vue';
 import SignUp from '@/views/SignUp.vue';
 import SingleCountry from '@/views/SingleCountry.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { NavigationGuardNext, RouteLocationNormalized, createRouter, createWebHistory } from 'vue-router';
+import { requireAuth } from './middlewares/auth-middleware';
 
 const routes = [
     {
@@ -45,12 +46,38 @@ const routes = [
     {
         path: '/signup',
         name: 'SignUp',
-        component: SignUp
+        component: SignUp,
+        beforeEnter: (
+            to: RouteLocationNormalized,
+            from: RouteLocationNormalized,
+            next: NavigationGuardNext
+        ) => {
+            const store = useStore();
+
+            if (store.isAuthenticated) {
+                next({ name: 'Profile' });
+            } else {
+                next();
+            }
+        }
     },
     {
         path: '/login',
         name: 'LogIn',
-        component: LogIn
+        component: LogIn,
+        beforeEnter: (
+            to: RouteLocationNormalized,
+            from: RouteLocationNormalized,
+            next: NavigationGuardNext
+        ) => {
+            const store = useStore();
+
+            if (store.isAuthenticated) {
+                next({ name: 'Profile' });
+            } else {
+                next();
+            }
+        }
     },
     {
         path: '/countries',
@@ -97,5 +124,15 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 });
+
+router.beforeEach(async (to, from, next) => {
+    const store = useStore();
+    if (store.isAuthenticated && !store.isCurrentUserLoaded) {
+        await store.loadCurrentUser();
+    }
+
+    return next();
+});
+
 
 export default router;

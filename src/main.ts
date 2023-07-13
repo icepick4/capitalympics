@@ -6,9 +6,11 @@ import es from './locales/es.json';
 import fr from './locales/fr.json';
 import it from './locales/it.json';
 import router from './router';
-import store from './store';
 import './style.css';
 import { Lang } from './types/common';
+
+import { createPinia } from 'pinia';
+const pinia = createPinia();
 
 const app = createApp(App, {
     compilerOptions: {
@@ -27,12 +29,12 @@ if (!supportedLocales.includes(defaultLocale)) {
 
 const i18n = createI18n({
     locale: defaultLocale,
-    messages: {
-        fr: fr,
-        en: en,
-        es: es,
-        it: it
-    }
+    messages: { fr, en, es, it },
 });
 
-app.use(router).use(store).use(i18n).mount('#app');
+app
+    .use(router)
+    .use(pinia)
+    .use(i18n)
+    .mount('#app')
+;

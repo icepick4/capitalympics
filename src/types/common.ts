@@ -21,3 +21,6 @@ export type Region =
 export type Color = 'primary' | 'error' | 'black' | 'white';
 
 export type Translation = Record<Lang, string>;
+
+export type Nullish = null | undefined;
+export type Maybe<T> = T | Nullish;

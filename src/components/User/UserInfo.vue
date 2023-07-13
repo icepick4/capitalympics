@@ -1,41 +1,30 @@
 <script setup lang="ts">
 import { User, UserScore } from '@/models/User';
 import ApiService from '@/services/apiService';
+import { useStore } from '@/store';
 import { CountryDetails, LearningType, Region, Sort } from '@/types/common';
+import ApiClient from '@/utils/ApiClient';
 import { getLevelName } from '@/utils/common';
-import { computed, onMounted, ref } from 'vue';
-import { RouterLink, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
+import { storeToRefs } from 'pinia';
+import { Ref, computed, onMounted, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import BlurContainer from '../BlurContainer.vue';
-import Loader from '../Loader.vue';
 import Modal from '../Modal.vue';
 import Regions from '../Regions.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
 
 const store = useStore();
-const router = useRouter();
+const user = storeToRefs(store).user as Ref<User>;
 
 defineEmits(['close']);
 
-const hasLoggedOut = ref(false);
 const confirmingLogOut = ref(false);
 
 const logOutConfirmation = () => {
     confirmingLogOut.value = true;
 };
 
-const logOut = () => {
-    hasLoggedOut.value = true;
-    setTimeout(() => {
-        store.dispatch('logOut');
-        hasLoggedOut.value = false;
-        router.push('/login');
-    }, 200);
-};
-
-const token = store.getters.token;
-const user: User = store.getters.user;
 const countries = ref<CountryDetails[]>([]);
 const learningType = ref<LearningType>('flag');
 const currentMax = ref(3);
@@ -45,15 +34,16 @@ const isMax = ref(false);
 const region = ref<Region>('World');
 const lastRegion = ref<Region>('World');
 
-const flagScore = computed(() => getLevelName(user.flag_score));
-const capitalScore = computed(() => getLevelName(user.capital_score));
+const flagScore = computed(() => getLevelName(user.value.flag_score));
+const capitalScore = computed(() => getLevelName(user.value.capital_score));
 
 const increaseMax = () => {
     if (isMax.value) {
         return;
     }
+
     currentMax.value += 3;
-    updateScores();
+    loadScores();
 };
 
 const decreaseMax = () => {
@@ -78,91 +68,85 @@ const switchSort = () => {
         currentSort.value = 'DESC';
     }
     countries.value = [];
-    updateScores();
+    loadScores();
 };
 
-const getScores = async (
-    user_id: number,
-    sort: Sort,
-    max: number,
-    scoreType: LearningType,
-    region: Region
-) => {
-    try {
-        const response = await ApiService.getScores(
-            user_id,
-            token,
-            max,
-            sort,
-            scoreType,
-            region
-        );
-        let scores: UserScore[] = [];
-        if (response) {
-            scores = response;
-            if (scores.length < max) {
-                isMax.value = true;
-            } else {
-                isMax.value = false;
-            }
-        }
+async function loadScores()
+{
+    const max = currentMax.value;
+    const queryParams = max === 0 ? {} :  {
+        max,
+        sort: currentSort.value,
+        region: region.value,
+    };
 
-        if (lastRegion.value !== region) {
-            countries.value = [];
-        }
-
-        scores.forEach((element, index) => {
-            if (
-                index >= max ||
-                (index < max - 3 && countries.value.length > 0) ||
-                countries.value.length >= max
-            ) {
-                return;
-            }
-            let countryDetails: CountryDetails = {
-                name: '',
-                flag: '',
-                alpha3Code: element.country_code,
-                score: element.score,
-                region: 'World'
-            };
-            getCountryDetails(element.country_code).then(
-                ({ name, flag, region }) => {
-                    countryDetails.name = name;
-                    countryDetails.flag = flag;
-                    countryDetails.region = region;
-                    countries.value.push(countryDetails);
-                }
-            );
-        });
-        lastRegion.value = region;
-    } catch (error) {
-        console.log(error);
+    const response = await ApiClient.get<{ scores: UserScore[] }>(`/users/${user.value.id}/${learningType.value}/scores`, queryParams);
+    if (!response.success) {
+        console.log(response.error);
+        return;
     }
+
+    const scores = response.data.scores;
+    isMax.value = scores.length < max;
+
+
+    if (lastRegion.value !== region.value) {
+        countries.value = [];
+    }
+
+    scores.forEach((element, index) => {
+        if (
+            index >= max ||
+            (index < max - 3 && countries.value.length > 0) ||
+            countries.value.length >= max
+        ) {
+            return;
+        }
+
+        let countryDetails: CountryDetails = {
+            name: '',
+            flag: '',
+            alpha3Code: element.country_code,
+            score: element.score,
+            region: 'World'
+        };
+
+        getCountryDetails(element.country_code).then(
+            ({ name, flag, region }) => {
+                countryDetails.name = name;
+                countryDetails.flag = flag;
+                countryDetails.region = region;
+                countries.value.push(countryDetails);
+            }
+        );
+    });
+
+    lastRegion.value = region.value;
 };
 
-const getCountryDetails = async (
-    country_code: string
-): Promise<{ name: string; flag: string; region: Region }> => {
-    const response = await ApiService.getCountry(country_code, user.language);
-    if (response) {
-        let country = response;
+type CountryDetail = {
+    name: string;
+    flag: string;
+    region: Region;
+}
+
+async function getCountryDetails(country_code: string): Promise<CountryDetail>
+{
+    try {
+        const country = await ApiService.getCountry(country_code, user.value.language);
+
         return {
             name: country.name,
             flag: country.flag,
-            region: country.region as Region
+            region: country.region as Region,
         };
-    } else {
+    } catch (error) {
         return {
             name: 'Unknown',
             flag: 'assets/flags/unknown.png',
-            region: 'World'
+            region: 'World',
         };
     }
-};
-
-const getCurrentLanguage = () => {
-    return user.language;
 };
 
 const isDateNow = (date: Date) => {
@@ -186,7 +170,7 @@ const formatDate = (date: Date) => {
         minutes = parseInt(`0${minutes}`);
     }
     if (isDateNow(date)) {
-        switch (getCurrentLanguage()) {
+        switch (user.value.language) {
             case 'fr':
                 return 'Maintenant';
             case 'en':
@@ -197,7 +181,7 @@ const formatDate = (date: Date) => {
                 return 'Now';
         }
     } else if (isDateToday(date)) {
-        switch (getCurrentLanguage()) {
+        switch (user.value.language) {
             case 'fr':
                 return "Aujourd'hui";
             case 'en':
@@ -211,28 +195,12 @@ const formatDate = (date: Date) => {
 
 const switchLearningType = () => {
     clickedSwitchLearningType.value = !clickedSwitchLearningType.value;
-    if (learningType.value === 'flag') {
-        learningType.value = 'capital';
-    } else {
-        learningType.value = 'flag';
-    }
+    learningType.value = learningType.value === 'flag' ? 'capital' : 'flag';
     countries.value = [];
-    updateScores();
+    loadScores();
 };
 
-const updateScores = () => {
-    getScores(
-        user.id,
-        currentSort.value,
-        currentMax.value,
-        learningType.value,
-        region.value
-    );
-};
-
-onMounted(() => {
-    updateScores();
-});
+onMounted(() => loadScores());
 
 const filteredCountries = computed(() => {
     if (region.value === 'World') {
@@ -249,18 +217,16 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 </script>
 
 <template>
-    <BlurContainer v-if="hasLoggedOut || confirmingLogOut">
+    <BlurContainer v-if="confirmingLogOut">
         <Modal
-            v-if="confirmingLogOut && !hasLoggedOut"
             :title="$t('logOutConfirmation')"
             :message="$t('loginPageRedirect')"
             background-color="white"
             title-color="black"
             :confirmationDialog="true"
-            @confirm="logOut"
-            @cancel="confirmingLogOut = false"
+            @confirm="() => store.logout()"
+            @cancel="() => (confirmingLogOut = false)"
         />
-        <Loader v-if="hasLoggedOut" :title="$t('loggingOut')" />
     </BlurContainer>
     <div
         class="w-full h-full flex flex-col items-start justify-start mt-10 mb-10"
@@ -277,7 +243,7 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                             alt="User Avatar"
                             class="w-10 h-10 sm:w-10 sm:h-10 rounded-full mr-4"
                         />
-                        <h1 class="text-2xl mr-1 font-bold">{{ user.name }}</h1>
+                        <h1 class="text-2xl mr-1 font-bold">{{ user?.name }}</h1>
                     </div>
                     <div
                         class="flex items-center center justify-end gap-4 w-full"
@@ -348,8 +314,8 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 >
                     <Regions
                         v-model="region"
-                        @change="updateScores"
                         class="sm:mr-10 items-center"
+                        @change="loadScores"
                     />
                     <div
                         class="flex flex-col gap-2 justify-center items-center"
@@ -394,7 +360,11 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 class="grid sm:grid-cols-4 grid-rows-6 sm:grid-rows-3 2xl:flex items-center gap-2 w-full justify-center mb-4"
                 style="grid-auto-flow: column"
             >
-                <Badge v-for="score in scoreValues" :score="score" />
+                <Badge
+                    v-for="(score, index) in scoreValues"
+                    :key="index"
+                    :score="score"
+                />
             </div>
             <div class="flex flex-col gap-4 mb-5">
                 <ScoresDisplay

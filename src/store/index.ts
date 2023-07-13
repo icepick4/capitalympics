@@ -1,80 +1,61 @@
-import ApiService from '@/services/apiService';
-import { setLocalStorageToken, setLocalStorageUser } from '@/utils/common';
-import { AxiosResponse } from 'axios';
-import { createStore } from 'vuex';
+import type { User } from '@/models/User';
+import { Maybe } from '@/types/common';
+import ApiClient, { SuccessResponse } from '@/utils/ApiClient';
+import { defineStore } from 'pinia';
+import { isObject } from 'radash';
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
-const store = createStore({
-    state: {
-        user: null,
-        token: null
-    },
-    mutations: {
-        setUser(state, user) {
-            state.user = user;
-        },
-        setToken(state, token) {
-            state.token = token;
-        },
-        clearUser(state) {
-            state.user = null;
-            localStorage.removeItem('user_id');
-        },
-        clearToken(state) {
-            state.token = null;
-            localStorage.removeItem('token');
+export const useStore = defineStore('app', () => {
+    const router = useRouter();
+    const i18n = useI18n();
+
+    const user = ref<Maybe<User>>();
+
+    const isAuthenticated = ref(!!ApiClient.token);
+    const isCurrentUserLoaded = computed(() => isObject(user.value));
+
+    async function login(loginData: { username: string, password: string })
+    {
+        if (!(await ApiClient.login(loginData))) {
+            throw new Error('Login failed');
         }
-    },
-    actions: {
-        async logIn(context, { username, password, last_activity }) {
-            try {
-                const response: AxiosResponse = await ApiService.logIn(
-                    username,
-                    password,
-                    last_activity
-                );
-                if (response.status === 200) {
-                    context.commit('setToken', response.data.token);
-                    context.commit('setUser', response.data.user);
-                    setLocalStorageToken(response.data.token);
-                    setLocalStorageUser(response.data.user.id);
-                } else {
-                    throw new Error('Login failed');
-                }
-            } catch (err) {
-                context.commit('clearUser');
-                context.commit('clearToken');
-            }
-        },
-        async logOut(context) {
-            context.commit('clearUser');
-            context.commit('clearToken');
-        },
-        async reconnect(context, { user_id, token }) {
-            try {
-                const response: AxiosResponse = await ApiService.reconnect(
-                    user_id,
-                    token
-                );
-                if (response.status === 200) {
-                    context.commit('setUser', response.data.user);
-                    context.commit('setToken', token);
-                } else {
-                    throw new Error('Reconnect failed');
-                }
-            } catch (err) {
-                context.commit('clearUser');
-                context.commit('clearToken');
-            }
-        }
-    },
-    getters: {
-        user(state) {
-            return state.user;
-        },
-        token(state) {
-            return state.token;
-        }
+
+        isAuthenticated.value = true;
+        await loadCurrentUser();
+        i18n.locale.value = (user.value as User).language ?? 'en';
     }
-});
 
-export default store;
+    async function loadCurrentUser()
+    {
+        if (!isAuthenticated.value || isCurrentUserLoaded.value) {
+            return;
+        }
+
+        const response = await ApiClient.get<SuccessResponse<User>>('/me');
+        if (!response.success) {
+            throw new Error('Failed to load current user');
+        }
+
+        user.value = response.data.data;
+    }
+
+    async function logout()
+    {
+        user.value = null;
+        isAuthenticated.value = false;
+        ApiClient.logout();
+
+        router.push({ name: 'Home' });
+    }
+
+    return {
+        isAuthenticated,
+        isCurrentUserLoaded,
+        loadCurrentUser,
+        login,
+        logout,
+        user,
+    };
+});
