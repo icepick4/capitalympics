@@ -16,8 +16,7 @@ export const useStore = defineStore('app', () => {
     const isAuthenticated = ref(!!ApiClient.token);
     const isCurrentUserLoaded = computed(() => isObject(user.value));
 
-    async function login(loginData: { username: string, password: string })
-    {
+    async function login(loginData: { username: string; password: string }) {
         if (!(await ApiClient.login(loginData))) {
             throw new Error('Login failed');
         }
@@ -27,8 +26,7 @@ export const useStore = defineStore('app', () => {
         i18n.locale.value = (user.value as User).language ?? 'en';
     }
 
-    async function loadCurrentUser()
-    {
+    async function loadCurrentUser() {
         if (!isAuthenticated.value || isCurrentUserLoaded.value) {
             return;
         }
@@ -39,10 +37,10 @@ export const useStore = defineStore('app', () => {
         }
 
         user.value = response.data.data;
+        i18n.locale.value = (user.value as User).language ?? 'en';
     }
 
-    async function logout()
-    {
+    async function logout() {
         user.value = null;
         isAuthenticated.value = false;
         ApiClient.logout();
@@ -56,6 +54,6 @@ export const useStore = defineStore('app', () => {
         loadCurrentUser,
         login,
         logout,
-        user,
+        user
     };
 });
