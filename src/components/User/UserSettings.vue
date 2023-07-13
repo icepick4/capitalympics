@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { User } from '@/models/User';
 import ApiService from '@/services/apiService';
+import { useStore } from '@/store';
 import { languages } from '@/utils/common';
-import { reactive, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { Ref, computed, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
-import { useStore } from 'vuex';
 import BlurContainer from '../BlurContainer.vue';
 import Modal from '../Modal.vue';
 
@@ -17,32 +18,29 @@ interface inputState {
 defineEmits(['close']);
 
 const store = useStore();
-const user: User = store.getters.user;
-const firstUsername = user.name;
+const user = storeToRefs(store).user as Ref<User>;
+
+const firstUsername = computed(() => user.value?.name);
+
+
 const username: inputState = reactive({
-    content: user.name,
+    content: user.value.name,
     hasFocused: undefined
 });
-const language = ref(user.language);
+const language = ref(user.value.language);
+
 const hasSaved = ref(false);
 const displaySaveError = ref(false);
 const usernameAlreadyTaken = ref(false);
 const t = useI18n();
 
 const validateUsername = () => {
-    if (username.content.length < 3 || username.content.length > 20) {
-        return false;
-    } else {
-        return true;
-    }
+    return !(username.content.length < 3 || username.content.length > 20);
 };
 
 const areInputsSame = () => {
-    if (username.content === user.name && language.value === user.language) {
-        return true;
-    } else {
-        return false;
-    }
+    return username.content === user.value.name
+        && language.value === user.value.language;
 };
 
 const typedUsername = () => {
@@ -57,23 +55,18 @@ const closeUserTakenModal = () => {
 
 const saveProfile = async () => {
     if (validateUsername()) {
-        if (user.name != username.content) {
-            user.name = username.content;
+        if (user.value.name != username.content) {
+            user.value.name = username.content;
         }
-        user.language = language.value;
+        user.value.language = language.value;
         try {
-            let response = await ApiService.updateUser(
-                user.id,
-                store.getters.token,
-                user
-            );
+            const response = await ApiService.updateUser(user.value);
             hasSaved.value = true;
             if (!response) {
                 usernameAlreadyTaken.value = true;
-                user.name = firstUsername;
+                user.value.name = firstUsername.value;
             } else {
                 usernameAlreadyTaken.value = false;
-                store.commit('setUser', user);
                 t.locale.value = language.value;
             }
         } catch (error) {

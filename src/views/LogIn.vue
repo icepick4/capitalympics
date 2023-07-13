@@ -1,76 +1,41 @@
 <script setup lang="ts">
 import BlurContainer from '@/components/BlurContainer.vue';
-import Loader from '@/components/Loader.vue';
 import Modal from '@/components/Modal.vue';
-import { getCurrentMySQLDate } from '@/utils/common';
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useStore } from '@/store';
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useStore } from 'vuex';
-
-const userFound = ref(false);
-const signed = ref(false);
-const displayErrorForm = ref(false);
-const hasLoggedIn = ref(false);
-const username = ref('');
-const password = ref('');
 const router = useRouter();
 const store = useStore();
-const t = useI18n();
-
-const handleSignInError = () => {
-    hasLoggedIn.value = false;
-    signed.value = true;
-};
-
-const validateForm = () => {
-    if (!username.value || !password.value) {
-        displayErrorForm.value = true;
-        return false;
-    }
-    return true;
-};
-
-const logIn = async () => {
-    if (!validateForm()) {
+const username = ref('');
+const password = ref('');
+const isLoading = ref(false);
+const isFormFilled = computed(() => username.value.length && password.value.length);
+const userNotFound = ref(false);
+async function login() {
+    if (!isFormFilled.value) {
         return;
     }
+    isLoading.value = true;
     try {
-        signed.value = false;
-        hasLoggedIn.value = true;
-        await store.dispatch('logIn', {
-            username: username.value,
-            password: password.value,
-            last_activity: getCurrentMySQLDate()
-        });
-        t.locale.value = store.getters.user.language;
-        hasLoggedIn.value = false;
-        router.push('/profile');
-    } catch (e) {
-        userFound.value = false;
-        signed.value = true;
+        await store.login({ username: username.value, password: password.value });
+        router.push({ name: 'Profile' });
+    } catch (error) {
+        console.error(error);
+        userNotFound.value = true;
+    } finally {
+        isLoading.value = false;
     }
-};
+}
 </script>
 
 <template>
-    <BlurContainer v-if="hasLoggedIn || displayErrorForm">
-        <Loader v-if="!displayErrorForm && !signed" />
+    <BlurContainer v-if="userNotFound">
         <Modal
-            v-else-if="displayErrorForm"
-            :title="$t('error')"
-            :message="$t('fillAllFields')"
-            background-color="white"
-            title-color="error"
-            @close="displayErrorForm = false"
-        />
-        <Modal
-            v-else-if="!userFound && signed"
             :title="$t('error')"
             :message="$t('userNotFound')"
             background-color="white"
             title-color="error"
-            @close="handleSignInError"
+            @close="() => (userNotFound = false)"
         />
     </BlurContainer>
     <section
@@ -111,25 +76,20 @@ const logIn = async () => {
                                 to="/signup"
                                 class="text-black hover:underline italic"
                             >
-                                {{ $t('createAccount') }}</RouterLink
-                            >
+                                {{ $t('createAccount') }}
+                            </RouterLink>
                         </p>
                     </div>
-
-                    <form @submit.prevent="logIn" class="space-y-5">
+                    <div class="mt-5 space-y-5">
                         <div>
                             <label
-                                for=""
+                                for="username"
                                 class="text-base font-medium text-gray-900"
                             >
                                 {{ $t('username') }}
                             </label>
-                            <div
-                                class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
-                            >
-                                <div
-                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-                                >
+                            <div class="mt-2.5 relative text-gray-400 focus-within:text-gray-600">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg
                                         class="w-5 h-5"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -145,28 +105,23 @@ const logIn = async () => {
                                         />
                                     </svg>
                                 </div>
-
                                 <input
+                                    v-model="username"
                                     type="text"
                                     :placeholder="$t('usernamePlaceholder')"
                                     class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-black"
-                                    v-model="username"
                                 />
                             </div>
                         </div>
                         <div>
                             <label
-                                for=""
+                                for="password"
                                 class="text-base font-medium text-gray-900"
                             >
                                 {{ $t('password') }}
                             </label>
-                            <div
-                                class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
-                            >
-                                <div
-                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-                                >
+                            <div class="mt-2.5 relative text-gray-400 focus-within:text-gray-600">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg
                                         class="w-5 h-5"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -182,22 +137,27 @@ const logIn = async () => {
                                         />
                                     </svg>
                                 </div>
-
                                 <input
+                                    v-model="password"
                                     type="password"
                                     :placeholder="$t('passwordPlaceholder')"
                                     class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 caret-black"
-                                    v-model="password"
                                 />
                             </div>
                         </div>
-
-                        <input
-                            class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-black transition-all duration-200 bg-white hover:scale-105 delay-100 rounded-md cursor-pointer"
-                            type="submit"
-                            :value="$t('login')"
-                        />
-                    </form>
+                        <button
+                            type="button"
+                            :disabled="!isFormFilled"
+                            class="
+                                w-full px-4 py-4 text-base font-semibold text-black bg-white rounded-md
+                                transition-all duration-200 delay-100 hover:scale-105 focus:scale-105
+                                disabled:hover:scale-100 disabled:opacity-60 disabled:cursor-not-allowed
+                            "
+                            @click="login"
+                        >
+                            {{  $t('login') }}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { ScoreType } from '@/types/common';
 import ButtonTemplate from './ButtonTemplate.vue';
-
-defineProps<{
-    user_id: number;
-    token: string;
-    click: (type: ScoreType) => void;
-}>();
+const emit = defineEmits(['click']);
+type Button = {
+    title: string;
+    color: string;
+    type: ScoreType;
+};
+const buttons: Button[] = [
+    { title: 'easy', color: 'bg-blue-500', type: 'succeeded' },
+    { title: 'medium', color: 'bg-yellow-500', type: 'medium' },
+    { title: 'hard', color: 'bg-red-500', type: 'failed' },
+];
 </script>
 
 <template>
@@ -14,19 +19,11 @@ defineProps<{
         class="flex flex-col sm:flex-row w-full items-center justify-center gap-2 lg:gap-5"
     >
         <ButtonTemplate
-            :title="$t('easy')"
-            :color="'bg-blue-500'"
-            @click="click('succeeded')"
-        />
-        <ButtonTemplate
-            :title="$t('medium')"
-            :color="'bg-yellow-500'"
-            @click="click('medium')"
-        />
-        <ButtonTemplate
-            :title="$t('hard')"
-            :color="'bg-red-500'"
-            @click="click('failed')"
+            v-for="(button, btnIndex) in buttons"
+            :key="btnIndex"
+            :title="$t(button.title)"
+            :color="button.color"
+            @click="emit('click', button.type)"
         />
     </div>
 </template>

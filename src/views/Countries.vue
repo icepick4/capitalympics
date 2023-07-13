@@ -19,7 +19,6 @@ const state: State = reactive({
 });
 
 const search = ref('');
-
 const region = ref('World');
 
 const finishedWaited = ref(false);
@@ -27,17 +26,9 @@ const displaySum41 = ref(false);
 
 const filteredCountries = () => {
     if (search.value.length > 0 || region.value.length > 0) {
-        if (search.value == 'sum') {
-            displaySum41.value = true;
-        } else {
-            displaySum41.value = false;
-        }
-        let currentRegion: string;
-        if (region.value == 'World') {
-            currentRegion = '';
-        } else {
-            currentRegion = region.value;
-        }
+        displaySum41.value = search.value === 'sum';
+        const currentRegion: string = region.value !== 'World' ? region.value : '';
+
         return state.countries.filter((country) => {
             return (
                 country.name
@@ -53,8 +44,9 @@ const filteredCountries = () => {
 
 onBeforeMount(async () => {
     const lang = getLanguage();
+
     try {
-        state.countries = await ApiService.getCountries(0, lang);
+        state.countries = await ApiService.getCountries(undefined, lang);
     } catch (error) {
         finishedWaited.value = true;
     }

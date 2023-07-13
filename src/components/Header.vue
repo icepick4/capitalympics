@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import { User } from '@/models/User';
-import { onMounted, onUnmounted, ref, watchEffect } from 'vue';
+import { useStore } from '@/store';
+import { storeToRefs } from 'pinia';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import { useStore } from 'vuex';
 
-const store = useStore();
-const user = ref<User | null>(store.getters.user);
-watchEffect(() => {
-    user.value = store.getters.user;
-});
+const { isAuthenticated } = storeToRefs(useStore());
 
 const isDropdownOpen = ref(false);
 const clickCount = ref(0);
@@ -28,6 +24,7 @@ const closeMenuOnClickOutside = (event: MouseEvent) => {
     if (clickCount.value === 1) {
         return;
     }
+
     if (menuRef.value && !menuRef.value.contains(event.target as Node)) {
         isDropdownOpen.value = false;
         clickCount.value = 0;
@@ -82,38 +79,38 @@ onUnmounted(() => {
                 >
                     {{ $t('quiz') }}
                 </RouterLink>
-                <RouterLink
-                    to="/login"
-                    class="hidden sm:flex justify-end items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
-                    v-if="user === null"
-                >
-                    {{ $t('login') }}</RouterLink
-                >
-                <RouterLink
-                    to="/signup"
-                    class="hidden sm:flex justify-center items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
-                    v-if="user === null"
-                >
-                    {{ $t('signup') }}</RouterLink
-                >
-                <RouterLink
-                    to="/learn"
-                    class="hidden sm:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
-                    v-if="user !== null"
-                >
-                    {{ $t('learn') }}
-                </RouterLink>
-                <RouterLink
-                    to="/profile"
-                    class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
-                    v-if="user !== null"
-                >
-                    <img
-                        src="/icons/default_profile.png"
-                        alt="avatar"
-                        class="w-10 h-10 rounded-full"
-                    />
-                </RouterLink>
+                <template v-if="!isAuthenticated">
+                    <RouterLink
+                        to="/login"
+                        class="hidden sm:flex justify-end items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    >
+                        {{ $t('login') }}</RouterLink
+                    >
+                    <RouterLink
+                        to="/signup"
+                        class="hidden sm:flex justify-center items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    >
+                        {{ $t('signup') }}</RouterLink
+                    >
+                </template>
+                <template v-else>
+                    <RouterLink
+                        to="/learn"
+                        class="hidden sm:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    >
+                        {{ $t('learn') }}
+                    </RouterLink>
+                    <RouterLink
+                        to="/profile"
+                        class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
+                    >
+                        <img
+                            src="/icons/default_profile.png"
+                            alt="avatar"
+                            class="w-10 h-10 rounded-full"
+                        />
+                    </RouterLink>
+                </template>
             </div>
             <div
                 class="flex flex-row justify-center items-center gap-7 xl:hidden"
@@ -169,23 +166,23 @@ onUnmounted(() => {
             >
                 <div class="py-2" @click="toggleDropdown">
                     <RouterLink
+                        v-if="isAuthenticated"
                         to="/profile"
                         class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
-                        v-if="user !== null"
                     >
                         {{ $t('profile') }}</RouterLink
                     >
                     <RouterLink
+                    v-if="!isAuthenticated"
                         to="/login"
                         class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
-                        v-if="user === null"
                     >
                         {{ $t('login') }}</RouterLink
                     >
                     <RouterLink
+                        v-if="!isAuthenticated"
                         to="/signup"
                         class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
-                        v-if="user === null"
                     >
                         {{ $t('signup') }}</RouterLink
                     >
@@ -202,9 +199,9 @@ onUnmounted(() => {
                         {{ $t('countries') }}
                     </RouterLink>
                     <RouterLink
+                        v-if="!isAuthenticated"
                         to="/learn"
                         class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
-                        v-if="user === null"
                     >
                         {{ $t('learn') }}
                     </RouterLink>
@@ -242,17 +239,14 @@ onUnmounted(() => {
     transition: all 0.2s ease-in-out;
     transform: scaleX(0);
 }
-
 .center-underline:hover::after {
     transform: scaleX(1);
 }
-
 @media (max-width: 375px) {
     .header {
         /* flex-direction: column; */
         gap: 2rem;
     }
-
     .menu {
         width: 100%;
         height: auto;

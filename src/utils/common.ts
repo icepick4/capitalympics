@@ -1,53 +1,22 @@
-import { Level, User } from '@/models/User';
-import store from '@/store';
+import { Level } from '@/models/User';
+import { useStore } from '@/store';
 import { Lang, Translation } from '@/types/common';
+import { DateTime } from 'luxon';
+import { storeToRefs } from 'pinia';
 
-export const getCurrentMySQLDate = (): string => {
-    let date = new Date();
-    //translate to mysql date
-    return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000)
-        .toISOString()
-        .slice(0, 19)
-        .replace('T', ' ');
-};
+export function getCurrentMySQLDate(): string
+{
+    return DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss');
+}
 
-export const isSetUser = (): boolean => {
-    if (localStorage.getItem('user_id') !== null) {
-        return true;
+export function getLanguage(): Lang
+{
+    const user = storeToRefs(useStore()).user;
+    if (user.value) {
+        return user.value.language;
     }
-    return false;
-};
 
-export const isSetToken = (): boolean => {
-    if (localStorage.getItem('token') !== null) {
-        return true;
-    }
-    return false;
-};
-
-export const getLocalStorageUser = (): number => {
-    const user_id = localStorage.getItem('user_id');
-    return parseInt(user_id!);
-};
-export const getLocalStorageToken = (): string => {
-    const token = localStorage.getItem('token');
-    return token!;
-};
-
-export const setLocalStorageUser = (user_id: string) => {
-    localStorage.setItem('user_id', user_id);
-};
-export const setLocalStorageToken = (token: string) => {
-    localStorage.setItem('token', token);
-};
-
-export const getLanguage = (): Lang => {
-    const user: User = store.getters.user;
-    if (user) {
-        return user.language as Lang;
-    }
-    const browserLanguage = navigator.language;
-    return browserLanguage.substring(0, 2) as Lang;
+    return navigator.language.substring(0, 2) as Lang;
 };
 
 export const languages = [
@@ -92,16 +61,28 @@ export const regions = {
     ]
 };
 
-export function getLevelName(score: number): string {
-    const user: User = store.getters.user;
-    const language = user ? user.language : 'en';
-    return Ranks[fromScoreToLevel(score)][language];
+export function getLevelName(score: number): string
+{
+    if (isNaN(score)) {
+        return '';
+    }
+
+    const store = useStore();
+    const language = store.user?.language ?? 'en';
+    const level = fromScoreToLevel(score);
+
+    return Ranks[level][language];
 }
 
 export const fromScoreToLevel = (score: number): Level => {
     if (score < 0) {
         return -1;
     }
+
+    if (score >= 100) {
+        return 10;
+    }
+
     return Math.floor(score / 10) as Level;
 };
 

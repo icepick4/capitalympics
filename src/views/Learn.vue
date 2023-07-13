@@ -4,15 +4,14 @@ import Loader from '@/components/Loader.vue';
 import Modal from '@/components/Modal.vue';
 import { Level, User } from '@/models/User';
 import ApiService from '@/services/apiService';
+import { useStore } from '@/store';
 import { getLevelName } from '@/utils/common';
-import { onBeforeMount, ref } from 'vue';
-import { RouterLink, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
+import { storeToRefs } from 'pinia';
+import { Ref, onBeforeMount, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
-const router = useRouter();
 const store = useStore();
-const user: User = store.getters.user;
-const token = store.getters.token;
+const user = storeToRefs(store).user as Ref<User>;
 
 const loading = ref(true);
 
@@ -21,21 +20,23 @@ const nextUserLevel = ref(-1);
 const noScores = ref(false);
 const initFirstTimeScores = ref(false);
 const confirmingResetScores = ref(false);
+
 const getUserScore = async (): Promise<Level> => {
+    loading.value = true;
+    let score: Level = -1;
+
     try {
-        const score: Level = await ApiService.getUserScore(user.id, token);
+        score = await ApiService.getUserScore(user.value);
         nextUserLevel.value = score + 10;
-        if (score === -1) {
-            noScores.value = true;
-        } else {
-            noScores.value = false;
-        }
-        loading.value = false;
+        noScores.value = score === -1;
         return score;
     } catch (error) {
         console.log(error);
+    } finally {
+        loading.value = false;
     }
-    return -1;
+
+    return score;
 };
 
 const resetScoresConfirmation = () => {
@@ -45,23 +46,21 @@ const resetScoresConfirmation = () => {
 const resetScores = async (): Promise<boolean> => {
     initFirstTimeScores.value = true;
     confirmingResetScores.value = false;
+
     try {
-        return await ApiService.resetScores(user.id, token);
+        return await ApiService.resetScores(user.value.id);
     } catch (error) {
         console.log(error);
     } finally {
         initFirstTimeScores.value = false;
         userScore.value = (await getUserScore()) as Level;
     }
+
     return false;
 };
 
 onBeforeMount(async () => {
-    if (user === null) {
-        router.push('/login');
-    } else {
-        userScore.value = (await getUserScore()) as Level;
-    }
+    userScore.value = (await getUserScore()) as Level;
 });
 </script>
 
