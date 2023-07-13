@@ -2,7 +2,7 @@ import { CountryI } from '@/models/Country';
 import { Level, User } from '@/models/User';
 import { Lang } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
-import { getLanguage } from '@/utils/common';
+import { getCurrentMySQLDate, getLanguage } from '@/utils/common';
 
 export default class ApiService {
     public static async getCountries(max?: number, lang?: Lang): Promise<CountryI[]>
@@ -26,12 +26,9 @@ export default class ApiService {
         return response.data.country;
     }
 
-    public static async signUp(
-        username: string,
-        password: string,
-        language: string,
-        created_at: string
-    ): Promise<boolean> {
+    public static async signUp(username: string, password: string, language: string): Promise<boolean>
+    {
+        const created_at = getCurrentMySQLDate();
         const response = await ApiClient.post('/users', {
             user: { name: username, language, password, created_at }
         });

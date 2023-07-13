@@ -1,139 +1,92 @@
 <script setup lang="ts">
 import BlurContainer from '@/components/BlurContainer.vue';
-import Loader from '@/components/Loader.vue';
 import Modal from '@/components/Modal.vue';
+import PasswordInput from '@/components/common/PasswordInput.vue';
+import Select from '@/components/common/Select.vue';
+import TextInput from '@/components/common/TextInput.vue';
 import ApiService from '@/services/apiService';
-import { getCurrentMySQLDate, languages } from '@/utils/common';
-import { reactive, ref } from 'vue';
+import { languages } from '@/utils/common';
+import { IconLanguage, IconUser } from '@tabler/icons-vue';
+import { computed, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { RouterLink, useRouter } from 'vue-router';
 
-interface inputState {
-    content: string;
-    hasFocused: boolean | undefined;
-}
-
-const username: inputState = reactive({
-    content: '',
-    hasFocused: undefined
-});
-
-const password: inputState = reactive({
-    content: '',
-    hasFocused: undefined
-});
-
-const passwordConfirmation: inputState = reactive({
-    content: '',
-    hasFocused: undefined
-});
-
-const language = ref('en');
-const hasSignedUp = ref(false);
-const numberOfPeople = ref(0);
+const { t } = useI18n();
 const router = useRouter();
-const displaySignUpError = ref(false);
 
-const getNumberOfPeople = async () => {
+const username = ref('');
+const password = ref('');
+const passwordConfirmation = ref('');
+const language = ref('en');
+
+const isLoading = ref(false);
+const signedUpFailed = ref(false);
+
+const errors = ref<Record<string, string|undefined>>({
+    username: undefined,
+    password: undefined,
+});
+
+watch(username, () => errors.value.username = undefined);
+watch(password, () => errors.value.password = undefined);
+
+// We retrieve the users count from the API
+const numberOfPeople = ref(0);
+(async () => {
     const response = await ApiService.getUsersCount();
     numberOfPeople.value = response;
-};
+})();
 
-const closeUserTakenModal = () => {
-    displaySignUpError.value = false;
-    hasSignedUp.value = false;
-};
-
-getNumberOfPeople();
-
-const signUp = async () => {
-    if (!isFormValid()) {
-        hasSignedUp.value = true;
+async function signup()
+{
+    validateForm();
+    if (errors.value.username || errors.value.password) {
         return;
     }
-    hasSignedUp.value = true;
+
+    isLoading.value = true;
+
     try {
-        await ApiService.signUp(
-            username.content,
-            password.content,
-            language.value,
-            getCurrentMySQLDate()
-        );
-        hasSignedUp.value = true;
+        await ApiService.signUp(username.value, password.value, language.value);
         router.push('/login');
     } catch (error) {
-        displaySignUpError.value = true;
+        signedUpFailed.value = true;
+    } finally {
+        isLoading.value = false;
     }
 };
+
+const canTryToSignup = computed(() => {
+    return username.value?.length
+        && password.value?.length
+        && password.value === passwordConfirmation.value
+});
 
 const validatePassword = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    if (!passwordRegex.test(password.content)) {
-        return false;
-    } else {
-        return true;
-    }
-};
-
-const typedPassword = () => {
-    password.hasFocused = true;
-};
-
-const validatePasswordConfirmation = () => {
-    if (password.content !== passwordConfirmation.content) {
-        return false;
-    } else {
-        return true;
-    }
-};
-
-const typedPasswordConfirmation = () => {
-    passwordConfirmation.hasFocused = true;
+    return passwordRegex.test(password.value);
 };
 
 const validateUsername = () => {
-    if (username.content.length < 3 || username.content.length > 20) {
-        return false;
-    } else {
-        return true;
-    }
+    return username.value.length >= 3
+        && username.value.length <= 20;
 };
 
-const typedUsername = () => {
-    username.hasFocused = true;
-};
-
-const isFormValid = () => {
-    if (
-        validatePassword() &&
-        validatePasswordConfirmation() &&
-        validateUsername()
-    ) {
-        return true;
-    } else {
-        return false;
-    }
+const validateForm = () => {
+    errors.value.password = validatePassword() ? undefined : t('passwordRestriction');
+    errors.value.username = validateUsername() ? undefined : t('usernameRestriction');
 };
 </script>
 
 <template>
-    <BlurContainer v-if="hasSignedUp">
+    <BlurContainer v-if="signedUpFailed">
         <Modal
-            v-if="!isFormValid()"
-            :title="$t('error')"
-            :message="$t('fillAllFields')"
-            background-color="white"
-            title-color="error"
-            @close="hasSignedUp = false"
-        />
-        <Modal
-            v-else-if="displaySignUpError"
             :title="$t('error')"
             :message="$t('usernameTaken')"
             background-color="white"
             title-color="error"
-            @close="closeUserTakenModal"
+            @close="() => (signedUpFailed = false)"
         />
-        <Loader v-else :title="$t('signingUp')" />
     </BlurContainer>
     <section class="h-full flex w-full justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
@@ -238,227 +191,49 @@ const isFormValid = () => {
                             {{ $t('login') }}
                         </RouterLink>
                     </p>
-
-                    <form @submit.prevent="signUp" class="mt-8">
-                        <div class="space-y-5">
-                            <div>
-                                <label
-                                    for=""
-                                    class="text-base font-medium text-gray-900"
-                                >
-                                    {{ $t('username') }}
-                                </label>
-                                <span
-                                    v-if="
-                                        username.hasFocused === false &&
-                                        !validateUsername()
-                                    "
-                                    class="text-error text-sm ml-1 text-center"
-                                    >{{ $t('usernameRestriction') }}
-                                </span>
-                                <div
-                                    class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
-                                >
-                                    <div
-                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-                                    >
-                                        <svg
-                                            class="w-5 h-5"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                            />
-                                        </svg>
-                                    </div>
-
-                                    <input
-                                        type="text"
-                                        :placeholder="$t('usernamePlaceholder')"
-                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50"
-                                        @input="typedUsername"
-                                        v-model="username.content"
-                                        @focusin="username.hasFocused = true"
-                                        @focusout="username.hasFocused = false"
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label
-                                    for=""
-                                    class="text-base font-medium text-gray-900"
-                                >
-                                    {{ $t('password') }}
-                                </label>
-                                <span
-                                    v-if="
-                                        password.hasFocused === false &&
-                                        !validatePassword()
-                                    "
-                                    class="text-error text-sm ml-1 text-center"
-                                >
-                                    {{ $t('passwordRestriction') }}
-                                </span>
-                                <div
-                                    class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
-                                >
-                                    <div
-                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-                                    >
-                                        <svg
-                                            class="w-5 h-5"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
-                                            />
-                                        </svg>
-                                    </div>
-
-                                    <input
-                                        type="password"
-                                        :placeholder="$t('passwordPlaceholder')"
-                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50"
-                                        @input="typedPassword"
-                                        v-model="password.content"
-                                        @focusin="password.hasFocused = true"
-                                        @focusout="password.hasFocused = false"
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label
-                                    for=""
-                                    class="text-base font-medium text-gray-900"
-                                >
-                                    {{ $t('passwordConfirmation') }}
-                                </label>
-                                <span
-                                    v-if="
-                                        passwordConfirmation.hasFocused ===
-                                            false &&
-                                        !validatePasswordConfirmation() &&
-                                        validatePassword()
-                                    "
-                                    class="text-error text-center text-sm ml-1"
-                                >
-                                    {{ $t('passwordMatching') }}
-                                </span>
-                                <div
-                                    class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
-                                >
-                                    <div
-                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-                                    >
-                                        <svg
-                                            class="w-5 h-5"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
-                                            />
-                                        </svg>
-                                    </div>
-
-                                    <input
-                                        type="password"
-                                        :placeholder="
-                                            $t(
-                                                'passwordConfirmationPlaceholder'
-                                            )
-                                        "
-                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50"
-                                        @input="typedPasswordConfirmation"
-                                        v-model="passwordConfirmation.content"
-                                        @focusin="
-                                            passwordConfirmation.hasFocused = true
-                                        "
-                                        @focusout="
-                                            passwordConfirmation.hasFocused = false
-                                        "
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label
-                                    for=""
-                                    class="text-base font-medium text-gray-900"
-                                >
-                                    {{ $t('language') }}
-                                </label>
-                                <div
-                                    class="mt-2.5 relative text-gray-400 focus-within:text-gray-600"
-                                >
-                                    <div
-                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-                                    >
-                                        <svg
-                                            class="w-5 h-5"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <select
-                                        class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50"
-                                        v-model="language"
-                                    >
-                                        <option
-                                            value=""
-                                            selected
-                                            disabled
-                                            hidden
-                                        >
-                                            {{ $t('languagePlaceholder') }}
-                                        </option>
-                                        <option
-                                            v-for="lang in languages"
-                                            :value="lang.value"
-                                        >
-                                            {{ lang.text }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div>
-                                <input
-                                    class="inline-flex items-center text-black justify-center w-full px-4 py-4 text-base font-semibold transition-all duration-200 border border-transparent rounded-md bg-white cursor-pointer focus:outline-none hover:scale-105 delay-100"
-                                    type="submit"
-                                    :value="$t('signup')"
-                                />
-                            </div>
+                    <div class="mt-8 space-y-5">
+                        <TextInput
+                            v-model="username"
+                            :label="$t('username')"
+                            :placeholder="$t('usernamePlaceholder')"
+                            :prepend-icon="IconUser"
+                            :error="errors.username"
+                        />
+                        <PasswordInput
+                            v-model="password"
+                            :label="$t('password')"
+                            :placeholder="$t('passwordPlaceholder')"
+                            :error="errors.password"
+                            revelable
+                        />
+                        <PasswordInput
+                            v-model="passwordConfirmation"
+                            :label="$t('passwordConfirmation')"
+                            :placeholder="$t('passwordConfirmationPlaceholder')"
+                        />
+                        <Select
+                            v-model="language"
+                            :label="$t('language')"
+                            :options="languages.map((lang) => ({ ...lang, label: lang.text }))"
+                            :prepend-icon="IconLanguage"
+                        />
+                        <div class="pt-2">
+                            <button
+                                type="button"
+                                :disabled="!canTryToSignup || isLoading"
+                                class="
+                                    w-full flex items-center justify-center px-4 py-4 text-base font-semibold text-black bg-white rounded-md
+                                    transition-all duration-200 delay-100 hover:scale-105 focus:scale-105
+                                    disabled:hover:scale-100 disabled:opacity-60 disabled:cursor-not-allowed
+                                    outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75
+                                "
+                                @click="signup"
+                            >
+                                <span v-if="!isLoading">{{  $t('signup') }}</span>
+                                <div v-else class="h-5 w-5 border-4 rounded-full border-blue-600/75 border-b-blue-600/25 animate-spin"></div>
+                            </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
