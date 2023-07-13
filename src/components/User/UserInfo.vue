@@ -365,7 +365,7 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 </div>
             </div>
             <div
-                class="grid sm:grid-cols-4 grid-rows-6 sm:grid-rows-3 2xl:flex items-center gap-2 w-full justify-center mb-4"
+                class="hidden sm:grid sm:grid-cols-4 grid-rows-6 sm:grid-rows-3 2xl:flex items-center gap-2 w-full justify-center mb-4"
                 style="grid-auto-flow: column"
             >
                 <Badge
