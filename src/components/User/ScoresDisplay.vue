@@ -25,10 +25,10 @@ defineProps<{
             <RouterLink
                 v-for="country in countries"
                 :key="country.name"
-                class="bg-white rounded-lg shadow-md p-4 hover:bg-gray-200 transition-colors duration-300 fade-up flex justify-between"
+                class="bg-white rounded-lg shadow-md p-4 hover:bg-gray-200 transition-colors duration-300 fade-up flex justify-between items"
                 :to="`/countries/${country.alpha3Code}`"
             >
-                <div class="flex items-center mb-2">
+                <div class="flex items-center">
                     <img
                         :src="country.flag"
                         alt="Country Flag"

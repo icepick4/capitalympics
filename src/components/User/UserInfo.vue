@@ -71,16 +71,21 @@ const switchSort = () => {
     loadScores();
 };
 
-async function loadScores()
-{
+async function loadScores() {
     const max = currentMax.value;
-    const queryParams = max === 0 ? {} :  {
-        max,
-        sort: currentSort.value,
-        region: region.value,
-    };
+    const queryParams =
+        max === 0
+            ? {}
+            : {
+                  max,
+                  sort: currentSort.value,
+                  region: region.value
+              };
 
-    const response = await ApiClient.get<{ scores: UserScore[] }>(`/users/${user.value.id}/${learningType.value}/scores`, queryParams);
+    const response = await ApiClient.get<{ scores: UserScore[] }>(
+        `/users/${user.value.id}/${learningType.value}/scores`,
+        queryParams
+    );
     if (!response.success) {
         console.log(response.error);
         return;
@@ -88,7 +93,6 @@ async function loadScores()
 
     const scores = response.data.scores;
     isMax.value = scores.length < max;
-
 
     if (lastRegion.value !== region.value) {
         countries.value = [];
@@ -122,32 +126,34 @@ async function loadScores()
     });
 
     lastRegion.value = region.value;
-};
+}
 
 type CountryDetail = {
     name: string;
     flag: string;
     region: Region;
-}
+};
 
-async function getCountryDetails(country_code: string): Promise<CountryDetail>
-{
+async function getCountryDetails(country_code: string): Promise<CountryDetail> {
     try {
-        const country = await ApiService.getCountry(country_code, user.value.language);
+        const country = await ApiService.getCountry(
+            country_code,
+            user.value.language
+        );
 
         return {
             name: country.name,
             flag: country.flag,
-            region: country.region as Region,
+            region: country.region as Region
         };
     } catch (error) {
         return {
             name: 'Unknown',
             flag: 'assets/flags/unknown.png',
-            region: 'World',
+            region: 'World'
         };
     }
-};
+}
 
 const isDateNow = (date: Date) => {
     const now = new Date();
@@ -243,7 +249,9 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                             alt="User Avatar"
                             class="w-10 h-10 sm:w-10 sm:h-10 rounded-full mr-4"
                         />
-                        <h1 class="text-2xl mr-1 font-bold">{{ user?.name }}</h1>
+                        <h1 class="text-2xl mr-1 font-bold">
+                            {{ user?.name }}
+                        </h1>
                     </div>
                     <div
                         class="flex items-center center justify-end gap-4 w-full"
