@@ -5,7 +5,7 @@ import { ref } from 'vue';
 import TextInput from './TextInput.vue';
 
 interface Properties {
-    modelValue: string|null;
+    modelValue: string | null;
     label?: string;
     placeholder?: string;
     disabled?: boolean;
@@ -15,9 +15,9 @@ interface Properties {
 }
 
 const isRevealed = ref(false);
-const toggleReveal = () => isRevealed.value = !isRevealed.value;
+const toggleReveal = () => (isRevealed.value = !isRevealed.value);
 
-const props = defineProps<Properties>()
+const props = defineProps<Properties>();
 const emit = defineEmits(['update:modelValue']);
 const value = useVModel(props, 'modelValue', emit);
 </script>
@@ -37,14 +37,10 @@ const value = useVModel(props, 'modelValue', emit);
             <button
                 v-if="revelable"
                 type="button"
-                class="
-                    bg-transparent hover:bg-gray-100 focus:bg-gray-100 text-gray-400/75 hover:text-black/75 focus:text-black/75
-                    outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75
-                    transition-colors rounded p-1
-                "
+                class="bg-transparent hover:bg-gray-100 focus:bg-gray-100 text-gray-400/75 hover:text-black/75 focus:text-black/75 outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75 transition-colors rounded p-1"
                 @click.stop="toggleReveal"
             >
-                <component :is="isRevealed ? IconEyeOff : IconEyeCheck" :stroke-width="1.5" />
+                <component :is="isRevealed ? IconEyeOff : IconEyeCheck" />
             </button>
         </template>
     </TextInput>
