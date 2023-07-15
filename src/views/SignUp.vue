@@ -22,13 +22,13 @@ const language = ref('en');
 const isLoading = ref(false);
 const signedUpFailed = ref(false);
 
-const errors = ref<Record<string, string|undefined>>({
+const errors = ref<Record<string, string | undefined>>({
     username: undefined,
-    password: undefined,
+    password: undefined
 });
 
-watch(username, () => errors.value.username = undefined);
-watch(password, () => errors.value.password = undefined);
+watch(username, () => (errors.value.username = undefined));
+watch(password, () => (errors.value.password = undefined));
 
 // We retrieve the users count from the API
 const numberOfPeople = ref(0);
@@ -37,8 +37,7 @@ const numberOfPeople = ref(0);
     numberOfPeople.value = response;
 })();
 
-async function signup()
-{
+async function signup() {
     validateForm();
     if (errors.value.username || errors.value.password) {
         return;
@@ -54,12 +53,14 @@ async function signup()
     } finally {
         isLoading.value = false;
     }
-};
+}
 
 const canTryToSignup = computed(() => {
-    return username.value?.length
-        && password.value?.length
-        && password.value === passwordConfirmation.value
+    return (
+        username.value?.length &&
+        password.value?.length &&
+        password.value === passwordConfirmation.value
+    );
 });
 
 const validatePassword = () => {
@@ -68,13 +69,16 @@ const validatePassword = () => {
 };
 
 const validateUsername = () => {
-    return username.value.length >= 3
-        && username.value.length <= 20;
+    return username.value.length >= 3 && username.value.length <= 20;
 };
 
 const validateForm = () => {
-    errors.value.password = validatePassword() ? undefined : t('passwordRestriction');
-    errors.value.username = validateUsername() ? undefined : t('usernameRestriction');
+    errors.value.password = validatePassword()
+        ? undefined
+        : t('passwordRestriction');
+    errors.value.username = validateUsername()
+        ? undefined
+        : t('usernameRestriction');
 };
 </script>
 
@@ -214,23 +218,28 @@ const validateForm = () => {
                         <Select
                             v-model="language"
                             :label="$t('language')"
-                            :options="languages.map((lang) => ({ ...lang, label: lang.text }))"
+                            :options="
+                                languages.map((lang) => ({
+                                    ...lang,
+                                    label: lang.text
+                                }))
+                            "
                             :prepend-icon="IconLanguage"
                         />
                         <div class="pt-2">
                             <button
                                 type="button"
                                 :disabled="!canTryToSignup || isLoading"
-                                class="
-                                    w-full flex items-center justify-center px-4 py-4 text-base font-semibold text-black bg-white rounded-md
-                                    transition-all duration-200 delay-100 hover:scale-105 focus:scale-105
-                                    disabled:hover:scale-100 disabled:opacity-60 disabled:cursor-not-allowed
-                                    outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75
-                                "
+                                class="w-full flex items-center justify-center px-4 py-4 text-base font-semibold text-black bg-white rounded-md transition-all duration-200 delay-100 hover:scale-105 focus:scale-105 disabled:hover:scale-100 disabled:opacity-60 disabled:cursor-not-allowed outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75"
                                 @click="signup"
                             >
-                                <span v-if="!isLoading">{{  $t('signup') }}</span>
-                                <div v-else class="h-5 w-5 border-4 rounded-full border-blue-600/75 border-b-blue-600/25 animate-spin"></div>
+                                <span v-if="!isLoading">{{
+                                    $t('signup')
+                                }}</span>
+                                <div
+                                    v-else
+                                    class="h-5 w-5 border-4 rounded-full border-blue-600/75 border-b-blue-600/25 animate-spin"
+                                ></div>
                             </button>
                         </div>
                     </div>

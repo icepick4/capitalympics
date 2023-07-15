@@ -22,7 +22,6 @@ const user = storeToRefs(store).user as Ref<User>;
 
 const firstUsername = computed(() => user.value?.name);
 
-
 const username: inputState = reactive({
     content: user.value.name,
     hasFocused: undefined
@@ -39,8 +38,10 @@ const validateUsername = () => {
 };
 
 const areInputsSame = () => {
-    return username.content === user.value.name
-        && language.value === user.value.language;
+    return (
+        username.content === user.value.name &&
+        language.value === user.value.language
+    );
 };
 
 const typedUsername = () => {
@@ -187,7 +188,7 @@ const saveProfile = async () => {
                 </div>
                 <div class="flex justify-center items-center">
                     <input
-                        class="block h-auto p-2 text-black duration-200 border border-gray-200 rounded-md bg-gray-50 hover:bg-gray-300"
+                        class="block h-auto p-2 text-black duration-200 border border-gray-200 rounded-md bg-gray-50 hover:bg-gray-300 cursor-pointer"
                         :disabled="areInputsSame()"
                         :value="$t('saveProfile')"
                         type="submit"

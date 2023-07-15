@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { User, UserScore } from '@/models/User';
-import ApiService from '@/services/apiService';
+import { User } from '@/models/User';
 import { useStore } from '@/store';
 import { CountryDetails, LearningType, Region, Sort } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
@@ -31,9 +30,9 @@ const currentMax = ref(3);
 const clickedSwitchLearningType = ref(false);
 const currentSort = ref<Sort>('DESC');
 const isMax = ref(false);
+const countriesLength = ref(0);
 const region = ref<Region>('World');
 const lastRegion = ref<Region>('World');
-
 const flagScore = computed(() => getLevelName(user.value.flag_score));
 const capitalScore = computed(() => getLevelName(user.value.capital_score));
 
@@ -41,9 +40,7 @@ const increaseMax = () => {
     if (isMax.value) {
         return;
     }
-
     currentMax.value += 3;
-    loadScores();
 };
 
 const decreaseMax = () => {
@@ -51,38 +48,28 @@ const decreaseMax = () => {
     if (currentMax.value < 3) {
         currentMax.value = 3;
     }
-    countries.value = countries.value.slice(0, currentMax.value);
     isMax.value = false;
 };
 
 const resetMax = () => {
     currentMax.value = 3;
-    countries.value = countries.value.slice(0, currentMax.value);
     isMax.value = false;
 };
 
 const switchSort = () => {
-    if (currentSort.value === 'DESC') {
-        currentSort.value = 'ASC';
-    } else {
-        currentSort.value = 'DESC';
-    }
-    countries.value = [];
-    loadScores();
+    currentSort.value = currentSort.value === 'ASC' ? 'DESC' : 'ASC';
+    resetMax();
+    countries.value = countries.value.reverse();
 };
 
 async function loadScores() {
-    const max = currentMax.value;
-    const queryParams =
-        max === 0
-            ? {}
-            : {
-                  max,
-                  sort: currentSort.value,
-                  region: region.value
-              };
+    const queryParams = {
+        sort: currentSort.value,
+        region: region.value,
+        lang: user.value.language
+    };
 
-    const response = await ApiClient.get<{ scores: UserScore[] }>(
+    const response = await ApiClient.get<{ scores: CountryDetails[] }>(
         `/users/${user.value.id}/${learningType.value}/scores`,
         queryParams
     );
@@ -92,67 +79,24 @@ async function loadScores() {
     }
 
     const scores = response.data.scores;
-    isMax.value = scores.length < max;
+    countriesLength.value = scores.length;
+    isMax.value = scores.length < currentMax.value;
+
+    countries.value = scores.map((score) => {
+        return {
+            name: score.name,
+            flag: score.flag,
+            alpha3Code: score.alpha3Code,
+            score: score.score,
+            region: score.region
+        };
+    });
 
     if (lastRegion.value !== region.value) {
         countries.value = [];
     }
 
-    scores.forEach((element, index) => {
-        if (
-            index >= max ||
-            (index < max - 3 && countries.value.length > 0) ||
-            countries.value.length >= max
-        ) {
-            return;
-        }
-
-        let countryDetails: CountryDetails = {
-            name: '',
-            flag: '',
-            alpha3Code: element.country_code,
-            score: element.score,
-            region: 'World'
-        };
-
-        getCountryDetails(element.country_code).then(
-            ({ name, flag, region }) => {
-                countryDetails.name = name;
-                countryDetails.flag = flag;
-                countryDetails.region = region;
-                countries.value.push(countryDetails);
-            }
-        );
-    });
-
     lastRegion.value = region.value;
-}
-
-type CountryDetail = {
-    name: string;
-    flag: string;
-    region: Region;
-};
-
-async function getCountryDetails(country_code: string): Promise<CountryDetail> {
-    try {
-        const country = await ApiService.getCountry(
-            country_code,
-            user.value.language
-        );
-
-        return {
-            name: country.name,
-            flag: country.flag,
-            region: country.region as Region
-        };
-    } catch (error) {
-        return {
-            name: 'Unknown',
-            flag: 'assets/flags/unknown.png',
-            region: 'World'
-        };
-    }
 }
 
 const isDateNow = (date: Date) => {
@@ -203,6 +147,7 @@ const switchLearningType = () => {
     clickedSwitchLearningType.value = !clickedSwitchLearningType.value;
     learningType.value = learningType.value === 'flag' ? 'capital' : 'flag';
     countries.value = [];
+    resetMax();
     loadScores();
 };
 
@@ -210,13 +155,15 @@ onMounted(() => loadScores());
 
 const filteredCountries = computed(() => {
     if (region.value === 'World') {
-        return countries.value;
+        return countries.value.slice(0, currentMax.value);
     }
-    return countries.value.filter((country: CountryDetails) => {
-        return country.region
-            .toLowerCase()
-            .includes(region.value.toLowerCase());
-    });
+    return countries.value
+        .filter((country: CountryDetails) => {
+            return country.region
+                .toLowerCase()
+                .includes(region.value.toLowerCase());
+        })
+        .slice(0, currentMax.value);
 });
 
 const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
@@ -237,7 +184,7 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     <div
         class="w-full h-full flex flex-col items-start justify-start mt-10 mb-10"
     >
-        <div class="container mx-auto p-4 sm:p-8">
+        <div class="w-full sm:w-full md:w-3/4 2xl:w-7/12 mx-auto p-4 sm:p-8">
             <!-- Informations de l'utilisateur -->
             <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-4">
                 <div
@@ -317,9 +264,7 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                         </template>
                     </h1>
                 </div>
-                <div
-                    class="flex flex-col sm:flex-row gap-5 justify-center items-center"
-                >
+                <div class="flex flex-row gap-5 justify-center items-center">
                     <Regions
                         v-model="region"
                         class="sm:mr-10 items-center"
@@ -348,9 +293,12 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                     <div
                         class="flex flex-col gap-2 justify-center items-center"
                     >
+                        {{ countriesLength }}
+                        {{ countries.length }}
                         <button
                             @click="switchSort"
                             class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                            :disabled="countriesLength != countries.length"
                         >
                             <img
                                 :src="`/icons/sort_${currentSort}.png`"
@@ -365,7 +313,7 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 </div>
             </div>
             <div
-                class="hidden sm:grid sm:grid-cols-4 grid-rows-6 sm:grid-rows-3 2xl:flex items-center gap-2 w-full justify-center mb-4"
+                class="hidden sm:grid sm:grid-cols-4 grid-rows-6 sm:grid-rows-3 2xl:flex items-center gap-2 justify-center mb-4"
                 style="grid-auto-flow: column"
             >
                 <Badge

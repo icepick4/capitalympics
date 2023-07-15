@@ -46,7 +46,7 @@ onUnmounted(() => {
 <template>
     <div class="flex items-center justify-center w-full">
         <div
-            class="header flex flex-row w-full sm:w-full md:w-3/4 2xl:w-1/2 justify-between h-auto relative p-7"
+            class="header flex flex-row w-full sm:w-full md:w-3/4 2xl:w-7/12 justify-between h-auto relative p-7"
         >
             <RouterLink
                 to="/"
@@ -173,7 +173,7 @@ onUnmounted(() => {
                         {{ $t('profile') }}</RouterLink
                     >
                     <RouterLink
-                    v-if="!isAuthenticated"
+                        v-if="!isAuthenticated"
                         to="/login"
                         class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
                     >

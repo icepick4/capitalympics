@@ -74,7 +74,7 @@ const color = computed(() => {
             {{ $t(learningType) }}
         </p>
         <span
-            class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ring-purple-700/10"
+            class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ring-purple-700/10 whitespace-nowrap"
             :class="color"
         >
             <component :is="icon" class="w-6 h-6 mr-1" />

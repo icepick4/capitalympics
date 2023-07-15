@@ -4,20 +4,18 @@ import { Lang, Translation } from '@/types/common';
 import { DateTime } from 'luxon';
 import { storeToRefs } from 'pinia';
 
-export function getCurrentMySQLDate(): string
-{
+export function getCurrentMySQLDate(): string {
     return DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss');
 }
 
-export function getLanguage(): Lang
-{
+export function getLanguage(): Lang {
     const user = storeToRefs(useStore()).user;
     if (user.value) {
         return user.value.language;
     }
 
     return navigator.language.substring(0, 2) as Lang;
-};
+}
 
 export const languages = [
     { value: 'en', text: 'English' },
@@ -61,8 +59,7 @@ export const regions = {
     ]
 };
 
-export function getLevelName(score: number): string
-{
+export function getLevelName(score: number): string {
     if (isNaN(score)) {
         return '';
     }
@@ -88,10 +85,10 @@ export const fromScoreToLevel = (score: number): Level => {
 
 const Ranks: Record<Level, Translation> = {
     [-1]: {
-        en: 'No score',
-        es: 'Sin puntuación',
-        fr: 'Pas de score',
-        it: 'Nessun punteggio'
+        en: 'Unranked',
+        es: 'Sin clasificar',
+        fr: 'Non classé',
+        it: 'Non classificato'
     },
     [0]: {
         en: 'Newcomer',

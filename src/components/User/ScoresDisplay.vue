@@ -1,12 +1,24 @@
 <script setup lang="ts">
 import { CountryDetails } from '@/types/common';
+import VLazyImage from 'v-lazy-image';
+import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
-import Badge from '../Badge.vue';
 
-defineProps<{
+const props = defineProps<{
     countries: CountryDetails[];
     title: string;
 }>();
+
+const getFlag = computed(() => {
+    return (country: CountryDetails) => {
+        let flag: string[];
+        flag = country.flag.split('/');
+        console.log(flag);
+        flag.splice(flag.length - 2, 1, '16x12');
+        console.log(flag);
+        return flag.join('/');
+    };
+});
 </script>
 
 <template>
@@ -20,23 +32,23 @@ defineProps<{
         <transition-group
             name="fade"
             tag="div"
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         >
             <RouterLink
                 v-for="country in countries"
                 :key="country.name"
-                class="bg-white rounded-lg shadow-md sm:p-4 hover:bg-gray-200 transition-colors duration-300 fade-up flex-col sm:flex-row flex justify-center sm:justify-between items-center gap-3 sm:gap-0 p-1"
+                class="bg-white rounded-lg shadow-md sm:p-4 hover:bg-gray-200 transition-colors duration-300 fade-up flex-row flex justify-between items-center gap-3 sm:gap-0 p-2"
                 :to="`/countries/${country.alpha3Code}`"
             >
                 <div class="flex items-center">
-                    <img
-                        :src="country.flag"
+                    <VLazyImage
+                        :src="getFlag(country)"
                         alt="Country Flag"
                         class="w-6 h-4 mr-2"
                     />
                     <h3 class="font-bold">{{ country.name }}</h3>
                 </div>
-                <Badge :score="country.score" />
+                <!-- <Badge :score="country.score" /> -->
             </RouterLink>
         </transition-group>
     </div>
