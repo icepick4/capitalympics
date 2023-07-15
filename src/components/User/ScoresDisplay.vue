@@ -3,6 +3,7 @@ import { CountryDetails } from '@/types/common';
 import VLazyImage from 'v-lazy-image';
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
+import Badge from '../Badge.vue';
 
 const props = defineProps<{
     countries: CountryDetails[];
@@ -11,12 +12,7 @@ const props = defineProps<{
 
 const getFlag = computed(() => {
     return (country: CountryDetails) => {
-        let flag: string[];
-        flag = country.flag.split('/');
-        console.log(flag);
-        flag.splice(flag.length - 2, 1, '16x12');
-        console.log(flag);
-        return flag.join('/');
+        return country.flag.replace('w320', 'w40');
     };
 });
 </script>
@@ -32,7 +28,7 @@ const getFlag = computed(() => {
         <transition-group
             name="fade"
             tag="div"
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4"
         >
             <RouterLink
                 v-for="country in countries"
@@ -48,7 +44,7 @@ const getFlag = computed(() => {
                     />
                     <h3 class="font-bold">{{ country.name }}</h3>
                 </div>
-                <!-- <Badge :score="country.score" /> -->
+                <Badge :score="country.score" />
             </RouterLink>
         </transition-group>
     </div>

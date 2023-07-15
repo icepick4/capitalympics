@@ -121,5 +121,6 @@
     "sort": "Trier les scores",
     "more": "Plus",
     "less": "Moins",
-    "reset": "Réinitialiser"
+    "reset": "Réinitialiser",
+    "value": "Valeur"
 }

@@ -11,7 +11,12 @@ import Profile from '@/views/Profile.vue';
 import Quiz from '@/views/Quiz.vue';
 import SignUp from '@/views/SignUp.vue';
 import SingleCountry from '@/views/SingleCountry.vue';
-import { NavigationGuardNext, RouteLocationNormalized, createRouter, createWebHistory } from 'vue-router';
+import {
+    NavigationGuardNext,
+    RouteLocationNormalized,
+    createRouter,
+    createWebHistory
+} from 'vue-router';
 import { requireAuth } from './middlewares/auth-middleware';
 
 const routes = [
@@ -128,11 +133,11 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     const store = useStore();
     if (store.isAuthenticated && !store.isCurrentUserLoaded) {
+        console.log('loading current user');
         await store.loadCurrentUser();
     }
 
     return next();
 });
-
 
 export default router;

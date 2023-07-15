@@ -1,5 +1,10 @@
 import { Nullish } from '@/types/common';
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, {
+    AxiosError,
+    AxiosInstance,
+    AxiosRequestConfig,
+    AxiosResponse
+} from 'axios';
 import { pick } from 'radash';
 import LocalStorage from './LocalStorage';
 
@@ -7,21 +12,21 @@ type QueryParamValue = string | number | undefined | Array<string | number>;
 type Query = Record<string, QueryParamValue>;
 
 type ApiError = {
-    code?: string
-    message?: string
-}
+    code?: string;
+    message?: string;
+};
 
 export type SuccessResponse<TData> = {
-    success: true
-    data: TData
+    success: true;
+    data: TData;
 };
 
 type ErrorResponse = {
-    success: false
-    error: ApiError
+    success: false;
+    error: ApiError;
 };
 
-export type ApiResponse<TData> = SuccessResponse<TData> | ErrorResponse
+export type ApiResponse<TData> = SuccessResponse<TData> | ErrorResponse;
 
 /**
  * An http client designed to handle requests to the api
@@ -35,46 +40,75 @@ class ApiClient {
         this.axios.defaults.timeout = 10_000; // 10 seconds
         this.token = LocalStorage.get<string>('token');
 
-       this.axios.interceptors.request.use((config) => {
-            const hasToken = LocalStorage.has('token');
-            const expiresIn = LocalStorage.expiresIn('token');
+        this.axios.interceptors.request.use(
+            (config) => {
+                const hasToken = LocalStorage.has('token');
+                const expiresIn = LocalStorage.expiresIn('token');
 
-            if (hasToken && typeof expiresIn === 'number' && expiresIn < 30) {
-                this.refreshToken();
-            }
+                if (
+                    hasToken &&
+                    typeof expiresIn === 'number' &&
+                    expiresIn < 30
+                ) {
+                    this.refreshToken();
+                }
 
-            return config;
-       }, (error) => Promise.reject(error));
+                return config;
+            },
+            (error) => Promise.reject(error)
+        );
     }
 
-    public async get<TData>(url: string, query: Query = {}, config?: AxiosRequestConfig): Promise<ApiResponse<TData>>
-    {
-        return this.call<TData>(this.axios.get(this.getUrl(url, query), config));
+    public async get<TData>(
+        url: string,
+        query: Query = {},
+        config?: AxiosRequestConfig
+    ): Promise<ApiResponse<TData>> {
+        console.log(this.getUrl(url, query));
+        return this.call<TData>(
+            this.axios.get(this.getUrl(url, query), config)
+        );
     }
 
-    public post<TData>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<TData>>
-    {
+    public post<TData>(
+        url: string,
+        data?: any,
+        config?: AxiosRequestConfig
+    ): Promise<ApiResponse<TData>> {
         return this.call<TData>(this.axios.post(url, data, config));
     }
 
-    public patch<TData>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<TData>>
-    {
+    public patch<TData>(
+        url: string,
+        data?: any,
+        config?: AxiosRequestConfig
+    ): Promise<ApiResponse<TData>> {
         return this.call<TData>(this.axios.patch(url, data, config));
     }
 
-    public put<TData>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<TData>>
-    {
+    public put<TData>(
+        url: string,
+        data?: any,
+        config?: AxiosRequestConfig
+    ): Promise<ApiResponse<TData>> {
         return this.call<TData>(this.axios.put(url, data, config));
     }
 
-    public async delete(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<undefined>>
-    {
+    public async delete(
+        url: string,
+        config?: AxiosRequestConfig
+    ): Promise<ApiResponse<undefined>> {
         return this.call<undefined>(this.axios.delete(url, config));
     }
 
-    public async login(loginData: { username: string, password: string }): Promise<boolean>
-    {
-        const response = await this.post<{ success: true, data: { token: string } }>('/login', loginData);
+    public async login(loginData: {
+        username: string;
+        password: string;
+    }): Promise<boolean> {
+        const response = await this.post<{
+            success: true;
+            data: { token: string };
+        }>('/login', loginData);
         if (!response.success) {
             return false;
         }
@@ -84,9 +118,11 @@ class ApiClient {
         return true;
     }
 
-    private async refreshToken(): Promise<void>
-    {
-        const response = await this.post<{ success: true, data: { token: string } }>('/refresh-token');
+    private async refreshToken(): Promise<void> {
+        const response = await this.post<{
+            success: true;
+            data: { token: string };
+        }>('/refresh-token');
         if (!response.success) {
             return;
         }
@@ -94,18 +130,15 @@ class ApiClient {
         this.token = response.data.data.token;
     }
 
-    public logout(): void
-    {
+    public logout(): void {
         this.token = undefined;
     }
 
-    public get token(): string|undefined
-    {
+    public get token(): string | undefined {
         return LocalStorage.get<string>('token');
     }
 
-    private set token(value: string | Nullish)
-    {
+    private set token(value: string | Nullish) {
         if (typeof value !== 'string') {
             LocalStorage.remove('token');
             delete this.axios.defaults.headers.common['Authorization'];
@@ -115,8 +148,9 @@ class ApiClient {
         }
     }
 
-    private async call<TData>(axiosRequest: Promise<AxiosResponse<TData>>): Promise<ApiResponse<TData>>
-    {
+    private async call<TData>(
+        axiosRequest: Promise<AxiosResponse<TData>>
+    ): Promise<ApiResponse<TData>> {
         try {
             const response = await axiosRequest;
             const { data } = response;
@@ -129,8 +163,7 @@ class ApiClient {
         }
     }
 
-    private getUrl(url: string, query: Query): string
-    {
+    private getUrl(url: string, query: Query): string {
         const completeUrl = new URL(this.axios.defaults.baseURL + url);
         const formatValue = (value: QueryParamValue): string => {
             if (value === undefined) {
@@ -142,7 +175,7 @@ class ApiClient {
             }
 
             return value.map((v) => formatValue(v)).join(',');
-        }
+        };
 
         Object.keys(query).forEach((paramName) => {
             const value = query[paramName];

@@ -5,10 +5,7 @@ const region = ref('World');
 </script>
 
 <template>
-    <select
-        v-model="region"
-        class="w-4/5 md:w-1/4 mx-auto p-2 rounded-md bg-gradient"
-    >
+    <select v-model="region" class="p-2 rounded-md bg-gradient">
         <option
             class="bg-white"
             v-for="region in regions[getLanguage()]"

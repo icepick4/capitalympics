@@ -121,5 +121,6 @@
     "sort": "Sort scores",
     "more": "More",
     "less": "Less",
-    "reset": "Reset"
+    "reset": "Reset",
+    "value": "Value"
 }

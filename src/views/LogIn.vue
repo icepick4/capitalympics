@@ -15,7 +15,9 @@ const username = ref('');
 const password = ref('');
 
 const isLoading = ref(false);
-const isFormFilled = computed(() => username.value.length && password.value.length);
+const isFormFilled = computed(
+    () => username.value.length && password.value.length
+);
 const userNotFound = ref(false);
 
 async function login() {
@@ -25,7 +27,10 @@ async function login() {
 
     isLoading.value = true;
     try {
-        await store.login({ username: username.value, password: password.value });
+        await store.login({
+            username: username.value,
+            password: password.value
+        });
         router.push({ name: 'Profile' });
     } catch (error) {
         console.error(error);
@@ -94,24 +99,30 @@ async function login() {
                             :label="$t('username')"
                             :placeholder="$t('usernamePlaceholder')"
                             :prepend-icon="IconUser"
+                            @keyup="
+                                ($event.key === 'Enter' ||
+                                    $event.key === ' ') &&
+                                    login()
+                            "
                         />
                         <PasswordInput
                             v-model="password"
                             :label="$t('password')"
                             :placeholder="$t('passwordPlaceholder')"
                             revelable
+                            @keyup="
+                                ($event.key === 'Enter' ||
+                                    $event.key === ' ') &&
+                                    login()
+                            "
                         />
                         <button
                             type="button"
                             :disabled="!isFormFilled"
-                            class="
-                                w-full px-4 py-4 text-base font-semibold text-black bg-white rounded-md
-                                transition-all duration-200 delay-100 hover:scale-105 focus:scale-105
-                                disabled:hover:scale-100 disabled:opacity-60 disabled:cursor-not-allowed
-                            "
+                            class="w-full px-4 py-4 text-base font-semibold text-black bg-white rounded-md transition-all duration-200 delay-100 hover:scale-105 focus:scale-105 disabled:hover:scale-100 disabled:opacity-60 disabled:cursor-not-allowed"
                             @click="login"
                         >
-                            {{  $t('login') }}
+                            {{ $t('login') }}
                         </button>
                     </div>
                 </div>

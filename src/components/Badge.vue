@@ -20,6 +20,7 @@ import { computed } from 'vue';
 const props = defineProps<{
     score: number;
     learningType?: LearningType;
+    selected?: boolean;
 }>();
 
 const level = computed(() => fromScoreToLevel(props.score));
@@ -75,7 +76,12 @@ const color = computed(() => {
         </p>
         <span
             class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ring-purple-700/10 whitespace-nowrap"
-            :class="color"
+            :class="[
+                color,
+                {
+                    'sm:shadow-[0_2px_20px_rgba(128,_49,232,_0.8)]': selected
+                }
+            ]"
         >
             <component :is="icon" class="w-6 h-6 mr-1" />
             {{ text }}

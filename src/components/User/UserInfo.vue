@@ -35,6 +35,9 @@ const region = ref<Region>('World');
 const lastRegion = ref<Region>('World');
 const flagScore = computed(() => getLevelName(user.value.flag_score));
 const capitalScore = computed(() => getLevelName(user.value.capital_score));
+const currentScore = computed(() =>
+    learningType.value === 'flag' ? flagScore.value : capitalScore.value
+);
 
 const increaseMax = () => {
     if (isMax.value) {
@@ -81,6 +84,9 @@ async function loadScores() {
     const scores = response.data.scores;
     countriesLength.value = scores.length;
     isMax.value = scores.length < currentMax.value;
+    if (lastRegion.value !== region.value) {
+        countries.value = [];
+    }
 
     countries.value = scores.map((score) => {
         return {
@@ -91,10 +97,6 @@ async function loadScores() {
             region: score.region
         };
     });
-
-    if (lastRegion.value !== region.value) {
-        countries.value = [];
-    }
 
     lastRegion.value = region.value;
 }
@@ -182,11 +184,11 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
         />
     </BlurContainer>
     <div
-        class="w-full h-full flex flex-col items-start justify-start mt-10 mb-10"
+        class="w-full h-full flex flex-col items-center justify-start mt-10 mb-10"
     >
         <div class="w-full sm:w-full md:w-3/4 2xl:w-7/12 mx-auto p-4 sm:p-8">
             <!-- Informations de l'utilisateur -->
-            <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-4">
+            <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-10">
                 <div
                     class="flex column flex-row items-center justify-center mb-4 gap-4"
                 >
@@ -230,96 +232,32 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 </p>
             </div>
             <div
-                class="w-full flex flex-col md:flex-row justify-between items-center gap-3 mb-4"
+                class="w-full flex flex-col md:flex-row justify-center items-center gap-3 mb-10"
             >
                 <div class="flex flex-row gap-5">
-                    <h1 class="text-xl md:text-4xl font-bold text-center">
-                        <template v-if="learningType === 'flag'">
-                            <div class="flex flex-col gap-5">
-                                <div class="flex flex-row items-start gap-2">
-                                    <p>{{ $t('mode') }} :</p>
-                                    <p class="font-normal">{{ $t('flags') }}</p>
-                                </div>
-                                <div class="flex flex-row gap-2">
-                                    <p>{{ $t('level') }} :</p>
-                                    <p class="font-normal">{{ flagScore }}</p>
-                                </div>
+                    <h1 class="text-4xl font-bold text-center">
+                        <div class="flex flex-col sm:flex-row gap-5">
+                            <div class="flex flex-row gap-2">
+                                <p>{{ $t('mode') }} :</p>
+                                <p class="font-normal">
+                                    {{ $t(learningType) }}
+                                </p>
                             </div>
-                        </template>
-                        <template v-else>
-                            <div class="flex flex-col gap-5">
-                                <div class="flex flex-row gap-2">
-                                    <p>{{ $t('mode') }} :</p>
-                                    <p class="font-normal">
-                                        {{ $t('capitals') }}
-                                    </p>
-                                </div>
-                                <div class="flex flex-row gap-2">
-                                    <p>{{ $t('level') }} :</p>
-                                    <p class="font-normal">
-                                        {{ capitalScore }}
-                                    </p>
-                                </div>
-                            </div>
-                        </template>
+                        </div>
                     </h1>
-                </div>
-                <div class="flex flex-row gap-5 justify-center items-center">
-                    <Regions
-                        v-model="region"
-                        class="sm:mr-10 items-center"
-                        @change="loadScores"
-                    />
-                    <div
-                        class="flex flex-col gap-2 justify-center items-center"
-                    >
-                        <button
-                            @click="switchLearningType"
-                            class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-                            :class="{
-                                '-rotate-180': clickedSwitchLearningType
-                            }"
-                        >
-                            <img
-                                src="/icons/switch.png"
-                                alt="switch"
-                                class="w-10 h-10"
-                            />
-                        </button>
-                        <span class="text-center text-sm">
-                            {{ $t('switch') }}
-                        </span>
-                    </div>
-                    <div
-                        class="flex flex-col gap-2 justify-center items-center"
-                    >
-                        {{ countriesLength }}
-                        {{ countries.length }}
-                        <button
-                            @click="switchSort"
-                            class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-                            :disabled="countriesLength != countries.length"
-                        >
-                            <img
-                                :src="`/icons/sort_${currentSort}.png`"
-                                alt="sort"
-                                class="w-10 h-10 rounded-full bg-white hover:scale-110 transition-all duration-300"
-                            />
-                        </button>
-                        <span class="text-center text-sm">
-                            {{ $t('sort') }}
-                        </span>
-                    </div>
                 </div>
             </div>
             <div
-                class="hidden sm:grid sm:grid-cols-4 grid-rows-6 sm:grid-rows-3 2xl:flex items-center gap-2 justify-center mb-4"
+                class="grid grid-rows-1 sm:grid-cols-4 sm:grid-rows-3 2xl:flex items-center gap-2 justify-center mb-10"
                 style="grid-auto-flow: column"
             >
                 <Badge
                     v-for="(score, index) in scoreValues"
                     :key="index"
                     :score="score"
+                    :selected="getLevelName(score) == currentScore"
+                    class="sm:block"
+                    :class="{ hidden: getLevelName(score) !== currentScore }"
                 />
             </div>
             <div class="flex flex-col gap-4 mb-5">
@@ -328,7 +266,16 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                     :title="$t('scores')"
                 ></ScoresDisplay>
             </div>
-            <div class="w-full flex flex-row justify-center items-center gap-5">
+        </div>
+        <Regions
+            v-model="region"
+            class="items-center mb-10"
+            @change="loadScores"
+        />
+        <div
+            class="w-11/12 2xl:w-7/12 flex flex-col sm:flex-row justify-center items-center gap-10 lg:gap-20"
+        >
+            <div class="flex flex-row gap-2 sm:gap-4">
                 <div class="flex flex-col gap-2 justify-center items-center">
                     <button
                         @click="increaseMax"
@@ -356,6 +303,18 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                     <span class="text-center text-sm">{{ $t('less') }}</span>
                 </div>
                 <div class="flex flex-col gap-2 justify-center items-center">
+                    <input
+                        type="number"
+                        class="rounded-full bg-white hover:scale-110 transition-all duration-300 w-10 h-10 text-center"
+                        v-model="currentMax"
+                        @input="isMax = false"
+                        max="244"
+                        min="0"
+                        step="1"
+                    />
+                    <span class="text-center text-sm">{{ $t('value') }}</span>
+                </div>
+                <div class="flex flex-col gap-2 justify-center items-center">
                     <button
                         @click="resetMax"
                         class="rounded-full bg-white hover:scale-110 transition-all duration-300 rotate-45"
@@ -367,6 +326,42 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                         />
                     </button>
                     <span class="text-center text-sm">{{ $t('reset') }}</span>
+                </div>
+            </div>
+            <div class="flex flex-row gap-2 sm:gap-4">
+                <div class="flex flex-col gap-2 justify-center items-center">
+                    <button
+                        @click="switchLearningType"
+                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                        :class="{
+                            '-rotate-180': clickedSwitchLearningType
+                        }"
+                    >
+                        <img
+                            src="/icons/switch.png"
+                            alt="switch"
+                            class="w-10 h-10"
+                        />
+                    </button>
+                    <span class="text-center text-sm">
+                        {{ $t('switch') }}
+                    </span>
+                </div>
+                <div class="flex flex-col gap-2 justify-center items-center">
+                    <button
+                        @click="switchSort"
+                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                        :disabled="countriesLength != countries.length"
+                    >
+                        <img
+                            :src="`/icons/sort_${currentSort}.png`"
+                            alt="sort"
+                            class="w-10 h-10 rounded-full bg-white hover:scale-110 transition-all duration-300"
+                        />
+                    </button>
+                    <span class="text-center text-sm">
+                        {{ $t('sort') }}
+                    </span>
                 </div>
             </div>
         </div>
@@ -391,5 +386,9 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     .center {
         justify-content: center;
     }
+}
+
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 </style>
