@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import Badge from '@/components/Badge.vue';
 import BlurContainer from '@/components/BlurContainer.vue';
 import Loader from '@/components/Loader.vue';
 import Modal from '@/components/Modal.vue';
 import { Level, User } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
-import { getLevelName } from '@/utils/common';
 import { storeToRefs } from 'pinia';
 import { Ref, onBeforeMount, ref } from 'vue';
 import { RouterLink } from 'vue-router';
@@ -15,15 +15,15 @@ const user = storeToRefs(store).user as Ref<User>;
 
 const loading = ref(true);
 
-const userScore = ref(<Level>-2);
+const userScore = ref(-2);
 const nextUserLevel = ref(-1);
 const noScores = ref(false);
 const initFirstTimeScores = ref(false);
 const confirmingResetScores = ref(false);
 
-const getUserScore = async (): Promise<Level> => {
+const getUserScore = async (): Promise<number> => {
     loading.value = true;
-    let score: Level = -1;
+    let score: number = -1;
 
     try {
         score = await ApiService.getUserScore(user.value);
@@ -60,7 +60,7 @@ const resetScores = async (): Promise<boolean> => {
 };
 
 onBeforeMount(async () => {
-    userScore.value = (await getUserScore()) as Level;
+    userScore.value = await getUserScore();
 });
 </script>
 
@@ -98,21 +98,18 @@ onBeforeMount(async () => {
             v-if="!noScores"
             class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-20"
         >
-            <div class="flex flex-col gap-5">
-                <h1 class="text-center text-2xl">{{ $t('myLevel') }} :</h1>
-                <div v-if="userScore != -1">
-                    <div class="bg-gradient rounded-lg shadow-lg p-6 mb-8">
-                        <h1 class="text-black text-center text-4xl">
-                            {{ getLevelName(userScore) }}
-                        </h1>
-                    </div>
-                    <div class="flex flex-col justify-center items-center">
-                        {{ $t('nextLevel') }} :
-                        <span class="text-xl">{{
-                            getLevelName(nextUserLevel as Level)
-                        }}</span>
-                    </div>
-                </div>
+            <div
+                class="flex flex-col gap-5 justify-center items-center"
+                v-if="userScore != -1"
+            >
+                <h1 class="text-center text-4xl">{{ $t('myLevel') }}</h1>
+                <Badge v-if="userScore != -2" :score="userScore" size="lg" />
+                {{ $t('nextLevel') }}
+                <Badge
+                    v-if="nextUserLevel != -1"
+                    :score="nextUserLevel"
+                    size="sm"
+                />
             </div>
             <div class="flex flex-col md:flex-row gap-10">
                 <div class="flex flex-col items-center gap-5">

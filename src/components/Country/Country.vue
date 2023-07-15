@@ -22,11 +22,15 @@ onBeforeMount(async () => {
     Promise.all([loadScore('flag'), loadScore('capital')]);
 });
 
-async function loadScore(type: LearningType)
-{
-    const response = await ApiClient.get<{ score: number|any[] }>(`/users/${user.value?.id}/${props.country.alpha3Code}/${type}/score`);
+async function loadScore(type: LearningType) {
+    const response = await ApiClient.get<{ score: number | any[] }>(
+        `/users/${user.value?.id}/${props.country.alpha3Code}/${type}/score`
+    );
     if (!response.success) {
-        console.log(`An error occured while loading the ${type} score for ${props.country.name}`, response.error);
+        console.log(
+            `An error occured while loading the ${type} score for ${props.country.name}`,
+            response.error
+        );
 
         if (type === 'capital') {
             capitalScore.value = -1;
@@ -37,9 +41,13 @@ async function loadScore(type: LearningType)
         return;
     }
     if (type === 'capital') {
-        capitalScore.value = Array.isArray(response.data.score) ? 0 : response.data.score;
+        capitalScore.value = Array.isArray(response.data.score)
+            ? 0
+            : response.data.score;
     } else {
-        flagScore.value = Array.isArray(response.data.score) ? 0 : response.data.score;
+        flagScore.value = Array.isArray(response.data.score)
+            ? 0
+            : response.data.score;
     }
 }
 </script>
@@ -61,11 +69,13 @@ async function loadScore(type: LearningType)
                             v-if="flagScore !== -1"
                             :score="flagScore"
                             learningType="flag"
+                            size="md"
                         />
                         <Badge
                             v-if="capitalScore !== -1"
                             :score="capitalScore"
                             learningType="capital"
+                            size="md"
                         />
                     </div>
                 </div>

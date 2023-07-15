@@ -15,13 +15,36 @@ import {
     IconWorld,
     IconWorldStar
 } from '@tabler/icons-vue';
-import { computed } from 'vue';
+import { computed, onBeforeMount, onUnmounted, ref } from 'vue';
 
 const props = defineProps<{
     score: number;
     learningType?: LearningType;
     selected?: boolean;
+    size?: 'sm' | 'md' | 'lg';
 }>();
+
+const onSmallScreen = () => window.innerWidth < 640;
+
+onBeforeMount(() => {
+    window.addEventListener('resize', () => {
+        if (onSmallScreen() && props.selected) {
+            size.value = 'lg';
+        } else {
+            size.value = props.size ?? 'md';
+        }
+    });
+});
+
+onUnmounted(() => {
+    window.removeEventListener('resize', () => {});
+});
+
+const size = ref(props.size ?? 'md');
+
+if (onSmallScreen() && props.selected) {
+    size.value = 'lg';
+}
 
 const level = computed(() => fromScoreToLevel(props.score));
 const text = computed(() => getLevelName(props.score));
@@ -75,15 +98,28 @@ const color = computed(() => {
             {{ $t(learningType) }}
         </p>
         <span
-            class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ring-purple-700/10 whitespace-nowrap"
+            class="inline-flex items-center rounded-md px-2 py-1 font-medium ring-1 ring-inset ring-purple-700/10 whitespace-nowrap"
             :class="[
                 color,
                 {
                     'sm:shadow-[0_2px_20px_rgba(128,_49,232,_0.8)]': selected
+                },
+                {
+                    'text-sm': size === 'sm',
+                    'text-base': size === 'md',
+                    'text-xl': size === 'lg'
                 }
             ]"
         >
-            <component :is="icon" class="w-6 h-6 mr-1" />
+            <component
+                :is="icon"
+                class="mr-2"
+                :class="{
+                    'w-4 h-4': size === 'sm',
+                    'w-6 h-6': size === 'md',
+                    'w-8 h-8': size === 'lg'
+                }"
+            />
             {{ text }}
         </span>
     </div>

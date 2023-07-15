@@ -186,7 +186,7 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     <div
         class="w-full h-full flex flex-col items-center justify-start mt-10 mb-10"
     >
-        <div class="w-full sm:w-full md:w-3/4 2xl:w-7/12 mx-auto p-4 sm:p-8">
+        <div class="w-full sm:w-full md:w-5/6 2xl:w-7/12 mx-auto p-4 sm:p-8">
             <!-- Informations de l'utilisateur -->
             <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-10">
                 <div
