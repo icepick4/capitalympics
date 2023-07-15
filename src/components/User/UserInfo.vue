@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import ActionIcon from '@/components/common/ActionIcon.vue';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
 import { CountryDetails, LearningType, Region, Sort } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { getLevelName } from '@/utils/common';
+import { IconArrowsSort, IconMinus, IconPlus, IconSortAscending, IconSortDescending, IconX } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
@@ -277,30 +279,25 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
         >
             <div class="flex flex-row gap-2 sm:gap-4">
                 <div class="flex flex-col gap-2 justify-center items-center">
-                    <button
+                    <ActionIcon
+                        :icon="IconPlus"
+                        :label="$t('more')"
+                        rounded
+                        class="hover:scale-110 focus:scale-110"
                         @click="increaseMax"
-                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-                    >
-                        <img
-                            src="/icons/plus.png"
-                            alt="more"
-                            class="w-10 h-10"
-                        />
-                    </button>
+                    />
                     <span class="text-center text-sm">{{ $t('more') }}</span>
                 </div>
                 <div class="flex flex-col gap-2 justify-center items-center">
-                    <button
+                    <ActionIcon
+                        :icon="IconMinus"
+                        :label="$t('less')"
+                        :disabled="currentMax <= 3"
+                        rounded
+                        class="peer hover:scale-110 focus:scale-110"
                         @click="decreaseMax"
-                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-                    >
-                        <img
-                            src="/icons/less.png"
-                            alt="less"
-                            class="w-10 h-10"
-                        />
-                    </button>
-                    <span class="text-center text-sm">{{ $t('less') }}</span>
+                    />
+                    <span class="text-center text-sm peer-disabled:opacity-50">{{ $t('less') }}</span>
                 </div>
                 <div class="flex flex-col gap-2 justify-center items-center">
                     <input
@@ -315,53 +312,40 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                     <span class="text-center text-sm">{{ $t('value') }}</span>
                 </div>
                 <div class="flex flex-col gap-2 justify-center items-center">
-                    <button
+                    <ActionIcon
+                        :icon="IconX"
+                        :label="$t('reset')"
+                        rounded
+                        class="hover:scale-110 focus:scale-110"
                         @click="resetMax"
-                        class="rounded-full bg-white hover:scale-110 transition-all duration-300 rotate-45"
-                    >
-                        <img
-                            src="/icons/plus.png"
-                            alt="reset"
-                            class="w-10 h-10"
-                        />
-                    </button>
+                    />
                     <span class="text-center text-sm">{{ $t('reset') }}</span>
                 </div>
             </div>
             <div class="flex flex-row gap-2 sm:gap-4">
                 <div class="flex flex-col gap-2 justify-center items-center">
-                    <button
-                        @click="switchLearningType"
-                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
+                    <ActionIcon
+                        :icon="IconArrowsSort"
+                        :label="$t('switch')"
+                        rounded
+                        class="hover:scale-110 focus:scale-110"
                         :class="{
                             '-rotate-180': clickedSwitchLearningType
                         }"
-                    >
-                        <img
-                            src="/icons/switch.png"
-                            alt="switch"
-                            class="w-10 h-10"
-                        />
-                    </button>
-                    <span class="text-center text-sm">
-                        {{ $t('switch') }}
-                    </span>
+                        @click="switchLearningType"
+                    />
+                    <span class="text-center text-sm">{{ $t('switch') }}</span>
                 </div>
                 <div class="flex flex-col gap-2 justify-center items-center">
-                    <button
+                    <ActionIcon
+                        :icon="currentSort === 'ASC' ? IconSortAscending : IconSortDescending"
+                        :label="$t('sort')"
+                        :disabled="countriesLength !== countries.length"
+                        rounded
+                        class="hover:scale-110 focus:scale-110"
                         @click="switchSort"
-                        class="rounded-full bg-white hover:scale-110 transition-all duration-300"
-                        :disabled="countriesLength != countries.length"
-                    >
-                        <img
-                            :src="`/icons/sort_${currentSort}.png`"
-                            alt="sort"
-                            class="w-10 h-10 rounded-full bg-white hover:scale-110 transition-all duration-300"
-                        />
-                    </button>
-                    <span class="text-center text-sm">
-                        {{ $t('sort') }}
-                    </span>
+                    />
+                    <span class="text-center text-sm">{{ $t('sort') }}</span>
                 </div>
             </div>
         </div>
