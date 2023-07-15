@@ -30,11 +30,13 @@ const couldNotGetCountry = ref(false);
 const country = ref<CountryI>();
 const currentRegion = ref<Region>('World');
 
-async function getNewCountry(region: Region)
-{
+async function getNewCountry(region: Region) {
     isLoading.value = true;
     const queryParameters = { lang: user.value.language, region };
-    const response = await ApiClient.get<{ country: CountryI }>(`/users/${user.value.id}/country/play/${currentLearning}`, queryParameters);
+    const response = await ApiClient.get<{ country: CountryI }>(
+        `/users/${user.value.id}/country/play/${currentLearning}`,
+        queryParameters
+    );
     isLoading.value = false;
 
     if (response.success) {
@@ -43,18 +45,19 @@ async function getNewCountry(region: Region)
     } else {
         couldNotGetCountry.value = true;
     }
-};
+}
 
-async function handleClick(score: ScoreType)
-{
+async function handleClick(score: ScoreType) {
     if (!country.value) return;
-    const response = await ApiClient.put<any>(`/users/${user.value.id}/${country.value.alpha3Code}/${currentLearning}/score/${score}`);
+    const response = await ApiClient.put<any>(
+        `/users/${user.value.id}/${country.value.alpha3Code}/${currentLearning}/score/${score}`
+    );
 
     if (response.success) {
         currentState.value = 'starting';
         getNewCountry(currentRegion.value);
     }
-};
+}
 
 const handleClickSee = () => {
     currentState.value = 'choosing';
@@ -77,58 +80,66 @@ onBeforeMount(() => {
         />
         <Loader v-else-if="isLoading" />
     </BlurContainer>
-    <div
-        class="flex flex-col w-full md:w-auto md:h-auto justify-center items-center my-10 gap-10"
-    >
-        <Regions
-            @change="getNewCountry(currentRegion)"
-            v-model="currentRegion"
-        />
+    <div class="w-full flex flex-col justify-center items-center">
         <div
-            v-if="country != undefined"
-            class="w-5/6 md:w-auto h-full flex flex-col items-center justify-center"
+            class="flex flex-col w-10/12 md:h-auto justify-center items-center gap-10"
         >
+            <Regions
+                @change="getNewCountry(currentRegion)"
+                v-model="currentRegion"
+                class="xs:w-1/2 sm:w-1/3 md:w-1/4 mx-4"
+            />
             <div
-                class="flex flex-col w-full h-full justify-between items-center border-[3px] border-black rounded-3xl bg-white p-5 md:p-10 lg:p-14 gap-7 md:gap-9 lg:gap-12"
+                v-if="country != undefined"
+                class="w-5/6 md:w-auto h-full flex flex-col items-center justify-center"
             >
-                <div v-if="currentLearning === 'capital'" class="w-full h-full">
-                    <Question
-                        :country="country"
-                        :state="currentState"
-                        :type="'capital'"
-                    />
-                </div>
-                <div v-else-if="currentLearning === 'flag'">
-                    <Question
-                        :country="country"
-                        :state="currentState"
-                        :type="'flag'"
-                    />
-                </div>
-                <div class="w-full">
-                    <div v-if="currentState === 'starting'">
-                        <ButtonTemplate
-                            :title="$t('see')"
-                            :color="'bg-gradient'"
-                            @click="handleClickSee"
+                <div
+                    class="flex flex-col w-full h-full justify-between items-center border-[3px] border-black rounded-3xl bg-white p-5 md:p-10 lg:p-14 gap-7 md:gap-9 lg:gap-12"
+                >
+                    <div
+                        v-if="currentLearning === 'capital'"
+                        class="w-full h-full"
+                    >
+                        <Question
+                            :country="country"
+                            :state="currentState"
+                            :type="'capital'"
                         />
                     </div>
-                    <div
-                        v-else-if="currentState === 'choosing'"
-                        class="text-center flex flex-col gap-5 lg:gap-10"
-                    >
-                        <ChoosingButtons @click="handleClick" />
+                    <div v-else-if="currentLearning === 'flag'">
+                        <Question
+                            :country="country"
+                            :state="currentState"
+                            :type="'flag'"
+                        />
+                    </div>
+                    <div class="w-full">
+                        <div v-if="currentState === 'starting'">
+                            <ButtonTemplate
+                                :title="$t('see')"
+                                :color="'bg-gradient'"
+                                @click="handleClickSee"
+                            />
+                        </div>
+                        <div
+                            v-else-if="currentState === 'choosing'"
+                            class="text-center flex flex-col gap-5 lg:gap-10"
+                        >
+                            <ChoosingButtons @click="handleClick" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="flex flex-row w-full justify-center gap-10 items-center">
-            <RouterLink
-                to="/learn"
-                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-auto"
+            <div
+                class="flex flex-row w-full justify-center gap-10 items-center"
             >
-                {{ $t('leave') }}
-            </RouterLink>
+                <RouterLink
+                    to="/learn"
+                    class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-auto"
+                >
+                    {{ $t('leave') }}
+                </RouterLink>
+            </div>
         </div>
     </div>
 </template>

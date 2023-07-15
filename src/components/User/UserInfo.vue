@@ -267,7 +267,7 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 >
                     <Regions
                         v-model="region"
-                        class="items-center w-1/5"
+                        class="items-center xs:w-1/2 lg:w-1/4"
                         @change="loadScores"
                 /></ScoresDisplay>
             </div>

@@ -27,7 +27,8 @@ const displaySum41 = ref(false);
 const filteredCountries = () => {
     if (search.value.length > 0 || region.value.length > 0) {
         displaySum41.value = search.value === 'sum';
-        const currentRegion: string = region.value !== 'World' ? region.value : '';
+        const currentRegion: string =
+            region.value !== 'World' ? region.value : '';
 
         return state.countries.filter((country) => {
             return (
@@ -57,21 +58,21 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <div class="flex flex-col gap-5 m-5">
+    <div class="flex flex-col gap-5 m-5 w-4/5 md:w-1/4 mx-auto">
         <h1 class="text-4xl font-bold text-center text-black">
             {{ $t('countries') }}
         </h1>
         <input
             type="text"
             v-model="search"
-            class="w-4/5 md:w-1/4 mx-auto p-2 placeholder-opacity-50 rounded-md bg-gradient text-black placeholder-black"
+            class="p-2 placeholder-opacity-50 rounded-md bg-gradient text-black placeholder-black"
             :placeholder="$t('searchPlaceholder')"
         />
 
         <Regions v-model="region" />
 
         <button
-            class="w-4/5 md:w-1/4 mx-auto p-2 rounded-md bg-gradient text-black active:bg-gray-700"
+            class="p-2 rounded-md bg-gradient text-black active:bg-gray-700"
             @click="
                 search = '';
                 region = 'World';

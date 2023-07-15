@@ -20,7 +20,7 @@ const getFlag = computed(() => {
 <template>
     <div class="bg-gradient rounded-lg shadow-lg p-6">
         <div class="flex flex-row justify-between w-full items-center mb-4">
-            <h2 class="text-xl font-bold">{{ title }}</h2>
+            <h2 class="text-xl font-bold w-full">{{ title }}</h2>
             <slot></slot>
         </div>
         <div v-if="countries.length === 0">
