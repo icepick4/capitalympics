@@ -124,7 +124,7 @@ onBeforeMount(async () => {
                         <div class="relative w-full h-full">
                             <img
                                 src="/learn/capitals.jpg"
-                                class="h-full w-auto"
+                                class="h-auto w-auto"
                                 alt="capitals button image"
                             />
                             <span
