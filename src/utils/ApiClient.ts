@@ -64,7 +64,6 @@ class ApiClient {
         query: Query = {},
         config?: AxiosRequestConfig
     ): Promise<ApiResponse<TData>> {
-        console.log(this.getUrl(url, query));
         return this.call<TData>(
             this.axios.get(this.getUrl(url, query), config)
         );

@@ -77,7 +77,7 @@ const items = computed(() => props.options.map(optionToItem));
                         :class="[
                             open || selectedItem
                                 ? 'text-black/75'
-                                : 'text-gray-300'
+                                : 'text-gray-400'
                         ]"
                     >
                         <component :is="prependIcon" :stroke-width="1.5" />

@@ -133,7 +133,6 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     const store = useStore();
     if (store.isAuthenticated && !store.isCurrentUserLoaded) {
-        console.log('loading current user');
         await store.loadCurrentUser();
     }
 

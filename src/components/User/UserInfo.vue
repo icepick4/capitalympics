@@ -264,14 +264,14 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 <ScoresDisplay
                     :countries="filteredCountries"
                     :title="$t('scores')"
-                ></ScoresDisplay>
+                >
+                    <Regions
+                        v-model="region"
+                        class="items-center w-1/5"
+                        @change="loadScores"
+                /></ScoresDisplay>
             </div>
         </div>
-        <Regions
-            v-model="region"
-            class="items-center mb-10"
-            @change="loadScores"
-        />
         <div
             class="w-11/12 2xl:w-7/12 flex flex-col sm:flex-row justify-center items-center gap-10 lg:gap-20"
         >
