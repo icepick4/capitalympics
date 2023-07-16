@@ -12,7 +12,7 @@ import { useStore } from '@/store';
 import { CurrentState, LearningType, Region, ScoreType } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { storeToRefs } from 'pinia';
-import { Ref, onBeforeMount, ref } from 'vue';
+import { Ref, onBeforeMount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -38,7 +38,6 @@ async function getNewCountry(region: Region) {
         queryParameters
     );
     isLoading.value = false;
-
     if (response.success) {
         country.value = response.data.country;
         currentState.value = 'starting';
@@ -66,6 +65,10 @@ const handleClickSee = () => {
 onBeforeMount(() => {
     getNewCountry(currentRegion.value);
 });
+
+watch(currentRegion, () => {
+    getNewCountry(currentRegion.value);
+});
 </script>
 
 <template>
@@ -85,7 +88,6 @@ onBeforeMount(() => {
             class="flex flex-col w-10/12 md:h-auto justify-center items-center gap-10"
         >
             <Regions
-                @change="getNewCountry(currentRegion)"
                 v-model="currentRegion"
                 class="xs:w-1/2 sm:w-1/3 md:w-1/4 mx-4"
             />
