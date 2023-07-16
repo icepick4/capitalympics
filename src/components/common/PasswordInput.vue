@@ -18,7 +18,7 @@ const isRevealed = ref(false);
 const toggleReveal = () => (isRevealed.value = !isRevealed.value);
 
 const props = defineProps<Properties>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'keyup']);
 const value = useVModel(props, 'modelValue', emit);
 </script>
 
@@ -32,6 +32,7 @@ const value = useVModel(props, 'modelValue', emit);
         :type="isRevealed ? 'text' : 'password'"
         :prepend-icon="IconFingerprint"
         :error="error"
+        @keyup="emit('keyup', $event)"
     >
         <template #append>
             <button

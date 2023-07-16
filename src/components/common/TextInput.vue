@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Properties>(), {
     type: 'text'
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'keyup']);
 const value = useVModel(props, 'modelValue', emit);
 
 function focusInput() {
@@ -78,6 +78,7 @@ function focusInput() {
                 :disabled="disabled"
                 class="peer placeholder:text-gray-400 w-full outline-none"
                 :class="[error ? 'text-red-600' : 'text-gray-700']"
+                @keyup="emit('keyup', $event)"
             />
             <slot name="append" />
         </div>
