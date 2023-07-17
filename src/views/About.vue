@@ -100,10 +100,10 @@ const handleScroll = () => {
         <div
             class="flex flex-col justify-center items-center lg:flex-row lg:gap-8 bg-gradient"
         >
-            <h1 class="text-3xl">
+            <h1 class="text-3xl m-8 text-center">
                 {{ $t('aboutTitle') }}
             </h1>
-            <p class="m-10 text-lg lg:w-1/4">
+            <p class="m-8 text-lg lg:w-1/4">
                 {{ $t('aboutText') }}
             </p>
         </div>
@@ -159,8 +159,8 @@ const handleScroll = () => {
                 class="section-fade-in"
             />
         </div>
-        <div class="w-full h-52 flex justify-center items-center bg-gradient">
-            <h1 class="text-3xl text-center lg:w-1/2">
+        <div class="w-full h-auto flex justify-center items-center bg-gradient">
+            <h1 class="text-3xl text-center lg:w-1/2 m-8">
                 {{ $t('aboutFooter') }}
             </h1>
         </div>

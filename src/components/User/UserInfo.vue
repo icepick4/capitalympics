@@ -5,7 +5,14 @@ import { useStore } from '@/store';
 import { CountryDetails, LearningType, Region, Sort } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { getLevelName } from '@/utils/common';
-import { IconArrowsSort, IconMinus, IconPlus, IconSortAscending, IconSortDescending, IconX } from '@tabler/icons-vue';
+import {
+    IconArrowsSort,
+    IconMinus,
+    IconPlus,
+    IconSortAscending,
+    IconSortDescending,
+    IconX
+} from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
@@ -188,7 +195,9 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     <div
         class="w-full h-full flex flex-col items-center justify-start mt-10 mb-10"
     >
-        <div class="w-full sm:w-full md:w-5/6 2xl:w-7/12 mx-auto p-4 sm:p-8">
+        <div
+            class="w-full sm:w-full md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto p-4 sm:p-8"
+        >
             <!-- Informations de l'utilisateur -->
             <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-10">
                 <div
@@ -297,7 +306,10 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                         class="peer hover:scale-110 focus:scale-110"
                         @click="decreaseMax"
                     />
-                    <span class="text-center text-sm peer-disabled:opacity-50">{{ $t('less') }}</span>
+                    <span
+                        class="text-center text-sm peer-disabled:opacity-50"
+                        >{{ $t('less') }}</span
+                    >
                 </div>
                 <div class="flex flex-col gap-2 justify-center items-center">
                     <input
@@ -338,7 +350,11 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 </div>
                 <div class="flex flex-col gap-2 justify-center items-center">
                     <ActionIcon
-                        :icon="currentSort === 'ASC' ? IconSortAscending : IconSortDescending"
+                        :icon="
+                            currentSort === 'ASC'
+                                ? IconSortAscending
+                                : IconSortDescending
+                        "
                         :label="$t('sort')"
                         :disabled="countriesLength !== countries.length"
                         rounded

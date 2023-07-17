@@ -32,6 +32,7 @@ export const useStore = defineStore('app', () => {
         }
 
         const response = await ApiClient.get<SuccessResponse<User>>('/me');
+        console.log(response);
         if (!response.success) {
             throw new Error('Failed to load current user');
         }

@@ -28,7 +28,7 @@ const onSmallScreen = () => window.innerWidth < 640;
 
 onBeforeMount(() => {
     window.addEventListener('resize', () => {
-        if (onSmallScreen() && props.selected) {
+        if (onSmallScreen()) {
             size.value = 'lg';
         } else {
             size.value = props.size ?? 'md';
@@ -42,7 +42,8 @@ onUnmounted(() => {
 
 const size = ref(props.size ?? 'md');
 
-if (onSmallScreen() && props.selected) {
+if (onSmallScreen()) {
+    console.log('small screen and selected');
     size.value = 'lg';
 }
 

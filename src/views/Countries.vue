@@ -99,16 +99,20 @@ onBeforeMount(async () => {
             "
         />
     </BlurContainer>
-    <div
-        v-else
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-16 p-10"
-    >
-        <div v-for="country in filteredCountries()" :key="country.alpha3Code">
-            <CountryLink
-                :countryName="country.name"
-                :countryCode="country.alpha3Code"
-                :countryFlag="country.flag"
-            />
+    <div v-else class="w-full flex justify-center items-center">
+        <div
+            class="w-full md:w-3/4 2xl:w-7/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16 p-10"
+        >
+            <div
+                v-for="country in filteredCountries()"
+                :key="country.alpha3Code"
+            >
+                <CountryLink
+                    :countryName="country.name"
+                    :countryCode="country.alpha3Code"
+                    :countryFlag="country.flag"
+                />
+            </div>
         </div>
     </div>
 </template>

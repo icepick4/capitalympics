@@ -46,7 +46,7 @@ onUnmounted(() => {
 <template>
     <div class="flex items-center justify-center w-full">
         <div
-            class="header flex flex-row w-full sm:w-full md:w-3/4 2xl:w-7/12 justify-between h-auto relative p-7"
+            class="header flex flex-row w-full md:w-3/4 2xl:w-7/12 justify-between h-auto relative p-7"
         >
             <RouterLink
                 to="/"
@@ -57,7 +57,6 @@ onUnmounted(() => {
                     alt="logo"
                     class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-22 xl:h-22"
                 />
-                <!-- <h1 class="text-4xl font-bold">Capitalympics</h1> -->
             </RouterLink>
 
             <div class="header flex flex-row justify-center items-center gap-7">
@@ -197,13 +196,6 @@ onUnmounted(() => {
                         class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
                     >
                         {{ $t('countries') }}
-                    </RouterLink>
-                    <RouterLink
-                        v-if="!isAuthenticated"
-                        to="/learn"
-                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
-                    >
-                        {{ $t('learn') }}
                     </RouterLink>
                     <RouterLink
                         to="/about"

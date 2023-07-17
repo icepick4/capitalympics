@@ -265,7 +265,7 @@ const handleScroll = () => {
         </div>
         <h1 class="text-center text-5xl">{{ $t('ready?') }}</h1>
         <div
-            class="w-4/5 lg:w-3/4 flex flex-col lg:flex-row lg:[bg-gradient] rounded-lg gap-10"
+            class="w-11/12 lg:w-3/4 flex flex-col lg:flex-row lg:[bg-gradient] rounded-lg gap-10"
         >
             <div
                 class="w-full lg:w-1/2 flex flex-row justify-center items-center lg:p-10 gap-3 sm:gap-10"
