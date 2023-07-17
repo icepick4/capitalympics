@@ -43,7 +43,6 @@ onUnmounted(() => {
 const size = ref(props.size ?? 'md');
 
 if (onSmallScreen()) {
-    console.log('small screen and selected');
     size.value = 'lg';
 }
 
