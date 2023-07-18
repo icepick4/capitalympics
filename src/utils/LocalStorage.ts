@@ -5,15 +5,13 @@ import SuperJSON from 'superjson';
 export type StorableValue = string | number | boolean | object | null;
 
 type StoredValue<T extends StorableValue> = {
-    value: T
-    expiredAt?: Maybe<string>
-}
+    value: T;
+    expiredAt?: Maybe<string>;
+};
 
-export class LocalStorage
-{
-    public get<T extends StorableValue>(key: string): T|undefined
-    {
-        const v: string|null = localStorage.getItem(key);
+export class LocalStorage {
+    public get<T extends StorableValue>(key: string): T | undefined {
+        const v: string | null = localStorage.getItem(key);
         if (!v) {
             return undefined;
         }
@@ -27,8 +25,7 @@ export class LocalStorage
         return parsedValue.value;
     }
 
-    public set(key: string, value: StorableValue, expires?: number): void
-    {
+    public set(key: string, value: StorableValue, expires?: number): void {
         let storedValue: StoredValue<typeof value> = { value };
 
         if (expires) {
@@ -39,19 +36,16 @@ export class LocalStorage
         localStorage.setItem(key, SuperJSON.stringify(storedValue));
     }
 
-    public has(key: string): boolean
-    {
+    public has(key: string): boolean {
         return !!this.get<any>(key);
     }
 
-    public remove(key: string): void
-    {
+    public remove(key: string): void {
         localStorage.removeItem(key);
     }
 
-    public expiresIn(key: string): number|undefined
-    {
-        const v: string|null = localStorage.getItem(key);
+    public expiresIn(key: string): number | undefined {
+        const v: string | null = localStorage.getItem(key);
         if (!v) {
             return undefined;
         }
@@ -61,11 +55,11 @@ export class LocalStorage
             return undefined;
         }
 
-        return DateTime.fromISO(parsedValue.expiredAt).diffNow('minutes').minutes;
+        return DateTime.fromISO(parsedValue.expiredAt).diffNow('minutes')
+            .minutes;
     }
 
-    private isExpire(storedValue: StoredValue<any>): boolean
-    {
+    private isExpire(storedValue: StoredValue<any>): boolean {
         // No expiration date has been set.
         if (!storedValue.expiredAt) {
             return true;

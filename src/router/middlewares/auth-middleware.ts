@@ -17,4 +17,4 @@ export async function requireAuth(
     }
 
     next({ name: 'LogIn' });
-};
+}

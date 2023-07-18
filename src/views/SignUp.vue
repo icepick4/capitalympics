@@ -38,7 +38,7 @@ const numberOfPeople = ref(0);
 })();
 
 async function signup() {
-validateForm();
+    validateForm();
     if (errors.value.username || errors.value.password) {
         return;
     }

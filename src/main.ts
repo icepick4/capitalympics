@@ -29,12 +29,7 @@ if (!supportedLocales.includes(defaultLocale)) {
 
 const i18n = createI18n({
     locale: defaultLocale,
-    messages: { fr, en, es, it },
+    messages: { fr, en, es, it }
 });
 
-app
-    .use(router)
-    .use(pinia)
-    .use(i18n)
-    .mount('#app')
-;
+app.use(router).use(pinia).use(i18n).mount('#app');

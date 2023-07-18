@@ -33,8 +33,16 @@ defineProps<{
         radial-gradient(circle 5px, #fff 100%, transparent 0),
         radial-gradient(circle 5px, #fff 100%, transparent 0),
         linear-gradient(#fff 20px, transparent 0);
-    background-position: center 127px, 94px 102px, 16px 18px, center 114px;
-    background-size: 60px 60px, 10px 10px, 10px 10px, 4px 14px;
+    background-position:
+        center 127px,
+        94px 102px,
+        16px 18px,
+        center 114px;
+    background-size:
+        60px 60px,
+        10px 10px,
+        10px 10px,
+        4px 14px;
     background-repeat: no-repeat;
     z-index: 10;
     perspective: 500px;

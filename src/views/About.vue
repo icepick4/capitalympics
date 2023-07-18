@@ -171,7 +171,9 @@ const handleScroll = () => {
 .section-fade-in {
     opacity: 0;
     transform: translateY(50px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
 
 .section-fade-in.show {

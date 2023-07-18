@@ -56,7 +56,9 @@ const getFlag = computed(() => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.4s, transform 0.4s;
+    transition:
+        opacity 0.4s,
+        transform 0.4s;
 }
 
 .fade-enter,

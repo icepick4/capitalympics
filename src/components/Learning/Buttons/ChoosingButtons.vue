@@ -10,7 +10,7 @@ type Button = {
 const buttons: Button[] = [
     { title: 'easy', color: 'bg-blue-500', type: 'succeeded' },
     { title: 'medium', color: 'bg-yellow-500', type: 'medium' },
-    { title: 'hard', color: 'bg-red-500', type: 'failed' },
+    { title: 'hard', color: 'bg-red-500', type: 'failed' }
 ];
 </script>
 
