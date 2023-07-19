@@ -18,6 +18,9 @@ Learn flags and capitals of the world !
 
 # Features
 
+⌛ Progression statistics
+⌛ Notifications on level up
+⌛ Store favorite session setup
 ✅ Learn flags and capitals of countries worldwide \
 ✅ Filter learning by regions of the world \
 ✅ Track scores for each country and overall progress \
@@ -37,12 +40,17 @@ Learn flags and capitals of the world !
 -   🌍 Alpha-3 code
 -   💰 Currencies
 
+
 🌐 Capitalympics is fully translated into multiple languages (English, French, Spanish and Italiano). \
 If your preferred language is not supported, please open an issue on the repository to request a new language.
 
 # Technologies Used
 
-🚀 Built with Vue.js 3, Vite, Tailwind CSS, and TypeScript
+🚀 The front is built with Vue.js 3, Vite, Tailwind CSS, and TypeScript.
+
+🚀 The back is built with Node.js, Express and MySQL.
+
+Take a look at the API used by Capitalympics [here](https://github.com/icepick4/capitalympics-api).
 
 # Getting Started
 
@@ -52,6 +60,16 @@ If your preferred language is not supported, please open an issue on the reposit
 4.  Start your learning journey by selecting a region.
 5.  Track your progress and delve into statistics on your profile page.
 
+# The learning concept 
+
+EN
+
+The flags and capitals learning app is based on a specific concept inspired by Anki. A flag or the name of a country is displayed, and the user must decide whether they know it or not, in their own conscience. Then, the answer is revealed, and the user can choose from three difficulty levels: easy, medium, or difficult. Depending on their choice, the country or capital will be presented more or less frequently in the future, based on the user's knowledge. The goal is to provide personalized learning based on user confidence. If the user plays correctly, the algorithm will select countries or capitals optimized for learning. Enjoy this unique learning experience!
+
+FR
+
+L'application d'apprentissage des drapeaux et des capitales repose sur un concept particulier inspiré de l'application Anki. Un drapeau ou le nom d'un pays est affiché, et l'utilisateur doit décider s'il le connaît ou non, en son âme et conscience. Ensuite, la réponse est révélée et l'utilisateur a le choix entre trois niveaux de difficulté : facile, moyen ou difficile. Selon le choix effectué, le pays ou la capitale sera présenté plus ou moins fréquemment par la suite, en fonction de la connaissance de l'utilisateur. L'objectif est d'offrir un apprentissage personnalisé, basé sur la confiance de l'utilisateur. Si l'utilisateur joue correctement, l'algorithme sélectionnera des pays ou des capitales optimisés pour l'apprentissage. Profitez de cette expérience d'apprentissage unique !
+
 # Screenshots
 
 ## Home
@@ -60,11 +78,12 @@ If your preferred language is not supported, please open an issue on the reposit
 
 ## Statistics
 
-![image](https://github.com/icepick4/capitalympics/assets/82316285/dbb8e136-bb31-400c-82df-2f5315990f36)
+![image](https://github.com/icepick4/capitalympics/assets/82316285/5ba8d533-a198-47aa-bbae-cdc555f4b221)
 
 ## Country Information
 
-![image](https://github.com/icepick4/capitalympics/assets/82316285/b29df73e-7537-4d2c-ab38-3c4a5806193f)
+![Screenshot_1](https://github.com/icepick4/capitalympics/assets/82316285/d7e9ae50-58ce-49b8-8951-9930fb38151e)
+
 
 # License
 
