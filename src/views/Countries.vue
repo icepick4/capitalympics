@@ -4,6 +4,7 @@ import CountryLink from '@/components/Country/CountryLink.vue';
 import Loader from '@/components/Loader.vue';
 import Modal from '@/components/Modal.vue';
 import Regions from '@/components/Regions.vue';
+import TextInput from '@/components/common/TextInput.vue';
 import { CountryI } from '@/models/Country';
 import ApiService from '@/services/apiService';
 import { getLanguage } from '@/utils/common';
@@ -62,23 +63,25 @@ onBeforeMount(async () => {
         <h1 class="text-4xl font-bold text-center text-black">
             {{ $t('countries') }}
         </h1>
-        <input
-            type="text"
+
+        <TextInput
             v-model="search"
-            class="p-2 placeholder-opacity-50 rounded-md bg-gradient text-black placeholder-black"
+            :label="$t('countries')"
             :placeholder="$t('searchPlaceholder')"
         />
 
         <Regions v-model="region" />
 
         <button
-            class="p-2 rounded-md bg-gradient text-black active:bg-gray-700"
+            type="button"
+            :disabled="search.length === 0 && region === 'World'"
+            class="w-full flex items-center justify-center px-4 py-4 text-base font-normal text-black border rounded-md transition-all duration-200 bg-gray-50 hover:bg-gray-200 disabled:hover:bg-gray-50 disabled:opacity-60 disabled:cursor-not-allowed"
             @click="
                 search = '';
                 region = 'World';
             "
         >
-            {{ $t('resetFilters') }}
+            <span>{{ $t('resetFilters') }}</span>
         </button>
     </div>
     <div v-if="displaySum41" class="flex justify-center">

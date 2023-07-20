@@ -188,7 +188,7 @@ const saveProfile = async () => {
                 </div>
                 <div class="flex justify-center items-center">
                     <input
-                        class="block h-auto p-2 text-black duration-200 border border-gray-200 rounded-md bg-gray-50 hover:bg-gray-300 cursor-pointer"
+                        class="block h-auto p-2 text-black duration-200 border rounded-md bg-gray-50 hover:bg-gray-300 cursor-pointer"
                         :disabled="areInputsSame()"
                         :value="$t('saveProfile')"
                         type="submit"

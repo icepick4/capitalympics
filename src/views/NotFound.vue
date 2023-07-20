@@ -8,7 +8,7 @@
         <div class="flex flex-row w-full justify-center items-center">
             <RouterLink
                 to="/"
-                class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-gradient rounded-md w-1/4"
+                class="w-1/4 flex items-center justify-center px-4 py-4 text-base font-normal text-black border rounded-md transition-all duration-200 bg-gray-50 hover:bg-gray-200 disabled:hover:bg-gray-50 disabled:opacity-60 disabled:cursor-not-allowed"
             >
                 {{ $t('backHome') }}
             </RouterLink>
