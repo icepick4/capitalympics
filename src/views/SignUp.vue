@@ -86,7 +86,7 @@ const validateForm = () => {
 
 <template>
     <Dialog
-        :isOpen="signedUpFailed"
+        v-model="signedUpFailed"
         :title="$t('error')"
         :description="$t('usernameTaken')"
         :buttonDescription="$t('close')"

@@ -6,19 +6,19 @@ import { CountryDetails, LearningType, Region, Sort } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { getLevelName } from '@/utils/common';
 import {
-IconArrowsSort,
-IconMinus,
-IconPlus,
-IconSortAscending,
-IconSortDescending,
-IconX
+    IconArrowsSort,
+    IconMinus,
+    IconPlus,
+    IconSortAscending,
+    IconSortDescending,
+    IconX
 } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import Regions from '../Regions.vue';
-import Dialog from '../common/Dialog.vue';
+import ConfirmDialog from '../common/ConfirmDialog.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
 
 const store = useStore();
@@ -180,8 +180,8 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 </script>
 
 <template>
-    <Dialog
-        :isOpen="confirmingLogOut"
+    <ConfirmDialog
+        v-model="confirmingLogOut"
         :title="$t('logOutConfirmation')"
         :description="$t('loginPageRedirect')"
         :buttonYes="$t('yes')"

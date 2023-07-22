@@ -74,15 +74,14 @@ watch(currentRegion, () => {
 <template>
     <BlurContainer v-if="couldNotGetCountry || isLoading">
         <Dialog
-            v-if="couldNotGetCountry"
-            :isOpen="couldNotGetCountry"
+            v-model="couldNotGetCountry"
             :title="$t('errorCountry')"
             :description="$t('tryAgain')"
             :buttonDescription="$t('close')"
             @close="couldNotGetCountry = false"
             type="error"
         />
-        <Loader v-else-if="isLoading" />
+        <Loader v-if="isLoading" />
     </BlurContainer>
     <div class="w-full flex flex-col justify-center items-center">
         <div

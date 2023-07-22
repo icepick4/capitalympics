@@ -2,7 +2,7 @@
 import Badge from '@/components/Badge.vue';
 import BlurContainer from '@/components/BlurContainer.vue';
 import Loader from '@/components/Loader.vue';
-import Dialog from '@/components/common/Dialog.vue';
+import ConfirmDialog from '@/components/common/ConfirmDialog.vue';
 import { Level, User } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
@@ -81,9 +81,8 @@ onBeforeMount(async () => {
             "
             class="w-1/2"
         >
-            <Dialog
-                v-if="confirmingResetScores"
-                :isOpen="confirmingResetScores"
+            <ConfirmDialog
+                v-model="confirmingResetScores"
                 :title="$t('resetScoresConfirmation')"
                 :description="$t('resetScoresMessage')"
                 :buttonYes="$t('yes')"
@@ -92,7 +91,7 @@ onBeforeMount(async () => {
                 @cancel="confirmingResetScores = false"
                 type="warning"
             />
-            <Loader v-else-if="initFirstTimeScores" :title="$t('loading')" />
+            <Loader v-if="initFirstTimeScores" :title="$t('loading')" />
         </BlurContainer>
 
         <div

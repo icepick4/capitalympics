@@ -109,7 +109,7 @@ const handleScroll = () => {
         <Loader v-if="!finishedWaited" />
         <Dialog
             v-else-if="!countries.length && finishedWaited"
-            :isOpen="true"
+            v-model="finishedWaited"
             :title="$t('noCountriesFound')"
             :description="$t('checkNetworkConnection')"
             :buttonDescription="$t('close')"

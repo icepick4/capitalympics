@@ -6,58 +6,39 @@ import {
     TransitionChild,
     TransitionRoot
 } from '@headlessui/vue';
-import { ref, watch } from 'vue';
+import { useVModel } from '@vueuse/core';
+import Button from './Button.vue';
 
 type DialogType = 'warning' | 'error' | 'success';
 
 interface Properties {
+    modelValue: boolean;
     title: string;
-    isOpen: boolean;
     description: string;
     buttonDescription?: string;
-    buttonYes?: string;
-    buttonNo?: string;
     type: DialogType;
 }
 
 const props = defineProps<Properties>();
 
-const display = ref(props.isOpen);
+const emit = defineEmits(['update:modelValue']);
 
-watch(
-    () => props.isOpen,
-    (isOpen) => {
-        display.value = isOpen;
-    }
-);
+const isOpen = useVModel(props, 'modelValue', emit);
 
-const emit = defineEmits(['close', 'confirm', 'cancel']);
-
-const closeModal = () => {
-    emit('close');
-    display.value = false;
-};
-
-const confirmModal = () => {
-    closeModal();
-    emit('confirm');
-};
-
-const cancelModal = () => {
-    closeModal();
-    emit('cancel');
+const setIsOpen = (value: boolean) => {
+    isOpen.value = value;
 };
 </script>
 
 <template>
-    <TransitionRoot appear :show="display" as="template">
+    <TransitionRoot appear :show="isOpen" as="template">
         <Dialog
             as="div"
-            @close="closeModal"
+            @close="setIsOpen"
             :class="{
-                'bg-yellow-100': props.type === 'warning',
-                'bg-red-100': props.type === 'error',
-                'bg-green-100': props.type === 'success'
+                'bg-yellow-100': type === 'warning',
+                'bg-red-100': type === 'error',
+                'bg-green-100': type === 'success'
             }"
             class="relative z-10"
         >
@@ -88,9 +69,9 @@ const cancelModal = () => {
                     >
                         <DialogPanel
                             :class="{
-                                'bg-yellow-50': props.type === 'warning',
-                                'bg-red-50': props.type === 'error',
-                                'bg-green-50': props.type === 'success'
+                                'bg-yellow-50': type === 'warning',
+                                'bg-red-50': type === 'error',
+                                'bg-green-50': type === 'success'
                             }"
                             class="w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all"
                         >
@@ -107,75 +88,13 @@ const cancelModal = () => {
                             </div>
 
                             <div v-if="buttonDescription" class="mt-4">
-                                <button
-                                    type="button"
-                                    :class="{
-                                        'bg-yellow-200':
-                                            props.type === 'warning',
-                                        'bg-red-200': props.type === 'error',
-                                        'bg-green-200':
-                                            props.type === 'success',
-                                        'hover:bg-yellow-300':
-                                            props.type === 'warning',
-                                        'hover:bg-red-300':
-                                            props.type === 'error',
-                                        'hover:bg-green-300':
-                                            props.type === 'success'
-                                    }"
-                                    class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium"
-                                    @click="closeModal"
-                                >
-                                    {{ buttonDescription }}
-                                </button>
+                                <Button
+                                    :text="buttonDescription"
+                                    :type="type"
+                                    @click="setIsOpen(false)"
+                                />
                             </div>
-                            <div class="flex flex-row gap-3" v-else>
-                                <div class="mt-4">
-                                    <button
-                                        type="button"
-                                        :class="{
-                                            'bg-yellow-200':
-                                                props.type === 'warning',
-                                            'bg-red-200':
-                                                props.type === 'error',
-                                            'bg-green-200':
-                                                props.type === 'success',
-                                            'hover:bg-yellow-300':
-                                                props.type === 'warning',
-                                            'hover:bg-red-300':
-                                                props.type === 'error',
-                                            'hover:bg-green-300':
-                                                props.type === 'success'
-                                        }"
-                                        class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium"
-                                        @click="confirmModal"
-                                    >
-                                        {{ buttonYes ?? 'Yes' }}
-                                    </button>
-                                </div>
-                                <div class="mt-4">
-                                    <button
-                                        type="button"
-                                        :class="{
-                                            'bg-yellow-200':
-                                                props.type === 'warning',
-                                            'bg-red-200':
-                                                props.type === 'error',
-                                            'bg-green-200':
-                                                props.type === 'success',
-                                            'hover:bg-yellow-300':
-                                                props.type === 'warning',
-                                            'hover:bg-red-300':
-                                                props.type === 'error',
-                                            'hover:bg-green-300':
-                                                props.type === 'success'
-                                        }"
-                                        class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium"
-                                        @click="cancelModal"
-                                    >
-                                        {{ buttonNo ?? 'No' }}
-                                    </button>
-                                </div>
-                            </div>
+                            <slot></slot>
                         </DialogPanel>
                     </TransitionChild>
                 </div>

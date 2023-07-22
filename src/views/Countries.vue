@@ -92,7 +92,7 @@ onBeforeMount(async () => {
     </BlurContainer>
     <template v-else-if="finishedWaited && state.countries.length === 0">
         <Dialog
-            :isOpen="true"
+            v-model="finishedWaited"
             :title="$t('noCountriesFound')"
             :description="$t('checkNetworkConnection')"
             :buttonDescription="$t('close')"

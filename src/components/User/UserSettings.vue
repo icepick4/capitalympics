@@ -82,7 +82,7 @@ const saveProfile = async () => {
 
 <template>
     <Dialog
-        :isOpen="displaySaveError"
+        v-model="displaySaveError"
         :title="$t('error')"
         :description="$t('errorSavingProfile')"
         :buttonDescription="$t('close')"
@@ -90,7 +90,7 @@ const saveProfile = async () => {
         type="error"
     />
     <Dialog
-        :isOpen="usernameAlreadyTaken"
+        v-model="usernameAlreadyTaken"
         :title="$t('error')"
         :description="$t('usernameTaken')"
         :buttonDescription="$t('close')"
@@ -98,11 +98,10 @@ const saveProfile = async () => {
         type="error"
     />
     <Dialog
-        :isOpen="hasSaved"
+        v-model="hasSaved"
         :title="$t('success')"
         :description="$t('profileSaved')"
         :buttonDescription="$t('close')"
-        @close="hasSaved = false"
         type="success"
     />
     <div

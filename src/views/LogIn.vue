@@ -48,7 +48,7 @@ async function login() {
 
 <template>
     <Dialog
-        :isOpen="userNotFound"
+        v-model="userNotFound"
         :title="$t('error')"
         :description="$t('userNotFound')"
         :buttonDescription="$t('close')"
@@ -56,8 +56,7 @@ async function login() {
         type="error"
     />
     <Dialog
-        v-if="signedUp"
-        :isOpen="signedUp"
+        v-model="signedUp"
         :title="$t('success')"
         :description="$t('signedUpSuccessfully')"
         :buttonDescription="$t('close')"
