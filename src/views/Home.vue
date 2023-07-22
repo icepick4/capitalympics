@@ -130,6 +130,7 @@ const handleScroll = () => {
                 {{ $t('welcomeMessage') }}
             </p>
         </div>
+
         <Planet
             v-if="displayPlanet"
             class="cursor-grab"

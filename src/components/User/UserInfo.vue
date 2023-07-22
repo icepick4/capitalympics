@@ -6,20 +6,19 @@ import { CountryDetails, LearningType, Region, Sort } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { getLevelName } from '@/utils/common';
 import {
-    IconArrowsSort,
-    IconMinus,
-    IconPlus,
-    IconSortAscending,
-    IconSortDescending,
-    IconX
+IconArrowsSort,
+IconMinus,
+IconPlus,
+IconSortAscending,
+IconSortDescending,
+IconX
 } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
-import BlurContainer from '../BlurContainer.vue';
-import Modal from '../Modal.vue';
 import Regions from '../Regions.vue';
+import Dialog from '../common/Dialog.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
 
 const store = useStore();
@@ -181,17 +180,17 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 </script>
 
 <template>
-    <BlurContainer v-if="confirmingLogOut">
-        <Modal
-            :title="$t('logOutConfirmation')"
-            :message="$t('loginPageRedirect')"
-            background-color="white"
-            title-color="black"
-            :confirmationDialog="true"
-            @confirm="() => store.logout()"
-            @cancel="() => (confirmingLogOut = false)"
-        />
-    </BlurContainer>
+    <Dialog
+        :isOpen="confirmingLogOut"
+        :title="$t('logOutConfirmation')"
+        :description="$t('loginPageRedirect')"
+        :buttonYes="$t('yes')"
+        :buttonNo="$t('no')"
+        @close="confirmingLogOut = $event"
+        @confirm="() => store.logout()"
+        @cancel="() => (confirmingLogOut = false)"
+        type="warning"
+    />
     <div
         class="w-full h-full flex flex-col items-center justify-start mt-10 mb-10"
     >

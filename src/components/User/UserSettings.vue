@@ -7,8 +7,7 @@ import { storeToRefs } from 'pinia';
 import { Ref, computed, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
-import BlurContainer from '../BlurContainer.vue';
-import Modal from '../Modal.vue';
+import Dialog from '../common/Dialog.vue';
 
 interface inputState {
     content: string;
@@ -62,11 +61,11 @@ const saveProfile = async () => {
         user.value.language = language.value;
         try {
             const response = await ApiService.updateUser(user.value);
-            hasSaved.value = true;
             if (!response) {
                 usernameAlreadyTaken.value = true;
                 user.value.name = firstUsername.value;
             } else {
+                hasSaved.value = true;
                 usernameAlreadyTaken.value = false;
                 t.locale.value = language.value;
             }
@@ -78,40 +77,30 @@ const saveProfile = async () => {
 </script>
 
 <template>
-    <BlurContainer v-if="hasSaved">
-        <Modal
-            v-if="!validateUsername()"
-            :title="$t('error')"
-            :message="$t('usernameRestriction')"
-            background-color="white"
-            title-color="error"
-            @close="hasSaved = false"
-        />
-        <Modal
-            v-else-if="displaySaveError"
-            :title="$t('error')"
-            :message="$t('errorSavingProfile')"
-            background-color="white"
-            title-color="error"
-            @close="closeUserTakenModal"
-        />
-        <Modal
-            v-else-if="usernameAlreadyTaken"
-            :title="$t('error')"
-            :message="$t('usernameTaken')"
-            background-color="white"
-            title-color="error"
-            @close="closeUserTakenModal"
-        />
-        <Modal
-            v-else
-            :title="$t('success')"
-            :message="$t('profileSaved')"
-            background-color="white"
-            title-color="primary"
-            @close="hasSaved = false"
-        />
-    </BlurContainer>
+    <Dialog
+        :isOpen="displaySaveError"
+        :title="$t('error')"
+        :description="$t('errorSavingProfile')"
+        :buttonDescription="$t('close')"
+        @close="closeUserTakenModal"
+        type="error"
+    />
+    <Dialog
+        :isOpen="usernameAlreadyTaken"
+        :title="$t('error')"
+        :description="$t('usernameTaken')"
+        :buttonDescription="$t('close')"
+        @close="closeUserTakenModal"
+        type="error"
+    />
+    <Dialog
+        :isOpen="hasSaved"
+        :title="$t('success')"
+        :description="$t('profileSaved')"
+        :buttonDescription="$t('close')"
+        @close="hasSaved = false"
+        type="success"
+    />
     <div
         class="w-11/12 sm:w-5/6 xl:w-3/4 2xl:w-2/3 mx-auto p-0 sm:p-8 flex-col"
     >
