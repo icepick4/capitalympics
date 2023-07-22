@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import BlurContainer from '@/components/BlurContainer.vue';
-import Modal from '@/components/Modal.vue';
+import Dialog from '@/components/common/Dialog.vue';
 import PasswordInput from '@/components/common/PasswordInput.vue';
 import TextInput from '@/components/common/TextInput.vue';
 import { useStore } from '@/store';
@@ -42,15 +41,14 @@ async function login() {
 </script>
 
 <template>
-    <BlurContainer v-if="userNotFound">
-        <Modal
-            :title="$t('error')"
-            :message="$t('userNotFound')"
-            background-color="white"
-            title-color="error"
-            @close="() => (userNotFound = false)"
-        />
-    </BlurContainer>
+    <Dialog
+        :isOpen="userNotFound"
+        :title="$t('error')"
+        :description="$t('userNotFound')"
+        :buttonDescription="$t('close')"
+        @close="() => (userNotFound = false)"
+        type="error"
+    />
     <section
         class="relative py-10 bg-gray-900 sm:py-16 lg:py-24 h-full flex items-center"
     >
@@ -119,10 +117,14 @@ async function login() {
                         <button
                             type="button"
                             :disabled="!isFormFilled"
-                            class="w-full px-4 py-4 text-base font-semibold text-black bg-white rounded-md transition-all duration-200 delay-100 hover:scale-105 focus:scale-105 disabled:hover:scale-100 disabled:opacity-60 disabled:cursor-not-allowed"
+                            class="w-full px-4 py-4 flex justify-center items-center text-base font-semibold text-black bg-white rounded-md transition-all duration-200 delay-100 hover:scale-105 focus:scale-105 disabled:hover:scale-100 disabled:opacity-60 disabled:cursor-not-allowed"
                             @click="login"
                         >
-                            {{ $t('login') }}
+                            <span v-if="!isLoading">{{ $t('login') }}</span>
+                            <div
+                                v-else
+                                class="h-5 w-5 border-4 rounded-full border-blue-600/75 border-b-blue-600/25 animate-spin"
+                            ></div>
                         </button>
                     </div>
                 </div>

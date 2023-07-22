@@ -30,6 +30,7 @@ const language = ref(user.value.language);
 const hasSaved = ref(false);
 const displaySaveError = ref(false);
 const usernameAlreadyTaken = ref(false);
+const loading = ref(false);
 const t = useI18n();
 
 const validateUsername = () => {
@@ -60,6 +61,7 @@ const saveProfile = async () => {
         }
         user.value.language = language.value;
         try {
+            loading.value = true;
             const response = await ApiService.updateUser(user.value);
             if (!response) {
                 usernameAlreadyTaken.value = true;
@@ -71,6 +73,8 @@ const saveProfile = async () => {
             }
         } catch (error) {
             displaySaveError.value = true;
+        } finally {
+            loading.value = false;
         }
     }
 };
@@ -175,13 +179,18 @@ const saveProfile = async () => {
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-center items-center">
-                    <input
-                        class="block h-auto p-2 text-black duration-200 border rounded-md bg-gray-50 hover:bg-gray-300 cursor-pointer"
+                <div class="flex justify-center items-center w-1/3">
+                    <button
+                        class="block h-auto w-full flex items-center justify-center p-2 text-black duration-200 border rounded-md bg-gray-50 hover:bg-gray-300 cursor-pointer"
                         :disabled="areInputsSame()"
-                        :value="$t('saveProfile')"
-                        type="submit"
-                    />
+                        @click="saveProfile"
+                    >
+                        <span v-if="!loading">{{ $t('saveProfile') }}</span>
+                        <div
+                            v-else
+                            class="h-5 w-5 border-4 rounded-full border-blue-600/75 border-b-blue-600/25 animate-spin"
+                        ></div>
+                    </button>
                 </div>
             </form>
         </div>

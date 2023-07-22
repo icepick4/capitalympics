@@ -2,8 +2,8 @@
 import BlurContainer from '@/components/BlurContainer.vue';
 import CarouselAuto from '@/components/CarouselAuto.vue';
 import Loader from '@/components/Loader.vue';
-import Modal from '@/components/Modal.vue';
 import Planet from '@/components/Planet.vue';
+import Dialog from '@/components/common/Dialog.vue';
 import { CountryI } from '@/models/Country';
 import ApiService from '@/services/apiService';
 import { getLanguage } from '@/utils/common';
@@ -107,16 +107,17 @@ const handleScroll = () => {
 <template>
     <BlurContainer v-if="(!planetLoaded && displayPlanet) || !countries.length">
         <Loader v-if="!finishedWaited" />
-        <Modal
+        <Dialog
             v-else-if="!countries.length && finishedWaited"
+            :isOpen="true"
             :title="$t('noCountriesFound')"
-            :message="$t('checkNetworkConnection')"
-            :backgroundColor="`white`"
-            :titleColor="`error`"
+            :description="$t('checkNetworkConnection')"
+            :buttonDescription="$t('close')"
             @close="
                 finishedWaited = false;
                 countries.length = 1;
             "
+            type="error"
         />
     </BlurContainer>
     <div

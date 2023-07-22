@@ -2,7 +2,6 @@
 import Badge from '@/components/Badge.vue';
 import BlurContainer from '@/components/BlurContainer.vue';
 import Loader from '@/components/Loader.vue';
-import Modal from '@/components/Modal.vue';
 import { Level, User } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
@@ -81,15 +80,16 @@ onBeforeMount(async () => {
             "
             class="w-1/2"
         >
-            <Modal
+            <Dialog
                 v-if="confirmingResetScores"
+                :isOpen="confirmingResetScores"
                 :title="$t('resetScoresConfirmation')"
-                :message="$t('resetScoresMessage')"
-                background-color="white"
-                title-color="black"
-                :confirmationDialog="true"
+                :description="$t('resetScoresMessage')"
+                :buttonYes="$t('yes')"
+                :buttonNo="$t('no')"
                 @confirm="resetScores"
                 @cancel="confirmingResetScores = false"
+                type="warning"
             />
             <Loader v-else-if="initFirstTimeScores" :title="$t('loading')" />
         </BlurContainer>

@@ -4,8 +4,8 @@ import ButtonTemplate from '@/components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Question from '@/components/Learning/Question.vue';
 import Loader from '@/components/Loader.vue';
-import Modal from '@/components/Modal.vue';
 import Regions from '@/components/Regions.vue';
+import Dialog from '@/components/common/Dialog.vue';
 import { CountryI } from '@/models/Country';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
@@ -73,13 +73,14 @@ watch(currentRegion, () => {
 
 <template>
     <BlurContainer v-if="couldNotGetCountry || isLoading">
-        <Modal
+        <Dialog
             v-if="couldNotGetCountry"
+            :isOpen="couldNotGetCountry"
             :title="$t('errorCountry')"
-            :message="$t('tryAgain')"
-            background-color="white"
-            title-color="error"
+            :description="$t('tryAgain')"
+            :buttonDescription="$t('close')"
             @close="couldNotGetCountry = false"
+            type="error"
         />
         <Loader v-else-if="isLoading" />
     </BlurContainer>

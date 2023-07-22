@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import BlurContainer from '@/components/BlurContainer.vue';
-import Modal from '@/components/Modal.vue';
+import Dialog from '@/components/common/Dialog.vue';
 import PasswordInput from '@/components/common/PasswordInput.vue';
 import Select from '@/components/common/Select.vue';
 import TextInput from '@/components/common/TextInput.vue';
@@ -83,15 +82,14 @@ const validateForm = () => {
 </script>
 
 <template>
-    <BlurContainer v-if="signedUpFailed">
-        <Modal
-            :title="$t('error')"
-            :message="$t('usernameTaken')"
-            background-color="white"
-            title-color="error"
-            @close="() => (signedUpFailed = false)"
-        />
-    </BlurContainer>
+    <Dialog
+        :isOpen="signedUpFailed"
+        :title="$t('error')"
+        :description="$t('usernameTaken')"
+        :buttonDescription="$t('close')"
+        @close="() => (signedUpFailed = false)"
+        type="error"
+    />
     <section class="h-full flex w-full justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
             <div

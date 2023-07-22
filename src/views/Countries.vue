@@ -2,8 +2,8 @@
 import BlurContainer from '@/components/BlurContainer.vue';
 import CountryLink from '@/components/Country/CountryLink.vue';
 import Loader from '@/components/Loader.vue';
-import Modal from '@/components/Modal.vue';
 import Regions from '@/components/Regions.vue';
+import Dialog from '@/components/common/Dialog.vue';
 import TextInput from '@/components/common/TextInput.vue';
 import { CountryI } from '@/models/Country';
 import ApiService from '@/services/apiService';
@@ -90,18 +90,19 @@ onBeforeMount(async () => {
     <BlurContainer v-if="!finishedWaited && state.countries.length === 0">
         <Loader :title="$t('loading')" />
     </BlurContainer>
-    <BlurContainer v-else-if="finishedWaited && state.countries.length === 0">
-        <Modal
+    <template v-else-if="finishedWaited && state.countries.length === 0">
+        <Dialog
+            :isOpen="true"
             :title="$t('noCountriesFound')"
-            :message="$t('checkNetworkConnection')"
-            :backgroundColor="`white`"
-            :titleColor="`error`"
+            :description="$t('checkNetworkConnection')"
+            :buttonDescription="$t('close')"
             @close="
                 finishedWaited = false;
                 $router.push('/');
             "
+            type="error"
         />
-    </BlurContainer>
+    </template>
     <div v-else class="w-full flex justify-center items-center">
         <div
             class="w-full md:w-3/4 2xl:w-7/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16 p-10"
