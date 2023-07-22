@@ -2,7 +2,6 @@
 import CarouselAuto from '@/components/CarouselAuto.vue';
 import Loader from '@/components/Loader.vue';
 import Planet from '@/components/Planet.vue';
-import Dialog from '@/components/common/Dialog.vue';
 import { CountryI } from '@/models/Country';
 import ApiService from '@/services/apiService';
 import { getLanguage } from '@/utils/common';

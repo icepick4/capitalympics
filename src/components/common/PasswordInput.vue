@@ -2,7 +2,6 @@
 import { IconEyeCheck, IconEyeOff, IconFingerprint } from '@tabler/icons-vue';
 import { useVModel } from '@vueuse/core';
 import { ref } from 'vue';
-import TextInput from './TextInput.vue';
 
 interface Properties {
     modelValue: string | null;

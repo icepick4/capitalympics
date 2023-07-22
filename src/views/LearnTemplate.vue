@@ -4,7 +4,6 @@ import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Question from '@/components/Learning/Question.vue';
 import Loader from '@/components/Loader.vue';
 import Regions from '@/components/Regions.vue';
-import Dialog from '@/components/common/Dialog.vue';
 import { CountryI } from '@/models/Country';
 import { User } from '@/models/User';
 import { useStore } from '@/store';

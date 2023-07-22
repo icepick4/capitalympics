@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import Dialog from '@/components/common/Dialog.vue';
-import PasswordInput from '@/components/common/PasswordInput.vue';
-import TextInput from '@/components/common/TextInput.vue';
 import { useStore } from '@/store';
 import { IconUser } from '@tabler/icons-vue';
 import { computed, ref } from 'vue';

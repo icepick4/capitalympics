@@ -2,8 +2,6 @@
 import CountryLink from '@/components/Country/CountryLink.vue';
 import Loader from '@/components/Loader.vue';
 import Regions from '@/components/Regions.vue';
-import Dialog from '@/components/common/Dialog.vue';
-import TextInput from '@/components/common/TextInput.vue';
 import { CountryI } from '@/models/Country';
 import ApiService from '@/services/apiService';
 import { getLanguage } from '@/utils/common';

@@ -5,6 +5,7 @@ import en from './locales/en.json';
 import es from './locales/es.json';
 import fr from './locales/fr.json';
 import it from './locales/it.json';
+import Plugin from './plugin';
 import router from './router';
 import './style.css';
 import { Lang } from './types/common';
@@ -32,4 +33,4 @@ const i18n = createI18n({
     messages: { fr, en, es, it }
 });
 
-app.use(router).use(pinia).use(i18n).mount('#app');
+app.use(router).use(pinia).use(i18n).use(Plugin).mount('#app');

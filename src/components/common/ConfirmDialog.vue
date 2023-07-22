@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import Button from './Button.vue';
-import Dialog from './Dialog.vue';
 
 const props = defineProps<{
     modelValue: boolean;
