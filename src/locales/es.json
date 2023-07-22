@@ -38,7 +38,7 @@
     "welcomeBack": "Bienvenido de nuevo",
     "noAccount": "¿Aún no tienes una cuenta?",
     "createAccount": "Crea una cuenta gratis",
-    "username": "Nombre de usuario",
+    "name": "Nombre de usuario",
     "password": "Contraseña",
     "backHome": "Volver a Inicio",
     "back": "Volver",
@@ -56,7 +56,7 @@
     "login": "Iniciar sesión",
     "usernameRestriction": "Debe contener entre 3 y 20 caracteres",
     "passwordRestriction": "Debe tener al menos 8 caracteres y contener al menos un número y una letra mayúscula",
-    "usernamePlaceholder": "Ingresa tu nombre de usuario",
+    "namePlaceholder": "Ingresa tu nombre de usuario",
     "passwordPlaceholder": "Ingresa tu contraseña",
     "passwordConfirmation": "Confirmar contraseña",
     "passwordMatching": "Las contraseñas deben coincidir",
@@ -123,5 +123,10 @@
     "less": "Menos",
     "reset": "Restablecer",
     "value": "Valor",
-    "signedUpSuccessfully": "¡Te has registrado con éxito!"
+    "today": "Hoy",
+    "now": "Ahora",
+    "deleteAccount": "Eliminar cuenta",
+    "deleteAccountConfirmation": "¿Estás seguro de que quieres eliminar tu cuenta?",
+    "signedUpSuccessfully": "¡Te has registrado con éxito!",
+    "world": "Mundo"
 }

@@ -24,7 +24,7 @@ onBeforeMount(async () => {
 
 async function loadScore(type: LearningType) {
     const response = await ApiClient.get<{ score: number | any[] }>(
-        `/users/${user.value?.id}/${props.country.alpha3Code}/${type}/score`
+        `/users/${user.value?.id}/${props.country.code}/${type}/score`
     );
     if (!response.success) {
         console.log(
@@ -63,7 +63,7 @@ async function loadScore(type: LearningType) {
                 <div class="flex flex-col items-center lg:items-start gap-1">
                     <h1 class="text-4xl font-bold">{{ country.name }}</h1>
                     <p>{{ country.official_name }}</p>
-                    <p class="text-gray-500">{{ country.alpha3Code }}</p>
+                    <p class="text-gray-500">{{ country.code }}</p>
                     <div class="flex flex-col gap-2">
                         <Badge
                             v-if="flagScore !== -1"
@@ -101,7 +101,7 @@ async function loadScore(type: LearningType) {
                     </div>
                     <div class="col-span-1">
                         <dt class="text-gray-500">{{ $t('region') }}</dt>
-                        <dd class="text-gray-900">{{ country.region }}</dd>
+                        <dd class="text-gray-900">{{ country.region.continent.name }}</dd>
                     </div>
                     <div class="col-span-1">
                         <dt class="text-gray-500">{{ $t('population') }}</dt>
@@ -112,7 +112,7 @@ async function loadScore(type: LearningType) {
                     <div class="col-span-1">
                         <dt class="text-gray-500">{{ $t('subregion') }}</dt>
                         <dd class="text-gray-900">
-                            {{ country.subregion }}
+                            {{ country.region.name }}
                         </dd>
                     </div>
                     <div class="col-span-1">

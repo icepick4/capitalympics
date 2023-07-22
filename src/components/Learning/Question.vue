@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { CountryI } from '@/models/Country';
-import { CurrentState, LearningType } from '@/types/common';
+import type { CurrentState, LearningType } from '@/types/common';
+import type { Country } from '@/types/models';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const props = defineProps<{
-    country: CountryI;
+    country: Country;
     state: CurrentState;
     type: LearningType;
 }>();

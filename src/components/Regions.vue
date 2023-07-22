@@ -1,21 +1,43 @@
 <script setup lang="ts">
-import { getLanguage, regions } from '@/utils/common';
+import { useContinentsStore } from '@/store/continents';
 import { IconMapPinFilled } from '@tabler/icons-vue';
-import { ref } from 'vue';
-const region = ref('World');
+import { useVModel } from '@vueuse/core';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
+interface Properties {
+    modelValue: number;
+}
+
+const props = defineProps<Properties>();
+const emit = defineEmits(['update:modelValue']);
+const region = useVModel(props, 'modelValue', emit);
+
+const continentsStore = useContinentsStore();
+const continents = computed(() => {
+    let continents = [{ value: 0, label: t('world') }];
+
+    if (!continentsStore.continents) {
+        return continents;
+    }
+
+    return [
+        ...continents,
+        ...Object.values(continentsStore.continents).map((continent) => ({
+            value: continent.id,
+            label: continent.name
+        }))
+    ];
+});
 </script>
 
 <template>
     <Select
         v-model="region"
         :label="$t('region')"
-        :options="
-            regions[getLanguage()].map((region) => ({
-                label: region[0],
-                value: region[1]
-            }))
-        "
+        :options="continents"
         :prepend-icon="IconMapPinFilled"
-    >
-    </Select>
+    />
 </template>

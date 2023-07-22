@@ -9,7 +9,7 @@ import { RouterLink, useRouter } from 'vue-router';
 const { t } = useI18n();
 const router = useRouter();
 
-const username = ref('');
+const name = ref('');
 const password = ref('');
 const passwordConfirmation = ref('');
 const language = ref('en');
@@ -18,11 +18,11 @@ const isLoading = ref(false);
 const signedUpFailed = ref(false);
 
 const errors = ref<Record<string, string | undefined>>({
-    username: undefined,
+    name: undefined,
     password: undefined
 });
 
-watch(username, () => (errors.value.username = undefined));
+watch(name, () => (errors.value.name = undefined));
 watch(password, () => (errors.value.password = undefined));
 
 // We retrieve the users count from the API
@@ -34,14 +34,14 @@ const numberOfPeople = ref(0);
 
 async function signup() {
     validateForm();
-    if (errors.value.username || errors.value.password) {
+    if (errors.value.name || errors.value.password) {
         return;
     }
 
     isLoading.value = true;
 
     try {
-        await ApiService.signUp(username.value, password.value, language.value);
+        await ApiService.signUp(name.value, password.value, language.value);
         router.push({
             path: '/login',
             query: { signedUp: '1' }
@@ -55,7 +55,7 @@ async function signup() {
 
 const canTryToSignup = computed(() => {
     return (
-        username.value?.length &&
+        name.value?.length &&
         password.value?.length &&
         password.value === passwordConfirmation.value
     );
@@ -67,16 +67,16 @@ const validatePassword = () => {
 };
 
 const validateUsername = () => {
-    return username.value.length >= 3 && username.value.length <= 20;
+    return name.value.length >= 3 && name.value.length <= 20;
 };
 
 const validateForm = () => {
     errors.value.password = validatePassword()
         ? undefined
         : t('passwordRestriction');
-    errors.value.username = validateUsername()
+    errors.value.name = validateUsername()
         ? undefined
-        : t('usernameRestriction');
+        : t('nameRestriction');
 };
 </script>
 
@@ -84,7 +84,7 @@ const validateForm = () => {
     <Dialog
         v-model="signedUpFailed"
         :title="$t('error')"
-        :description="$t('usernameTaken')"
+        :description="$t('nameTaken')"
         :buttonDescription="$t('close')"
         type="error"
     />
@@ -193,11 +193,11 @@ const validateForm = () => {
                     </p>
                     <div class="mt-8 space-y-5">
                         <TextInput
-                            v-model="username"
-                            :label="$t('username')"
-                            :placeholder="$t('usernamePlaceholder')"
+                            v-model="name"
+                            :label="$t('name')"
+                            :placeholder="$t('namePlaceholder')"
                             :prepend-icon="IconUser"
-                            :error="errors.username"
+                            :error="errors.name"
                         />
                         <PasswordInput
                             v-model="password"

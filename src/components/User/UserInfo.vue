@@ -1,28 +1,46 @@
 <script setup lang="ts">
 import { User } from '@/models/User';
 import { useStore } from '@/store';
-import { CountryDetails, LearningType, Region, Sort } from '@/types/common';
+import { useContinentsStore } from '@/store/continents';
+import { useCountriesStore } from '@/store/countries';
+import { useRegionsStore } from '@/store/regions';
+import type { UserScore } from '@/types/common';
+import { LearningType, Sort } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { getLevelName } from '@/utils/common';
 import {
-    IconArrowsSort,
-    IconMinus,
-    IconPlus,
-    IconSortAscending,
-    IconSortDescending,
-    IconX
+IconArrowsSort,
+IconMinus,
+IconPlus,
+IconSortAscending,
+IconSortDescending,
+IconX
 } from '@tabler/icons-vue';
+import { DateTime } from 'luxon';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import Regions from '../Regions.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
 
+interface DisplayedCountry {
+    id: number;
+    name: string;
+    flag: string;
+    code: string;
+    score: number;
+    continent: number;
+}
+
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
 
-defineEmits(['close']);
+const continentStore = useContinentsStore();
+const countriesStore = useCountriesStore();
+const regionsStore = useRegionsStore();
+const { t } = useI18n();
 
 const confirmingLogOut = ref(false);
 
@@ -30,17 +48,19 @@ const logOutConfirmation = () => {
     confirmingLogOut.value = true;
 };
 
-const countries = ref<CountryDetails[]>([]);
+const continent = ref(0);
 const learningType = ref<LearningType>('flag');
+const countries = ref<DisplayedCountry[]>([])
+
 const currentMax = ref(3);
 const clickedSwitchLearningType = ref(false);
 const currentSort = ref<Sort>('DESC');
 const isMax = ref(false);
 const countriesLength = ref(0);
-const region = ref<Region>('World');
-const lastRegion = ref<Region>('World');
+
 const flagScore = computed(() => getLevelName(user.value.flag_score));
 const capitalScore = computed(() => getLevelName(user.value.capital_score));
+
 const currentScore = computed(() =>
     learningType.value === 'flag' ? flagScore.value : capitalScore.value
 );
@@ -68,93 +88,69 @@ const resetMax = () => {
 const switchSort = () => {
     currentSort.value = currentSort.value === 'ASC' ? 'DESC' : 'ASC';
     resetMax();
-    countries.value = countries.value.reverse();
 };
 
 async function loadScores() {
     const queryParams = {
-        sort: currentSort.value,
-        region: region.value,
-        lang: user.value.language
+        continent: continent.value || undefined,
+        type: learningType.value,
     };
 
-    const response = await ApiClient.get<{ scores: CountryDetails[] }>(
-        `/users/${user.value.id}/${learningType.value}/scores`,
-        queryParams
-    );
+    interface ResponseGetScores {
+        success: true;
+        scores: UserScore[];
+    }
+
+    const response = await ApiClient.get<ResponseGetScores>('/scores', queryParams);
     if (!response.success) {
-        console.log(response.error);
+        console.error(response.error);
         return;
     }
 
     const scores = response.data.scores;
+
     countriesLength.value = scores.length;
     isMax.value = scores.length < currentMax.value;
-    if (lastRegion.value !== region.value) {
-        countries.value = [];
-    }
 
-    countries.value = scores.map((score) => {
+    countries.value = scores.map((userScore) => {
+        const _country = countriesStore.find(userScore.country_id);
+        const _region = regionsStore.find(_country.region_id);
+
         return {
-            name: score.name,
-            flag: score.flag,
-            alpha3Code: score.alpha3Code,
-            score: score.score,
-            region: score.region
-        };
+            id: _country.id,
+            name: _country.name,
+            flag: _country.flag,
+            code: _country.code,
+            score: userScore.score,
+            continent: _region.continent_id,
+        }
     });
-
-    lastRegion.value = region.value;
 }
 
-const isDateNow = (date: Date) => {
-    const now = new Date();
-    // 10 minutes max
-    return now.getTime() - date.getTime() < 600000;
+const isToday = (date: DateTime): boolean => {
+    return date.toISODate() === DateTime.local().toISODate();
 };
 
-const isDateToday = (date: Date) => {
-    const now = new Date();
-    return (
-        now.getDate() === date.getDate() &&
-        now.getMonth() === date.getMonth() &&
-        now.getFullYear() === date.getFullYear()
-    );
+const isNow = (date: DateTime): boolean => {
+    return date.diffNow().as('minutes') < 10;
 };
 
-const formatDate = (date: Date) => {
-    let minutes = date.getMinutes();
-    if (minutes < 10) {
-        minutes = parseInt(`0${minutes}`);
+const formatDate = (date: DateTime) => {
+    if (isToday(date)) {
+        return t('today');
     }
-    if (isDateNow(date)) {
-        switch (user.value.language) {
-            case 'fr':
-                return 'Maintenant';
-            case 'en':
-                return 'Now';
-            case 'es':
-                return 'Ahora';
-            default:
-                return 'Now';
-        }
-    } else if (isDateToday(date)) {
-        switch (user.value.language) {
-            case 'fr':
-                return "Aujourd'hui";
-            case 'en':
-                return 'Today';
-            case 'es':
-                return 'Hoy';
-        }
+
+    if (isNow(date)) {
+        return t('now');
     }
-    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} `;
+
+    return date.toLocaleString(DateTime.DATE_MED);
 };
 
 const switchLearningType = () => {
     clickedSwitchLearningType.value = !clickedSwitchLearningType.value;
     learningType.value = learningType.value === 'flag' ? 'capital' : 'flag';
-    countries.value = [];
+    // countries.value = [];
     resetMax();
     loadScores();
 };
@@ -162,15 +158,8 @@ const switchLearningType = () => {
 onMounted(() => loadScores());
 
 const filteredCountries = computed(() => {
-    if (region.value === 'World') {
-        return countries.value.slice(0, currentMax.value);
-    }
     return countries.value
-        .filter((country: CountryDetails) => {
-            return country.region
-                .toLowerCase()
-                .includes(region.value.toLowerCase());
-        })
+        .filter((country) => !continent.value || continent.value === country.continent)
         .slice(0, currentMax.value);
 });
 
@@ -182,8 +171,6 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
         v-model="confirmingLogOut"
         :title="$t('logOutConfirmation')"
         :description="$t('loginPageRedirect')"
-        :buttonYes="$t('yes')"
-        :buttonNo="$t('no')"
         @confirm="() => store.logout()"
         @cancel="() => (confirmingLogOut = false)"
         type="warning"
@@ -228,14 +215,13 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                         />
                     </div>
                 </div>
-
                 <p class="text-black mb-2">
                     {{ $t('lastActivity') }} :
-                    {{ formatDate(new Date(user.last_activity)) }}
+                    {{ formatDate(DateTime.fromISO(user.updated_at)) }}
                 </p>
                 <p class="text-black">
                     {{ $t('joined') }} :
-                    {{ formatDate(new Date(user.created_at)) }}
+                    {{ formatDate(DateTime.fromISO(user.created_at)) }}
                 </p>
             </div>
             <div
@@ -272,11 +258,8 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                     :countries="filteredCountries"
                     :title="$t('scores')"
                 >
-                    <Regions
-                        v-model="region"
-                        class="items-center xs:w-1/2 lg:w-1/4"
-                        @change="loadScores"
-                /></ScoresDisplay>
+                    <Regions v-model="continent" class="items-center xs:w-1/2 lg:w-1/4" />
+                </ScoresDisplay>
             </div>
         </div>
         <div
@@ -352,11 +335,11 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                                 : IconSortDescending
                         "
                         :label="$t('sort')"
-                        :disabled="countriesLength !== countries.length"
                         rounded
                         class="hover:scale-110 focus:scale-110"
                         @click="switchSort"
                     />
+                    <!-- :disabled="countriesLength !== countries.length" -->
                     <span class="text-center text-sm">{{ $t('sort') }}</span>
                 </div>
             </div>

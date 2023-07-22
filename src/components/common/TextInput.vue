@@ -39,7 +39,7 @@ function focusInput() {
         <label
             v-if="label"
             :for="inputName"
-            class="font-semibold text-gray-800 text-sm"
+            class="block font-semibold text-gray-800 text-sm"
         >
             {{ label }}
         </label>

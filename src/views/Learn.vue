@@ -15,7 +15,6 @@ const loading = ref(true);
 
 const userScore = ref(-2);
 const nextUserLevel = ref(-1);
-const noScores = ref(false);
 const initFirstTimeScores = ref(false);
 const confirmingResetScores = ref(false);
 
@@ -26,7 +25,6 @@ const getUserScore = async (): Promise<number> => {
     try {
         score = await ApiService.getUserScore(user.value);
         nextUserLevel.value = score + 10;
-        noScores.value = score === -1;
         return score;
     } catch (error) {
         console.log(error);
@@ -72,8 +70,6 @@ onBeforeMount(async () => {
             v-model="confirmingResetScores"
             :title="$t('resetScoresConfirmation')"
             :description="$t('resetScoresMessage')"
-            :buttonYes="$t('yes')"
-            :buttonNo="$t('no')"
             @confirm="resetScores"
             @cancel="confirmingResetScores = false"
             type="warning"
@@ -81,7 +77,6 @@ onBeforeMount(async () => {
         <Loader v-if="initFirstTimeScores" :title="$t('loading')" />
 
         <div
-            v-if="!noScores"
             class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-20"
         >
             <div
@@ -171,13 +166,6 @@ onBeforeMount(async () => {
                     {{ $t('seeScores') }}
                 </RouterLink>
             </div>
-        </div>
-        <div
-            v-else
-            class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-1/2 cursor-pointer"
-            @click="resetScores"
-        >
-            {{ $t('initScoresTitle') }}
         </div>
     </div>
 </template>

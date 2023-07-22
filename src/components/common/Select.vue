@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Maybe } from '@/types/common';
 import {
-    Listbox,
-    ListboxButton,
-    ListboxOption,
-    ListboxOptions
+Listbox,
+ListboxButton,
+ListboxOption,
+ListboxOptions
 } from '@headlessui/vue';
 import { IconCheck, IconChevronDown, SVGProps } from '@tabler/icons-vue';
 import { useVModel } from '@vueuse/core';
@@ -57,7 +57,7 @@ const items = computed(() => props.options.map(optionToItem));
 
 <template>
     <div class="relative block w-full font-sans space-y-1">
-        <p v-if="label" class="font-semibold text-gray-700 text-sm">
+        <p v-if="label" class="block font-semibold text-gray-700 text-sm">
             {{ label }}
         </p>
         <Listbox
@@ -67,13 +67,13 @@ const items = computed(() => props.options.map(optionToItem));
             :disabled="disabled"
         >
             <ListboxButton
-                class="w-full bg-white flex items-center py-2 px-3 gap-x-2 rounded-md text-left text-base border border-gray-400/50 outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75"
+                class="w-full bg-white flex items-center py-2 px-3 gap-x-2 rounded text-left text-base border border-gray-400/50 outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75"
             >
                 <slot name="prepend">
                     <div
                         v-if="prependIcon"
                         aria-hidden="true"
-                        class="grid place-items-center h-8 w-8 transition-colors shrink-0"
+                        class="grid place-items-center h-6 w-6 transition-colors shrink-0"
                         :class="[
                             open || selectedItem
                                 ? 'text-black/75'
@@ -88,7 +88,7 @@ const items = computed(() => props.options.map(optionToItem));
                 </div>
                 <div
                     aria-hidden="true"
-                    class="grid place-items-center h-8 w-8 transition-colors shrink-0 text-gray-500"
+                    class="grid place-items-center h-6 w-6 transition-colors shrink-0 text-gray-500"
                     :class="{ 'rotate-180': open }"
                 >
                     <IconChevronDown />
@@ -99,7 +99,7 @@ const items = computed(() => props.options.map(optionToItem));
                 </span>
             </ListboxButton>
             <ListboxOptions
-                class="absolute z-20 origin-top-left mt-2.5 max-h-60 w-full min-w-[72px] overflow-auto rounded-md bg-white p-1 text-base sm:text-sm outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75"
+                class="absolute z-20 origin-top-left mt-2.5 max-h-60 w-full min-w-[72px] overflow-auto rounded bg-white p-1 text-base sm:text-sm outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75"
             >
                 <ListboxOption
                     v-for="item in items"
@@ -109,7 +109,7 @@ const items = computed(() => props.options.map(optionToItem));
                     :disabled="item.disabled"
                 >
                     <li
-                        class="rounded-md cursor-pointer relative select-none py-2 pl-3 pr-4"
+                        class="rounded cursor-pointer relative select-none py-2 pl-3 pr-4"
                         :class="{
                             'text-gray-700 font-medium bg-gray-100': selected,
                             'text-gray-700 font-medium': selected,

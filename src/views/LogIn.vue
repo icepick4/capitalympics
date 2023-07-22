@@ -5,9 +5,7 @@ import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
-
 const query = computed(() => route.query);
-
 const signedUp = ref(false);
 
 if (query.value.signedUp) {
@@ -15,14 +13,14 @@ if (query.value.signedUp) {
 }
 
 const router = useRouter();
-const store = useStore();
+const { login: storeLogin } = useStore();
 
-const username = ref('');
+const name = ref('');
 const password = ref('');
 
 const isLoading = ref(false);
 const isFormFilled = computed(
-    () => username.value.length && password.value.length
+    () => name.value.length && password.value.length
 );
 const userNotFound = ref(false);
 
@@ -33,8 +31,8 @@ async function login() {
 
     isLoading.value = true;
     try {
-        await store.login({
-            username: username.value,
+        await storeLogin({
+            name: name.value,
             password: password.value
         });
         router.push({ name: 'Profile' });
@@ -106,9 +104,9 @@ async function login() {
                     </div>
                     <div class="mt-5 space-y-5">
                         <TextInput
-                            v-model="username"
-                            :label="$t('username')"
-                            :placeholder="$t('usernamePlaceholder')"
+                            v-model="name"
+                            :label="$t('name')"
+                            :placeholder="$t('namePlaceholder')"
                             :prepend-icon="IconUser"
                             @keyup="
                                 ($event.key === 'Enter' ||

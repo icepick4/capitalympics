@@ -93,21 +93,23 @@ class ApiClient {
         return this.call<TData>(this.axios.put(url, data, config));
     }
 
-    public async delete(
+    public async delete<TData>(
         url: string,
         config?: AxiosRequestConfig
-    ): Promise<ApiResponse<undefined>> {
-        return this.call<undefined>(this.axios.delete(url, config));
+    ): Promise<ApiResponse<TData>> {
+        return this.call<TData>(this.axios.delete(url, config));
     }
 
     public async login(loginData: {
-        username: string;
+        name: string;
         password: string;
     }): Promise<boolean> {
-        const response = await this.post<{
+        interface LoginResponse {
             success: true;
             data: { token: string };
-        }>('/login', loginData);
+        }
+
+        const response = await this.post<LoginResponse>('/login', loginData);
         if (!response.success) {
             return false;
         }
