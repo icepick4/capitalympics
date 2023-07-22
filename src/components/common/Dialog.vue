@@ -33,20 +33,20 @@ watch(
 
 const emit = defineEmits(['close', 'confirm', 'cancel']);
 
-function closeModal() {
+const closeModal = () => {
     emit('close');
     display.value = false;
-}
+};
 
-function confirmModal() {
+const confirmModal = () => {
     closeModal();
     emit('confirm');
-}
+};
 
-function cancelModal() {
+const cancelModal = () => {
     closeModal();
     emit('cancel');
-}
+};
 </script>
 
 <template>

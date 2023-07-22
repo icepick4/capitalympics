@@ -5,7 +5,13 @@ import TextInput from '@/components/common/TextInput.vue';
 import { useStore } from '@/store';
 import { IconUser } from '@tabler/icons-vue';
 import { computed, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+
+const query = computed(() => route.query);
+
+const signedUp = computed(() => query.value.signedUp === '1');
 
 const router = useRouter();
 const store = useStore();
@@ -48,6 +54,14 @@ async function login() {
         :buttonDescription="$t('close')"
         @close="() => (userNotFound = false)"
         type="error"
+    />
+    <Dialog
+        v-if="signedUp"
+        :isOpen="signedUp"
+        :title="$t('success')"
+        :description="$t('signedUpSuccessfully')"
+        :buttonDescription="$t('close')"
+        type="success"
     />
     <section
         class="relative py-10 bg-gray-900 sm:py-16 lg:py-24 h-full flex items-center"

@@ -2,6 +2,7 @@
 import Badge from '@/components/Badge.vue';
 import BlurContainer from '@/components/BlurContainer.vue';
 import Loader from '@/components/Loader.vue';
+import Dialog from '@/components/common/Dialog.vue';
 import { Level, User } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';

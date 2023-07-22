@@ -122,5 +122,6 @@
     "more": "More",
     "less": "Less",
     "reset": "Reset",
-    "value": "Value"
+    "value": "Value",
+    "signedUpSuccessfully": "Signed up successfully, now you can log in"
 }

@@ -181,7 +181,7 @@ const saveProfile = async () => {
                 </div>
                 <div class="flex justify-center items-center w-1/3">
                     <button
-                        class="block h-auto w-full flex items-center justify-center p-2 text-black duration-200 border rounded-md bg-gray-50 hover:bg-gray-300 cursor-pointer"
+                        class="h-auto w-full flex items-center justify-center p-2 text-black duration-200 border rounded-md bg-gray-50 hover:bg-gray-300 cursor-pointer"
                         :disabled="areInputsSame()"
                         @click="saveProfile"
                     >

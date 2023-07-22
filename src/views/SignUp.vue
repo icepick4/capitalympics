@@ -46,7 +46,10 @@ async function signup() {
 
     try {
         await ApiService.signUp(username.value, password.value, language.value);
-        router.push('/login');
+        router.push({
+            path: '/login',
+            query: { signedUp: '1' }
+        });
     } catch (error) {
         signedUpFailed.value = true;
     } finally {

@@ -122,5 +122,6 @@
     "more": "Plus",
     "less": "Moins",
     "reset": "Réinitialiser",
-    "value": "Valeur"
+    "value": "Valeur",
+    "signedUpSuccessfully": "Inscription réussie ! Veuillez vous connecter pour continuer."
 }
