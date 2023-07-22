@@ -90,7 +90,6 @@ const validateForm = () => {
         :title="$t('error')"
         :description="$t('usernameTaken')"
         :buttonDescription="$t('close')"
-        @close="() => (signedUpFailed = false)"
         type="error"
     />
     <section class="h-full flex w-full justify-center">

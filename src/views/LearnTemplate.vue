@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import BlurContainer from '@/components/BlurContainer.vue';
 import ButtonTemplate from '@/components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Question from '@/components/Learning/Question.vue';
@@ -72,17 +71,14 @@ watch(currentRegion, () => {
 </script>
 
 <template>
-    <BlurContainer v-if="couldNotGetCountry || isLoading">
-        <Dialog
-            v-model="couldNotGetCountry"
-            :title="$t('errorCountry')"
-            :description="$t('tryAgain')"
-            :buttonDescription="$t('close')"
-            @close="couldNotGetCountry = false"
-            type="error"
-        />
-        <Loader v-if="isLoading" />
-    </BlurContainer>
+    <Dialog
+        v-model="couldNotGetCountry"
+        :title="$t('errorCountry')"
+        :description="$t('tryAgain')"
+        :buttonDescription="$t('close')"
+        type="error"
+    />
+    <Loader v-if="isLoading" />
     <div class="w-full flex flex-col justify-center items-center">
         <div
             class="flex flex-col w-10/12 md:h-auto justify-center items-center gap-10"

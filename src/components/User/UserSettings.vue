@@ -86,7 +86,6 @@ const saveProfile = async () => {
         :title="$t('error')"
         :description="$t('errorSavingProfile')"
         :buttonDescription="$t('close')"
-        @close="closeUserTakenModal"
         type="error"
     />
     <Dialog
@@ -94,7 +93,6 @@ const saveProfile = async () => {
         :title="$t('error')"
         :description="$t('usernameTaken')"
         :buttonDescription="$t('close')"
-        @close="closeUserTakenModal"
         type="error"
     />
     <Dialog

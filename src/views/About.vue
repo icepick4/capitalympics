@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import AboutSection from '@/components/AboutSection.vue';
-import BlurContainer from '@/components/BlurContainer.vue';
 import Loader from '@/components/Loader.vue';
 import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
 
-const haveImagesLoaded = ref(false);
+const imagesLoaded = ref(false);
 
 const imageScale = ref(1);
 const previousScrollTop = ref(0);
@@ -16,7 +15,7 @@ onMounted(() => {
     const handleImageLoad = () => {
         loadedCount++;
         if (loadedCount === images.length) {
-            haveImagesLoaded.value = true;
+            imagesLoaded.value = true;
         }
     };
 
@@ -73,9 +72,7 @@ const handleScroll = () => {
 </script>
 
 <template>
-    <BlurContainer v-if="!haveImagesLoaded">
-        <Loader :title="$t('loading')" />
-    </BlurContainer>
+    <Loader v-if="!imagesLoaded" :title="$t('loading')" />
     <div class="flex flex-col top-0 w-full">
         <div class="relative overflow-hidden">
             <img

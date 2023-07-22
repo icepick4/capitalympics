@@ -186,7 +186,6 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
         :description="$t('loginPageRedirect')"
         :buttonYes="$t('yes')"
         :buttonNo="$t('no')"
-        @close="confirmingLogOut = $event"
         @confirm="() => store.logout()"
         @cancel="() => (confirmingLogOut = false)"
         type="warning"

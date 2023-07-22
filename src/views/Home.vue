@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import BlurContainer from '@/components/BlurContainer.vue';
 import CarouselAuto from '@/components/CarouselAuto.vue';
 import Loader from '@/components/Loader.vue';
 import Planet from '@/components/Planet.vue';
@@ -20,6 +19,7 @@ const previousScrollTop = ref(0);
 const displayPlanet = ref(window.innerWidth > 1536);
 const isDeviceMobile = ref(window.innerWidth < 500);
 const finishedWaited = ref(false);
+const noCountriesFound = ref(false);
 
 const handlePlanetMouseDown = () => {
     planetMouseDown.value = true;
@@ -65,6 +65,7 @@ onBeforeMount(async () => {
     } catch (error) {
         console.log(error);
         finishedWaited.value = true;
+        noCountriesFound.value = true;
     }
     document.body.addEventListener('scroll', handleScroll);
 });
@@ -105,21 +106,17 @@ const handleScroll = () => {
 </script>
 
 <template>
-    <BlurContainer v-if="(!planetLoaded && displayPlanet) || !countries.length">
-        <Loader v-if="!finishedWaited" />
-        <Dialog
-            v-else-if="!countries.length && finishedWaited"
-            v-model="finishedWaited"
-            :title="$t('noCountriesFound')"
-            :description="$t('checkNetworkConnection')"
-            :buttonDescription="$t('close')"
-            @close="
-                finishedWaited = false;
-                countries.length = 1;
-            "
-            type="error"
-        />
-    </BlurContainer>
+    <Loader
+        v-if="!finishedWaited || (!planetLoaded && displayPlanet)"
+        :title="$t('loading')"
+    />
+    <Dialog
+        v-model="noCountriesFound"
+        :title="$t('noCountriesFound')"
+        :description="$t('checkNetworkConnection')"
+        :buttonDescription="$t('close')"
+        type="error"
+    />
     <div
         class="flex flex-col items-center justify-center h-full gap-5 mt-20 xs:mb-20"
     >
@@ -216,7 +213,7 @@ const handleScroll = () => {
             </h1>
         </div>
         <div class="flex flex-col items-center justify-center">
-            <CarouselAuto v-if="countries.length > 1">
+            <CarouselAuto v-if="countries.length > 1 || !noCountriesFound">
                 <template v-for="country in countries" :key="country.name">
                     <img
                         :src="country.flag"

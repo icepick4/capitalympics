@@ -11,7 +11,11 @@ const route = useRoute();
 
 const query = computed(() => route.query);
 
-const signedUp = computed(() => query.value.signedUp === '1');
+const signedUp = ref(false);
+
+if (query.value.signedUp) {
+    signedUp.value = true;
+}
 
 const router = useRouter();
 const store = useStore();
@@ -52,7 +56,6 @@ async function login() {
         :title="$t('error')"
         :description="$t('userNotFound')"
         :buttonDescription="$t('close')"
-        @close="() => (userNotFound = false)"
         type="error"
     />
     <Dialog
