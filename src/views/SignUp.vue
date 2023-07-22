@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import Dialog from '@/components/common/Dialog.vue';
-import PasswordInput from '@/components/common/PasswordInput.vue';
-import Select from '@/components/common/Select.vue';
-import TextInput from '@/components/common/TextInput.vue';
 import ApiService from '@/services/apiService';
 import { languages } from '@/utils/common';
 import { IconLanguage, IconUser } from '@tabler/icons-vue';

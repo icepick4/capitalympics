@@ -7,7 +7,6 @@ import { storeToRefs } from 'pinia';
 import { Ref, computed, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
-import Dialog from '../common/Dialog.vue';
 
 interface inputState {
     content: string;

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Select from '@/components/common/Select.vue';
 import { getLanguage, regions } from '@/utils/common';
 import { IconMapPinFilled } from '@tabler/icons-vue';
 import { ref } from 'vue';

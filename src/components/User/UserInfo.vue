@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ActionIcon from '@/components/common/ActionIcon.vue';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
 import { CountryDetails, LearningType, Region, Sort } from '@/types/common';
@@ -18,7 +17,6 @@ import { Ref, computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import Regions from '../Regions.vue';
-import ConfirmDialog from '../common/ConfirmDialog.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
 
 const store = useStore();

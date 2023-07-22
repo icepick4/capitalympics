@@ -7,7 +7,6 @@ import {
     TransitionRoot
 } from '@headlessui/vue';
 import { useVModel } from '@vueuse/core';
-import Button from './Button.vue';
 
 type DialogType = 'warning' | 'error' | 'success';
 
