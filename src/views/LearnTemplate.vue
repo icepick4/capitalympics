@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import BlurContainer from '@/components/BlurContainer.vue';
 import ButtonTemplate from '@/components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Question from '@/components/Learning/Question.vue';
 import Loader from '@/components/Loader.vue';
-import Modal from '@/components/Modal.vue';
 import Regions from '@/components/Regions.vue';
+import Dialog from '@/components/common/Dialog.vue';
 import { CountryI } from '@/models/Country';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
@@ -72,17 +71,14 @@ watch(currentRegion, () => {
 </script>
 
 <template>
-    <BlurContainer v-if="couldNotGetCountry || isLoading">
-        <Modal
-            v-if="couldNotGetCountry"
-            :title="$t('errorCountry')"
-            :message="$t('tryAgain')"
-            background-color="white"
-            title-color="error"
-            @close="couldNotGetCountry = false"
-        />
-        <Loader v-else-if="isLoading" />
-    </BlurContainer>
+    <Dialog
+        v-model="couldNotGetCountry"
+        :title="$t('errorCountry')"
+        :description="$t('tryAgain')"
+        :buttonDescription="$t('close')"
+        type="error"
+    />
+    <Loader v-if="isLoading" />
     <div class="w-full flex flex-col justify-center items-center">
         <div
             class="flex flex-col w-10/12 md:h-auto justify-center items-center gap-10"

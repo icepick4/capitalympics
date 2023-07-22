@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import Badge from '@/components/Badge.vue';
-import BlurContainer from '@/components/BlurContainer.vue';
 import Loader from '@/components/Loader.vue';
-import Modal from '@/components/Modal.vue';
+import ConfirmDialog from '@/components/common/ConfirmDialog.vue';
 import { Level, User } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
@@ -65,34 +64,22 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <BlurContainer v-if="loading">
-        <Loader :title="$t('loading')" />
-    </BlurContainer>
+    <Loader v-if="loading" :title="$t('loading')" />
     <div
         v-if="user !== null"
         class="flex flex-col justify-center items-center gap-20 my-5 h-full"
     >
-        <BlurContainer
-            v-if="
-                (initFirstTimeScores ||
-                    userScore == -1 ||
-                    confirmingResetScores) &&
-                (!noScores || initFirstTimeScores)
-            "
-            class="w-1/2"
-        >
-            <Modal
-                v-if="confirmingResetScores"
-                :title="$t('resetScoresConfirmation')"
-                :message="$t('resetScoresMessage')"
-                background-color="white"
-                title-color="black"
-                :confirmationDialog="true"
-                @confirm="resetScores"
-                @cancel="confirmingResetScores = false"
-            />
-            <Loader v-else-if="initFirstTimeScores" :title="$t('loading')" />
-        </BlurContainer>
+        <ConfirmDialog
+            v-model="confirmingResetScores"
+            :title="$t('resetScoresConfirmation')"
+            :description="$t('resetScoresMessage')"
+            :buttonYes="$t('yes')"
+            :buttonNo="$t('no')"
+            @confirm="resetScores"
+            @cancel="confirmingResetScores = false"
+            type="warning"
+        />
+        <Loader v-if="initFirstTimeScores" :title="$t('loading')" />
 
         <div
             v-if="!noScores"

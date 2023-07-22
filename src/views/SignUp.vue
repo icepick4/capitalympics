@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import BlurContainer from '@/components/BlurContainer.vue';
-import Modal from '@/components/Modal.vue';
+import Dialog from '@/components/common/Dialog.vue';
 import PasswordInput from '@/components/common/PasswordInput.vue';
 import Select from '@/components/common/Select.vue';
 import TextInput from '@/components/common/TextInput.vue';
@@ -47,7 +46,10 @@ async function signup() {
 
     try {
         await ApiService.signUp(username.value, password.value, language.value);
-        router.push('/login');
+        router.push({
+            path: '/login',
+            query: { signedUp: '1' }
+        });
     } catch (error) {
         signedUpFailed.value = true;
     } finally {
@@ -83,15 +85,13 @@ const validateForm = () => {
 </script>
 
 <template>
-    <BlurContainer v-if="signedUpFailed">
-        <Modal
-            :title="$t('error')"
-            :message="$t('usernameTaken')"
-            background-color="white"
-            title-color="error"
-            @close="() => (signedUpFailed = false)"
-        />
-    </BlurContainer>
+    <Dialog
+        v-model="signedUpFailed"
+        :title="$t('error')"
+        :description="$t('usernameTaken')"
+        :buttonDescription="$t('close')"
+        type="error"
+    />
     <section class="h-full flex w-full justify-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
             <div

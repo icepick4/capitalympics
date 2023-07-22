@@ -7,8 +7,7 @@ import { storeToRefs } from 'pinia';
 import { Ref, computed, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
-import BlurContainer from '../BlurContainer.vue';
-import Modal from '../Modal.vue';
+import Dialog from '../common/Dialog.vue';
 
 interface inputState {
     content: string;
@@ -31,6 +30,7 @@ const language = ref(user.value.language);
 const hasSaved = ref(false);
 const displaySaveError = ref(false);
 const usernameAlreadyTaken = ref(false);
+const loading = ref(false);
 const t = useI18n();
 
 const validateUsername = () => {
@@ -61,57 +61,47 @@ const saveProfile = async () => {
         }
         user.value.language = language.value;
         try {
+            loading.value = true;
             const response = await ApiService.updateUser(user.value);
-            hasSaved.value = true;
             if (!response) {
                 usernameAlreadyTaken.value = true;
                 user.value.name = firstUsername.value;
             } else {
+                hasSaved.value = true;
                 usernameAlreadyTaken.value = false;
                 t.locale.value = language.value;
             }
         } catch (error) {
             displaySaveError.value = true;
+        } finally {
+            loading.value = false;
         }
     }
 };
 </script>
 
 <template>
-    <BlurContainer v-if="hasSaved">
-        <Modal
-            v-if="!validateUsername()"
-            :title="$t('error')"
-            :message="$t('usernameRestriction')"
-            background-color="white"
-            title-color="error"
-            @close="hasSaved = false"
-        />
-        <Modal
-            v-else-if="displaySaveError"
-            :title="$t('error')"
-            :message="$t('errorSavingProfile')"
-            background-color="white"
-            title-color="error"
-            @close="closeUserTakenModal"
-        />
-        <Modal
-            v-else-if="usernameAlreadyTaken"
-            :title="$t('error')"
-            :message="$t('usernameTaken')"
-            background-color="white"
-            title-color="error"
-            @close="closeUserTakenModal"
-        />
-        <Modal
-            v-else
-            :title="$t('success')"
-            :message="$t('profileSaved')"
-            background-color="white"
-            title-color="primary"
-            @close="hasSaved = false"
-        />
-    </BlurContainer>
+    <Dialog
+        v-model="displaySaveError"
+        :title="$t('error')"
+        :description="$t('errorSavingProfile')"
+        :buttonDescription="$t('close')"
+        type="error"
+    />
+    <Dialog
+        v-model="usernameAlreadyTaken"
+        :title="$t('error')"
+        :description="$t('usernameTaken')"
+        :buttonDescription="$t('close')"
+        type="error"
+    />
+    <Dialog
+        v-model="hasSaved"
+        :title="$t('success')"
+        :description="$t('profileSaved')"
+        :buttonDescription="$t('close')"
+        type="success"
+    />
     <div
         class="w-11/12 sm:w-5/6 xl:w-3/4 2xl:w-2/3 mx-auto p-0 sm:p-8 flex-col"
     >
@@ -186,13 +176,18 @@ const saveProfile = async () => {
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-center items-center">
-                    <input
-                        class="block h-auto p-2 text-black duration-200 border rounded-md bg-gray-50 hover:bg-gray-300 cursor-pointer"
+                <div class="flex justify-center items-center w-1/3">
+                    <button
+                        class="h-auto w-full flex items-center justify-center p-2 text-black duration-200 border rounded-md bg-gray-50 hover:bg-gray-300 cursor-pointer"
                         :disabled="areInputsSame()"
-                        :value="$t('saveProfile')"
-                        type="submit"
-                    />
+                        @click="saveProfile"
+                    >
+                        <span v-if="!loading">{{ $t('saveProfile') }}</span>
+                        <div
+                            v-else
+                            class="h-5 w-5 border-4 rounded-full border-blue-600/75 border-b-blue-600/25 animate-spin"
+                        ></div>
+                    </button>
                 </div>
             </form>
         </div>

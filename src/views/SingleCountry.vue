@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import BlurContainer from '@/components/BlurContainer.vue';
 import Country from '@/components/Country/Country.vue';
 import Loader from '@/components/Loader.vue';
 import { CountryI } from '@/models/Country';
@@ -37,9 +36,7 @@ const goBack = () => {
 </script>
 
 <template>
-    <BlurContainer v-if="state.isLoading">
-        <Loader :title="$t('loading') + countryCode" />
-    </BlurContainer>
+    <Loader v-if="state.isLoading" :title="$t('loading') + countryCode" />
     <div class="flex flex-col gap-5 m-1 sm:m-5">
         <Transition name="slide-fade" appear>
             <Country
