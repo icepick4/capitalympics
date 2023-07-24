@@ -5,7 +5,9 @@
     "scripts": {
         "dev": "vite --host",
         "build": "vue-tsc && vite build --emptyOutDir",
-        "format": "prettier --write \"src/**/*.{js,jsx,json,ts,tsx,vue,css}\""
+        "format": "prettier --write \"src/**/*.{js,jsx,json,ts,tsx,vue,css}\"",
+        "sb": "storybook dev -p 6006",
+        "sb:build": "storybook build"
     },
     "dependencies": {
         "@headlessui/vue": "^1.7.14",
@@ -25,6 +27,14 @@
         "vue-router": "^4.2.4"
     },
     "devDependencies": {
+        "@storybook/addon-essentials": "^7.1.0",
+        "@storybook/addon-interactions": "^7.1.0",
+        "@storybook/addon-links": "^7.1.0",
+        "@storybook/addon-styling": "^1.3.4",
+        "@storybook/blocks": "^7.1.0",
+        "@storybook/testing-library": "^0.2.0",
+        "@storybook/vue3": "^7.1.0",
+        "@storybook/vue3-vite": "^7.1.0",
         "@types/aos": "^3.0.4",
         "@types/axios": "^0.14.0",
         "@types/luxon": "^3.3.0",
@@ -35,6 +45,9 @@
         "autoprefixer": "^10.4.14",
         "postcss": "^8.4.21",
         "prettier": "^3.0.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "storybook": "^7.1.0",
         "tailwindcss": "^3.2.7",
         "typescript": "^4.9.3",
         "vite": "^4.1.0",

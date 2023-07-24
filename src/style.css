@@ -9,7 +9,6 @@
 
 :root {
     font-family: 'TiltWrap', sans-serif;
-    background-color: #b6e8f2;
 }
 
 html,
@@ -19,8 +18,6 @@ body {
     height: 100vh;
     overflow-x: hidden;
 }
-
-
 
 #app {
     height: 100%;
