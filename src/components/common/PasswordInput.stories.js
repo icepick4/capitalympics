@@ -3,12 +3,12 @@ import PasswordInput from './PasswordInput.vue';
 
 export default {
     title: 'Common/PasswordInput',
-    component: PasswordInput,
+    component: PasswordInput
 };
 
 const Template = (args) => ({
     components: {
-        PasswordInput,
+        PasswordInput
     },
     setup: () => {
         const value = ref('');
@@ -20,16 +20,16 @@ const Template = (args) => ({
             v-bind="args"
             class="max-w-md"
         />
-    `,
+    `
 });
 
 export const Default = Template.bind({});
 Default.args = {
-    label: "Your awesome password",
+    label: 'Your awesome password'
 };
 
 export const Revelable = Template.bind({});
 Revelable.args = {
     ...Default.args,
-    revelable: true,
+    revelable: true
 };

@@ -23,10 +23,10 @@ export const useCountriesStore = defineStore('countries', () => {
     });
 
     async function fetchCountries() {
-        const response = await ApiClient.get<{ success: true, countries: Country[] }>(
-            '/countries',
-            { lang: getLanguage() }
-        );
+        const response = await ApiClient.get<{
+            success: true;
+            countries: Country[];
+        }>('/countries', { lang: getLanguage() });
 
         if (!response.success) {
             throw new Error('Failed to fetch countries');
@@ -46,7 +46,9 @@ export const useCountriesStore = defineStore('countries', () => {
             return; // Already loaded
         }
 
-        const storedCountries = await LocalStorage.get<StoredCountries>('countries');
+        const storedCountries = await LocalStorage.get<StoredCountries>(
+            'countries'
+        );
         if (storedCountries && storedCountries.language === language) {
             data.value = storedCountries;
             return;
@@ -55,7 +57,7 @@ export const useCountriesStore = defineStore('countries', () => {
         const countries = await fetchCountries();
         data.value = {
             countries,
-            language,
+            language
         };
 
         LocalStorage.set('countries', data.value);
@@ -76,6 +78,6 @@ export const useCountriesStore = defineStore('countries', () => {
     return {
         countries,
         find,
-        loadCountries,
+        loadCountries
     };
 });

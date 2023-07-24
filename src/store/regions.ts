@@ -23,10 +23,10 @@ export const useRegionsStore = defineStore('regions', () => {
     });
 
     async function fetchRegions() {
-        const response = await ApiClient.get<{ success: true, regions: Region[] }>(
-            '/regions',
-            { lang: getLanguage() }
-        );
+        const response = await ApiClient.get<{
+            success: true;
+            regions: Region[];
+        }>('/regions', { lang: getLanguage() });
 
         if (!response.success) {
             throw new Error('Failed to fetch regions');
@@ -55,7 +55,7 @@ export const useRegionsStore = defineStore('regions', () => {
         const regions = await fetchRegions();
         data.value = {
             regions,
-            language,
+            language
         };
 
         LocalStorage.set('regions', data.value);
@@ -76,6 +76,6 @@ export const useRegionsStore = defineStore('regions', () => {
     return {
         find,
         regions,
-        loadRegions,
+        loadRegions
     };
 });

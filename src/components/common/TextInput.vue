@@ -51,7 +51,9 @@ function focusInput() {
             :class="[
                 focused ? 'outline-blue-600/75' : 'outline-transparent',
                 error ? 'border-red-600' : 'border-gray-400/50',
-                disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white cursor-text'
+                disabled
+                    ? 'bg-gray-100 cursor-not-allowed'
+                    : 'bg-white cursor-text'
             ]"
             @click="focusInput"
         >
@@ -77,10 +79,7 @@ function focusInput() {
                 :name="inputName"
                 :placeholder="placeholder"
                 :disabled="disabled"
-                class="
-                    placeholder:text-gray-400 w-full outline-none bg-white
-                    disabled:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors
-                "
+                class="placeholder:text-gray-400 w-full outline-none bg-white disabled:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors"
                 :class="[error ? 'text-red-600' : 'text-gray-700']"
                 @keyup="emit('keyup', $event)"
             />

@@ -38,7 +38,10 @@ async function getNewCountry() {
         type: currentLearning
     };
 
-    const response = await ApiClient.get<{ success: true, country: number }>('/questions/next', queryParameters);
+    const response = await ApiClient.get<{ success: true; country: number }>(
+        '/questions/next',
+        queryParameters
+    );
 
     isLoading.value = false;
     if (!response.success) {
@@ -88,7 +91,10 @@ watch(continent, getNewCountry);
         <div
             class="flex flex-col w-10/12 md:h-auto justify-center items-center gap-10"
         >
-            <Regions v-model="continent" class="xs:w-1/2 sm:w-1/3 md:w-1/4 mx-4" />
+            <Regions
+                v-model="continent"
+                class="xs:w-1/2 sm:w-1/3 md:w-1/4 mx-4"
+            />
             <div
                 v-if="country != undefined"
                 class="w-5/6 md:w-auto h-full flex flex-col items-center justify-center"
@@ -98,7 +104,9 @@ watch(continent, getNewCountry);
                 >
                     <div
                         v-if="currentLearning"
-                        :class="currentLearning === 'capital' && 'w-full h-full'"
+                        :class="
+                            currentLearning === 'capital' && 'w-full h-full'
+                        "
                     >
                         <Question
                             :country="country"

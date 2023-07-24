@@ -22,16 +22,17 @@ const errorDisplayed = computed({
             error.value = undefined;
         }
     }
-})
+});
 
 const name = ref(user.value.name);
 const language = ref(user.value.language);
 
-const canSave = computed(() =>
-    name.value.length > 3 && name.value.length < 20 && (
-        name.value !== user.value.name ||
-        language.value !== user.value.language
-    )
+const canSave = computed(
+    () =>
+        name.value.length > 3 &&
+        name.value.length < 20 &&
+        (name.value !== user.value.name ||
+            language.value !== user.value.language)
 );
 
 const loading = ref(false);
@@ -41,9 +42,12 @@ async function saveProfile() {
     loading.value = true;
 
     try {
-        await store.updateAccount({ language: language.value, name: name.value });
+        await store.updateAccount({
+            language: language.value,
+            name: name.value
+        });
         hasSaved.value = true;
-    } catch(e) {
+    } catch (e) {
         error.value = (e as Error).message;
     } finally {
         loading.value = false;
@@ -105,7 +109,11 @@ const deleteAccount = async () => {
             </div>
             <div class="grid grid-cols-3 gap-x-3 items-end">
                 <TextInput v-model="name" :label="$t('name')" />
-                <Select v-model="language" :label="$t('language')" :options="languages.map((l) => ({ ...l, label: l.text }))" />
+                <Select
+                    v-model="language"
+                    :label="$t('language')"
+                    :options="languages.map((l) => ({ ...l, label: l.text }))"
+                />
                 <Button
                     :text="$t('saveProfile')"
                     :disabled="!canSave || loading"

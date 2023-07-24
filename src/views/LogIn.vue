@@ -19,9 +19,7 @@ const name = ref('');
 const password = ref('');
 
 const isLoading = ref(false);
-const isFormFilled = computed(
-    () => name.value.length && password.value.length
-);
+const isFormFilled = computed(() => name.value.length && password.value.length);
 const userNotFound = ref(false);
 
 async function login() {

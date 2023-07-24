@@ -11,7 +11,6 @@ import router from './router';
 import './style.css';
 import type { Lang } from './types/common';
 
-
 const browserLanguage = navigator.language;
 const defaultLocale = browserLanguage.substring(0, 2) as Lang;
 const supportedLocales: Lang[] = ['en', 'fr', 'es', 'it'];
@@ -35,7 +34,7 @@ if (!supportedLocales.includes(defaultLocale)) {
     const i18n = createI18n({
         locale: defaultLocale,
         messages: { fr, en, es, it }
-    })
+    });
 
     app.use(router).use(pinia).use(i18n).use(Plugin);
     app.mount('#app');

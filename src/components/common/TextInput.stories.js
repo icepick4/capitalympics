@@ -4,12 +4,12 @@ import TextInput from './TextInput.vue';
 
 export default {
     title: 'Common/TextInput',
-    component: TextInput,
+    component: TextInput
 };
 
 const Template = (args) => ({
     components: {
-        TextInput,
+        TextInput
     },
     setup: () => {
         const value = ref('');
@@ -21,31 +21,31 @@ const Template = (args) => ({
             v-bind="args"
             class="max-w-md"
         />
-    `,
+    `
 });
 
 export const Default = Template.bind({});
 Default.args = {
     label: "What's your name?",
-    placeholder: 'Enter your name',
+    placeholder: 'Enter your name'
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
     ...Default.args,
-    disabled: true,
+    disabled: true
 };
 
 export const InError = Template.bind({});
 InError.args = {
     ...Default.args,
-    error: 'Please a valid name',
+    error: 'Please a valid name'
 };
 
 export const WithPrependIconAndHint = Template.bind({});
 WithPrependIconAndHint.args = {
-    label: "Password",
+    label: 'Password',
     placeholder: 'Your password (not even hidden...)',
-    hint: "Your password must be at least 8 characters long",
-    prependIcon: IconLock,
+    hint: 'Your password must be at least 8 characters long',
+    prependIcon: IconLock
 };
