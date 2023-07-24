@@ -37,7 +37,7 @@ const getFlag = computed(() => {
                 v-for="country in countries"
                 :key="country.name"
                 class="bg-white rounded-lg shadow-md sm:p-4 hover:bg-gray-200 transition-colors duration-300 fade-up flex-row flex justify-between items-center gap-3 sm:gap-0 p-2"
-                :to="`/countries/${country.alpha3Code}`"
+                :to="`/countries/${country.code}`"
             >
                 <div class="flex items-center">
                     <VLazyImage

@@ -65,18 +65,22 @@ export default class ApiService {
     }
 
     public static async getUserScore(user: User): Promise<number> {
-        const response = await ApiClient.get<{
-            flag_score: number;
-            capital_score: number;
-        }>(`/users/${user.id}/score`);
-        if (!response.success) {
-            throw new Error('Failed get global score');
+        interface ResponseOverallScores {
+            success: true;
+            scores: {
+                capital: number;
+                flag: number;
+            }
         }
 
-        const avg =
-            (response.data.flag_score + response.data.capital_score) / 2;
+        const response = await ApiClient.get<ResponseOverallScores>('/scores/overall');
+        if (!response.success) {
+            throw new Error('Failed get global scores');
+        }
 
-        return Math.round(avg);
+        const { capital, flag } = response.data.scores;
+
+        return Math.round((capital + flag) / 2);
     }
 
     public static async updateUser(user: User): Promise<boolean> {

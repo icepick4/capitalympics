@@ -1,64 +1,35 @@
 <script setup lang="ts">
 import CountryLink from '@/components/Country/CountryLink.vue';
-import Loader from '@/components/Loader.vue';
 import Regions from '@/components/Regions.vue';
-import { CountryI } from '@/models/Country';
-import ApiService from '@/services/apiService';
-import { getLanguage } from '@/utils/common';
-import { reactive, ref } from '@vue/reactivity';
-import { onBeforeMount } from 'vue';
+import { useCountriesStore } from '@/store/countries';
+import { useRegionsStore } from '@/store/regions';
+import { IconZoomFilled } from '@tabler/icons-vue';
+import { ref } from '@vue/reactivity';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 
-interface State {
-    countries: CountryI[];
-}
-
-const state: State = reactive({
-    countries: []
-});
-
 const router = useRouter();
+const regionsStore = useRegionsStore();
+const { countries } = useCountriesStore();
+const displayedCountries = computed(() => {
+    const _countries = Object.values(countries || {});
+    if (!search.value.length && !continent.value) {
+        return _countries;
+    }
+
+    const s = search.value.toLowerCase();
+
+    return _countries.filter((country) => {
+        const region = regionsStore.find(country.region_id);
+        const countryName = country.name.toLowerCase();
+
+        return (!s.length || countryName.includes(s))
+            && (!continent.value || region.continent_id === continent.value);
+    });
+})
 
 const search = ref('');
-const region = ref('World');
-
-const finishedWaited = ref(false);
-const displaySum41 = ref(false);
-
-const filteredCountries = () => {
-    if (search.value.length > 0 || region.value.length > 0) {
-        displaySum41.value = search.value === 'sum';
-        const currentRegion: string =
-            region.value !== 'World' ? region.value : '';
-
-        return state.countries.filter((country) => {
-            return (
-                country.name
-                    .toLowerCase()
-                    .includes(search.value.toLowerCase()) &&
-                country.region.includes(currentRegion)
-            );
-        });
-    } else {
-        return state.countries;
-    }
-};
-
-onBeforeMount(async () => {
-    const lang = getLanguage();
-
-    try {
-        state.countries = await ApiService.getCountries(undefined, lang);
-    } catch (error) {
-        console.error(error);
-    } finally {
-        finishedWaited.value = true;
-    }
-});
-
-const goHome = () => {
-    router.push('/');
-};
+const continent = ref(0);
 </script>
 
 <template>
@@ -66,56 +37,22 @@ const goHome = () => {
         <h1 class="text-4xl font-bold text-center text-black">
             {{ $t('countries') }}
         </h1>
-
         <TextInput
-            v-model="search"
+            v-model.trim="search"
+            :prepend-icon="IconZoomFilled"
             :label="$t('countries')"
             :placeholder="$t('searchPlaceholder')"
         />
-
-        <Regions v-model="region" />
-
-        <button
-            type="button"
-            :disabled="search.length === 0 && region === 'World'"
-            class="w-full flex items-center justify-center px-4 py-4 text-base font-normal text-black border rounded-md transition-all duration-200 bg-gray-50 hover:bg-gray-200 disabled:hover:bg-gray-50 disabled:opacity-60 disabled:cursor-not-allowed"
-            @click="
-                search = '';
-                region = 'World';
-            "
-        >
-            <span>{{ $t('resetFilters') }}</span>
-        </button>
+        <Regions v-model="continent" />
     </div>
-    <div v-if="displaySum41" class="flex justify-center">
-        <h1 class="text-4xl font-bold text-center text-black">41</h1>
-    </div>
-
-    <template v-if="finishedWaited && state.countries.length === 0">
-        <Dialog
-            v-model="finishedWaited"
-            :title="$t('noCountriesFound')"
-            :description="$t('checkNetworkConnection')"
-            :buttonDescription="$t('close')"
-            type="error"
-            @update:model-value="goHome"
-        />
-    </template>
-    <Loader
-        v-else-if="!finishedWaited && state.countries.length === 0"
-        :title="$t('loading')"
-    />
-    <div v-else class="w-full flex justify-center items-center">
+    <div class="w-full flex justify-center items-center">
         <div
             class="w-full md:w-3/4 2xl:w-7/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16 p-10"
         >
-            <div
-                v-for="country in filteredCountries()"
-                :key="country.alpha3Code"
-            >
+            <div v-for="country in displayedCountries" :key="country.id">
                 <CountryLink
                     :countryName="country.name"
-                    :countryCode="country.alpha3Code"
+                    :countryCode="country.code"
                     :countryFlag="country.flag"
                 />
             </div>

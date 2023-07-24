@@ -7,8 +7,8 @@ export interface User {
     password: string;
     flag_score: number;
     capital_score: number;
-    last_activity: string;
     created_at: string;
+    updated_at: string;
     language: Lang;
 }
 

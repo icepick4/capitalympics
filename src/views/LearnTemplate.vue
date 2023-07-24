@@ -4,10 +4,11 @@ import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Question from '@/components/Learning/Question.vue';
 import Loader from '@/components/Loader.vue';
 import Regions from '@/components/Regions.vue';
-import { CountryI } from '@/models/Country';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
-import { CurrentState, LearningType, Region, ScoreType } from '@/types/common';
+import { useCountriesStore } from '@/store/countries';
+import { CurrentState, LearningType, ScoreType } from '@/types/common';
+import type { Country } from '@/types/models';
 import ApiClient from '@/utils/ApiClient';
 import { storeToRefs } from 'pinia';
 import { Ref, onBeforeMount, ref, watch } from 'vue';
@@ -15,6 +16,7 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const store = useStore();
+const contriesStore = useCountriesStore();
 
 // This page is protected by a guard, so we can assume that the user is logged in and defined
 const user = storeToRefs(store).user as Ref<User>;
@@ -25,48 +27,52 @@ const currentLearning: LearningType = route.path.split('/')[2] as LearningType;
 const currentState = ref<CurrentState>('starting');
 const couldNotGetCountry = ref(false);
 
-const country = ref<CountryI>();
-const currentRegion = ref<Region>('World');
+const country = ref<Country>();
+const continent = ref<number>(0);
 
-async function getNewCountry(region: Region) {
+async function getNewCountry() {
     isLoading.value = true;
-    const queryParameters = { lang: user.value.language, region };
-    const response = await ApiClient.get<{ country: CountryI }>(
-        `/users/${user.value.id}/country/play/${currentLearning}`,
-        queryParameters
-    );
+
+    const queryParameters = {
+        continent: continent.value || undefined,
+        type: currentLearning
+    };
+
+    const response = await ApiClient.get<{ success: true, country: number }>('/questions/next', queryParameters);
+
     isLoading.value = false;
-    if (response.success) {
-        country.value = response.data.country;
-        currentState.value = 'starting';
-    } else {
+    if (!response.success) {
         couldNotGetCountry.value = true;
+        return;
     }
+
+    country.value = contriesStore.find(response.data.country);
+    currentState.value = 'starting';
 }
 
 async function handleClick(score: ScoreType) {
     if (!country.value) return;
-    const response = await ApiClient.put<any>(
-        `/users/${user.value.id}/${country.value.alpha3Code}/${currentLearning}/score/${score}`
-    );
+    const response = await ApiClient.post<any>(`/questions`, {
+        result: score,
+        type: currentLearning,
+        country_id: country.value.id
+    });
 
-    if (response.success) {
-        currentState.value = 'starting';
-        getNewCountry(currentRegion.value);
+    if (!response.success) {
+        console.error(response);
+        return;
     }
+
+    currentState.value = 'starting';
+    getNewCountry();
 }
 
 const handleClickSee = () => {
     currentState.value = 'choosing';
 };
 
-onBeforeMount(() => {
-    getNewCountry(currentRegion.value);
-});
-
-watch(currentRegion, () => {
-    getNewCountry(currentRegion.value);
-});
+onBeforeMount(getNewCountry);
+watch(continent, getNewCountry);
 </script>
 
 <template>
@@ -82,10 +88,7 @@ watch(currentRegion, () => {
         <div
             class="flex flex-col w-10/12 md:h-auto justify-center items-center gap-10"
         >
-            <Regions
-                v-model="currentRegion"
-                class="xs:w-1/2 sm:w-1/3 md:w-1/4 mx-4"
-            />
+            <Regions v-model="continent" class="xs:w-1/2 sm:w-1/3 md:w-1/4 mx-4" />
             <div
                 v-if="country != undefined"
                 class="w-5/6 md:w-auto h-full flex flex-col items-center justify-center"
@@ -94,20 +97,13 @@ watch(currentRegion, () => {
                     class="flex flex-col w-full h-full justify-between items-center border-[3px] border-black rounded-3xl bg-white p-5 md:p-10 lg:p-14 gap-7 md:gap-9 lg:gap-12"
                 >
                     <div
-                        v-if="currentLearning === 'capital'"
-                        class="w-full h-full"
+                        v-if="currentLearning"
+                        :class="currentLearning === 'capital' && 'w-full h-full'"
                     >
                         <Question
                             :country="country"
                             :state="currentState"
-                            :type="'capital'"
-                        />
-                    </div>
-                    <div v-else-if="currentLearning === 'flag'">
-                        <Question
-                            :country="country"
-                            :state="currentState"
-                            :type="'flag'"
+                            :type="currentLearning"
                         />
                     </div>
                     <div class="w-full">

@@ -1,12 +1,20 @@
 <script setup lang="ts">
-defineProps<{
+interface Properties {
     type: 'warning' | 'error' | 'success';
     text: string;
-}>();
+    disabled?: boolean;
+}
+
+withDefaults(defineProps<Properties>(), {
+    disabled: false,
+    type: 'success',
+});
 </script>
 <template>
     <button
         type="button"
+        :disabled="disabled"
+        class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         :class="{
             'bg-yellow-200': type === 'warning',
             'bg-red-200': type === 'error',
@@ -15,8 +23,6 @@ defineProps<{
             'hover:bg-red-300': type === 'error',
             'hover:bg-green-300': type === 'success'
         }"
-        class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium transition-all duration-300"
-        @click="$emit('click')"
     >
         {{ text }}
     </button>

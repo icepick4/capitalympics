@@ -1,30 +1,22 @@
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 
-const props = defineProps<{
+interface Properties {
     modelValue: boolean;
     title: string;
     description: string;
-    buttonYes: string;
-    buttonNo: string;
+    buttonYes?: string;
+    buttonNo?: string;
     type: 'warning' | 'error' | 'success';
-}>();
+}
+
+const props = defineProps<Properties>();
 
 const emit = defineEmits(['update:modelValue', 'confirm', 'cancel']);
-
 const isOpen = useVModel(props, 'modelValue', emit);
 
-const setIsOpen = (value: boolean) => {
-    isOpen.value = value;
-};
-
-const confirmModal = () => {
-    emit('confirm');
-};
-
-const cancelModal = () => {
-    emit('cancel');
-};
+const confirmModal = () => emit('confirm');
+const cancelModal = () => emit('cancel');
 </script>
 
 <template>
@@ -33,20 +25,20 @@ const cancelModal = () => {
         :title="title"
         :description="description"
         :type="type"
-        @close="setIsOpen"
+        @close="cancelModal"
     >
         <div class="flex flex-row gap-3">
             <div class="mt-4">
                 <Button
                     :type="type"
-                    :text="buttonYes ?? 'Yes'"
+                    :text="buttonYes ?? $t('yes')"
                     @click="confirmModal"
                 />
             </div>
             <div class="mt-4">
                 <Button
                     :type="type"
-                    :text="buttonNo ?? 'No'"
+                    :text="buttonNo ?? $t('no')"
                     @click="cancelModal"
                 />
             </div>

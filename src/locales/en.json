@@ -38,7 +38,7 @@
     "welcomeBack": "Welcome back",
     "noAccount": "Don't have an account yet?",
     "createAccount": "Create an account for free",
-    "username": "Username",
+    "name": "name",
     "password": "Password",
     "backHome": "Back to home",
     "back": "Back",
@@ -56,7 +56,7 @@
     "login": "Login",
     "usernameRestriction": "Must be between 3 and 20 characters",
     "passwordRestriction": "Must be at least 8 characters long and contain at least one number and one capital letter",
-    "usernamePlaceholder": "Enter your username",
+    "namePlaceholder": "Enter your username",
     "passwordPlaceholder": "Enter your password",
     "passwordConfirmation": "Confirm password",
     "passwordMatching": "Passwords must match",
@@ -123,5 +123,10 @@
     "less": "Less",
     "reset": "Reset",
     "value": "Value",
-    "signedUpSuccessfully": "Signed up successfully, now you can log in"
+    "today": "Today",
+    "now": "Now",
+    "deleteAccount": "Delete my account",
+    "deleteAccountConfirmation": "Are you sure you want to delete your account ?",
+    "signedUpSuccessfully": "Signed up successfully, now you can log in",
+    "world": "World"
 }
