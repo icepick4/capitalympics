@@ -29,7 +29,7 @@ const handlePlanetMouseUp = () => {
 };
 
 const navigateToCountry = (country: CountryI) => {
-    router.push(`/countries/${country.id}`);
+    router.push(`/countries/${country.code}`);
 };
 
 const scrollTo = (id: string) => {

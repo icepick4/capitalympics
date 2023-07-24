@@ -23,7 +23,7 @@ const emit = defineEmits(['click']);
         :disabled="disabled"
         :title="label"
         type="button"
-        class="grid place-items-center bg-white w-10 h-10 outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75 focus:bg-gray-100 transition-all"
+        class="grid place-items-center bg-white w-10 h-10 outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75 transition-all"
         :class="[
             rounded ? 'rounded-full' : 'rounded-md',
             disabled

@@ -19,9 +19,12 @@ export const useStore = defineStore('app', () => {
     const i18n = useI18n();
 
     const user = ref<Maybe<User>>();
-    watch(() => user.value?.language, (language) => {
-        i18n.locale.value = language ?? DefaultLang;
-    });
+    watch(
+        () => user.value?.language,
+        (language) => {
+            i18n.locale.value = language ?? DefaultLang;
+        }
+    );
 
     const isAuthenticated = ref(!!ApiClient.token);
     const isCurrentUserLoaded = computed(() => isObject(user.value));
@@ -57,9 +60,9 @@ export const useStore = defineStore('app', () => {
     }
 
     function logout() {
-        user.value = null;
         isAuthenticated.value = false;
         ApiClient.logout();
+        user.value = null;
 
         router.push({ name: 'Home' });
     }
@@ -69,7 +72,11 @@ export const useStore = defineStore('app', () => {
             throw new Error('Not authenticated');
         }
 
-        const response = await ApiClient.patch<{ success: true, user: User }>('/me', data);
+        const response = await ApiClient.patch<{
+            success: true;
+            user: User;
+        }>('/me', data);
+
         if (!response.success) {
             throw new Error('Failed to update current user');
         }

@@ -11,27 +11,17 @@ const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
 
 const hasSaved = ref(false);
-const error = ref<string>();
-
-const errorDisplayed = computed({
-    get() {
-        return !!error.value;
-    },
-    set(v) {
-        if (!v) {
-            error.value = undefined;
-        }
-    }
-})
+const nameAlreadyTaken = ref(false);
 
 const name = ref(user.value.name);
 const language = ref(user.value.language);
 
-const canSave = computed(() =>
-    name.value.length > 3 && name.value.length < 20 && (
-        name.value !== user.value.name ||
-        language.value !== user.value.language
-    )
+const canSave = computed(
+    () =>
+        name.value.length >= 3 &&
+        name.value.length < 20 &&
+        (name.value !== user.value.name ||
+            language.value !== user.value.language)
 );
 
 const loading = ref(false);
@@ -39,12 +29,14 @@ const askDeleteConfirmation = ref(false);
 
 async function saveProfile() {
     loading.value = true;
-
     try {
-        await store.updateAccount({ language: language.value, name: name.value });
+        await store.updateAccount({
+            language: language.value,
+            name: name.value
+        });
         hasSaved.value = true;
-    } catch(e) {
-        error.value = (e as Error).message;
+    } catch (e) {
+        nameAlreadyTaken.value = true;
     } finally {
         loading.value = false;
     }
@@ -65,10 +57,10 @@ const deleteAccount = async () => {
         @confirm="deleteAccount"
         @cancel="() => (askDeleteConfirmation = false)"
     />
-    <ConfirmDialog
-        v-model="errorDisplayed"
+    <Dialog
+        v-model="nameAlreadyTaken"
         :title="$t('error')"
-        :description="error ?? ''"
+        :description="$t('nameTaken')"
         :buttonDescription="$t('close')"
         type="error"
     />
@@ -91,7 +83,8 @@ const deleteAccount = async () => {
                     <ActionIcon
                         :label="$t('deleteAccount')"
                         :icon="IconUserX"
-                        class="hover:scale-110 focus:scale-110 hover:bg-red-400 focus:bg-red-400 transition-all"
+                        rounded
+                        class="hover:scale-110 hover:bg-red-400 transition-all duration-300"
                         @click="askDeleteConfirmation = true"
                     />
                 </div>
@@ -105,7 +98,11 @@ const deleteAccount = async () => {
             </div>
             <div class="grid grid-cols-3 gap-x-3 items-end">
                 <TextInput v-model="name" :label="$t('name')" />
-                <Select v-model="language" :label="$t('language')" :options="languages.map((l) => ({ ...l, label: l.text }))" />
+                <Select
+                    v-model="language"
+                    :label="$t('language')"
+                    :options="languages.map((l) => ({ ...l, label: l.text }))"
+                />
                 <Button
                     :text="$t('saveProfile')"
                     :disabled="!canSave || loading"
