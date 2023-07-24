@@ -18,9 +18,9 @@ Learn flags and capitals of the world !
 
 # Features
 
-⌛ Progression statistics
-⌛ Notifications on level up
-⌛ Store favorite session setup
+⌛ Progression statistics \
+⌛ Notifications on level up \
+⌛ Store favorite session setup \
 ✅ Learn flags and capitals of countries worldwide \
 ✅ Filter learning by regions of the world \
 ✅ Track scores for each country and overall progress \
