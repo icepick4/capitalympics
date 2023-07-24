@@ -3,7 +3,7 @@ import CountryLink from '@/components/Country/CountryLink.vue';
 import Regions from '@/components/Regions.vue';
 import { useCountriesStore } from '@/store/countries';
 import { useRegionsStore } from '@/store/regions';
-import { IconZoomFilled } from '@tabler/icons-vue';
+import { IconSearch } from '@tabler/icons-vue';
 import { ref } from '@vue/reactivity';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
@@ -23,10 +23,12 @@ const displayedCountries = computed(() => {
         const region = regionsStore.find(country.region_id);
         const countryName = country.name.toLowerCase();
 
-        return (!s.length || countryName.includes(s))
-            && (!continent.value || region.continent_id === continent.value);
+        return (
+            (!s.length || countryName.includes(s)) &&
+            (!continent.value || region.continent_id === continent.value)
+        );
     });
-})
+});
 
 const search = ref('');
 const continent = ref(0);
@@ -39,7 +41,7 @@ const continent = ref(0);
         </h1>
         <TextInput
             v-model.trim="search"
-            :prepend-icon="IconZoomFilled"
+            :prepend-icon="IconSearch"
             :label="$t('countries')"
             :placeholder="$t('searchPlaceholder')"
         />

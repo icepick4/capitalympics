@@ -9,12 +9,12 @@ import { LearningType, Sort } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { getLevelName } from '@/utils/common';
 import {
-IconArrowsSort,
-IconMinus,
-IconPlus,
-IconSortAscending,
-IconSortDescending,
-IconX
+    IconArrowsSort,
+    IconMinus,
+    IconPlus,
+    IconSortAscending,
+    IconSortDescending,
+    IconX
 } from '@tabler/icons-vue';
 import { DateTime } from 'luxon';
 import { storeToRefs } from 'pinia';
@@ -50,7 +50,7 @@ const logOutConfirmation = () => {
 
 const continent = ref(0);
 const learningType = ref<LearningType>('flag');
-const countries = ref<DisplayedCountry[]>([])
+const countries = ref<DisplayedCountry[]>([]);
 
 const currentMax = ref(3);
 const clickedSwitchLearningType = ref(false);
@@ -93,7 +93,7 @@ const switchSort = () => {
 async function loadScores() {
     const queryParams = {
         continent: continent.value || undefined,
-        type: learningType.value,
+        type: learningType.value
     };
 
     interface ResponseGetScores {
@@ -101,12 +101,14 @@ async function loadScores() {
         scores: UserScore[];
     }
 
-    const response = await ApiClient.get<ResponseGetScores>('/scores', queryParams);
+    const response = await ApiClient.get<ResponseGetScores>(
+        '/scores',
+        queryParams
+    );
     if (!response.success) {
         console.error(response.error);
         return;
     }
-
     const scores = response.data.scores;
 
     countriesLength.value = scores.length;
@@ -115,15 +117,14 @@ async function loadScores() {
     countries.value = scores.map((userScore) => {
         const _country = countriesStore.find(userScore.country_id);
         const _region = regionsStore.find(_country.region_id);
-
         return {
             id: _country.id,
             name: _country.name,
             flag: _country.flag,
             code: _country.code,
             score: userScore.score,
-            continent: _region.continent_id,
-        }
+            continent: _region.continent_id
+        };
     });
 }
 
@@ -150,7 +151,6 @@ const formatDate = (date: DateTime) => {
 const switchLearningType = () => {
     clickedSwitchLearningType.value = !clickedSwitchLearningType.value;
     learningType.value = learningType.value === 'flag' ? 'capital' : 'flag';
-    // countries.value = [];
     resetMax();
     loadScores();
 };
@@ -159,8 +159,17 @@ onMounted(() => loadScores());
 
 const filteredCountries = computed(() => {
     return countries.value
-        .filter((country) => !continent.value || continent.value === country.continent)
-        .slice(0, currentMax.value);
+        .filter(
+            (country) =>
+                !continent.value || continent.value === country.continent
+        )
+        .sort((a, b) => {
+            if (currentSort.value === 'ASC') {
+                return a.score - b.score;
+            }
+
+            return b.score - a.score;
+        });
 });
 
 const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
@@ -255,10 +264,13 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
             </div>
             <div class="flex flex-col gap-4 mb-5">
                 <ScoresDisplay
-                    :countries="filteredCountries"
+                    :countries="filteredCountries.slice(0, currentMax)"
                     :title="$t('scores')"
                 >
-                    <Regions v-model="continent" class="items-center xs:w-1/2 lg:w-1/4" />
+                    <Regions
+                        v-model="continent"
+                        class="items-center xs:w-1/2 lg:w-1/4"
+                    />
                 </ScoresDisplay>
             </div>
         </div>
@@ -270,6 +282,7 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                     <ActionIcon
                         :icon="IconPlus"
                         :label="$t('more')"
+                        :disabled="filteredCountries.length <= currentMax"
                         rounded
                         class="hover:scale-110 focus:scale-110"
                         @click="increaseMax"
@@ -339,7 +352,6 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                         class="hover:scale-110 focus:scale-110"
                         @click="switchSort"
                     />
-                    <!-- :disabled="countriesLength !== countries.length" -->
                     <span class="text-center text-sm">{{ $t('sort') }}</span>
                 </div>
             </div>
