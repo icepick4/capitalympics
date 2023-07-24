@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Properties {
-    type: 'warning' | 'error' | 'success';
+    type?: 'warning' | 'error' | 'success';
     text: string;
     disabled?: boolean;
 }

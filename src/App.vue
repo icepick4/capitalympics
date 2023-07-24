@@ -16,11 +16,13 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <Loader v-if="isLoading" />
-    <div v-else class="flex flex-col h-screen min-h-screen">
-        <Header />
-        <div class="flex flex-col flex-grow justify-evenly">
-            <RouterView />
+    <div class="bg-[#b6e8f2]">
+        <Loader v-if="isLoading" />
+        <div v-else class="flex flex-col h-screen min-h-screen">
+            <Header />
+            <div class="flex flex-col flex-grow justify-evenly">
+                <RouterView />
+            </div>
         </div>
     </div>
 </template>

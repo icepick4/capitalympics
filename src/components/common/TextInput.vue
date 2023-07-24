@@ -47,10 +47,11 @@ function focusInput() {
             {{ hint }}
         </p>
         <div
-            class="bg-white flex items-center gap-x-2 rounded border px-3 py-2 cursor-text peer-disabled:cursor-not-allowed transition-colors outline outline-2 outline-offset-2"
+            class="flex items-center gap-x-2 rounded border px-3 py-2 transition-colors outline outline-2 outline-offset-2"
             :class="[
                 focused ? 'outline-blue-600/75' : 'outline-transparent',
-                error ? 'border-red-600' : 'border-gray-400/50'
+                error ? 'border-red-600' : 'border-gray-400/50',
+                disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white cursor-text'
             ]"
             @click="focusInput"
         >
@@ -76,7 +77,10 @@ function focusInput() {
                 :name="inputName"
                 :placeholder="placeholder"
                 :disabled="disabled"
-                class="peer placeholder:text-gray-400 w-full outline-none"
+                class="
+                    placeholder:text-gray-400 w-full outline-none bg-white
+                    disabled:text-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors
+                "
                 :class="[error ? 'text-red-600' : 'text-gray-700']"
                 @keyup="emit('keyup', $event)"
             />
