@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Badge from '@/components/Badge.vue';
 import ButtonTemplate from '@/components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Question from '@/components/Learning/Question.vue';
@@ -26,6 +27,18 @@ const isLoading = ref(false);
 const currentLearning: LearningType = route.path.split('/')[2] as LearningType;
 const currentState = ref<CurrentState>('starting');
 const couldNotGetCountry = ref(false);
+const displayLevelUpdate = ref(false);
+const levelUpdate: LevelUpdate = {
+    score: 0,
+    level: 'up'
+};
+
+type LevelUpdateType = 'up' | 'down';
+
+interface LevelUpdate {
+    score: number;
+    level: LevelUpdateType;
+}
 
 const country = ref<Country>();
 const continent = ref<number>(0);
@@ -38,7 +51,10 @@ async function getNewCountry() {
         type: currentLearning
     };
 
-    const response = await ApiClient.get<{ success: true, country: number }>('/questions/next', queryParameters);
+    const response = await ApiClient.get<{ success: true; country: number }>(
+        '/questions/next',
+        queryParameters
+    );
 
     isLoading.value = false;
     if (!response.success) {
@@ -61,6 +77,10 @@ async function handleClick(score: ScoreType) {
     if (!response.success) {
         console.error(response);
         return;
+    } else if (response.data.level) {
+        displayLevelUpdate.value = true;
+        levelUpdate.score = response.data.score;
+        levelUpdate.level = response.data.level;
     }
 
     currentState.value = 'starting';
@@ -83,12 +103,30 @@ watch(continent, getNewCountry);
         :buttonDescription="$t('close')"
         type="error"
     />
+    <Dialog
+        v-model="displayLevelUpdate"
+        :title="
+            levelUpdate.level === 'up' ? $t('congratulations') : $t('tooBad')
+        "
+        :description="
+            levelUpdate.level === 'up' ? $t('levelUp') : $t('levelDown')
+        "
+        :buttonDescription="$t('close')"
+        :type="levelUpdate.level === 'up' ? 'success' : 'error'"
+    >
+        <template #badge>
+            <Badge :score="levelUpdate.score" :selected="false" />
+        </template>
+    </Dialog>
     <Loader v-if="isLoading" />
     <div class="w-full flex flex-col justify-center items-center">
         <div
             class="flex flex-col w-10/12 md:h-auto justify-center items-center gap-10"
         >
-            <Regions v-model="continent" class="xs:w-1/2 sm:w-1/3 md:w-1/4 mx-4" />
+            <Regions
+                v-model="continent"
+                class="xs:w-1/2 sm:w-1/3 md:w-1/4 mx-4"
+            />
             <div
                 v-if="country != undefined"
                 class="w-5/6 md:w-auto h-full flex flex-col items-center justify-center"
@@ -98,7 +136,9 @@ watch(continent, getNewCountry);
                 >
                     <div
                         v-if="currentLearning"
-                        :class="currentLearning === 'capital' && 'w-full h-full'"
+                        :class="
+                            currentLearning === 'capital' && 'w-full h-full'
+                        "
                     >
                         <Question
                             :country="country"
