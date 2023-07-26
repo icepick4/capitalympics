@@ -101,7 +101,9 @@ async function loadScore(type: LearningType) {
                     </div>
                     <div class="col-span-1">
                         <dt class="text-gray-500">{{ $t('region') }}</dt>
-                        <dd class="text-gray-900">{{ country.region.continent.name }}</dd>
+                        <dd class="text-gray-900">
+                            {{ country.region.continent.name }}
+                        </dd>
                     </div>
                     <div class="col-span-1">
                         <dt class="text-gray-500">{{ $t('population') }}</dt>

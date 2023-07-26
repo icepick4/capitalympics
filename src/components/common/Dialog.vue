@@ -8,38 +8,39 @@ import {
 } from '@headlessui/vue';
 import { useVModel } from '@vueuse/core';
 
-type DialogType = 'warning' | 'error' | 'success';
-
 interface Properties {
     modelValue: boolean;
     title: string;
     description: string;
     buttonDescription?: string;
-    type: DialogType;
+    type: 'error' | 'info' | 'success' | 'warning';
+    initialFocus?: HTMLElement | null;
 }
 
-const props = defineProps<Properties>();
+const props = withDefaults(defineProps<Properties>(), {
+    type: 'info'
+});
 
 const emit = defineEmits(['update:modelValue']);
-
 const isOpen = useVModel(props, 'modelValue', emit);
 
-const setIsOpen = (value: boolean) => {
-    isOpen.value = value;
-};
+function close() {
+    isOpen.value = false;
+}
 </script>
 
 <template>
     <TransitionRoot appear :show="isOpen" as="template">
         <Dialog
             as="div"
-            @close="setIsOpen"
+            :initial-focus="initialFocus"
+            class="relative z-10"
             :class="{
                 'bg-yellow-100': type === 'warning',
                 'bg-red-100': type === 'error',
                 'bg-green-100': type === 'success'
             }"
-            class="relative z-10"
+            @close="close"
         >
             <TransitionChild
                 as="template"
@@ -85,12 +86,11 @@ const setIsOpen = (value: boolean) => {
                                     {{ description }}
                                 </p>
                             </div>
-
                             <div v-if="buttonDescription" class="mt-4">
                                 <Button
                                     :text="buttonDescription"
                                     :type="type"
-                                    @click="setIsOpen(false)"
+                                    @click="close"
                                 />
                             </div>
                             <slot></slot>

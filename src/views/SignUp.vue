@@ -74,9 +74,7 @@ const validateForm = () => {
     errors.value.password = validatePassword()
         ? undefined
         : t('passwordRestriction');
-    errors.value.name = validateUsername()
-        ? undefined
-        : t('nameRestriction');
+    errors.value.name = validateUsername() ? undefined : t('nameRestriction');
 };
 </script>
 

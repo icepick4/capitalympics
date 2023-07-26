@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
 import { languages } from '@/utils/common';
 import { IconUserX } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 
 const store = useStore();
@@ -25,7 +27,7 @@ const canSave = computed(
 );
 
 const loading = ref(false);
-const askDeleteConfirmation = ref(false);
+const { t } = useI18n();
 
 async function saveProfile() {
     loading.value = true;
@@ -43,20 +45,19 @@ async function saveProfile() {
 }
 
 const deleteAccount = async () => {
+    const hasConfirmed = await useConfirmDialog({
+        title: t('deleteAccount'),
+        description: t('deleteAccountConfirmation'),
+        cancelText: t('confirmDialog.cancel'),
+        confirmText: t('confirmDialog.confirm')
+    });
+
+    if (!hasConfirmed) return;
     await store.deleteAccount();
-    askDeleteConfirmation.value = false;
 };
 </script>
 
 <template>
-    <ConfirmDialog
-        v-model="askDeleteConfirmation"
-        :title="$t('deleteAccount')"
-        :description="$t('deleteAccountConfirmation')"
-        type="warning"
-        @confirm="deleteAccount"
-        @cancel="() => (askDeleteConfirmation = false)"
-    />
     <Dialog
         v-model="nameAlreadyTaken"
         :title="$t('error')"
@@ -85,7 +86,7 @@ const deleteAccount = async () => {
                         :icon="IconUserX"
                         rounded
                         class="hover:scale-110 hover:bg-red-400 transition-all duration-300"
-                        @click="askDeleteConfirmation = true"
+                        @click="deleteAccount"
                     />
                 </div>
                 <RouterLink to="/profile">
