@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
-import { useContinentsStore } from '@/store/continents';
 import { useCountriesStore } from '@/store/countries';
 import { useRegionsStore } from '@/store/regions';
 import type { UserScore } from '@/types/common';
@@ -9,12 +9,12 @@ import { LearningType, Sort } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { getLevelName } from '@/utils/common';
 import {
-    IconArrowsSort,
-    IconMinus,
-    IconPlus,
-    IconSortAscending,
-    IconSortDescending,
-    IconX
+IconArrowsSort,
+IconMinus,
+IconPlus,
+IconSortAscending,
+IconSortDescending,
+IconX
 } from '@tabler/icons-vue';
 import { DateTime } from 'luxon';
 import { storeToRefs } from 'pinia';
@@ -37,16 +37,9 @@ interface DisplayedCountry {
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
 
-const continentStore = useContinentsStore();
 const countriesStore = useCountriesStore();
 const regionsStore = useRegionsStore();
 const { t } = useI18n();
-
-const confirmingLogOut = ref(false);
-
-const logOutConfirmation = () => {
-    confirmingLogOut.value = true;
-};
 
 const continent = ref(0);
 const learningType = ref<LearningType>('flag');
@@ -173,17 +166,21 @@ const filteredCountries = computed(() => {
 });
 
 const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+
+async function disconnect() {
+    const hasConfirmed = await useConfirmDialog({
+        title: t('logOutConfirmation'),
+        description: t('loginPageRedirect'),
+        cancelText: t('no'),
+        confirmText: t('yes'),
+    });
+
+    if (!hasConfirmed) return;
+    await store.logout();
+}
 </script>
 
 <template>
-    <ConfirmDialog
-        v-model="confirmingLogOut"
-        :title="$t('logOutConfirmation')"
-        :description="$t('loginPageRedirect')"
-        @confirm="() => store.logout()"
-        @cancel="() => (confirmingLogOut = false)"
-        type="warning"
-    />
     <div
         class="w-full h-full flex flex-col items-center justify-start mt-10 mb-10"
     >
@@ -220,7 +217,7 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                             src="/icons/logout.png"
                             alt="Logout"
                             class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
-                            @click="logOutConfirmation"
+                            @click="disconnect"
                         />
                     </div>
                 </div>

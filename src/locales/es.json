@@ -128,5 +128,9 @@
     "deleteAccount": "Eliminar cuenta",
     "deleteAccountConfirmation": "¿Estás seguro de que quieres eliminar tu cuenta?",
     "signedUpSuccessfully": "¡Te has registrado con éxito!",
-    "world": "Mundo"
+    "world": "Mundo",
+    "confirmDialog": {
+        "cancel": "Cancelar",
+        "confirm": "Confirmar"
+    }
 }
