@@ -23,10 +23,10 @@ export const useContinentsStore = defineStore('continents', () => {
     });
 
     async function fetchContinents() {
-        const response = await ApiClient.get<{ success: true, continents: Continent[] }>(
-            '/continents',
-            { lang: getLanguage() }
-        );
+        const response = await ApiClient.get<{
+            success: true;
+            continents: Continent[];
+        }>('/continents', { lang: getLanguage() });
 
         if (!response.success) {
             throw new Error('Failed to fetch continents');
@@ -46,7 +46,9 @@ export const useContinentsStore = defineStore('continents', () => {
             return; // Already loaded
         }
 
-        const storedContinents = await LocalStorage.get<StoredContinents>('continents');
+        const storedContinents = await LocalStorage.get<StoredContinents>(
+            'continents'
+        );
         if (storedContinents && storedContinents.language === language) {
             data.value = storedContinents;
             return;
@@ -55,7 +57,7 @@ export const useContinentsStore = defineStore('continents', () => {
         const continents = await fetchContinents();
         data.value = {
             continents,
-            language,
+            language
         };
 
         LocalStorage.set('continents', data.value);
@@ -76,6 +78,6 @@ export const useContinentsStore = defineStore('continents', () => {
     return {
         continents,
         find,
-        loadContinents,
+        loadContinents
     };
 });

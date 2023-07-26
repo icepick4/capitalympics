@@ -49,7 +49,7 @@ const deleteAccount = async () => {
         title: t('deleteAccount'),
         description: t('deleteAccountConfirmation'),
         cancelText: t('confirmDialog.cancel'),
-        confirmText: t('confirmDialog.confirm'),
+        confirmText: t('confirmDialog.confirm')
     });
 
     if (!hasConfirmed) return;

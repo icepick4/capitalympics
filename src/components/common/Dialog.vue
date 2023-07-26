@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {
-Dialog,
-DialogPanel,
-DialogTitle,
-TransitionChild,
-TransitionRoot
+    Dialog,
+    DialogPanel,
+    DialogTitle,
+    TransitionChild,
+    TransitionRoot
 } from '@headlessui/vue';
 import { useVModel } from '@vueuse/core';
 
@@ -14,7 +14,7 @@ interface Properties {
     description: string;
     buttonDescription?: string;
     type: 'error' | 'info' | 'success' | 'warning';
-    initialFocus?: HTMLElement|null;
+    initialFocus?: HTMLElement | null;
 }
 
 const props = withDefaults(defineProps<Properties>(), {

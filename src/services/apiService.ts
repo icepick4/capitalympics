@@ -70,10 +70,12 @@ export default class ApiService {
             scores: {
                 capital: number;
                 flag: number;
-            }
+            };
         }
 
-        const response = await ApiClient.get<ResponseOverallScores>('/scores/overall');
+        const response = await ApiClient.get<ResponseOverallScores>(
+            '/scores/overall'
+        );
         if (!response.success) {
             throw new Error('Failed get global scores');
         }

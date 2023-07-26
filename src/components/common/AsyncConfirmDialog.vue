@@ -34,7 +34,12 @@ dialog.onCancel(() => emit('cancel'));
     >
         <div class="mt-4 flex items-center justify-start gap-3 rounded-b-lg">
             <Button :text="cancelText" type="warning" @click="dialog.cancel" />
-            <Button ref="confirmBtn" :text="confirmText" type="warning" @click="dialog.confirm" />
+            <Button
+                ref="confirmBtn"
+                :text="confirmText"
+                type="warning"
+                @click="dialog.confirm"
+            />
         </div>
     </Dialog>
 </template>

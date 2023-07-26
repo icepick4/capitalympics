@@ -9,12 +9,12 @@ import { LearningType, Sort } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { getLevelName } from '@/utils/common';
 import {
-IconArrowsSort,
-IconMinus,
-IconPlus,
-IconSortAscending,
-IconSortDescending,
-IconX
+    IconArrowsSort,
+    IconMinus,
+    IconPlus,
+    IconSortAscending,
+    IconSortDescending,
+    IconX
 } from '@tabler/icons-vue';
 import { DateTime } from 'luxon';
 import { storeToRefs } from 'pinia';
@@ -172,7 +172,7 @@ async function disconnect() {
         title: t('logOutConfirmation'),
         description: t('loginPageRedirect'),
         cancelText: t('no'),
-        confirmText: t('yes'),
+        confirmText: t('yes')
     });
 
     if (!hasConfirmed) return;
