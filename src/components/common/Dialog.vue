@@ -77,11 +77,12 @@ function close() {
                         >
                             <DialogTitle
                                 as="h3"
-                                class="text-lg font-medium leading-6 text-gray-900"
+                                class="text-lg font-medium leading-6 text-gray-900 flex flex-row justify-between items-center w-full"
                             >
                                 {{ title }}
+                                <slot name="badge"></slot>
                             </DialogTitle>
-                            <div class="mt-2">
+                            <div class="mt-3">
                                 <p class="text-sm text-gray-500">
                                     {{ description }}
                                 </p>

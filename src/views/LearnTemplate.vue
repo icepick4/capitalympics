@@ -4,22 +4,18 @@ import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Question from '@/components/Learning/Question.vue';
 import Loader from '@/components/Loader.vue';
 import Regions from '@/components/Regions.vue';
-import { User } from '@/models/User';
-import { useStore } from '@/store';
+import { notify } from '@/plugins/notification';
 import { useCountriesStore } from '@/store/countries';
 import { CurrentState, LearningType, ScoreType } from '@/types/common';
 import type { Country } from '@/types/models';
 import ApiClient from '@/utils/ApiClient';
-import { storeToRefs } from 'pinia';
-import { Ref, onBeforeMount, ref, watch } from 'vue';
+import { onBeforeMount, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
+const { t } = useI18n();
 const route = useRoute();
-const store = useStore();
 const contriesStore = useCountriesStore();
-
-// This page is protected by a guard, so we can assume that the user is logged in and defined
-const user = storeToRefs(store).user as Ref<User>;
 
 const isLoading = ref(false);
 
@@ -64,6 +60,19 @@ async function handleClick(score: ScoreType) {
     if (!response.success) {
         console.error(response);
         return;
+    } else if (response.data.level) {
+        notify({
+            title:
+                response.data.level === 'up'
+                    ? t('congratulations')
+                    : t('tooBad'),
+            message:
+                response.data.level === 'up' ? t('levelUp') : t('levelDown'),
+            type: response.data.level === 'up' ? 'success' : 'error',
+            flag: country.value.flag,
+            score: response.data.score,
+            timeout: 5000
+        });
     }
 
     currentState.value = 'starting';
