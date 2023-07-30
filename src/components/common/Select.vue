@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Maybe } from '@/types/common';
 import {
-Listbox,
-ListboxButton,
-ListboxOption,
-ListboxOptions
+    Listbox,
+    ListboxButton,
+    ListboxOption,
+    ListboxOptions
 } from '@headlessui/vue';
 import { IconCheck, IconChevronDown, SVGProps } from '@tabler/icons-vue';
 import { useVModel } from '@vueuse/core';

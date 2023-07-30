@@ -132,5 +132,9 @@
     "congratulations": "Congratulazioni!",
     "tooBad": "Peccato!",
     "levelUp": "Siete passati al livello successivo ! 🚀🎉",
-    "levelDown": "Siete tornati al livello precedente ! 😔"
+    "levelDown": "Siete tornati al livello precedente ! 😔",
+    "confirmDialog": {
+        "cancel": "Cancella",
+        "confirm": "Conferma"
+    }
 }

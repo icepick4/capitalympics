@@ -14,7 +14,7 @@ withDefaults(defineProps<Properties>(), {
     <button
         type="button"
         :disabled="disabled"
-        class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+        class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75 transition-all duration-300"
         :class="{
             'bg-yellow-200': type === 'warning',
             'bg-red-200': type === 'error',

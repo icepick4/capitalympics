@@ -5,7 +5,9 @@ import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const displayUserSettings = computed(() => router.currentRoute.value.path === '/profile/edit');
+const displayUserSettings = computed(
+    () => router.currentRoute.value.path === '/profile/edit'
+);
 </script>
 
 <template>
