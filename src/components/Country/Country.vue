@@ -1,55 +1,17 @@
 <script setup lang="ts">
 import { CountryI } from '@/models/Country';
 import { useStore } from '@/store';
-import { LearningType } from '@/types/common';
-import ApiClient from '@/utils/ApiClient';
 import { storeToRefs } from 'pinia';
-import { onBeforeMount, ref } from 'vue';
 import Badge from '../Badge.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user;
 
-const flagScore = ref(-1);
-const capitalScore = ref(-1);
-
 const props = defineProps<{
     country: CountryI;
+    flagScore: number;
+    capitalScore: number;
 }>();
-
-onBeforeMount(async () => {
-    if (!user.value) return;
-    Promise.all([loadScore('flag'), loadScore('capital')]);
-});
-
-async function loadScore(type: LearningType) {
-    const response = await ApiClient.get<{ score: number | any[] }>(
-        `/users/${user.value?.id}/${props.country.code}/${type}/score`
-    );
-    if (!response.success) {
-        console.log(
-            `An error occured while loading the ${type} score for ${props.country.name}`,
-            response.error
-        );
-
-        if (type === 'capital') {
-            capitalScore.value = -1;
-        } else {
-            flagScore.value = -1;
-        }
-
-        return;
-    }
-    if (type === 'capital') {
-        capitalScore.value = Array.isArray(response.data.score)
-            ? 0
-            : response.data.score;
-    } else {
-        flagScore.value = Array.isArray(response.data.score)
-            ? 0
-            : response.data.score;
-    }
-}
 </script>
 
 <template>
@@ -66,13 +28,11 @@ async function loadScore(type: LearningType) {
                     <p class="text-gray-500">{{ country.code }}</p>
                     <div class="flex flex-col gap-2">
                         <Badge
-                            v-if="flagScore !== -1"
                             :score="flagScore"
                             learningType="flag"
                             size="md"
                         />
                         <Badge
-                            v-if="capitalScore !== -1"
                             :score="capitalScore"
                             learningType="capital"
                             size="md"
