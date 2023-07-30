@@ -135,5 +135,13 @@
     "confirmDialog": {
         "cancel": "Annuler",
         "confirm": "Confirmer"
+    },
+    "nameSort": {
+        "asc": "Nom (A-Z)",
+        "desc": "Nom (Z-A)"
+    },
+    "populationSort": {
+        "asc": "Population (croissant)",
+        "desc": "Population (décroissant)"
     }
 }

@@ -1,13 +1,8 @@
 <script setup lang="ts">
 import { CountryI } from '@/models/Country';
-import { useStore } from '@/store';
-import { storeToRefs } from 'pinia';
 import Badge from '../Badge.vue';
 
-const store = useStore();
-const user = storeToRefs(store).user;
-
-const props = defineProps<{
+defineProps<{
     country: CountryI;
     flagScore: number;
     capitalScore: number;

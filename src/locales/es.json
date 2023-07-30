@@ -135,5 +135,13 @@
     "confirmDialog": {
         "cancel": "Cancelar",
         "confirm": "Confirmar"
+    },
+    "nameSort": {
+        "asc": "Nombre (ascendente)",
+        "desc": "Nombre (descendente)"
+    },
+    "populationSort": {
+        "asc": "Población (ascendente)",
+        "desc": "Población (descendente)"
     }
 }
