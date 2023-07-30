@@ -4,7 +4,7 @@ import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Question from '@/components/Learning/Question.vue';
 import Loader from '@/components/Loader.vue';
 import Regions from '@/components/Regions.vue';
-import { notify } from '@/plugins/notification';
+import { notify } from '@/plugins/notifications';
 import { useCountriesStore } from '@/store/countries';
 import { CurrentState, LearningType, ScoreType } from '@/types/common';
 import type { Country } from '@/types/models';
@@ -78,7 +78,6 @@ async function handleClick(score: ScoreType) {
             type: response.data.level === 'up' ? 'success' : 'error',
             flag: country.value.flag,
             score: response.data.score,
-            timeout: 5000
         });
     }
 

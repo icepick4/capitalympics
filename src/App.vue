@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import NotificationsWrapper from '@/components/Notification/NotificationsWrapper.vue';
 import { onBeforeMount, ref } from 'vue';
 import { RouterView } from 'vue-router';
 import Header from './components/Header.vue';
@@ -18,6 +19,7 @@ onBeforeMount(async () => {
 <template>
     <Loader v-if="isLoading" />
     <div v-else class="flex flex-col h-screen min-h-screen">
+        <NotificationsWrapper />
         <Header />
         <div class="flex flex-col flex-grow justify-evenly">
             <RouterView />
