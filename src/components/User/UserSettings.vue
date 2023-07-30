@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
+import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { languages } from '@/utils/common';
 import { IconUserX } from '@tabler/icons-vue';
@@ -12,7 +13,7 @@ import { RouterLink } from 'vue-router';
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
 
-const hasSaved = ref(false);
+const { t } = useI18n();
 const nameAlreadyTaken = ref(false);
 
 const name = ref(user.value.name);
@@ -27,7 +28,6 @@ const canSave = computed(
 );
 
 const loading = ref(false);
-const { t } = useI18n();
 
 async function saveProfile() {
     loading.value = true;
@@ -36,7 +36,12 @@ async function saveProfile() {
             language: language.value,
             name: name.value
         });
-        hasSaved.value = true;
+
+        notify({
+            type: 'success',
+            title: t('success'),
+            message: t('profileSaved'),
+        })
     } catch (e) {
         nameAlreadyTaken.value = true;
     } finally {
@@ -64,13 +69,6 @@ const deleteAccount = async () => {
         :description="$t('nameTaken')"
         :buttonDescription="$t('close')"
         type="error"
-    />
-    <Dialog
-        v-model="hasSaved"
-        :title="$t('success')"
-        :description="$t('profileSaved')"
-        :buttonDescription="$t('close')"
-        type="success"
     />
     <div
         class="w-11/12 sm:w-5/6 xl:w-3/4 2xl:w-2/3 mx-auto p-0 sm:p-8 flex-col"

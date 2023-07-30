@@ -7,7 +7,7 @@ import es from './locales/es.json';
 import fr from './locales/fr.json';
 import it from './locales/it.json';
 import CommonPlugin from './plugins/common';
-import './plugins/notification';
+import NotificationsPlugin from './plugins/notifications';
 import router from './router';
 import './style.css';
 import type { Lang } from './types/common';
@@ -37,6 +37,6 @@ if (!supportedLocales.includes(defaultLocale)) {
         messages: { fr, en, es, it }
     });
 
-    app.use(router).use(pinia).use(i18n).use(CommonPlugin);
+    app.use(router).use(pinia).use(i18n).use(CommonPlugin).use(NotificationsPlugin);
     app.mount('#app');
 })();
