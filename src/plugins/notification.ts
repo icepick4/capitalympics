@@ -1,14 +1,6 @@
+import type { Properties as NotificationProperties } from '@/components/Notification/Notification.vue';
 import Notification from '@/components/Notification/Notification.vue';
 import { createApp, createVNode, h } from 'vue';
-
-interface NotificationProperties {
-    title: string;
-    message: string;
-    type: 'success' | 'error' | 'warning';
-    flag?: string;
-    score?: number;
-    timeout?: number;
-}
 
 const notify = ({
     title,
@@ -36,3 +28,4 @@ const notify = ({
 };
 
 export { notify };
+

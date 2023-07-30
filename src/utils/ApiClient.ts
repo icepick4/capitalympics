@@ -1,3 +1,4 @@
+import { useStore } from '@/store';
 import { Nullish } from '@/types/common';
 import axios, {
     AxiosError,
@@ -41,16 +42,31 @@ class ApiClient {
         this.token = LocalStorage.get<string>('token');
 
         this.axios.interceptors.request.use(
-            (config) => {
+            async (config) => {
+                // No check is performed if the call is used to regenerate the JWT Token.
+                if (config.url?.includes('refresh-token')) {
+                    return config;
+                }
+
                 const hasToken = LocalStorage.has('token');
                 const expiresIn = LocalStorage.expiresIn('token');
 
-                if (
-                    hasToken &&
-                    typeof expiresIn === 'number' &&
-                    expiresIn < 30
-                ) {
-                    this.refreshToken();
+                if (hasToken && typeof expiresIn === 'number') {
+                    // The token has expired
+                    if (expiresIn < 0) {
+                        const appStore = useStore();
+
+                        // @todo display a message explaining why the user has been redirected.
+                        appStore.logout('LogIn');
+
+                        throw new axios.Cancel('Your token is expired, the call was cancelled');
+                    }
+
+                    // The token must be refreshed
+                    if (expiresIn < 30) {
+                        await this.refreshToken();
+                        config.headers['Authorization'] = `Bearer ${this.token}`;
+                    }
                 }
 
                 return config;
