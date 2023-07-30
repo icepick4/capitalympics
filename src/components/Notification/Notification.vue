@@ -49,23 +49,29 @@ const startTime = Date.now();
                     class="bg-white border-gray-300 border p-3 shadow-lg rounded-md"
                 >
                     <div class="flex flex-row">
-                        <div class="px-2 flex gap-3 items-center">
+                        <div
+                            class="px-2 flex gap-3 items-center"
+                            v-if="!flag && !score"
+                        >
                             <IconCircleCheckFilled
-                                v-if="!flag && !score"
                                 class="w-8 h-8 text-green-500"
                             />
-                            <template v-if="flag && score">
-                                <Badge :score="score" />
-                                <img
-                                    v-if="flag"
-                                    class="w-9 h-7 border-[1px] border-gray-700 rounded"
-                                    :src="flag"
-                                    :alt="title"
-                                />
-                            </template>
                         </div>
-                        <div class="ml-2 mr-6">
-                            <span>{{ title }}</span>
+                        <div class="ml-3 mr-3">
+                            <div
+                                class="flex flex-row justify-between items-center mb-2"
+                            >
+                                <span>{{ title }}</span>
+                                <template v-if="flag && score">
+                                    <Badge :score="score" />
+                                    <img
+                                        v-if="flag"
+                                        class="w-12 h-8 border-[1px] border-gray-700 rounded"
+                                        :src="flag"
+                                        :alt="title"
+                                    />
+                                </template>
+                            </div>
                             <span class="block text-gray-500">{{
                                 message
                             }}</span>
