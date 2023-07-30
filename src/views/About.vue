@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AboutSection from '@/components/AboutSection.vue';
+import AboutSection from '@/components/About/AboutSection.vue';
 import Loader from '@/components/Loader.vue';
 import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
 
@@ -29,11 +29,11 @@ onMounted(() => {
 });
 
 onBeforeMount(async () => {
-    document.body.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 });
 
 onUnmounted(() => {
-    document.body.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('scroll', handleScroll);
 });
 
 const handleScroll = () => {
@@ -41,10 +41,8 @@ const handleScroll = () => {
     const scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
     const windowHeight = window.innerHeight;
-
     sections.forEach((section) => {
         const sectionTop = section.getBoundingClientRect().top;
-
         if (sectionTop < windowHeight - windowHeight / 4) {
             section.classList.add('show');
         } else {

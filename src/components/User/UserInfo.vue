@@ -281,10 +281,13 @@ async function disconnect() {
                         :label="$t('more')"
                         :disabled="filteredCountries.length <= currentMax"
                         rounded
-                        class="hover:scale-110 focus:scale-110"
+                        class="peer hover:scale-110 focus:scale-110"
                         @click="increaseMax"
                     />
-                    <span class="text-center text-sm">{{ $t('more') }}</span>
+                    <span
+                        class="text-center text-sm peer-disabled:opacity-50"
+                        >{{ $t('more') }}</span
+                    >
                 </div>
                 <div class="flex flex-col gap-2 justify-center items-center">
                     <ActionIcon

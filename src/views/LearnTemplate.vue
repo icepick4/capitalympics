@@ -51,7 +51,14 @@ async function getNewCountry() {
 
 async function handleClick(score: ScoreType) {
     if (!country.value) return;
-    const response = await ApiClient.post<any>(`/questions`, {
+
+    interface ResponsePostQuestion {
+        success: boolean;
+        level?: 'up' | 'down';
+        score?: number;
+    }
+
+    const response = await ApiClient.post<ResponsePostQuestion>('/questions', {
         result: score,
         type: currentLearning,
         country_id: country.value.id

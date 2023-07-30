@@ -29,6 +29,7 @@ const notify = ({
         score,
         timeout
     });
+
     const app = createApp({ render: () => h(notificationComponent) });
 
     app.mount(container);
