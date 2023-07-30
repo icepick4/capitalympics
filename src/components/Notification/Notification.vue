@@ -7,10 +7,7 @@ interface Properties {
     title: string;
     message?: string;
     type: 'success' | 'error' | 'warning';
-    country?: {
-        name: string;
-        flag: string;
-    };
+    flag?: string;
     score?: number;
     timeout?: number;
 }
@@ -54,16 +51,16 @@ const startTime = Date.now();
                     <div class="flex flex-row">
                         <div class="px-2 flex gap-3 items-center">
                             <IconCircleCheckFilled
-                                v-if="!country && !score"
+                                v-if="!flag && !score"
                                 class="w-8 h-8 text-green-500"
                             />
-                            <template v-if="country && score">
+                            <template v-if="flag && score">
                                 <Badge :score="score" />
                                 <img
-                                    v-if="country"
+                                    v-if="flag"
                                     class="w-9 h-7 border-[1px] border-gray-700 rounded"
-                                    :src="country.flag"
-                                    :alt="country.name"
+                                    :src="flag"
+                                    :alt="title"
                                 />
                             </template>
                         </div>

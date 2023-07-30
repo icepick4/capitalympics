@@ -5,7 +5,7 @@ interface NotificationProperties {
     title: string;
     message: string;
     type: 'success' | 'error' | 'warning';
-    country?: { name: string; flag: string };
+    flag?: string;
     score?: number;
     timeout?: number;
 }
@@ -14,7 +14,7 @@ const notify = ({
     title,
     message,
     type,
-    country,
+    flag,
     score,
     timeout
 }: NotificationProperties) => {
@@ -25,7 +25,7 @@ const notify = ({
         title,
         message,
         type,
-        country,
+        flag,
         score,
         timeout
     });

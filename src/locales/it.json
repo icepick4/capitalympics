@@ -128,5 +128,9 @@
     "deleteAccount": "Elimina il tuo account",
     "deleteAccountConfirmation": "Sei sicuro di voler eliminare il tuo account?",
     "signedUpSuccessfully": "Registrazione avvenuta con successo!",
-    "world": "Mondo"
+    "world": "Mondo",
+    "congratulations": "Congratulazioni!",
+    "tooBad": "Peccato!",
+    "levelUp": "Siete passati al livello successivo ! 🚀🎉",
+    "levelDown": "Siete tornati al livello precedente ! 😔"
 }

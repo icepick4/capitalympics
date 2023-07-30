@@ -9,7 +9,6 @@ import { useCountriesStore } from '@/store/countries';
 import { CurrentState, LearningType, ScoreType } from '@/types/common';
 import type { Country } from '@/types/models';
 import ApiClient from '@/utils/ApiClient';
-import { getLevelName } from '@/utils/common';
 import { onBeforeMount, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
@@ -63,16 +62,14 @@ async function handleClick(score: ScoreType) {
         return;
     } else if (response.data.level) {
         notify({
-            title: t('levelUp'),
-            message: t('levelUpMessage', {
-                level: getLevelName(response.data.score),
-                country: country.value.name
-            }),
+            title:
+                response.data.level === 'up'
+                    ? t('congratulations')
+                    : t('tooBad'),
+            message:
+                response.data.level === 'up' ? t('levelUp') : t('levelDown'),
             type: response.data.level === 'up' ? 'success' : 'error',
-            country: {
-                name: country.value.name,
-                flag: country.value.flag
-            },
+            flag: country.value.flag,
             score: response.data.score,
             timeout: 5000
         });
