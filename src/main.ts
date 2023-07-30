@@ -6,11 +6,11 @@ import en from './locales/en.json';
 import es from './locales/es.json';
 import fr from './locales/fr.json';
 import it from './locales/it.json';
-import Plugin from './plugin';
+import CommonPlugin from './plugins/common';
+import './plugins/notification';
 import router from './router';
 import './style.css';
 import type { Lang } from './types/common';
-
 
 const browserLanguage = navigator.language;
 const defaultLocale = browserLanguage.substring(0, 2) as Lang;
@@ -35,8 +35,8 @@ if (!supportedLocales.includes(defaultLocale)) {
     const i18n = createI18n({
         locale: defaultLocale,
         messages: { fr, en, es, it }
-    })
+    });
 
-    app.use(router).use(pinia).use(i18n).use(Plugin);
+    app.use(router).use(pinia).use(i18n).use(CommonPlugin);
     app.mount('#app');
 })();

@@ -1,44 +1,28 @@
 <script setup lang="ts">
-import Badge from '@/components/Badge.vue';
 import ButtonTemplate from '@/components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Question from '@/components/Learning/Question.vue';
 import Loader from '@/components/Loader.vue';
 import Regions from '@/components/Regions.vue';
-import { User } from '@/models/User';
-import { useStore } from '@/store';
+import { notify } from '@/plugins/notification';
 import { useCountriesStore } from '@/store/countries';
 import { CurrentState, LearningType, ScoreType } from '@/types/common';
 import type { Country } from '@/types/models';
 import ApiClient from '@/utils/ApiClient';
-import { storeToRefs } from 'pinia';
-import { Ref, onBeforeMount, ref, watch } from 'vue';
+import { getLevelName } from '@/utils/common';
+import { onBeforeMount, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
+const { t } = useI18n();
 const route = useRoute();
-const store = useStore();
 const contriesStore = useCountriesStore();
-
-// This page is protected by a guard, so we can assume that the user is logged in and defined
-const user = storeToRefs(store).user as Ref<User>;
 
 const isLoading = ref(false);
 
 const currentLearning: LearningType = route.path.split('/')[2] as LearningType;
 const currentState = ref<CurrentState>('starting');
 const couldNotGetCountry = ref(false);
-const displayLevelUpdate = ref(false);
-const levelUpdate: LevelUpdate = {
-    score: 0,
-    level: 'up'
-};
-
-type LevelUpdateType = 'up' | 'down';
-
-interface LevelUpdate {
-    score: number;
-    level: LevelUpdateType;
-}
 
 const country = ref<Country>();
 const continent = ref<number>(0);
@@ -78,9 +62,18 @@ async function handleClick(score: ScoreType) {
         console.error(response);
         return;
     } else if (response.data.level) {
-        displayLevelUpdate.value = true;
-        levelUpdate.score = response.data.score;
-        levelUpdate.level = response.data.level;
+        notify({
+            title: t('levelUp'),
+            message: `You are now ${getLevelName(response.data.score)} on ${
+                country.value.name
+            }!`,
+            type: response.data.level === 'up' ? 'success' : 'error',
+            country: {
+                name: country.value.name,
+                flag: country.value.flag
+            },
+            score: response.data.score
+        });
     }
 
     currentState.value = 'starting';
@@ -103,21 +96,6 @@ watch(continent, getNewCountry);
         :buttonDescription="$t('close')"
         type="error"
     />
-    <Dialog
-        v-model="displayLevelUpdate"
-        :title="
-            levelUpdate.level === 'up' ? $t('congratulations') : $t('tooBad')
-        "
-        :description="
-            levelUpdate.level === 'up' ? $t('levelUp') : $t('levelDown')
-        "
-        :buttonDescription="$t('close')"
-        :type="levelUpdate.level === 'up' ? 'success' : 'error'"
-    >
-        <template #badge>
-            <Badge :score="levelUpdate.score" :selected="false" />
-        </template>
-    </Dialog>
     <Loader v-if="isLoading" />
     <div class="w-full flex flex-col justify-center items-center">
         <div

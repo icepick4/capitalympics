@@ -3,6 +3,7 @@ import CarouselAuto from '@/components/CarouselAuto.vue';
 import Loader from '@/components/Loader.vue';
 import Planet from '@/components/Planet.vue';
 import { CountryI } from '@/models/Country';
+import { notify } from '@/plugins/notification';
 import ApiService from '@/services/apiService';
 import { getLanguage } from '@/utils/common';
 import { onBeforeMount, onUnmounted, ref } from 'vue';
@@ -102,6 +103,17 @@ const handleScroll = () => {
         imageScale.value = 1;
     }
 };
+
+notify({
+    title: 'Level up!',
+    message: 'You are now Beginner on Earth!',
+    type: 'success',
+    country: {
+        name: 'Earth',
+        flag: 'https://flagcdn.com/w320/aw.png'
+    },
+    score: 50
+});
 </script>
 
 <template>
@@ -127,7 +139,6 @@ const handleScroll = () => {
                 {{ $t('welcomeMessage') }}
             </p>
         </div>
-
         <Planet
             v-if="displayPlanet"
             class="cursor-grab"
