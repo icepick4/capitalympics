@@ -3,7 +3,7 @@ import { IconCircleCheckFilled, IconX } from '@tabler/icons-vue';
 import { onMounted, ref } from 'vue';
 import Badge from '../Badge.vue';
 
-interface Properties {
+export interface Properties {
     title: string;
     message?: string;
     type: 'success' | 'error' | 'warning';

@@ -37,7 +37,7 @@ export class LocalStorage {
     }
 
     public has(key: string): boolean {
-        return !!this.get<any>(key);
+        return typeof localStorage.getItem(key) === 'string';
     }
 
     public remove(key: string): void {
@@ -55,14 +55,15 @@ export class LocalStorage {
             return undefined;
         }
 
-        return DateTime.fromISO(parsedValue.expiredAt).diffNow('minutes')
-            .minutes;
+        const { minutes: diffInMinutes } = DateTime.fromISO(parsedValue.expiredAt).diffNow('minutes');
+
+        return Math.round(diffInMinutes);
     }
 
     private isExpire(storedValue: StoredValue<any>): boolean {
         // No expiration date has been set.
         if (!storedValue.expiredAt) {
-            return true;
+            return false;
         }
 
         return DateTime.now() > DateTime.fromISO(storedValue.expiredAt);

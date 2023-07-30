@@ -59,12 +59,12 @@ export const useStore = defineStore('app', () => {
         user.value = response.data.data;
     }
 
-    function logout() {
+    function logout(redirectRouteName: string = 'Home') {
         isAuthenticated.value = false;
         ApiClient.logout();
         user.value = null;
 
-        router.push({ name: 'Home' });
+        router.push({ name: redirectRouteName });
     }
 
     async function updateAccount(data: Partial<User>) {
