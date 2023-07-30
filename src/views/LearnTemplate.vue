@@ -64,15 +64,17 @@ async function handleClick(score: ScoreType) {
     } else if (response.data.level) {
         notify({
             title: t('levelUp'),
-            message: `You are now ${getLevelName(response.data.score)} on ${
-                country.value.name
-            }!`,
+            message: t('levelUpMessage', {
+                level: getLevelName(response.data.score),
+                country: country.value.name
+            }),
             type: response.data.level === 'up' ? 'success' : 'error',
             country: {
                 name: country.value.name,
                 flag: country.value.flag
             },
-            score: response.data.score
+            score: response.data.score,
+            timeout: 5000
         });
     }
 

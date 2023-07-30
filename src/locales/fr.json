@@ -132,5 +132,6 @@
     "congratulations": "Félicitations !",
     "tooBad": "Dommage !",
     "levelUp": "Vous êtes passé au niveau supérieur ! 🚀🎉",
-    "levelDown": "Vous êtes redescendu d'un niveau !"
+    "levelDown": "Vous êtes redescendu d'un niveau !",
+    "levelUpMessage": "Vous êtes maintenant {level} avec : {country}."
 }

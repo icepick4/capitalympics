@@ -12,12 +12,13 @@ interface Properties {
         flag: string;
     };
     score?: number;
+    timeout?: number;
 }
 
-defineProps<Properties>();
+const props = defineProps<Properties>();
 
 const enabled = ref(true);
-const timeout = 3000;
+const timeout = props.timeout || 5000;
 const close = () => {
     enabled.value = false;
 };
