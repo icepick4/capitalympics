@@ -73,11 +73,10 @@ async function handleClick(score: ScoreType) {
                 response.data.level === 'up'
                     ? t('congratulations')
                     : t('tooBad'),
-            message:
-                response.data.level === 'up' ? t('levelUp') : t('levelDown'),
-            type: response.data.level === 'up' ? 'success' : 'error',
+            message: t('levelUp'),
+            type: response.data.level === 'up' ? 'success' : 'warning',
             flag: country.value.flag,
-            score: response.data.score,
+            score: response.data.score
         });
     }
 

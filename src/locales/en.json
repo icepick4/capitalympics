@@ -129,10 +129,9 @@
     "deleteAccountConfirmation": "Are you sure you want to delete your account ?",
     "signedUpSuccessfully": "Signed up successfully, now you can log in",
     "world": "World",
-    "congratulations": "Congratulations",
-    "tooBad": "Too bad",
-    "levelUp": "You've reached the next level ! 🚀🎉",
-    "levelDown": "You've lost a level ! 😔",
+    "congratulations": "Congratulations! 🚀🎉",
+    "tooBad": "Too bad! 😔",
+    "levelUp": "You've reached the level",
     "confirmDialog": {
         "cancel": "Cancel",
         "confirm": "Confirm"

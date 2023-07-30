@@ -35,18 +35,18 @@ const navigateToCountry = (country: CountryI) => {
 const scrollTo = (id: string) => {
     const element = document.querySelector(id) as HTMLElement;
     if (element) {
-        document.body.scrollTo({
+        window.scrollTo({
             top: element.offsetTop,
             behavior: 'smooth'
         });
     } else if (id === 'top') {
         imageScale.value = 1;
-        document.body.scrollTo({
+        window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
     } else if (id === 'bottom') {
-        document.body.scrollTo({
+        window.scrollTo({
             top: document.body.scrollHeight,
             behavior: 'smooth'
         });
@@ -66,11 +66,11 @@ onBeforeMount(async () => {
         finishedWaited.value = true;
         noCountriesFound.value = true;
     }
-    document.body.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 });
 
 onUnmounted(() => {
-    document.body.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('scroll', handleScroll);
 });
 
 const handleScroll = () => {

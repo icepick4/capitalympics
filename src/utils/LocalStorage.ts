@@ -19,7 +19,7 @@ export class LocalStorage {
         const parsedValue = SuperJSON.parse<StoredValue<T>>(v);
         if (this.isExpire(parsedValue)) {
             this.remove(key);
-            return;
+            return undefined;
         }
 
         return parsedValue.value;
@@ -55,7 +55,9 @@ export class LocalStorage {
             return undefined;
         }
 
-        const { minutes: diffInMinutes } = DateTime.fromISO(parsedValue.expiredAt).diffNow('minutes');
+        const { minutes: diffInMinutes } = DateTime.fromISO(
+            parsedValue.expiredAt
+        ).diffNow('minutes');
 
         return Math.round(diffInMinutes);
     }

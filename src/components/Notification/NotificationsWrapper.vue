@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import type { Notification } from '@/plugins/notifications';
 import { Ref, inject } from 'vue';
-import NotificationComponent from './Notification.v2.vue';
+import NotificationComponent from './Notification.vue';
 
-const notifications = inject<Ref<Notification[]>>('notifications') as Ref<Notification[]>;
+const notifications = inject<Ref<Notification[]>>('notifications') as Ref<
+    Notification[]
+>;
 function removeNotification(id: string) {
-    console.log("Delete " + id);
-    console.log(
-        notifications.value.map((n) => n.id).join(', ')
-    )
-    notifications.value = notifications.value.filter(n => n.id !== id);
+    notifications.value = notifications.value.filter((n) => n.id !== id);
 }
 </script>
 
 <template>
     <transition-group
-        name="fade-slide"
+        name="slide-fade"
+        enter-active-class="slide-fade-enter-active"
+        leave-active-class="slide-fade-leave-active"
         tag="div"
-        class="absolute bottom-0 right-0 z-50 p-6 w-full max-w-md flex flex-col gap-y-3 overflow-hidden"
+        class="absolute bottom-0 right-0 z-50 p-6 w-full max-w-md flex flex-col gap-y-4 overflow-hidden"
     >
         <NotificationComponent
             v-for="notification in notifications"
@@ -29,20 +29,29 @@ function removeNotification(id: string) {
 </template>
 
 <style scoped>
-.fade-slide-enter-active,
-.fade-slide-leave-active {
-    transition: all 0.5s ease;
+.slide-fade-enter-active {
+    animation: slide-up 0.5s ease-out;
 }
 
-.fade-slide-enter-from,
-.fade-slide-leave-to {
-    opacity: 0;
-    transform: translateX(100px);
+.slide-fade-leave-active {
+    animation: slide-right 0.5s ease-out;
 }
 
-.fade-slide-enter-to,
-.fade-slide-leave-from {
-    opacity: 1;
-    transform: translateY(0);
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-right {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
 }
 </style>
