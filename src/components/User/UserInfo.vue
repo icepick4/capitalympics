@@ -281,7 +281,7 @@ async function disconnect() {
                         :label="$t('more')"
                         :disabled="filteredCountries.length <= currentMax"
                         rounded
-                        class="peer hover:scale-110 focus:scale-110"
+                        class="peer hover:scale-110"
                         @click="increaseMax"
                     />
                     <span
@@ -295,7 +295,7 @@ async function disconnect() {
                         :label="$t('less')"
                         :disabled="currentMax <= 3"
                         rounded
-                        class="peer hover:scale-110 focus:scale-110"
+                        class="peer hover:scale-110"
                         @click="decreaseMax"
                     />
                     <span
@@ -320,7 +320,7 @@ async function disconnect() {
                         :icon="IconX"
                         :label="$t('reset')"
                         rounded
-                        class="hover:scale-110 focus:scale-110"
+                        class="hover:scale-110"
                         @click="resetMax"
                     />
                     <span class="text-center text-sm">{{ $t('reset') }}</span>
@@ -332,7 +332,7 @@ async function disconnect() {
                         :icon="IconArrowsSort"
                         :label="$t('switch')"
                         rounded
-                        class="hover:scale-110 focus:scale-110"
+                        class="hover:scale-110"
                         :class="{
                             '-rotate-180': clickedSwitchLearningType
                         }"
@@ -349,7 +349,7 @@ async function disconnect() {
                         "
                         :label="$t('sort')"
                         rounded
-                        class="hover:scale-110 focus:scale-110"
+                        class="hover:scale-110"
                         @click="switchSort"
                     />
                     <span class="text-center text-sm">{{ $t('sort') }}</span>

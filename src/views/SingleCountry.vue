@@ -2,18 +2,22 @@
 import Country from '@/components/Country/Country.vue';
 import Loader from '@/components/Loader.vue';
 import { CountryI } from '@/models/Country';
-import ApiService from '@/services/apiService';
+import ApiClient from '@/utils/ApiClient';
 import { getLanguage } from '@/utils/common';
 import { onBeforeMount, reactive } from 'vue';
 
 interface State {
     country: CountryI | undefined;
     isLoading: boolean;
+    flagScore: number;
+    capitalScore: number;
 }
 
 const state: State = reactive({
     country: undefined,
-    isLoading: true
+    isLoading: true,
+    flagScore: -1,
+    capitalScore: -1
 });
 
 const props = defineProps<{
@@ -22,8 +26,27 @@ const props = defineProps<{
 
 onBeforeMount(async () => {
     let lang = getLanguage();
+
+    interface CountryResponse {
+        success: boolean;
+        country: CountryI;
+        flagScore?: number;
+        capitalScore?: number;
+    }
+
     try {
-        state.country = await ApiService.getCountry(props.countryCode, lang);
+        const response = await ApiClient.get<CountryResponse>(
+            `/countries/${props.countryCode}?lang=${lang}`
+        );
+
+        if (!response.success) {
+            console.error(response);
+            return;
+        }
+
+        state.country = response.data.country;
+        state.flagScore = response.data.flagScore || -1;
+        state.capitalScore = response.data.capitalScore || -1;
         state.isLoading = false;
     } catch (error) {
         state.isLoading = false;
@@ -42,6 +65,8 @@ const goBack = () => {
             <Country
                 v-if="state.country != undefined"
                 :country="state.country"
+                :flagScore="state.flagScore"
+                :capitalScore="state.capitalScore"
             />
         </Transition>
         <button
