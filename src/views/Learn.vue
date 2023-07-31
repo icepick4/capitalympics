@@ -3,6 +3,7 @@ import Badge from '@/components/Badge.vue';
 import Loader from '@/components/Loader.vue';
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { Level, User } from '@/models/User';
+import { notify } from '@/plugins/notifications';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
 import { storeToRefs } from 'pinia';
@@ -59,6 +60,11 @@ const resetScores = async (): Promise<boolean> => {
     } finally {
         initFirstTimeScores.value = false;
         userScore.value = (await getUserScore()) as Level;
+        notify({
+            title: t('resetScores'),
+            message: t('resetScoresSuccess'),
+            type: 'success'
+        });
     }
 
     return false;

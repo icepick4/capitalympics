@@ -59,13 +59,17 @@ class ApiClient {
                         // @todo display a message explaining why the user has been redirected.
                         appStore.logout('LogIn');
 
-                        throw new axios.Cancel('Your token is expired, the call was cancelled');
+                        throw new axios.Cancel(
+                            'Your token is expired, the call was cancelled'
+                        );
                     }
 
                     // The token must be refreshed
                     if (expiresIn < 30) {
                         await this.refreshToken();
-                        config.headers['Authorization'] = `Bearer ${this.token}`;
+                        config.headers[
+                            'Authorization'
+                        ] = `Bearer ${this.token}`;
                     }
                 }
 

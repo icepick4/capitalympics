@@ -1,6 +1,7 @@
 import type { User } from '@/models/User';
-import { DefaultLang, Maybe } from '@/types/common';
+import { Maybe } from '@/types/common';
 import ApiClient, { SuccessResponse } from '@/utils/ApiClient';
+import { getLanguage } from '@/utils/common';
 import { defineStore } from 'pinia';
 import { isObject } from 'radash';
 import { computed, ref, watch } from 'vue';
@@ -22,7 +23,7 @@ export const useStore = defineStore('app', () => {
     watch(
         () => user.value?.language,
         (language) => {
-            i18n.locale.value = language ?? DefaultLang;
+            i18n.locale.value = language ?? getLanguage();
         }
     );
 

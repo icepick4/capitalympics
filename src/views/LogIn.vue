@@ -1,15 +1,21 @@
 <script setup lang="ts">
+import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { IconUser } from '@tabler/icons-vue';
 import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const query = computed(() => route.query);
-const signedUp = ref(false);
+const { t } = useI18n();
 
 if (query.value.signedUp) {
-    signedUp.value = true;
+    notify({
+        title: t('success'),
+        message: t('signedUpMessage'),
+        type: 'success'
+    });
 }
 
 const router = useRouter();
@@ -50,13 +56,6 @@ async function login() {
         :description="$t('userNotFound')"
         :buttonDescription="$t('close')"
         type="error"
-    />
-    <Dialog
-        v-model="signedUp"
-        :title="$t('success')"
-        :description="$t('signedUpSuccessfully')"
-        :buttonDescription="$t('close')"
-        type="success"
     />
     <section
         class="relative py-10 bg-gray-900 sm:py-16 lg:py-24 h-full flex items-center"

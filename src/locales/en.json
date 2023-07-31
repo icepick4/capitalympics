@@ -143,5 +143,7 @@
     "populationSort": {
         "asc": "Sort by population (ascending)",
         "desc": "Sort by population (descending)"
-    }
+    },
+    "resetScoresSuccess": "Your scores have been reset successfully",
+    "resetScoresTitle": "Scores reset"
 }
