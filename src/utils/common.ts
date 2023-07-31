@@ -64,8 +64,7 @@ export function getLevelName(score: number): string {
         return '';
     }
 
-    const store = useStore();
-    const language = store.user?.language ?? 'en';
+    const language = getLanguage();
     const level = fromScoreToLevel(score);
 
     return Ranks[level][language];

@@ -64,7 +64,9 @@ export default class ApiService {
         return response.data.count;
     }
 
-    public static async getUserScore(user: User): Promise<number> {
+    public static async getUserScore(
+        user: User
+    ): Promise<{ capital: number; flag: number }> {
         interface ResponseOverallScores {
             success: true;
             scores: {
@@ -80,9 +82,11 @@ export default class ApiService {
             throw new Error('Failed get global scores');
         }
 
-        const { capital, flag } = response.data.scores;
-
-        return Math.round((capital + flag) / 2);
+        const scores = response.data.scores;
+        return {
+            capital: scores.capital,
+            flag: scores.flag
+        };
     }
 
     public static async updateUser(user: User): Promise<boolean> {

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
+import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
 import { useCountriesStore } from '@/store/countries';
 import { useRegionsStore } from '@/store/regions';
@@ -51,11 +52,13 @@ const currentSort = ref<Sort>('DESC');
 const isMax = ref(false);
 const countriesLength = ref(0);
 
-const flagScore = computed(() => getLevelName(user.value.flag_score));
-const capitalScore = computed(() => getLevelName(user.value.capital_score));
+const flagScore = ref(0);
+const capitalScore = ref(0);
 
 const currentScore = computed(() =>
-    learningType.value === 'flag' ? flagScore.value : capitalScore.value
+    learningType.value === 'flag'
+        ? getLevelName(flagScore.value)
+        : getLevelName(capitalScore.value)
 );
 
 const increaseMax = () => {
@@ -119,6 +122,10 @@ async function loadScores() {
             continent: _region.continent_id
         };
     });
+
+    const { capital, flag } = await ApiService.getUserScore(user.value);
+    flagScore.value = flag;
+    capitalScore.value = capital;
 }
 
 const isToday = (date: DateTime): boolean => {
