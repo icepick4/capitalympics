@@ -57,7 +57,7 @@ class ApiClient {
                         const appStore = useStore();
 
                         // @todo display a message explaining why the user has been redirected.
-                        appStore.logout('LogIn');
+                        appStore.logout({ expiredToken: '1' }, 'Login');
 
                         throw new axios.Cancel(
                             'Your token is expired, the call was cancelled'

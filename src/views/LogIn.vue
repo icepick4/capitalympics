@@ -13,8 +13,14 @@ const { t } = useI18n();
 if (query.value.signedUp) {
     notify({
         title: t('success'),
-        message: t('signedUpMessage'),
+        message: t('signedUpSuccessfully'),
         type: 'success'
+    });
+} else if (query.value.expiredToken) {
+    notify({
+        title: t('error'),
+        message: t('expiredToken'),
+        type: 'warning'
     });
 }
 

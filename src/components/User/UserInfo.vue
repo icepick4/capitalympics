@@ -38,7 +38,7 @@ interface DisplayedCountry {
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
 if (!user.value) {
-    store.logout();
+    store.logout({ loggedOut: '1' });
 }
 
 const countriesStore = useCountriesStore();
@@ -186,7 +186,7 @@ async function disconnect() {
     });
 
     if (!hasConfirmed) return;
-    store.logout();
+    store.logout({ loggedOut: '1' });
 }
 </script>
 

@@ -72,6 +72,7 @@
     "hard": "Hard",
     "visitGoogleMaps": "Visit Google Maps",
     "loggingOut": "Logging out...",
+    "loggedOutSuccessfully": "Logged out successfully",
     "lastActivity": "Last activity",
     "joined": "Joined ",
     "scores": "Your scores",
@@ -127,6 +128,7 @@
     "now": "Now",
     "deleteAccount": "Delete my account",
     "deleteAccountConfirmation": "Are you sure you want to delete your account ?",
+    "accountDeleted": "Your account has been deleted successfully",
     "signedUpSuccessfully": "Signed up successfully, now you can log in",
     "world": "World",
     "congratulations": "Congratulations! 🚀🎉",
@@ -145,5 +147,6 @@
         "desc": "Sort by population (descending)"
     },
     "resetScoresSuccess": "Your scores have been reset successfully",
-    "resetScoresTitle": "Scores reset"
+    "resetScoresTitle": "Scores reset",
+    "expiredToken": "Your session has expired, please log in again"
 }

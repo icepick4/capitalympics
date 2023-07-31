@@ -3,10 +3,12 @@ import CarouselAuto from '@/components/CarouselAuto.vue';
 import Loader from '@/components/Loader.vue';
 import Planet from '@/components/Planet.vue';
 import { CountryI } from '@/models/Country';
+import { notify } from '@/plugins/notifications';
 import ApiService from '@/services/apiService';
 import { getLanguage } from '@/utils/common';
-import { onBeforeMount, onUnmounted, ref } from 'vue';
-import { RouterLink, useRouter } from 'vue-router';
+import { computed, onBeforeMount, onUnmounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 
 const countries = ref<CountryI[]>([]);
 const router = useRouter();
@@ -19,6 +21,24 @@ const displayPlanet = ref(window.innerWidth > 1536);
 const isDeviceMobile = ref(window.innerWidth < 500);
 const finishedWaited = ref(false);
 const noCountriesFound = ref(false);
+
+const { t } = useI18n();
+const route = useRoute();
+const query = computed(() => route.query);
+
+if (query.value.loggedOut) {
+    notify({
+        title: t('success'),
+        message: t('loggedOutSuccessfully'),
+        type: 'success'
+    });
+} else if (query.value.deletedAccount) {
+    notify({
+        title: t('success'),
+        message: t('accountDeleted'),
+        type: 'success'
+    });
+}
 
 const handlePlanetMouseDown = () => {
     planetMouseDown.value = true;

@@ -82,6 +82,9 @@ const routes = [
             } else {
                 next();
             }
+        },
+        meta: {
+            isFromSignUp: false
         }
     },
     {

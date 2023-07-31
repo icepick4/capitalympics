@@ -61,7 +61,7 @@ const resetScores = async (): Promise<boolean> => {
         initFirstTimeScores.value = false;
         userScore.value = (await getUserScore()) as Level;
         notify({
-            title: t('resetScores'),
+            title: t('resetScoresTitle'),
             message: t('resetScoresSuccess'),
             type: 'success'
         });

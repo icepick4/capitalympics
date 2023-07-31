@@ -60,12 +60,15 @@ export const useStore = defineStore('app', () => {
         user.value = response.data.data;
     }
 
-    function logout(redirectRouteName: string = 'Home') {
+    function logout(
+        query: { [key: string]: string },
+        redirectRouteName: string = 'Home'
+    ) {
         isAuthenticated.value = false;
         ApiClient.logout();
         user.value = null;
 
-        router.push({ name: redirectRouteName });
+        router.push({ name: redirectRouteName, query });
     }
 
     async function updateAccount(data: Partial<User>) {
@@ -95,7 +98,7 @@ export const useStore = defineStore('app', () => {
             throw new Error('Failed to delete current user');
         }
 
-        logout();
+        logout({ deletedAccount: '1' });
     }
 
     return {

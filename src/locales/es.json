@@ -72,6 +72,7 @@
     "hard": "Difícil",
     "visitGoogleMaps": "Visitar Google Maps",
     "loggingOut": "Cerrando sesión...",
+    "loggedOutSuccessfully": "¡Has cerrado sesión con éxito!",
     "lastActivity": "Última actividad",
     "joined": "Unido",
     "scores": "Tus puntuaciones",
@@ -127,6 +128,7 @@
     "now": "Ahora",
     "deleteAccount": "Eliminar cuenta",
     "deleteAccountConfirmation": "¿Estás seguro de que quieres eliminar tu cuenta?",
+    "accountDeleted": "Cuenta eliminada con éxito",
     "signedUpSuccessfully": "¡Te has registrado con éxito!",
     "world": "Mundo",
     "congratulations": "¡Felicidades! 🚀🎉",
@@ -143,5 +145,8 @@
     "populationSort": {
         "asc": "Población (ascendente)",
         "desc": "Población (descendente)"
-    }
+    },
+    "resetScoresSuccess": "¡Tus puntuaciones se han restablecido con éxito!",
+    "resetScoresTitle": "Puntuaciones restablecidas",
+    "expiredToken": "Tu sesión ha expirado. Por favor, inicia sesión de nuevo."
 }

@@ -72,6 +72,7 @@
     "hard": "Difficile",
     "visitGoogleMaps": "Visita Google Maps",
     "loggingOut": "Disconnessione in corso...",
+    "loggedOutSuccessfully": "Disconnessione avvenuta con successo!",
     "lastActivity": "Ultima attività",
     "joined": "Iscritto",
     "scores": "I tuoi punteggi",
@@ -127,6 +128,7 @@
     "now": "Adesso",
     "deleteAccount": "Elimina il tuo account",
     "deleteAccountConfirmation": "Sei sicuro di voler eliminare il tuo account?",
+    "accountDeleted": "Il tuo account è stato eliminato con successo",
     "signedUpSuccessfully": "Registrazione avvenuta con successo!",
     "world": "Mondo",
     "congratulations": "Congratulazioni! 🚀🎉",
@@ -143,5 +145,8 @@
     "populationSort": {
         "asc": "Popolazione (crescente)",
         "desc": "Popolazione (decrescente)"
-    }
+    },
+    "resetScoresSuccess": "I tuoi punteggi sono stati reimpostati con successo",
+    "resetScoresTitle": "Punteggi reimpostati",
+    "expiredToken": "Il token di accesso è scaduto. Effettua nuovamente l'accesso."
 }

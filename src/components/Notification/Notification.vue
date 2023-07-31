@@ -53,7 +53,7 @@ const startTime = Date.now();
                 <div class="flex flex-row justify-between">
                     <div class="flex flex-row gap-3 items-center">
                         <div
-                            class="px-2 flex gap-3 items-center"
+                            class="flex gap-3 items-center"
                             v-if="!notification.flag && !notification.score"
                         >
                             <IconCircleCheckFilled
@@ -82,7 +82,7 @@ const startTime = Date.now();
                     </div>
                 </div>
                 <div class="flex flex-row justify-start items-center gap-3">
-                    <span class="block text-gray-500">{{
+                    <span class="px-1 block text-gray-500">{{
                         notification.message
                     }}</span>
                     <Badge

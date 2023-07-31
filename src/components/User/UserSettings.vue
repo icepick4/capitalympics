@@ -16,15 +16,15 @@ const user = storeToRefs(store).user as Ref<User>;
 const { t } = useI18n();
 const nameAlreadyTaken = ref(false);
 
-const name = ref(user.value.name);
-const language = ref(user.value.language);
+const name = ref(user.value?.name);
+const language = ref(user.value?.language);
 
 const canSave = computed(
     () =>
         name.value.length >= 3 &&
         name.value.length < 20 &&
-        (name.value !== user.value.name ||
-            language.value !== user.value.language)
+        (name.value !== user.value?.name ||
+            language.value !== user.value?.language)
 );
 
 const loading = ref(false);
@@ -40,8 +40,8 @@ async function saveProfile() {
         notify({
             type: 'success',
             title: t('success'),
-            message: t('profileSaved'),
-        })
+            message: t('profileSaved')
+        });
     } catch (e) {
         nameAlreadyTaken.value = true;
     } finally {
