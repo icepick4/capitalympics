@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import Badge from '@/components/Badge.vue';
 import Loader from '@/components/Loader.vue';
+import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { Level, User } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import { Ref, onBeforeMount, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
+const { t } = useI18n();
 
 const loading = ref(true);
 
 const userScore = ref(-2);
 const nextUserLevel = ref(-1);
 const initFirstTimeScores = ref(false);
-const confirmingResetScores = ref(false);
 
 const getUserScore = async (): Promise<number> => {
     loading.value = true;
@@ -35,16 +37,23 @@ const getUserScore = async (): Promise<number> => {
     return score;
 };
 
-const resetScoresConfirmation = () => {
-    confirmingResetScores.value = true;
+const resetScoresConfirmation = async () => {
+    const hasConfirmed = await useConfirmDialog({
+        title: t('resetScoresConfirmation'),
+        description: t('resetScoresMessage'),
+        cancelText: t('no'),
+        confirmText: t('yes')
+    });
+    if (hasConfirmed) {
+        resetScores();
+    }
 };
 
 const resetScores = async (): Promise<boolean> => {
     initFirstTimeScores.value = true;
-    confirmingResetScores.value = false;
 
     try {
-        return await ApiService.resetScores(user.value.id);
+        return await ApiService.resetScores();
     } catch (error) {
         console.log(error);
     } finally {
@@ -66,14 +75,6 @@ onBeforeMount(async () => {
         v-if="user !== null"
         class="flex flex-col justify-center items-center gap-20 my-5 h-full"
     >
-        <ConfirmDialog
-            v-model="confirmingResetScores"
-            :title="$t('resetScoresConfirmation')"
-            :description="$t('resetScoresMessage')"
-            @confirm="resetScores"
-            @cancel="confirmingResetScores = false"
-            type="warning"
-        />
         <Loader v-if="initFirstTimeScores" :title="$t('loading')" />
 
         <div

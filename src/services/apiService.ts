@@ -95,8 +95,8 @@ export default class ApiService {
         return response.success;
     }
 
-    public static async resetScores(user_id: number): Promise<boolean> {
-        const response = await ApiClient.post(`/users/init/${user_id}`, null);
+    public static async resetScores(): Promise<boolean> {
+        const response = await ApiClient.post(`/scores/reset`, null);
         if (!response.success) {
             throw new Error('Failed reset scores');
         }
