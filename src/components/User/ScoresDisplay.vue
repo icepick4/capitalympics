@@ -47,7 +47,7 @@ const getFlag = computed(() => {
                     />
                     <h3 class="font-bold">{{ country.name }}</h3>
                 </div>
-                <Badge :score="country.score" />
+                <Badge :score="country.score" size="sm"></Badge>
             </RouterLink>
         </transition-group>
     </div>

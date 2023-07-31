@@ -2,49 +2,29 @@
 import { LearningType } from '@/types/common';
 import { fromScoreToLevel, getLevelName } from '@/utils/common';
 import {
-    IconCompass,
-    IconCrown,
-    IconGlobe,
-    IconMap,
-    IconMapPin,
-    IconMapPinStar,
-    IconPlanet,
-    IconSchool,
-    IconSparkles,
-    IconUserQuestion,
-    IconWorld,
-    IconWorldStar
+IconCompass,
+IconCrown,
+IconGlobe,
+IconMap,
+IconMapPin,
+IconMapPinStar,
+IconPlanet,
+IconSchool,
+IconSparkles,
+IconUserQuestion,
+IconWorld,
+IconWorldStar
 } from '@tabler/icons-vue';
-import { computed, onBeforeMount, onUnmounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
     score: number;
     learningType?: LearningType;
     selected?: boolean;
-    size?: 'sm' | 'md' | 'lg';
+    size?: 'xs' | 'sm' | 'md' | 'lg';
 }>();
 
-const onSmallScreen = () => window.innerWidth < 640;
-
-onBeforeMount(() => {
-    window.addEventListener('resize', () => {
-        if (onSmallScreen()) {
-            size.value = 'lg';
-        } else {
-            size.value = props.size ?? 'md';
-        }
-    });
-});
-
-onUnmounted(() => {
-    window.removeEventListener('resize', () => {});
-});
-
 const size = ref(props.size ?? 'md');
-
-if (onSmallScreen()) {
-    size.value = 'lg';
-}
 
 const level = computed(() => fromScoreToLevel(props.score));
 const text = computed(() => getLevelName(props.score));
@@ -105,6 +85,7 @@ const color = computed(() => {
                     'sm:shadow-[0_2px_20px_rgba(128,_49,232,_0.8)]': selected
                 },
                 {
+                    'text-xs': size === 'xs',
                     'text-sm': size === 'sm',
                     'text-base': size === 'md',
                     'text-xl': size === 'lg'
@@ -115,6 +96,7 @@ const color = computed(() => {
                 :is="icon"
                 class="mr-2"
                 :class="{
+                    'w-3 h-3': size === 'xs',
                     'w-4 h-4': size === 'sm',
                     'w-6 h-6': size === 'md',
                     'w-8 h-8': size === 'lg'

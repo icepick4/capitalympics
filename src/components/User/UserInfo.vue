@@ -91,7 +91,6 @@ const switchSort = () => {
 
 async function loadScores() {
     const queryParams = {
-        continent: continent.value || undefined,
         type: learningType.value
     };
 

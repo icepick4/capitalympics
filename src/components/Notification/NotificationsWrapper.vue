@@ -17,7 +17,7 @@ function removeNotification(id: string) {
         enter-active-class="slide-fade-enter-active"
         leave-active-class="slide-fade-leave-active"
         tag="div"
-        class="absolute bottom-0 right-0 z-50 p-6 w-full max-w-md flex flex-col gap-y-4 overflow-hidden"
+        class="fixed bottom-0 right-0 z-50 p-6 w-full max-w-md flex flex-col gap-y-4 overflow-hidden"
     >
         <NotificationComponent
             v-for="notification in notifications"
