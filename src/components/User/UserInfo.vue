@@ -37,6 +37,9 @@ interface DisplayedCountry {
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
+if (!user.value) {
+    store.logout();
+}
 
 const countriesStore = useCountriesStore();
 const regionsStore = useRegionsStore();
@@ -183,7 +186,7 @@ async function disconnect() {
     });
 
     if (!hasConfirmed) return;
-    await store.logout();
+    store.logout();
 }
 </script>
 
@@ -230,11 +233,11 @@ async function disconnect() {
                 </div>
                 <p class="text-black mb-2">
                     {{ $t('lastActivity') }} :
-                    {{ formatDate(DateTime.fromISO(user.updated_at)) }}
+                    {{ formatDate(DateTime.fromISO(user?.updated_at)) }}
                 </p>
                 <p class="text-black">
                     {{ $t('joined') }} :
-                    {{ formatDate(DateTime.fromISO(user.created_at)) }}
+                    {{ formatDate(DateTime.fromISO(user?.created_at)) }}
                 </p>
             </div>
             <div
