@@ -11,8 +11,11 @@ import ApiClient from '@/utils/ApiClient';
 import { getLevelName } from '@/utils/common';
 import {
     IconArrowsSort,
+    IconChartBar,
+    IconLogout,
     IconMinus,
     IconPlus,
+    IconSettings,
     IconSortAscending,
     IconSortDescending,
     IconX
@@ -214,17 +217,19 @@ async function disconnect() {
                     <div
                         class="flex items-center center justify-end gap-4 w-full"
                     >
+                        <RouterLink to="/profile/statistics">
+                            <IconChartBar
+                                class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
+                                @click="$emit('close')"
+                            />
+                        </RouterLink>
                         <RouterLink to="/profile/edit">
-                            <img
-                                src="/icons/settings.png"
-                                alt="Edit account"
+                            <IconSettings
                                 class="w-8 h-8 cursor-pointer hover:rotate-180 transition-all duration-500"
                                 @click="$emit('close')"
                             />
                         </RouterLink>
-                        <img
-                            src="/icons/logout.png"
-                            alt="Logout"
+                        <IconLogout
                             class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
                             @click="disconnect"
                         />

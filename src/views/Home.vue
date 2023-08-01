@@ -149,8 +149,10 @@ const handleScroll = () => {
                 {{ $t('welcomeMessage') }}
             </p>
         </div>
-        <Line />
-        <Doughnut class="w-1/2" />
+        <div class="flex flex-col w-1/3 gap-10">
+            <Line />
+            <Doughnut />
+        </div>
         <Planet
             v-if="displayPlanet"
             class="cursor-grab"

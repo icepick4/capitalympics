@@ -106,6 +106,10 @@ const routes = [
             {
                 path: 'edit',
                 component: Profile
+            },
+            {
+                path: 'statistics',
+                component: Profile
             }
         ],
         props: true,
