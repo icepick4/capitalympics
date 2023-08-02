@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useStore } from '@/store';
+import { IconUser } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
@@ -103,11 +104,7 @@ onUnmounted(() => {
                         to="/profile"
                         class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
                     >
-                        <img
-                            src="/icons/default_profile.png"
-                            alt="avatar"
-                            class="w-10 h-10 rounded-full"
-                        />
+                        <IconUser class="w-10 h-10 rounded-full" />
                     </RouterLink>
                 </template>
             </div>

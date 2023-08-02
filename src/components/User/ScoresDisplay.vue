@@ -18,7 +18,7 @@ const getFlag = computed(() => {
 </script>
 
 <template>
-    <div class="p2 sm:p-6">
+    <div class="p2">
         <div class="flex flex-row justify-between w-full items-center mb-4">
             <h2 class="text-xl font-bold w-full">{{ title }}</h2>
             <slot></slot>

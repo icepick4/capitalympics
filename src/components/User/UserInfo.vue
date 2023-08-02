@@ -3,7 +3,12 @@ import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
-import { IconListNumbers, IconLogout2, IconSettings } from '@tabler/icons-vue';
+import {
+    IconListNumbers,
+    IconLogout2,
+    IconSettings,
+    IconUser
+} from '@tabler/icons-vue';
 import { DateTime } from 'luxon';
 import { storeToRefs } from 'pinia';
 import { Ref, onMounted, ref } from 'vue';
@@ -71,9 +76,7 @@ async function disconnect() {
                     class="flex column flex-row items-center justify-center mb-4 gap-4"
                 >
                     <div class="flex items-center">
-                        <img
-                            src="/icons/default_profile.png"
-                            alt="User Avatar"
+                        <IconUser
                             class="w-10 h-10 sm:w-10 sm:h-10 rounded-full mr-4"
                         />
                         <h1 class="text-2xl mr-1 font-bold">

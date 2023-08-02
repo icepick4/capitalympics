@@ -73,7 +73,7 @@ const color = computed(() => {
 </script>
 
 <template>
-    <div class="flex justify-center items-center select-none">
+    <div class="flex justify-start items-center select-none">
         <p class="w-28 text-center lg:text-start" v-if="learningType">
             {{ $t(learningType) }}
         </p>
