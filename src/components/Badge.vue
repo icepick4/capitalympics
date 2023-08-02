@@ -2,18 +2,18 @@
 import { LearningType } from '@/types/common';
 import { fromScoreToLevel, getLevelName } from '@/utils/common';
 import {
-IconCompass,
-IconCrown,
-IconGlobe,
-IconMap,
-IconMapPin,
-IconMapPinStar,
-IconPlanet,
-IconSchool,
-IconSparkles,
-IconUserQuestion,
-IconWorld,
-IconWorldStar
+    IconCompass,
+    IconCrown,
+    IconGlobe,
+    IconMap,
+    IconMapPin,
+    IconMapPinStar,
+    IconPlanet,
+    IconSchool,
+    IconSparkles,
+    IconUserQuestion,
+    IconWorld,
+    IconWorldStar
 } from '@tabler/icons-vue';
 import { computed, ref } from 'vue';
 
@@ -73,7 +73,7 @@ const color = computed(() => {
 </script>
 
 <template>
-    <div class="flex justify-start items-center select-none">
+    <div class="flex justify-center items-center select-none">
         <p class="w-28 text-center lg:text-start" v-if="learningType">
             {{ $t(learningType) }}
         </p>

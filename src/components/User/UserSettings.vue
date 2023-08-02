@@ -4,7 +4,7 @@ import { User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { languages } from '@/utils/common';
-import { IconUserX } from '@tabler/icons-vue';
+import { IconUserX, IconX } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -88,9 +88,7 @@ const deleteAccount = async () => {
                     />
                 </div>
                 <RouterLink to="/profile">
-                    <img
-                        src="/icons/close.png"
-                        alt="Account"
+                    <IconX
                         class="w-10 h-10 ml-2 cursor-pointer hover:scale-110 transition-all"
                     />
                 </RouterLink>
