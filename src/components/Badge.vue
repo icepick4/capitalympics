@@ -121,7 +121,16 @@ const circumference = computed(() => 2 * Math.PI * 30);
         class="relative flex flex-row items-center justify-center gap-2"
     >
         <div class="flex flex-col items-center justify-center gap-1">
-            <svg class="w-20 h-20 -rotate-90">
+            <svg
+                class="-rotate-90"
+                :class="{
+                    'w-16 h-16': size === 'xs',
+                    'w-20 h-20': size === 'sm',
+                    'w-24 h-24': size === 'md',
+                    'w-28 h-28': size === 'lg'
+                }"
+                viewBox="0 0 80 80"
+            >
                 <circle
                     class="text-white"
                     stroke-width="5"
@@ -144,18 +153,33 @@ const circumference = computed(() => 2 * Math.PI * 30);
                 />
             </svg>
             <span class="absolute text-xl"
-                ><component :is="icon" class="w-8 h-8"
+                ><component
+                    :is="icon"
+                    :class="{
+                        'w-6 h-6': size === 'xs',
+                        'w-8 h-8': size === 'sm',
+                        'w-10 h-10': size === 'md',
+                        'w-12 h-12': size === 'lg'
+                    }"
             /></span>
         </div>
         <div class="flex flex-col items-start justify-start">
             <span
-                class="text-2xl font-bold bg-transparent p-1 rounded-lg"
-                :class="color"
+                class="text-2xl font-bold !bg-transparent p-1 rounded-lg"
+                :class="[
+                    color,
+                    {
+                        'text-xs': size === 'xs',
+                        'text-sm': size === 'sm',
+                        'text-lg': size === 'md',
+                        'text-xl': size === 'lg'
+                    }
+                ]"
             >
                 {{ text }}
             </span>
             <span class="text-2xl font-bold text-gray-800 p-1">{{
-                score * 10
+                Math.round(score * 10)
             }}</span>
         </div>
     </div>
