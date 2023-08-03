@@ -24,11 +24,13 @@ if (!user.value) {
 
 const { t } = useI18n();
 
-const score = ref(-2);
+const flagScore = ref(-2);
+const capitalScore = ref(-2);
 
 onMounted(async () => {
     const { capital, flag } = await ApiService.getUserScore();
-    score.value = (capital + flag) / 2;
+    flagScore.value = flag;
+    capitalScore.value = capital;
 });
 
 const isToday = (date: DateTime): boolean => {
@@ -69,7 +71,36 @@ async function disconnect() {
         class="w-full h-full flex flex-col items-center justify-center mt-10 mb-10"
     >
         <div class="w-full md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto p-4 sm:p-8">
-            <Badge v-if="score != -2" :score="score" size="lg" class="mb-4" />
+            <div class="flex flex-col items-center justify-start gap-5">
+                <div
+                    class="w-full flex flex-col xs:flex-row items-center justify-between gap-10"
+                >
+                    <span class="text-2xl xs:text-lg sm:text-2xl font-thin">{{
+                        $t('flags')
+                    }}</span>
+                    <Badge
+                        v-if="flagScore !== -2"
+                        :score="flagScore"
+                        size="md"
+                        :progress="true"
+                        class="mb-4"
+                    />
+                </div>
+                <div
+                    class="w-full flex flex-col xs:flex-row items-center justify-between gap-10"
+                >
+                    <span class="text-2xl xs:text-lg sm:text-2xl font-thin">{{
+                        $t('capitals')
+                    }}</span>
+                    <Badge
+                        v-if="capitalScore !== -2"
+                        :score="capitalScore"
+                        size="md"
+                        :progress="true"
+                        class="mb-4"
+                    />
+                </div>
+            </div>
             <!-- Informations de l'utilisateur -->
             <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-10">
                 <div

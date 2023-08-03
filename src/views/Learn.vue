@@ -25,7 +25,7 @@ const getUserScore = async (): Promise<number> => {
     loading.value = true;
     let score: number = -1;
     try {
-        const { capital, flag } = await ApiService.getUserScore(user.value);
+        const { capital, flag } = await ApiService.getUserScore();
         const score = (capital + flag) / 2;
         nextUserLevel.value = score + 10;
         return score;

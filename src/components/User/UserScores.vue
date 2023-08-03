@@ -56,9 +56,7 @@ const flagScore = ref(0);
 const capitalScore = ref(0);
 
 const currentScore = computed(() =>
-    learningType.value === 'flag'
-        ? getLevelName(flagScore.value)
-        : getLevelName(capitalScore.value)
+    learningType.value === 'flag' ? flagScore.value : capitalScore.value
 );
 
 const increaseMax = () => {
@@ -158,6 +156,7 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     <div
         class="w-full h-full flex flex-col items-center justify-center gap-10 mt-10 mb-10"
     >
+        <Badge :score="currentScore" size="lg" :progress="true" class="mb-4" />
         <div
             class="grid grid-rows-1 sm:grid-cols-4 sm:grid-rows-3 2xl:flex items-center gap-2 justify-center mb-10"
             style="grid-auto-flow: column"
@@ -166,9 +165,11 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 v-for="(score, index) in scoreValues"
                 :key="index"
                 :score="score"
-                :selected="getLevelName(score) == currentScore"
+                :selected="getLevelName(score) == getLevelName(currentScore)"
                 class="sm:block"
-                :class="{ hidden: getLevelName(score) !== currentScore }"
+                :class="{
+                    hidden: getLevelName(score) !== getLevelName(currentScore)
+                }"
                 size="md"
             />
         </div>
