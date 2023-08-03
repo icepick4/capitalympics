@@ -150,5 +150,9 @@
     "resetScoresTitle": "Scores réinitialisés",
     "expiredToken": "Votre session a expiré. Veuillez vous reconnecter.",
     "seeInformations": "Voir les informations",
-    "seeProgression": "Voir la progression"
+    "seeProgression": "Voir la progression",
+    "statistics": "Statistiques",
+    "numberOfQuestions": "Nombre de questions",
+    "lastStreak": "Dernière série",
+    "daysPlayed": "Jours joués"
 }

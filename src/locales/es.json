@@ -150,5 +150,9 @@
     "resetScoresTitle": "Puntuaciones restablecidas",
     "expiredToken": "Tu sesión ha expirado. Por favor, inicia sesión de nuevo.",
     "seeInformations": "Ver información",
-    "seeProgression": "Ver progresión"
+    "seeProgression": "Ver progresión",
+    "statistics": "Estadísticas",
+    "numberOfQuestions": "Número de preguntas",
+    "lastStreak": "Última racha",
+    "daysPlayed": "Días jugados"
 }

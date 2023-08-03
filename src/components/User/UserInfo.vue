@@ -16,6 +16,7 @@ import { Ref, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
+import StatCardContainer from '../Statistics/StatCardContainer.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -72,7 +73,7 @@ async function disconnect() {
         class="w-full h-full flex flex-col items-center justify-center mt-10 mb-10"
     >
         <div class="w-full md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto p-4 sm:p-8">
-            <div class="flex flex-row justify-end gap-2">
+            <div class="flex flex-col sm:flex-row justify-end sm:gap-2">
                 <div class="flex flex-col items-end justify-end gap-2">
                     <span class="text-2xl xs:text-lg sm:text-2xl font-thin">{{
                         $t('flags')
@@ -147,6 +148,7 @@ async function disconnect() {
                 </p>
             </div>
         </div>
+        <StatCardContainer />
     </div>
 </template>
 

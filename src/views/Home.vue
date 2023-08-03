@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import CarouselAuto from '@/components/CarouselAuto.vue';
-import Doughnut from '@/components/Charts/Doughnut.vue';
-import Line from '@/components/Charts/Line.vue';
 import Loader from '@/components/Loader.vue';
 import Planet from '@/components/Planet.vue';
 import { CountryI } from '@/models/Country';
@@ -148,10 +146,6 @@ const handleScroll = () => {
             <p class="text-black text-xl sm:text-2xl">
                 {{ $t('welcomeMessage') }}
             </p>
-        </div>
-        <div class="flex flex-col w-1/3 gap-10">
-            <Line />
-            <Doughnut />
         </div>
         <Planet
             v-if="displayPlanet"

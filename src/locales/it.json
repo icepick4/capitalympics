@@ -150,5 +150,9 @@
     "resetScoresTitle": "Punteggi reimpostati",
     "expiredToken": "Il token di accesso è scaduto. Effettua nuovamente l'accesso.",
     "seeInformations": "Vedi le informazioni",
-    "seeProgression": "Vedi la progressione"
+    "seeProgression": "Vedi la progressione",
+    "statistics": "Statistiche",
+    "numberOfQuestions": "Numero di domande",
+    "lastStreak": "Ultima striscia",
+    "daysPlayed": "Giorni giocati"
 }

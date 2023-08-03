@@ -67,11 +67,13 @@ const startTime = Date.now();
                         </div>
                         <img
                             v-else
-                            class="w-12 h-8 border-[1px] border-gray-700 rounded"
+                            class="w-9 h-6 sm:w-12 sm:h-8 border-[1px] border-gray-700 rounded"
                             :src="notification.flag"
                             :alt="notification.title"
                         />
-                        <span class="text-lg">{{ notification.title }}</span>
+                        <span class="text-base sm:text-lg">{{
+                            notification.title
+                        }}</span>
                     </div>
                     <div class="px-2">
                         <button @click="close">
@@ -82,9 +84,10 @@ const startTime = Date.now();
                     </div>
                 </div>
                 <div class="flex flex-row justify-start items-center gap-3">
-                    <span class="px-1 block text-gray-500">{{
-                        notification.message
-                    }}</span>
+                    <span
+                        class="text-sm sm:text-base px-1 block text-gray-500"
+                        >{{ notification.message }}</span
+                    >
                     <Badge
                         v-if="notification.score"
                         :score="notification.score"
