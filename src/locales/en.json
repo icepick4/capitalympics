@@ -148,5 +148,7 @@
     },
     "resetScoresSuccess": "Your scores have been reset successfully",
     "resetScoresTitle": "Scores reset",
-    "expiredToken": "Your session has expired, please log in again"
+    "expiredToken": "Your session has expired, please log in again",
+    "seeInformations": "See informations",
+    "seeProgression": "See progression"
 }

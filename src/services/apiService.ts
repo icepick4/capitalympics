@@ -64,9 +64,10 @@ export default class ApiService {
         return response.data.count;
     }
 
-    public static async getUserScore(
-        user: User
-    ): Promise<{ capital: number; flag: number }> {
+    public static async getUserScore(): Promise<{
+        capital: number;
+        flag: number;
+    }> {
         interface ResponseOverallScores {
             success: true;
             scores: {

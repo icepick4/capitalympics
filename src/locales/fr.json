@@ -148,5 +148,7 @@
     },
     "resetScoresSuccess": "Vos scores ont été réinitialisés avec succès",
     "resetScoresTitle": "Scores réinitialisés",
-    "expiredToken": "Votre session a expiré. Veuillez vous reconnecter."
+    "expiredToken": "Votre session a expiré. Veuillez vous reconnecter.",
+    "seeInformations": "Voir les informations",
+    "seeProgression": "Voir la progression"
 }

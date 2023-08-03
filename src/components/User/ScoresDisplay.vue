@@ -5,7 +5,7 @@ import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 
-const props = defineProps<{
+defineProps<{
     countries: CountryDetails[];
     title: string;
 }>();
@@ -18,7 +18,7 @@ const getFlag = computed(() => {
 </script>
 
 <template>
-    <div class="bg-gradient rounded-lg shadow-lg p-6">
+    <div class="p2">
         <div class="flex flex-row justify-between w-full items-center mb-4">
             <h2 class="text-xl font-bold w-full">{{ title }}</h2>
             <slot></slot>

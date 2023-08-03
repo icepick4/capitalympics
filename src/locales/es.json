@@ -148,5 +148,7 @@
     },
     "resetScoresSuccess": "¡Tus puntuaciones se han restablecido con éxito!",
     "resetScoresTitle": "Puntuaciones restablecidas",
-    "expiredToken": "Tu sesión ha expirado. Por favor, inicia sesión de nuevo."
+    "expiredToken": "Tu sesión ha expirado. Por favor, inicia sesión de nuevo.",
+    "seeInformations": "Ver información",
+    "seeProgression": "Ver progresión"
 }

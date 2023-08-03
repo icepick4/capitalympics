@@ -4,7 +4,7 @@ import { User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { languages } from '@/utils/common';
-import { IconUserX } from '@tabler/icons-vue';
+import { IconUserX, IconX } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -77,8 +77,12 @@ const deleteAccount = async () => {
             class="bg-gradient rounded-lg shadow-lg p-4 sm:p-6 mb-8 flex flex-col gap-10"
         >
             <div class="flex flex-row justify-between items-center">
-                <div class="flex flex-row justify-center items-center gap-5">
-                    <h1 class="text-xl sm:text-2xl">{{ $t('editProfile') }}</h1>
+                <div
+                    class="w-full flex flex-row justify-between items-center gap-5"
+                >
+                    <h1 class="w-6 sm:w-11/12 text-xl sm:text-2xl">
+                        {{ $t('editProfile') }}
+                    </h1>
                     <ActionIcon
                         :label="$t('deleteAccount')"
                         :icon="IconUserX"
@@ -88,14 +92,12 @@ const deleteAccount = async () => {
                     />
                 </div>
                 <RouterLink to="/profile">
-                    <img
-                        src="/icons/close.png"
-                        alt="Account"
+                    <IconX
                         class="w-10 h-10 ml-2 cursor-pointer hover:scale-110 transition-all"
                     />
                 </RouterLink>
             </div>
-            <div class="grid grid-cols-3 gap-x-3 items-end">
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-5 items-end">
                 <TextInput v-model="name" :label="$t('name')" />
                 <Select
                     v-model="language"

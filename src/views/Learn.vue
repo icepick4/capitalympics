@@ -25,7 +25,7 @@ const getUserScore = async (): Promise<number> => {
     loading.value = true;
     let score: number = -1;
     try {
-        const { capital, flag } = await ApiService.getUserScore(user.value);
+        const { capital, flag } = await ApiService.getUserScore();
         const score = (capital + flag) / 2;
         nextUserLevel.value = score + 10;
         return score;
@@ -87,25 +87,36 @@ onBeforeMount(async () => {
             class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-20"
         >
             <div
-                class="flex flex-col gap-5 justify-center items-center"
+                class="flex flex-col gap-6 justify-center items-center"
                 v-if="userScore != -1"
             >
-                <h1 class="text-center text-4xl">{{ $t('myLevel') }}</h1>
-                <Badge v-if="userScore != -2" :score="userScore" size="lg" />
-                {{ $t('nextLevel') }}
                 <Badge
-                    v-if="nextUserLevel != -1"
-                    :score="nextUserLevel"
-                    size="sm"
+                    v-if="userScore != -2"
+                    :score="userScore"
+                    size="lg"
+                    :progress="true"
                 />
+                <div class="flex flex-col gap-1 justify-center items-center">
+                    <span class="text-lg">{{ $t('nextLevel') }}</span>
+                    <Badge
+                        v-if="nextUserLevel != -1"
+                        :score="nextUserLevel"
+                        size="md"
+                    />
+                </div>
             </div>
             <div class="flex flex-col md:flex-row gap-10">
                 <div class="flex flex-col items-center gap-5">
-                    <h1>{{ $t('capitals') }}</h1>
+                    <h1 class="text-2xl">{{ $t('capitals') }}</h1>
                     <RouterLink
                         to="/learn/capital"
-                        class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md hover:scale-105"
+                        class="relative group transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md"
                     >
+                        <span
+                            class="absolute group-hover:opacity-100 opacity-100 xs:opacity-0 flex justify-center items-center inset-x-0 inset-y-0 right-0 p-1 text-4xl text-white bg-black bg-opacity-50 z-10 font-thin transition-all duration-300"
+                        >
+                            Learn
+                        </span>
                         <div class="relative w-full h-full">
                             <img
                                 src="/learn/capitals.jpg"
@@ -113,7 +124,7 @@ onBeforeMount(async () => {
                                 alt="capitals button image"
                             />
                             <span
-                                class="absolute -bottom-6 right-0 p-1 text-xs text-white bg-black bg-opacity-50 font-extralight"
+                                class="absolute group-hover:opacity-100 opacity-100 xs:opacity-0 bottom-0 right-0 p-1 text-xs text-white bg-black bg-opacity-50 font-extralight transition-all duration-300"
                             >
                                 Photo of
                                 <a
@@ -130,11 +141,16 @@ onBeforeMount(async () => {
                     </RouterLink>
                 </div>
                 <div class="flex flex-col items-center gap-5">
-                    <h1>{{ $t('flags') }}</h1>
+                    <h1 class="text-2xl">{{ $t('flags') }}</h1>
                     <RouterLink
                         to="/learn/flag"
-                        class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md hover:scale-105"
+                        class="relative group transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md"
                     >
+                        <span
+                            class="absolute group-hover:opacity-100 opacity-100 xs:opacity-0 flex justify-center items-center inset-x-0 inset-y-0 right-0 p-1 text-4xl text-white bg-black bg-opacity-50 z-10 font-thin transition-all duration-300"
+                        >
+                            Learn
+                        </span>
                         <div class="relative w-full h-full">
                             <img
                                 src="/learn/flags.jpg"
@@ -142,7 +158,7 @@ onBeforeMount(async () => {
                                 alt="flags button image"
                             />
                             <span
-                                class="absolute -bottom-6 right-0 p-1 text-xs text-white bg-black bg-opacity-50 font-extralight"
+                                class="absolute group-hover:opacity-100 opacity-100 xs:opacity-0 bottom-0 right-0 p-1 text-xs text-white bg-black bg-opacity-50 font-extralight transition-all duration-300"
                             >
                                 Photo of
                                 <a

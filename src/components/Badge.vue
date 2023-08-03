@@ -2,18 +2,18 @@
 import { LearningType } from '@/types/common';
 import { fromScoreToLevel, getLevelName } from '@/utils/common';
 import {
-IconCompass,
-IconCrown,
-IconGlobe,
-IconMap,
-IconMapPin,
-IconMapPinStar,
-IconPlanet,
-IconSchool,
-IconSparkles,
-IconUserQuestion,
-IconWorld,
-IconWorldStar
+    IconCompass,
+    IconCrown,
+    IconGlobe,
+    IconMap,
+    IconMapPin,
+    IconMapPinStar,
+    IconPlanet,
+    IconSchool,
+    IconSparkles,
+    IconUserQuestion,
+    IconWorld,
+    IconWorldStar
 } from '@tabler/icons-vue';
 import { computed, ref } from 'vue';
 
@@ -22,6 +22,7 @@ const props = defineProps<{
     learningType?: LearningType;
     selected?: boolean;
     size?: 'xs' | 'sm' | 'md' | 'lg';
+    progress?: boolean;
 }>();
 
 const size = ref(props.size ?? 'md');
@@ -70,11 +71,24 @@ const color = computed(() => {
         }[level.value] ?? defaultColor
     );
 });
+
+const isMaxScore = computed(() => props.score === 100);
+
+const offset = computed(() => {
+    if (isMaxScore.value) return 0;
+    const percent = props.score;
+    return circumference.value - (percent / 100) * circumference.value;
+});
+
+const circumference = computed(() => 2 * Math.PI * 30);
 </script>
 
 <template>
-    <div class="flex justify-start items-center select-none">
-        <p class="w-28 text-center lg:text-start" v-if="learningType">
+    <div
+        v-if="!progress"
+        class="flex flex-col xs:flex-row justify-start items-start select-none"
+    >
+        <p class="w-28 text-left lg:text-start" v-if="learningType">
             {{ $t(learningType) }}
         </p>
         <span
@@ -104,5 +118,72 @@ const color = computed(() => {
             />
             {{ text }}
         </span>
+    </div>
+    <div
+        v-else-if="progress"
+        class="relative flex flex-row items-center justify-center gap-2"
+    >
+        <div class="flex flex-col items-center justify-center gap-1">
+            <svg
+                class="-rotate-90"
+                :class="{
+                    'w-16 h-16': size === 'xs',
+                    'w-20 h-20': size === 'sm',
+                    'w-24 h-24': size === 'md',
+                    'w-28 h-28': size === 'lg'
+                }"
+                viewBox="0 0 80 80"
+            >
+                <circle
+                    class="text-white"
+                    stroke-width="5"
+                    stroke="currentColor"
+                    fill="transparent"
+                    r="30"
+                    cx="40"
+                    cy="40"
+                />
+                <circle
+                    :class="color"
+                    stroke-width="5"
+                    :stroke-dasharray="circumference"
+                    :stroke-dashoffset="offset"
+                    stroke="currentColor"
+                    fill="transparent"
+                    r="30"
+                    cx="40"
+                    cy="40"
+                />
+            </svg>
+            <span class="absolute text-xl"
+                ><component
+                    :is="icon"
+                    :class="{
+                        'w-6 h-6': size === 'xs',
+                        'w-8 h-8': size === 'sm',
+                        'w-10 h-10': size === 'md',
+                        'w-12 h-12': size === 'lg'
+                    }"
+            /></span>
+        </div>
+        <div class="flex flex-col items-start justify-start">
+            <span
+                class="text-2xl font-bold !bg-transparent p-1 rounded-lg"
+                :class="[
+                    color,
+                    {
+                        'text-xs': size === 'xs',
+                        'text-sm': size === 'sm',
+                        'text-lg': size === 'md',
+                        'text-xl': size === 'lg'
+                    }
+                ]"
+            >
+                {{ text }}
+            </span>
+            <span class="text-2xl font-bold text-gray-800 p-1">{{
+                Math.round(score * 10)
+            }}</span>
+        </div>
     </div>
 </template>

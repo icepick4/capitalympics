@@ -110,6 +110,10 @@ const routes = [
             {
                 path: 'statistics',
                 component: Profile
+            },
+            {
+                path: 'scores',
+                component: Profile
             }
         ],
         props: true,
