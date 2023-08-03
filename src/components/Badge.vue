@@ -22,6 +22,7 @@ const props = defineProps<{
     learningType?: LearningType;
     selected?: boolean;
     size?: 'xs' | 'sm' | 'md' | 'lg';
+    progress?: boolean;
 }>();
 
 const size = ref(props.size ?? 'md');
@@ -70,10 +71,20 @@ const color = computed(() => {
         }[level.value] ?? defaultColor
     );
 });
+
+const isMaxScore = computed(() => props.score === 100);
+
+const offset = computed(() => {
+    if (isMaxScore.value) return 0;
+    const percent = props.score;
+    return circumference.value - (percent / 100) * circumference.value;
+});
+
+const circumference = computed(() => 2 * Math.PI * 30);
 </script>
 
 <template>
-    <div class="flex justify-start items-center select-none">
+    <div v-if="!progress" class="flex justify-start items-center select-none">
         <p class="w-28 text-center lg:text-start" v-if="learningType">
             {{ $t(learningType) }}
         </p>
@@ -104,5 +115,48 @@ const color = computed(() => {
             />
             {{ text }}
         </span>
+    </div>
+    <div
+        v-else-if="progress"
+        class="relative flex flex-row items-center justify-center gap-2"
+    >
+        <div class="flex flex-col items-center justify-center gap-1">
+            <svg class="w-20 h-20 -rotate-90">
+                <circle
+                    class="text-white"
+                    stroke-width="5"
+                    stroke="currentColor"
+                    fill="transparent"
+                    r="30"
+                    cx="40"
+                    cy="40"
+                />
+                <circle
+                    :class="color"
+                    stroke-width="5"
+                    :stroke-dasharray="circumference"
+                    :stroke-dashoffset="offset"
+                    stroke="currentColor"
+                    fill="transparent"
+                    r="30"
+                    cx="40"
+                    cy="40"
+                />
+            </svg>
+            <span class="absolute text-xl"
+                ><component :is="icon" class="w-8 h-8"
+            /></span>
+        </div>
+        <div class="flex flex-col items-start justify-start">
+            <span
+                class="text-2xl font-bold bg-transparent p-1 rounded-lg"
+                :class="color"
+            >
+                {{ text }}
+            </span>
+            <span class="text-2xl font-bold text-gray-800 p-1">{{
+                score * 10
+            }}</span>
+        </div>
     </div>
 </template>
