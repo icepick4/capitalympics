@@ -84,8 +84,11 @@ const circumference = computed(() => 2 * Math.PI * 30);
 </script>
 
 <template>
-    <div v-if="!progress" class="flex justify-start items-center select-none">
-        <p class="w-28 text-center lg:text-start" v-if="learningType">
+    <div
+        v-if="!progress"
+        class="flex flex-col xs:flex-row justify-start items-start select-none"
+    >
+        <p class="w-28 text-left lg:text-start" v-if="learningType">
             {{ $t(learningType) }}
         </p>
         <span

@@ -148,5 +148,7 @@
     },
     "resetScoresSuccess": "I tuoi punteggi sono stati reimpostati con successo",
     "resetScoresTitle": "Punteggi reimpostati",
-    "expiredToken": "Il token di accesso è scaduto. Effettua nuovamente l'accesso."
+    "expiredToken": "Il token di accesso è scaduto. Effettua nuovamente l'accesso.",
+    "seeInformations": "Vedi le informazioni",
+    "seeProgression": "Vedi la progressione"
 }

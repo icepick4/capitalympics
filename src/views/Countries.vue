@@ -145,7 +145,7 @@ const switchSortName = () => {
     </div>
     <div class="w-full flex justify-center items-center">
         <div
-            class="w-full md:w-3/4 2xl:w-7/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16 p-10"
+            class="w-full md:w-3/4 2xl:w-7/12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-16 p-10"
         >
             <div v-for="country in sortedCountries" :key="country.id">
                 <CountryLink
