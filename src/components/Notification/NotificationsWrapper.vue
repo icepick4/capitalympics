@@ -17,7 +17,7 @@ function removeNotification(id: string) {
         enter-active-class="slide-fade-enter-active"
         leave-active-class="slide-fade-leave-active"
         tag="div"
-        class="fixed top-0 md:bottom-0 right-0 z-50 p-4 sm:p-6 w-full max-w-md flex flex-col-reverse sm:flex-col gap-y-4 overflow-hidden"
+        class="fixed sm:bottom-0 right-0 z-50 p-4 sm:p-6 w-full max-w-md flex flex-col-reverse sm:flex-col gap-y-4 overflow-hidden"
     >
         <NotificationComponent
             v-for="notification in notifications"
@@ -33,8 +33,9 @@ function removeNotification(id: string) {
     animation: slide-up 0.5s ease-out;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .slide-fade-enter-active {
+        top: 0;
         animation: slide-down 0.5s ease-out;
     }
 }

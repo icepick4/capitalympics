@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import ProgressBadgeSkeleton from '@/components/Skeletons/ProgressBadgeSkeleton.vue';
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
+import { isNow, isToday } from '@/utils/common';
 import {
     IconChartBar,
     IconListNumbers,
@@ -35,14 +37,6 @@ onMounted(async () => {
     capitalScore.value = capital;
 });
 
-const isToday = (date: DateTime): boolean => {
-    return date.toISODate() === DateTime.local().toISODate();
-};
-
-const isNow = (date: DateTime): boolean => {
-    return date.diffNow().as('minutes') < 10;
-};
-
 const formatDate = (date: DateTime) => {
     if (isToday(date)) {
         return t('today');
@@ -72,8 +66,11 @@ async function disconnect() {
     <div
         class="w-full h-full flex flex-col items-center justify-center mt-10 mb-10"
     >
-        <div class="w-full md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto p-4 sm:p-8">
-            <div class="flex flex-col sm:flex-row justify-end sm:gap-2">
+        <div class="w-full md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto">
+            <div
+                v-if="flagScore !== -2 && capitalScore !== -2"
+                class="flex flex-col sm:flex-row justify-end sm:gap-2"
+            >
                 <div class="flex flex-col items-end justify-end gap-2">
                     <span class="text-2xl xs:text-lg sm:text-2xl font-thin">{{
                         $t('flags')
@@ -99,8 +96,12 @@ async function disconnect() {
                     />
                 </div>
             </div>
+            <div v-else class="p-4 w-full flex gap-5 justify-end items-end">
+                <ProgressBadgeSkeleton />
+                <ProgressBadgeSkeleton />
+            </div>
             <!-- Informations de l'utilisateur -->
-            <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-10">
+            <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-5">
                 <div
                     class="flex column flex-row items-center justify-center mb-4 gap-4"
                 >
@@ -148,7 +149,8 @@ async function disconnect() {
                 </p>
             </div>
         </div>
-        <StatCardContainer />
+        <h1 class="text-3xl mb-5">{{ $t('statistics') }}</h1>
+        <StatCardContainer :basicDisplay="true" />
     </div>
 </template>
 

@@ -153,6 +153,11 @@
     "seeProgression": "See progression",
     "statistics": "Statistics",
     "numberOfQuestions": "Number of questions",
+    "bestStreak": "Best streak",
     "lastStreak": "Last streak",
-    "daysPlayed": "Days played"
+    "daysPlayed": "Days played",
+    "global": "Global",
+    "charts": "Charts",
+    "radarChartDescription": "Your average score for each continent",
+    "doughnutChartDescription": "Number of responses for each type"
 }

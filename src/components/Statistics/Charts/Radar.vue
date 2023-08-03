@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { useContinentsStore } from '@/store/continents';
 import { useRegionsStore } from '@/store/regions';
-import { UserScore } from '@/types/common';
-import ApiClient from '@/utils/ApiClient';
 
 import { useCountriesStore } from '@/store/countries';
+import { UserScore } from '@/types/common';
 import {
     Chart as ChartJS,
     Filler,
@@ -40,34 +39,41 @@ const chartData: {
 
 interface ChartOptions {
     responsive: boolean;
+    scale: {
+        ticks: {
+            beginAtZero: boolean;
+            min: number;
+            max: number;
+            stepSize: number;
+        };
+    };
 }
 
 const chartOptions: ChartOptions = {
-    responsive: true
+    responsive: true,
+    scale: {
+        ticks: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            stepSize: 500
+        }
+    }
 };
 
 const loaded = ref(false);
 const regionsStore = useRegionsStore();
 const countriesStore = useCountriesStore();
 
+const props = defineProps<{
+    flagScores: UserScore[];
+    capitalScores: UserScore[];
+    labels: string[];
+}>();
+
 onMounted(async () => {
-    interface ResponseGetScores {
-        success: true;
-        scores: UserScore[];
-    }
-
-    const flagResponse = await ApiClient.get<ResponseGetScores>('/scores', {
-        type: 'flag'
-    });
-    const capitalResponse = await ApiClient.get<ResponseGetScores>('/scores', {
-        type: 'capital'
-    });
-    if (!flagResponse.success || !capitalResponse.success) {
-        return;
-    }
-
-    const capitalData = capitalResponse.data.scores;
-    const flagData = flagResponse.data.scores;
+    const flagData = props.flagScores;
+    const capitalData = props.capitalScores;
 
     const continentsStore = useContinentsStore();
     const continents = computed(() => {
@@ -87,7 +93,7 @@ onMounted(async () => {
     });
     chartData.labels = continents.value.map((continent) => continent.label);
     chartData.datasets.push({
-        label: 'Drapeaux',
+        label: props.labels[0],
         backgroundColor: 'rgba(99, 255, 132, 0.6)',
         data: continents.value.map((continent) => {
             const scores = flagData.filter((score) => {
@@ -97,14 +103,16 @@ onMounted(async () => {
             });
 
             const scoresSum =
-                scores.reduce((a, b) => a + b.score, 0) / scores.length;
+                Math.floor(
+                    scores.reduce((a, b) => a + b.score, 0) / scores.length
+                ) * 10;
 
             return scoresSum;
         })
     });
 
     chartData.datasets.push({
-        label: 'Capitales',
+        label: props.labels[1],
         backgroundColor: 'rgba(255, 99, 132, 0.6)',
         data: continents.value.map((continent) => {
             const scores = capitalData.filter((score) => {
@@ -114,7 +122,9 @@ onMounted(async () => {
             });
 
             const scoresSum =
-                scores.reduce((a, b) => a + b.score, 0) / scores.length;
+                Math.floor(
+                    scores.reduce((a, b) => a + b.score, 0) / scores.length
+                ) * 10;
 
             return scoresSum;
         })

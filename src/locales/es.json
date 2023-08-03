@@ -153,6 +153,11 @@
     "seeProgression": "Ver progresión",
     "statistics": "Estadísticas",
     "numberOfQuestions": "Número de preguntas",
+    "bestStreak": "Mejor racha",
     "lastStreak": "Última racha",
-    "daysPlayed": "Días jugados"
+    "daysPlayed": "Días jugados",
+    "global": "Global",
+    "charts": "Gráficos",
+    "radarChartDescription": "Tu puntuación media en cada continente",
+    "doughnutChartDescription": "Número de respuestas para cada tipo"
 }

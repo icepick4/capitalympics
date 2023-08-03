@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ApiClient from '@/utils/ApiClient';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { onMounted, ref } from 'vue';
 import { Doughnut } from 'vue-chartjs';
@@ -32,29 +31,20 @@ const chartOptions: ChartOptions = {
 
 const loaded = ref(false);
 
+const props = defineProps<{
+    scores: {
+        country_id: number;
+        created_at: string;
+        result: 'succeeded' | 'medium' | 'failed';
+        learning_type: string;
+    }[];
+    labels: string[];
+}>();
+
 onMounted(async () => {
-    const learningType: string = 'flag';
-    interface RawScoresResponse {
-        success: boolean;
-        scores: {
-            country_id: number;
-            created_at: string;
-            result: 'succeeded' | 'medium' | 'failed';
-            learning_type: string;
-        }[];
-    }
+    const data = props.scores;
 
-    const response = await ApiClient.get<RawScoresResponse>('/scores/raw', {
-        type: learningType
-    });
-    if (!response.success) {
-        console.log(response.error);
-        return;
-    }
-
-    const data = response.data.scores;
-
-    chartData.labels = ['Succeeded', 'Medium', 'Failed'];
+    chartData.labels = props.labels;
 
     let successCount = 0;
     let mediumCount = 0;

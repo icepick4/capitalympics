@@ -153,6 +153,11 @@
     "seeProgression": "Vedi la progressione",
     "statistics": "Statistiche",
     "numberOfQuestions": "Numero di domande",
-    "lastStreak": "Ultima striscia",
-    "daysPlayed": "Giorni giocati"
+    "bestStreak": "Miglior serie",
+    "lastStreak": "Ultima serie",
+    "daysPlayed": "Giorni giocati",
+    "global": "Globale",
+    "charts": "Grafici",
+    "radarChartDescription": "Il vostro punteggio medio in ogni continente",
+    "doughnutChartDescription": "Numero di risposte per ogni tipo"
 }
