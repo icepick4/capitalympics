@@ -71,10 +71,8 @@ async function disconnect() {
         class="w-full h-full flex flex-col items-center justify-center mt-10 mb-10"
     >
         <div class="w-full md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto p-4 sm:p-8">
-            <div class="flex flex-col items-center justify-start gap-5">
-                <div
-                    class="w-full flex flex-col xs:flex-row items-center justify-between gap-10"
-                >
+            <div class="flex flex-row justify-end gap-2">
+                <div class="flex flex-col items-end justify-end gap-2">
                     <span class="text-2xl xs:text-lg sm:text-2xl font-thin">{{
                         $t('flags')
                     }}</span>
@@ -86,9 +84,7 @@ async function disconnect() {
                         class="mb-4"
                     />
                 </div>
-                <div
-                    class="w-full flex flex-col xs:flex-row items-center justify-between gap-10"
-                >
+                <div class="flex flex-col items-end justify-end gap-2">
                     <span class="text-2xl xs:text-lg sm:text-2xl font-thin">{{
                         $t('capitals')
                     }}</span>
