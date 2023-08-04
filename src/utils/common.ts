@@ -4,6 +4,14 @@ import { Lang, Translation } from '@/types/common';
 import { DateTime } from 'luxon';
 import { storeToRefs } from 'pinia';
 
+export const isToday = (date: DateTime): boolean => {
+    return date.toISODate() === DateTime.local().toISODate();
+};
+
+export const isNow = (date: DateTime): boolean => {
+    return DateTime.now().diff(date).as('minutes') < 10;
+};
+
 export function getCurrentMySQLDate(): string {
     return DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss');
 }

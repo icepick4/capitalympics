@@ -18,13 +18,6 @@ const switchCard = () => {
     seeBack.value = !seeBack.value;
 };
 
-const size = computed(() => {
-    if (window.innerWidth < 640) return 'xs';
-    if (window.innerWidth < 768) return 'sm';
-    if (window.innerWidth < 1024) return 'md';
-    return 'lg';
-});
-
 const switchText = computed(() => {
     return seeBack.value ? t('seeInformations') : t('seeProgression');
 });

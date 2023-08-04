@@ -108,6 +108,10 @@ const routes = [
                 component: Profile
             },
             {
+                path: 'statistics',
+                component: Profile
+            },
+            {
                 path: 'scores',
                 component: Profile
             }

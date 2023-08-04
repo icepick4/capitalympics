@@ -126,6 +126,7 @@
     "value": "Value",
     "today": "Today",
     "now": "Now",
+    "days": "day | days",
     "deleteAccount": "Delete my account",
     "deleteAccountConfirmation": "Are you sure you want to delete your account ?",
     "accountDeleted": "Your account has been deleted successfully",
@@ -150,5 +151,14 @@
     "resetScoresTitle": "Scores reset",
     "expiredToken": "Your session has expired, please log in again",
     "seeInformations": "See informations",
-    "seeProgression": "See progression"
+    "seeProgression": "See progression",
+    "statistics": "Statistics",
+    "numberOfQuestions": "Number of questions",
+    "bestStreak": "Best streak",
+    "lastStreak": "Last streak",
+    "daysPlayed": "Days played",
+    "global": "Global",
+    "charts": "Charts",
+    "radarChartDescription": "Your average score for each continent",
+    "doughnutChartDescription": "Number of responses for each type"
 }

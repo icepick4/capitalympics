@@ -126,6 +126,7 @@
     "value": "Valor",
     "today": "Hoy",
     "now": "Ahora",
+    "days": "día | días",
     "deleteAccount": "Eliminar cuenta",
     "deleteAccountConfirmation": "¿Estás seguro de que quieres eliminar tu cuenta?",
     "accountDeleted": "Cuenta eliminada con éxito",
@@ -150,5 +151,14 @@
     "resetScoresTitle": "Puntuaciones restablecidas",
     "expiredToken": "Tu sesión ha expirado. Por favor, inicia sesión de nuevo.",
     "seeInformations": "Ver información",
-    "seeProgression": "Ver progresión"
+    "seeProgression": "Ver progresión",
+    "statistics": "Estadísticas",
+    "numberOfQuestions": "Número de preguntas",
+    "bestStreak": "Mejor racha",
+    "lastStreak": "Última racha",
+    "daysPlayed": "Días jugados",
+    "global": "Global",
+    "charts": "Gráficos",
+    "radarChartDescription": "Tu puntuación media en cada continente",
+    "doughnutChartDescription": "Número de respuestas para cada tipo"
 }
