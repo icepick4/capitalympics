@@ -9,7 +9,7 @@ export const isToday = (date: DateTime): boolean => {
 };
 
 export const isNow = (date: DateTime): boolean => {
-    return date.diffNow().as('minutes') < 10;
+    return DateTime.now().diff(date).as('minutes') < 10;
 };
 
 export function getCurrentMySQLDate(): string {

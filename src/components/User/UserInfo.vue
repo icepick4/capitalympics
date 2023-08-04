@@ -38,12 +38,11 @@ onMounted(async () => {
 });
 
 const formatDate = (date: DateTime) => {
-    if (isToday(date)) {
-        return t('today');
-    }
-
     if (isNow(date)) {
         return t('now');
+    }
+    if (isToday(date)) {
+        return t('today');
     }
 
     return date.toLocaleString(DateTime.DATE_MED);

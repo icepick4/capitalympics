@@ -68,16 +68,19 @@ const calculateBestSucceededStreak = (
 const getDaysAgoFromDate = (date: DateTime): number | string => {
     const now = DateTime.now();
 
+    if (isNow(date)) {
+        return t('now');
+    }
     if (isToday(date)) {
         return t('today');
     }
 
-    if (isNow(date)) {
-        return t('now');
-    }
-
     const diff = now.diff(date, 'days').toObject();
-    return Math.abs(Math.round(diff.days || 0));
+    return (
+        Math.abs(Math.ceil(diff.days || 0)) +
+        ' ' +
+        t('days', Math.abs(Math.ceil(diff.days || 0)))
+    );
 };
 
 onMounted(async () => {
@@ -125,9 +128,7 @@ onMounted(async () => {
     ).size;
 
     lastLearnFlags.value = flagScores[0].created_at;
-    console.log(flagScores[0].created_at);
     lastLearnCapitals.value = capitalScores[0].created_at;
-    console.log(capitalScores[0].created_at);
 });
 </script>
 
@@ -169,7 +170,7 @@ onMounted(async () => {
                     }"
                 />
                 <StatCard
-                    :label="$t('lastLearn')"
+                    :label="$t('lastActivity')"
                     :value="
                         getDaysAgoFromDate(DateTime.fromISO(lastLearnFlags))
                     "
@@ -195,7 +196,7 @@ onMounted(async () => {
                     }"
                 />
                 <StatCard
-                    :label="$t('lastLearn')"
+                    :label="$t('lastActivity')"
                     :value="
                         getDaysAgoFromDate(DateTime.fromISO(lastLearnCapitals))
                     "

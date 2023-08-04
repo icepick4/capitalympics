@@ -126,6 +126,7 @@
     "value": "Valor",
     "today": "Hoy",
     "now": "Ahora",
+    "days": "día | días",
     "deleteAccount": "Eliminar cuenta",
     "deleteAccountConfirmation": "¿Estás seguro de que quieres eliminar tu cuenta?",
     "accountDeleted": "Cuenta eliminada con éxito",
