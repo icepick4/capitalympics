@@ -24,6 +24,7 @@ export const useStore = defineStore('app', () => {
         () => user.value?.language,
         (language) => {
             i18n.locale.value = language ?? getLanguage();
+            loadMandatoryData();
         }
     );
 

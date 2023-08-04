@@ -72,9 +72,9 @@ onMounted(async () => {
         <div class="w-full flex flex-col items-center gap-3">
             <h1 class="text-3xl mb-5">{{ $t('charts') }}</h1>
             <div
-                class="w-1/4 flex flex-col md:flex-row justify-center items-center gap-16"
+                class="flex flex-col md:flex-row justify-center items-center gap-16"
             >
-                <div class="flex flex-col items-center gap-10">
+                <div class="w-full h-full flex flex-col items-center gap-10">
                     <Doughnut
                         v-if="rawScores && rawScores.length > 0"
                         :scores="rawScores"
@@ -83,7 +83,9 @@ onMounted(async () => {
                     <ChartSkeleton v-else />
                     <StatCard :label="$t('doughnutChartDescription')" />
                 </div>
-                <div class="flex flex-col items-center gap-10">
+                <div
+                    class="w-full h-full flex flex-col justify-between items-center gap-10"
+                >
                     <Radar
                         v-if="
                             flagScores &&
