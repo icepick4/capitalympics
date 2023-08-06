@@ -146,7 +146,7 @@ onMounted(async () => {
                 <StatCard
                     :label="$t('bestStreak')"
                     :value="bestStreak"
-                    class="bg-green-800"
+                    class="bg-green-600"
                 />
                 <StatCard :label="$t('daysPlayed')" :value="daysPlayed" />
             </div>
@@ -164,9 +164,9 @@ onMounted(async () => {
                     :label="$t('lastStreak')"
                     :value="lastStreakFlags"
                     :class="{
-                        'bg-green-800': lastStreakFlagsLabel == 'succeeded',
-                        'bg-yellow-700': lastStreakFlagsLabel == 'medium',
-                        'bg-red-800': lastStreakFlagsLabel == 'failed'
+                        'bg-green-600': lastStreakFlagsLabel == 'succeeded',
+                        'bg-orange-600': lastStreakFlagsLabel == 'medium',
+                        'bg-red-600': lastStreakFlagsLabel == 'failed'
                     }"
                 />
                 <StatCard
@@ -190,9 +190,9 @@ onMounted(async () => {
                     :label="$t('lastStreak')"
                     :value="lastStreakCapitals"
                     :class="{
-                        'bg-green-800': lastStreakCapitalsLabel == 'succeeded',
-                        'bg-yellow-700': lastStreakCapitalsLabel == 'medium',
-                        'bg-red-800': lastStreakCapitalsLabel == 'failed'
+                        'bg-green-600': lastStreakCapitalsLabel == 'succeeded',
+                        'bg-orange-600': lastStreakCapitalsLabel == 'medium',
+                        'bg-red-600': lastStreakCapitalsLabel == 'failed'
                     }"
                 />
                 <StatCard

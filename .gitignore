@@ -26,3 +26,5 @@ dist-ssr
 src/assets/previous-logo/*
 
 .env
+
+countries/*

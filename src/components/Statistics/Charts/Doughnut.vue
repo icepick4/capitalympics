@@ -15,7 +15,7 @@ const chartData: {
     datasets: [
         {
             label: 'Scores',
-            backgroundColor: ['#41B883', '#E46651', '#DD1B16'],
+            backgroundColor: ['#16a34a', '#ea580c', '#dc2626'],
             data: []
         }
     ]

@@ -1,13 +1,12 @@
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
-import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { defineConfig } from 'vite';
 import compression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
-        splitVendorChunkPlugin(),
         vue(),
         compression(),
         VitePWA({
@@ -55,7 +54,20 @@ export default defineConfig({
         __INTLIFY_PROD_DEVTOOLS__: false
     },
     build: {
-        outDir: '/var/www/html/dist/capitalympics'
+        outDir: './dist',
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        return id
+                            .toString()
+                            .split('node_modules/')[1]
+                            .split('/')[0]
+                            .toString();
+                    }
+                }
+            }
+        }
     },
     resolve: {
         alias: {

@@ -5,13 +5,13 @@ import { useRegionsStore } from '@/store/regions';
 import { useCountriesStore } from '@/store/countries';
 import { UserScore } from '@/types/common';
 import {
-    Chart as ChartJS,
-    Filler,
-    Legend,
-    LineElement,
-    PointElement,
-    RadialLinearScale,
-    Tooltip
+Chart as ChartJS,
+Filler,
+Legend,
+LineElement,
+PointElement,
+RadialLinearScale,
+Tooltip
 } from 'chart.js';
 import { computed, onMounted, ref } from 'vue';
 import { Radar } from 'vue-chartjs';
@@ -46,7 +46,7 @@ interface ChartOptions {
             max: number;
             stepSize: number;
         };
-    };
+    }
 }
 
 const chartOptions: ChartOptions = {
@@ -94,7 +94,7 @@ onMounted(async () => {
     chartData.labels = continents.value.map((continent) => continent.label);
     chartData.datasets.push({
         label: props.labels[0],
-        backgroundColor: 'rgba(99, 255, 132, 0.6)',
+        backgroundColor: 'rgba(99, 255, 132)',
         data: continents.value.map((continent) => {
             const scores = flagData.filter((score) => {
                 const _country = countriesStore.find(score.country_id);
@@ -113,7 +113,7 @@ onMounted(async () => {
 
     chartData.datasets.push({
         label: props.labels[1],
-        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+        backgroundColor: 'rgba(255, 99, 132)',
         data: continents.value.map((continent) => {
             const scores = capitalData.filter((score) => {
                 const _country = countriesStore.find(score.country_id);

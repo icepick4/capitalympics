@@ -68,9 +68,11 @@ async function disconnect() {
         <div class="w-full md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto">
             <div
                 v-if="flagScore !== -2 && capitalScore !== -2"
-                class="flex flex-col sm:flex-row justify-end sm:gap-2"
+                class="flex flex-col sm:flex-row justify-start sm:gap-2"
             >
-                <div class="flex flex-col items-end justify-end gap-2">
+                <div
+                    class="flex flex-col items-center justify-center sm:items-start sm:justify-start gap-2"
+                >
                     <span class="text-2xl xs:text-lg sm:text-2xl font-thin">{{
                         $t('flags')
                     }}</span>
@@ -82,7 +84,9 @@ async function disconnect() {
                         class="mb-4"
                     />
                 </div>
-                <div class="flex flex-col items-end justify-end gap-2">
+                <div
+                    class="flex flex-col items-center justify-center sm:items-start sm:justify-start gap-2"
+                >
                     <span class="text-2xl xs:text-lg sm:text-2xl font-thin">{{
                         $t('capitals')
                     }}</span>
@@ -95,12 +99,12 @@ async function disconnect() {
                     />
                 </div>
             </div>
-            <div v-else class="p-4 w-full flex gap-5 justify-end items-end">
+            <div v-else class="p-4 w-full flex gap-5 justify-start items-start">
                 <ProgressBadgeSkeleton />
                 <ProgressBadgeSkeleton />
             </div>
             <!-- Informations de l'utilisateur -->
-            <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-5">
+            <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-5 m-3">
                 <div
                     class="flex column flex-row items-center justify-center mb-4 gap-4"
                 >
@@ -115,27 +119,29 @@ async function disconnect() {
                     <div
                         class="flex items-center center justify-end gap-4 w-full"
                     >
-                        <RouterLink to="/profile/statistics">
+                        <RouterLink to="/profile/statistics" title="Statistics">
                             <IconChartBar
                                 class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
                                 @click="$emit('close')"
                             />
                         </RouterLink>
-                        <RouterLink to="/profile/scores">
+                        <RouterLink to="/profile/scores" title="Scores">
                             <IconListNumbers
                                 class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
                             />
                         </RouterLink>
-                        <RouterLink to="/profile/edit">
+                        <RouterLink to="/profile/edit" title="Edit">
                             <IconSettings
                                 class="w-8 h-8 cursor-pointer hover:rotate-180 transition-all duration-500"
                                 @click="$emit('close')"
                             />
                         </RouterLink>
-                        <IconLogout2
-                            class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
-                            @click="disconnect"
-                        />
+                        <div title="Disconnect">
+                            <IconLogout2
+                                class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
+                                @click="disconnect"
+                            />
+                        </div>
                     </div>
                 </div>
                 <p class="text-black mb-2">
