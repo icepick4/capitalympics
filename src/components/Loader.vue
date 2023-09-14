@@ -10,10 +10,10 @@ defineProps<{
     >
         <div class="flex justify-center items-center h-full w-full">
             <div
-                class="flex flex-col justify-center items-center h-full w-full gap-5"
+                class="flex flex-col justify-center items-center h-full w-full"
             >
                 <div
-                    class="flex flex-col justify-center items-center rounded-full bg-gray-600 w-52 h-52 scale-105"
+                    class="flex flex-col justify-center items-center rounded-full bg-gray-600 w-48 h-48"
                 >
                     <span class="loader"></span>
                     <div class="flex justify-center items-center w-full gap-5">
@@ -21,11 +21,11 @@ defineProps<{
                             v-for="i in 3"
                             :key="i"
                             :style="{ 'animation-delay': `${(i - 1) * 0.2}s` }"
-                            class="rounded-full h-5 w-5 animate-pulse-fast flex justify-center items-center bg-white"
+                            class="rounded-full h-3 w-3 animate-pulse-fast flex justify-center items-center bg-white"
                         ></div>
                     </div>
                 </div>
-                <h1 v-if="title" class="text-2xl bg-gradient rounded-lg p-4">
+                <h1 v-if="title" class="text-2xl rounded-lg p-4">
                     {{ title }}
                 </h1>
             </div>

@@ -93,12 +93,12 @@ const handleScroll = () => {
             </span>
         </div>
         <div
-            class="flex flex-col justify-center items-center lg:flex-row lg:gap-8 bg-gradient"
+            class="flex flex-col justify-between items-center lg:flex-row bg-gradient 2xl:justify-center"
         >
             <h1 class="text-3xl m-8 text-center">
                 {{ $t('aboutTitle') }}
             </h1>
-            <p class="m-8 text-lg lg:w-1/4">
+            <p class="m-8 text-lg lg:w-1/2 2xl:w-1/4">
                 {{ $t('aboutText') }}
             </p>
         </div>

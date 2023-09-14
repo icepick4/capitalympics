@@ -2,18 +2,18 @@
 import { LearningType } from '@/types/common';
 import { fromScoreToLevel, getLevelName } from '@/utils/common';
 import {
-    IconCompass,
-    IconCrown,
-    IconGlobe,
-    IconMap,
-    IconMapPin,
-    IconMapPinStar,
-    IconPlanet,
-    IconSchool,
-    IconSparkles,
-    IconUserQuestion,
-    IconWorld,
-    IconWorldStar
+IconCompass,
+IconCrown,
+IconGlobe,
+IconMap,
+IconMapPin,
+IconMapPinStar,
+IconPlanet,
+IconSchool,
+IconSparkles,
+IconUserQuestion,
+IconWorld,
+IconWorldStar
 } from '@tabler/icons-vue';
 import { computed, ref } from 'vue';
 
@@ -73,11 +73,14 @@ const color = computed(() => {
 });
 
 const isMaxScore = computed(() => props.score === 100);
+const isMinScore = computed(() => props.score === -1);
+const nextLevel = props.score + (10 - (props.score % 10));
 
 const offset = computed(() => {
     if (isMaxScore.value) return 0;
+    if (isMinScore.value) return circumference.value;
     const percent = props.score;
-    return circumference.value - (percent / 100) * circumference.value;
+    return circumference.value - (percent / nextLevel) * circumference.value;
 });
 
 const circumference = computed(() => 2 * Math.PI * 30);
@@ -181,9 +184,9 @@ const circumference = computed(() => 2 * Math.PI * 30);
             >
                 {{ text }}
             </span>
-            <span class="text-2xl font-bold text-gray-800 p-1">{{
-                Math.round(score * 10)
-            }}</span>
+            <span class="text-2xl font-bold text-gray-800 p-1"
+                >{{ isMinScore ? 0 : Math.round(score * 10) }} / {{ nextLevel * 10 }}</span
+            >
         </div>
     </div>
 </template>

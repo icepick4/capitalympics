@@ -137,7 +137,7 @@ const handleScroll = () => {
         type="error"
     />
     <div
-        class="flex flex-col items-center justify-center h-full gap-5 mt-20 xs:mb-20"
+        class="overflow-clip flex flex-col items-center justify-center h-full gap-5 mt-20 xs:mb-20"
     >
         <div class="flex flex-col items-start w-11/12 md:w-5/6 lg:w-1/2">
             <h1 class="text-4xl sm:text-6xl text-black mb-4 mt-4">
