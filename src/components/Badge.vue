@@ -26,7 +26,6 @@ const props = defineProps<{
 }>();
 
 const size = ref(props.size ?? 'md');
-
 const level = computed(() => fromScoreToLevel(props.score));
 const text = computed(() => getLevelName(props.score));
 
@@ -74,13 +73,15 @@ const color = computed(() => {
 
 const isMaxScore = computed(() => props.score === 100);
 const isMinScore = computed(() => props.score === -1);
-const nextLevel = Math.ceil(props.score / 10) * 10;
 
 const offset = computed(() => {
     if (isMaxScore.value) return 0;
     if (isMinScore.value) return circumference.value;
     const percent = props.score;
-    return circumference.value - (percent / nextLevel) * circumference.value;
+    return (
+        circumference.value -
+        (percent / Math.ceil(props.score / 10)) * 10 * circumference.value
+    );
 });
 
 const circumference = computed(() => 2 * Math.PI * 30);
@@ -186,7 +187,7 @@ const circumference = computed(() => 2 * Math.PI * 30);
             </span>
             <span class="text-2xl font-bold text-gray-800 p-1"
                 >{{ isMinScore ? 0 : Math.round(score * 10) }} /
-                {{ nextLevel * 10 }}</span
+                {{ Math.ceil(props.score / 10) * 100 }}</span
             >
         </div>
     </div>
