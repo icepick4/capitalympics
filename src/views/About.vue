@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import AboutSection from '@/components/About/AboutSection.vue';
+import Footer from '@/components/Footer.vue';
 import Loader from '@/components/Loader.vue';
 import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
-
 const imagesLoaded = ref(false);
 
 const imageScale = ref(1);
@@ -160,6 +160,7 @@ const handleScroll = () => {
             </h1>
         </div>
     </div>
+    <Footer></Footer>
 </template>
 
 <style scoped>
