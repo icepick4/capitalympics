@@ -78,10 +78,7 @@ const offset = computed(() => {
     if (isMaxScore.value) return 0;
     if (isMinScore.value) return circumference.value;
     const percent = props.score;
-    return (
-        circumference.value -
-        (percent / Math.ceil(props.score / 10)) * 10 * circumference.value
-    );
+    return circumference.value - (percent / 100) * circumference.value;
 });
 
 const circumference = computed(() => 2 * Math.PI * 30);
@@ -159,8 +156,8 @@ const circumference = computed(() => 2 * Math.PI * 30);
                     cy="40"
                 />
             </svg>
-            <span class="absolute text-xl"
-                ><component
+            <span class="absolute text-xl">
+                <component
                     :is="icon"
                     :class="{
                         'w-6 h-6': size === 'xs',
@@ -168,7 +165,8 @@ const circumference = computed(() => 2 * Math.PI * 30);
                         'w-10 h-10': size === 'md',
                         'w-12 h-12': size === 'lg'
                     }"
-            /></span>
+                />
+            </span>
         </div>
         <div class="flex flex-col items-start justify-start">
             <span
