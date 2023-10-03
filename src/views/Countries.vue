@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CountryLink from '@/components/Country/CountryLink.vue';
+import Footer from '@/components/Footer.vue';
 import Regions from '@/components/Regions.vue';
 import { useCountriesStore } from '@/store/countries';
 import { useRegionsStore } from '@/store/regions';
@@ -156,4 +157,5 @@ const switchSortName = () => {
             </div>
         </div>
     </div>
+    <Footer></Footer>
 </template>
