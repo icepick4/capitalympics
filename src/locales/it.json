@@ -160,5 +160,9 @@
     "global": "Globale",
     "charts": "Grafici",
     "radarChartDescription": "Il vostro punteggio medio in ogni continente",
-    "doughnutChartDescription": "Numero di risposte per ogni tipo"
+    "doughnutChartDescription": "Numero di risposte per ogni tipo",
+    "socials": "Social media",
+    "quickLinks": "Link veloci",
+    "contacts": "Contatti",
+    "myProfile": "Il mio profilo"
 }

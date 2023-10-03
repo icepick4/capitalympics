@@ -75,6 +75,10 @@ const scrollTo = (id: string) => {
 
 onBeforeMount(async () => {
     let lang = getLanguage();
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+    });
     try {
         let fetchedCountries = await ApiService.getCountries(8, lang);
         countries.value = fetchedCountries
