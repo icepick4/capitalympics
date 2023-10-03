@@ -45,7 +45,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div class="flex items-center justify-center w-full">
+    <div class="flex items-center justify-center w-full bg-[rgba(0,0,0,0.5)]]">
         <div
             class="header flex flex-row w-full md:w-3/4 2xl:w-7/12 justify-between h-auto relative p-7"
         >

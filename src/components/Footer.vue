@@ -15,14 +15,16 @@ const { isAuthenticated } = storeToRefs(useStore());
 </script>
 <template>
     <div class="w-full bg-white p-6 flex items-center justify-center">
-        <div class="flex flex-row justify-between items-center w-2/3">
-            <div class="flex flex-row gap-5 items-center">
+        <div
+            class="flex flex-col xl:flex-row justify-between items-center w-2/3 gap-10 xl:gap-0"
+        >
+            <div class="hidden xl:flex flex-row gap-5 items-center">
                 <RouterLink to="/">
                     <img src="/logo.png" class="w-3/4 h-3/4" />
                 </RouterLink>
             </div>
-            <div class="flex flex-col gap-5 items-start">
-                <h1 class="text-xl text-center">{{ $t('contacts') }}</h1>
+            <div class="flex flex-col gap-5 items-center xl:items-start">
+                <h1 class="text-2xl text-center">{{ $t('contacts') }}</h1>
                 <a
                     href="https://linkedin.com/in/remijara"
                     class="flex flex-row gap-3 items-center group cursor-pointer"
@@ -48,8 +50,8 @@ const { isAuthenticated } = storeToRefs(useStore());
                     </div>
                 </a>
             </div>
-            <div class="flex flex-col gap-5 items-start">
-                <h1 class="text-xl text-center">{{ $t('quickLinks') }}</h1>
+            <div class="flex flex-col gap-5 items-center xl:items-start">
+                <h1 class="text-2xl text-center">{{ $t('quickLinks') }}</h1>
                 <RouterLink
                     to="/countries"
                     class="flex flex-row gap-3 items-center group cursor-pointer"
@@ -89,8 +91,8 @@ const { isAuthenticated } = storeToRefs(useStore());
                     </div>
                 </RouterLink>
             </div>
-            <div class="flex flex-col gap-5 items-start">
-                <h1 class="text-xl text-center">{{ $t('socials') }}</h1>
+            <div class="flex flex-col gap-5 items-center xl:items-start">
+                <h1 class="text-2xl text-center">{{ $t('socials') }}</h1>
                 <a
                     href="https://github.com/icepick4"
                     class="flex flex-row gap-3 items-center group cursor-pointer"

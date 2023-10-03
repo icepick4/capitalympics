@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Footer from '@/components/Footer.vue';
 import ProgressBadgeSkeleton from '@/components/Skeletons/ProgressBadgeSkeleton.vue';
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
@@ -156,7 +157,13 @@ async function disconnect() {
         </div>
         <h1 class="text-3xl mb-5">{{ $t('statistics') }}</h1>
         <StatCardContainer :basicDisplay="true" />
+        <RouterLink
+            to="/profile/statistics"
+            class="hover:underline text-lg mt-5"
+            >{{ $t('seeMore') }}</RouterLink
+        >
     </div>
+    <Footer></Footer>
 </template>
 
 <style scoped>

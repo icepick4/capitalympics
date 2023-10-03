@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Footer from '@/components/Footer.vue';
 import UserInfo from '@/components/User/UserInfo.vue';
 import UserScores from '@/components/User/UserScores.vue';
 import UserSettings from '@/components/User/UserSettings.vue';
@@ -24,7 +23,6 @@ const displayUserScores = computed(
     <UserSettings v-else-if="displayUserSettings" />
     <UserScores v-else-if="displayUserScores" />
     <UserInfo v-else />
-    <Footer></Footer>
 </template>
 
 <style scoped>
