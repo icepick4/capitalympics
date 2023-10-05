@@ -33,6 +33,7 @@ Learn flags and capitals of the world !
   - [ ] Play quizzes of the community and get ranked
   - [ ] Quizzes statistics
 - [ ] Friend system
+- [ ] CI/CD
 
 - [x] Accessible country information, including:
   - [x]  🌐 Name
