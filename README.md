@@ -18,27 +18,34 @@ Learn flags and capitals of the world !
 
 # Features
 
-⌛ Progression statistics \
-⌛ Store favorite session setup \
-✅ Notifications on level up and level down \
-✅ Learn flags and capitals of countries worldwide \
-✅ Filter learning by regions of the world \
-✅ Track scores for each country and overall progress \
-✅ View comprehensive statistics on your profile \
-✅ Sort and filter statistics by category \
-✅ Create an account to unlock enhanced features \
-✅ Accessible country information, including:
+- [x] Progression statistics
+- [ ] Store favorite session setup
+- [x] Notifications on level up and level down
+- [x] Learn flags and capitals of countries worldwide
+- [ ] Learn location of countries worldwide
+- [x] Filter learning by regions of the world
+- [x] Track scores for each country and overall progress
+- [x] View comprehensive statistics on your profile
+- [x] Sort and filter statistics by category
+- [x] Create an account to unlock enhanced features
+- [ ] Quizzes
+  - [ ] Create your own quizzes and share them
+  - [ ] Play quizzes of the community and get ranked
+  - [ ] Quizzes statistics
+- [ ] Friend system
 
--   🌐 Name
--   🏛️ Official name
--   🌆 Capital
--   🌍 Region
--   🔍 Subregion
--   👥 Population
--   🗺️ Google Maps link
--   🚩 Flag
--   🌍 Alpha-3 code
--   💰 Currencies
+- [x] Accessible country information, including:
+  - [x]  🌐 Name
+  - [x]  🏛️ Official name
+  - [x]  🌆 Capital
+  - [x]  🌍 Region
+  - [x]  🔍 Subregion
+  - [x]  👥 Population
+  - [x]  🗺️ Google Maps link
+  - [x]  🚩 Flag
+  - [x]  🌍 Alpha-3 code
+  - [x]  💰 Currencies
+
 
 
 🌐 Capitalympics is fully translated into multiple languages (English, French, Spanish and Italiano). \
