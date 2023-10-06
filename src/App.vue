@@ -4,6 +4,7 @@ import { onBeforeMount, ref } from 'vue';
 import { RouterView } from 'vue-router';
 import Header from './components/Header.vue';
 import Loader from './components/Loader.vue';
+import Star from './components/Star.vue';
 import { useStore } from './store';
 
 const { loadMandatoryData } = useStore();
@@ -17,6 +18,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
+    <Star></Star>
     <Loader v-if="isLoading" />
     <div v-else class="flex flex-col h-screen min-h-screen">
         <NotificationsWrapper />
