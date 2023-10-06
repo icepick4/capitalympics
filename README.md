@@ -16,6 +16,17 @@ Learn flags and capitals of the world !
 
 📊 Get ready to challenge yourself, improve your knowledge, and become a global expert!
 
+# Getting Started
+
+1.  Visit the [Capitalympics website](https://capitalympics.com).
+2.  Sign up for an account to unlock the learning features.
+     - Go to [this](https://capitalympics.com/signup) page and create your account.
+     - You can edit it at any time on [this](https://capitalympics.com/profile/edit) page.    
+3.  Explore the vast collection of country information, which is accessible without an account.
+4.  Start your [learning](https://capitalympics.com/learn) journey by selecting a mode (flag or capital) and a region.
+     - If you wanna learn more about the learning features read [The learning concept](https://capitalympics.com/profile)
+6.  Track your progress and delve into [statistics](https://capitalympics.com/profile/statistics) on your profile page.
+
 # Features
 
 - [x] Progression statistics
@@ -58,15 +69,7 @@ If your preferred language is not supported, please open an issue on the reposit
 
 🚀 The back is built with Node.js, Express and MySQL.
 
-Take a look at the API used by Capitalympics [here](https://github.com/icepick4/capitalympics-api).
-
-# Getting Started
-
-1.  Visit the [Capitalympics website](https://capitalympics.com).
-2.  Sign up for an account to unlock the learning features.
-3.  Explore the vast collection of country information, which is accessible without an account.
-4.  Start your learning journey by selecting a region.
-5.  Track your progress and delve into statistics on your profile page.
+Take a look at the API used by Capitalympics : [Capitalympics API](https://github.com/icepick4/capitalympics-api).
 
 # The learning concept 
 
