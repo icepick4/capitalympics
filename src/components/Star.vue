@@ -23,7 +23,6 @@ const hideComponent = () => {
                     target="_blank"
                 >
                     <IconBrandGithub
-                        alt="GitHub"
                         class="w-8 h-8 hover:scale-105 transition-all"
                     />
                 </a>
@@ -39,10 +38,7 @@ const hideComponent = () => {
                     @click="hideComponent"
                     class="text-gray-400 hover:text-white focus:outline-none"
                 >
-                    <IconX
-                        alt="Fermer"
-                        class="w-5 h-5 hover:scale-105 transition-all"
-                    />
+                    <IconX class="w-5 h-5 hover:scale-105 transition-all" />
                 </button>
             </div>
             <a href="https://github.com/icepick4/capitalympics" target="_blank">
