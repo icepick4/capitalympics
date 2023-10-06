@@ -26,9 +26,9 @@ const hideComponent = () => {
 <template>
     <div
         v-if="showComponent"
-        class="fixed bottom-2 left-2 m-2 p-3 px-4 bg-gray-800 text-white border-white rounded-[20px] border-4 shadow-lg z-50 star-container"
+        class="fixed bottom-0 m-3 p-3 px-4 bg-gray-800 text-white border-white rounded-[20px] border-4 shadow-lg z-50 star-container"
     >
-        <div class="flex flex-col gap-3 items-center w-full">
+        <div class="flex flex-col gap-1 md:gap-3 items-center w-full">
             <div
                 class="flex flex-row gap-3 justify-between items-center w-full"
             >
@@ -44,7 +44,9 @@ const hideComponent = () => {
                     href="https://github.com/icepick4/capitalympics"
                     target="_blank"
                 >
-                    <p class="text-2xl rainbow-text whitespace-pre-wrap">
+                    <p
+                        class="text-xl sm:text-2xl text-center rainbow-text whitespace-pre-wrap"
+                    >
                         {{ $t('starRepo', { number: stars }) }}
                     </p>
                 </a>
@@ -56,7 +58,9 @@ const hideComponent = () => {
                 </button>
             </div>
             <a href="https://github.com/icepick4/capitalympics" target="_blank">
-                <p class="text-lg">{{ $t('giveStrength') }}</p>
+                <p class="text-base sm:text-lg text-center">
+                    {{ $t('giveStrength') }}
+                </p>
             </a>
         </div>
     </div>

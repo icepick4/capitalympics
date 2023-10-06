@@ -6,7 +6,7 @@ import { CountryI } from '@/models/Country';
 import { notify } from '@/plugins/notifications';
 import ApiService from '@/services/apiService';
 import { getLanguage } from '@/utils/common';
-import { computed, onBeforeMount, onUnmounted, ref } from 'vue';
+import { computed, onBeforeMount, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 
@@ -60,7 +60,6 @@ const scrollTo = (id: string) => {
             behavior: 'smooth'
         });
     } else if (id === 'top') {
-        imageScale.value = 1;
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -90,42 +89,7 @@ onBeforeMount(async () => {
         finishedWaited.value = true;
         noCountriesFound.value = true;
     }
-    window.addEventListener('scroll', handleScroll);
 });
-
-onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-});
-
-const handleScroll = () => {
-    const scrollPosition =
-        document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollDelta = scrollPosition - previousScrollTop.value;
-    previousScrollTop.value = scrollPosition;
-
-    let scaling = 0.008;
-    if (isDeviceMobile) {
-        scaling = 0.02;
-    }
-
-    if (scrollDelta > 0) {
-        // Scrolling down, zoom in
-        imageScale.value += scaling;
-        if (imageScale.value > 2.5) {
-            imageScale.value = 2.5;
-        }
-    } else {
-        // Scrolling up, zoom out
-        imageScale.value -= scaling / 2;
-        if (imageScale.value < 1) {
-            imageScale.value = 1;
-        }
-    }
-
-    if (scrollPosition == 0) {
-        imageScale.value = 1;
-    }
-};
 </script>
 
 <template>
@@ -171,8 +135,7 @@ const handleScroll = () => {
                         ? 'Photo of Thomas Kelley on Unsplash'
                         : 'Photo of Ryan Kim on Unsplash'
                 "
-                class="w-full h-[26rem] object-cover transition-all duration-100 ease-linear brightness-75 xs:brightness-100"
-                :style="{ transform: `scale(${imageScale})` }"
+                class="w-full h-[26rem] object-cover transition-all duration-100 ease-linear brightness-75 xs:brightness-100 scale-125"
             />
         </div>
         <div
@@ -206,7 +169,6 @@ const handleScroll = () => {
             <h1
                 class="text-3xl mt-4"
                 :class="{
-                    'text-white': isDeviceMobile,
                     'xs:text-5xl': !isDeviceMobile
                 }"
             >
@@ -215,7 +177,6 @@ const handleScroll = () => {
             <h1
                 class="text-xl mb-4 mt-2"
                 :class="{
-                    'text-white': isDeviceMobile,
                     'xs:text-3xl': !isDeviceMobile
                 }"
             >
