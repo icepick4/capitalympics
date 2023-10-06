@@ -1,11 +1,23 @@
 <script setup lang="ts">
 import { IconBrandGithub, IconX } from '@tabler/icons-vue';
 import { onMounted, ref } from 'vue';
-const showComponent = ref(true);
 
-onMounted(() => {
+const showComponent = ref(true);
+const stars = ref<number>(0);
+
+onMounted(async () => {
     showComponent.value = true;
+    const response = await getNumberOfStars();
+    stars.value = response;
 });
+
+const getNumberOfStars = async (): Promise<number> => {
+    const response = await fetch(
+        'https://api.github.com/repos/icepick4/capitalympics'
+    );
+    const data = await response.json();
+    return data.stargazers_count;
+};
 
 const hideComponent = () => {
     showComponent.value = false;
@@ -17,7 +29,9 @@ const hideComponent = () => {
         class="fixed bottom-2 left-2 m-2 p-3 px-4 bg-gray-800 text-white border-white rounded-[20px] border-4 shadow-lg z-50 star-container"
     >
         <div class="flex flex-col gap-3 items-center w-full">
-            <div class="flex flex-row justify-between items-center w-full">
+            <div
+                class="flex flex-row gap-3 justify-between items-center w-full"
+            >
                 <a
                     href="https://github.com/icepick4/capitalympics"
                     target="_blank"
@@ -30,8 +44,8 @@ const hideComponent = () => {
                     href="https://github.com/icepick4/capitalympics"
                     target="_blank"
                 >
-                    <p class="text-2xl rainbow-text">
-                        {{ $t('starRepo') }}
+                    <p class="text-2xl rainbow-text whitespace-pre-wrap">
+                        {{ $t('starRepo', { number: stars }) }}
                     </p>
                 </a>
                 <button
@@ -42,9 +56,7 @@ const hideComponent = () => {
                 </button>
             </div>
             <a href="https://github.com/icepick4/capitalympics" target="_blank">
-                <p class="text-lg">
-                    {{ $t('giveStrength') }}
-                </p>
+                <p class="text-lg">{{ $t('giveStrength') }}</p>
             </a>
         </div>
     </div>

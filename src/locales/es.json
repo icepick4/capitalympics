@@ -164,5 +164,7 @@
     "socials": "Redes sociales",
     "quickLinks": "Enlaces rápidos",
     "contacts": "Contactos",
-    "myProfile": "Mi perfil"
+    "myProfile": "Mi perfil",
+    "giveStrength": "¡Dar fuerza al promotor! ❤️",
+    "starRepo": "¡Pon una estrella GitHub! {number}⭐"
 }

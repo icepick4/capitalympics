@@ -166,5 +166,5 @@
     "contacts": "Contacts",
     "myProfile": "My profile",
     "giveStrength": "Give strength to the developer ❤️",
-    "starRepo": "Star the repo ⭐"
+    "starRepo": "Star the repo • {number}⭐"
 }
