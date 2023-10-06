@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ButtonTemplate from '@/components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
+import Infos from '@/components/Learning/Infos.vue';
 import Question from '@/components/Learning/Question.vue';
 import Loader from '@/components/Loader.vue';
 import Regions from '@/components/Regions.vue';
@@ -9,6 +10,7 @@ import { useCountriesStore } from '@/store/countries';
 import { CurrentState, LearningType, ScoreType } from '@/types/common';
 import type { Country } from '@/types/models';
 import ApiClient from '@/utils/ApiClient';
+import { IconInfoCircle } from '@tabler/icons-vue';
 import { onBeforeMount, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
@@ -18,6 +20,15 @@ const route = useRoute();
 const contriesStore = useCountriesStore();
 
 const isLoading = ref(false);
+const showInfos = ref(false);
+
+const hideInfos = () => {
+    showInfos.value = false;
+};
+
+const toggleInfos = () => {
+    showInfos.value = !showInfos.value;
+};
 
 const currentLearning: LearningType = route.path.split('/')[2] as LearningType;
 const currentState = ref<CurrentState>('starting');
@@ -101,6 +112,7 @@ watch(continent, getNewCountry);
         type="error"
     />
     <Loader v-if="isLoading" />
+    <Infos :show="showInfos" @close="hideInfos" />
     <div class="w-full flex flex-col justify-center items-center">
         <div
             class="flex flex-col w-10/12 md:h-auto justify-center items-center gap-10"
@@ -109,6 +121,7 @@ watch(continent, getNewCountry);
                 v-model="continent"
                 class="xs:w-1/2 sm:w-1/3 md:w-1/4 mx-4"
             />
+
             <div
                 v-if="country != undefined"
                 class="w-5/6 md:w-auto h-full flex flex-col items-center justify-center"
@@ -154,6 +167,10 @@ watch(continent, getNewCountry);
                 >
                     {{ $t('leave') }}
                 </RouterLink>
+                <IconInfoCircle
+                    class="w-16 h-16 top-0 left-0 cursor-pointer hover:scale-110 transition-all animate-bounce hover:animate-none"
+                    @click="toggleInfos"
+                />
             </div>
         </div>
     </div>

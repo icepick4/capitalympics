@@ -82,7 +82,6 @@ onBeforeMount(async () => {
         class="flex flex-col justify-center items-center gap-20 my-5 h-full"
     >
         <Loader v-if="initFirstTimeScores" :title="$t('loading')" />
-
         <div
             class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-20"
         >
