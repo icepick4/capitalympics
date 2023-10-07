@@ -2,7 +2,7 @@
 import { useStore } from '@/store';
 import { IconUser } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, Ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { baseImageURL } from '@/utils/common';
 import { User } from '@/models/User';
