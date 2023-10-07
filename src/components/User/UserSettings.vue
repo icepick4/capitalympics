@@ -4,11 +4,13 @@ import { User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { languages } from '@/utils/common';
-import { IconUserX, IconX } from '@tabler/icons-vue';
+import { IconUserX, IconX, IconUser, IconPhotoEdit } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
+import { baseImageURL } from '@/utils/common';
+import ProfilePicture from './ProfilePicture.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -76,13 +78,21 @@ const deleteAccount = async () => {
         <div
             class="bg-gradient rounded-lg shadow-lg p-4 sm:p-6 mb-8 flex flex-col gap-10"
         >
-            <div class="flex flex-row justify-between items-center">
+            <div
+                class="flex flex-row justify-between items-top sm:items-center"
+            >
                 <div
-                    class="w-full flex flex-row justify-between items-center gap-5"
+                    class="w-full flex flex-row justify-between items-top sm:items-center gap-5"
                 >
-                    <h1 class="w-6 sm:w-11/12 text-xl sm:text-2xl">
-                        {{ $t('editProfile') }}
-                    </h1>
+                    <div
+                        class="flex flex-col sm:flex-row items-start sm:items-center gap-1"
+                    >
+                        <h1 class="w-6 sm:w-11/12 text-xl sm:text-2xl">
+                            {{ $t('editProfile') }}
+                        </h1>
+                        <ProfilePicture />
+                        <IconPhotoEdit class="w-10 h-10" />
+                    </div>
                     <ActionIcon
                         :label="$t('deleteAccount')"
                         :icon="IconUserX"

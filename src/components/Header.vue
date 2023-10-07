@@ -4,8 +4,10 @@ import { IconUser } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { baseImageURL } from '@/utils/common';
 
 const { isAuthenticated } = storeToRefs(useStore());
+const { user } = storeToRefs(useStore());
 
 const isDropdownOpen = ref(false);
 const clickCount = ref(0);
@@ -42,6 +44,23 @@ onMounted(() => {
 onUnmounted(() => {
     document.removeEventListener('click', closeMenuOnClickOutside);
 });
+
+const imageAvailable = ref(false);
+
+const checkImage = async () => {
+    try {
+        const response = await fetch(baseImageURL + user.value.id + '.png', {
+            method: 'HEAD'
+        });
+        if (response.ok) {
+            imageAvailable.value = true;
+        }
+    } catch (error) {
+        imageAvailable.value = false;
+    }
+};
+
+checkImage();
 </script>
 
 <template>
@@ -104,7 +123,16 @@ onUnmounted(() => {
                         to="/profile"
                         class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
                     >
-                        <IconUser class="w-10 h-10 rounded-full" />
+                        <IconUser
+                            class="w-10 h-10 sm:w-10 sm:h-10 rounded-full mr-4 hover:cursor-pointer"
+                            v-if="!imageAvailable"
+                        />
+                        <img
+                            crossorigin="anonymous"
+                            :src="baseImageURL + user.id + '.png'"
+                            class="w-10 h-10 sm:w-10 sm:h-10 rounded-full mr-4 hover:cursor-pointer"
+                            v-else
+                        />
                     </RouterLink>
                 </template>
             </div>
