@@ -5,9 +5,14 @@ import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { baseImageURL } from '@/utils/common';
+import { User } from '@/models/User';
 
+const store = useStore();
 const { isAuthenticated } = storeToRefs(useStore());
-const { user } = storeToRefs(useStore());
+const user = storeToRefs(store).user as Ref<User>;
+if (!user.value) {
+    store.logout({ loggedOut: '1' });
+}
 
 const isDropdownOpen = ref(false);
 const clickCount = ref(0);

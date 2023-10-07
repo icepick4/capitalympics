@@ -112,7 +112,7 @@ async function disconnect() {
                 >
                     <div class="flex items-center">
                         <ProfilePicture />
-                        <h1 class="text-2xl mr-1 font-bold">
+                        <h1 class="text-2xl mr-1 ml-4 font-bold">
                             {{ user?.name }}
                         </h1>
                     </div>
