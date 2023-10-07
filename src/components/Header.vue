@@ -49,7 +49,7 @@ const imageAvailable = ref(false);
 
 const checkImage = async () => {
     try {
-        const response = await fetch(baseImageURL + user.value.id + '.png', {
+        const response = await fetch(baseImageURL + user.value?.id + '.png', {
             method: 'HEAD'
         });
         if (response.ok) {
@@ -129,7 +129,7 @@ checkImage();
                         />
                         <img
                             crossorigin="anonymous"
-                            :src="baseImageURL + user.id + '.png'"
+                            :src="baseImageURL + user?.id + '.png'"
                             class="w-10 h-10 sm:w-10 sm:h-10 rounded-full mr-4 hover:cursor-pointer"
                             v-else
                         />

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IconUser } from '@tabler/icons-vue';
 import { baseImageURL } from '@/utils/common';
-import { ref } from 'vue';
+import { ref, Ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
