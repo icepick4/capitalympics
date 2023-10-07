@@ -20,7 +20,6 @@ import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import StatCardContainer from '../Statistics/StatCardContainer.vue';
-import sharp from 'sharp';
 import { notify } from '@/plugins/notifications';
 
 const store = useStore();
@@ -72,13 +71,15 @@ const openFileExplorer = () => {
 const handleProfilePictureChange = async (event: Event) => {
     const fileInput = event.target as HTMLInputElement;
     //limit to 500kb
-    if (fileInput.files?.[0].size > 500000) {
-        notify({
-            title: t('error'),
-            message: t('imageSizeError'),
-            type: 'error'
-        });
-        return;
+    if (fileInput && fileInput.files && fileInput.files.length > 0) {
+        if (fileInput.files?.[0].size > 500000) {
+            notify({
+                title: t('error'),
+                message: t('imageSizeError'),
+                type: 'error'
+            });
+            return;
+        }
     }
     const selectedFile = fileInput.files?.[0];
 
