@@ -114,7 +114,7 @@ onBeforeMount(async () => {
                         <span
                             class="absolute group-hover:opacity-100 opacity-100 xs:opacity-0 flex justify-center items-center inset-x-0 inset-y-0 right-0 p-1 text-4xl text-white bg-black bg-opacity-50 z-10 font-thin transition-all duration-300"
                         >
-                            Learn
+                            {{ $t('learn') }}
                         </span>
                         <div class="relative w-full h-full">
                             <img
@@ -148,7 +148,7 @@ onBeforeMount(async () => {
                         <span
                             class="absolute group-hover:opacity-100 opacity-100 xs:opacity-0 flex justify-center items-center inset-x-0 inset-y-0 right-0 p-1 text-4xl text-white bg-black bg-opacity-50 z-10 font-thin transition-all duration-300"
                         >
-                            Learn
+                            {{ $t('learn') }}
                         </span>
                         <div class="relative w-full h-full">
                             <img
