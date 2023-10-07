@@ -166,5 +166,20 @@
     "contacts": "Contacts",
     "myProfile": "My profile",
     "giveStrength": "Give strength to the developer ❤️",
-    "starRepo": "Star the repo • {number}⭐"
+    "starRepo": "Star the repo • {number}⭐",
+    "infosTitle": "Understanding Learning",
+    "infos1": "Learning is a dynamic process that can be summarized in several stages:",
+    "infos2": "Your goal is to answer a question, initially in your mind, for example, \"Find the capital of Japan\".",
+    "infos3": "At that moment, you assess whether you know the answer or not (still in your mind), there are three possible scenarios:",
+    "infos4": "You immediately know the answer.",
+    "infos5": "You need to take a moment to think and find the answer.",
+    "infos6": "You have no idea about the answer at all.",
+    "infos7": "Once you are confident in your answer, you click the \"Reveal\" button.",
+    "infos8": "Then, you adjust your response based on what you thought:",
+    "infos9": "If you thought you had the right answer, but it wasn't, you can mark it as \"Difficult\".",
+    "infos10": "If your answer was correct, you validate it as \"Easy\".",
+    "infos11": "If you had no idea about the answer, you can classify it as \"Difficult\".",
+    "infos12": "If you were torn between two options, you can use the \"Medium\" response.",
+    "infos13": "By following this process and respecting your answers, the items you have the most difficulty with will be reviewed more frequently to facilitate your learning.",
+    "infos14": "Happy learning!"
 }

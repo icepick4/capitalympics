@@ -166,5 +166,20 @@
     "contacts": "Contacts",
     "myProfile": "Mon profil",
     "giveStrength": "Donner de la force au développeur ❤️",
-    "starRepo": "Mettez une étoile GitHub • {number}⭐"
+    "starRepo": "Mettez une étoile GitHub • {number}⭐",
+    "infosTitle": "Comprendre l'Apprentissage",
+    "infos1": "L'apprentissage est un processus dynamique qui peut se résumer en plusieurs étapes :",
+    "infos2": "Votre objectif est de répondre à une question, dans votre tête dans un premier temps, par exemple, \"Trouvez la capitale du Japon\".",
+    "infos3": "À ce moment-là, vous évaluez si vous connaissez la réponse ou non (toujours dans votre tête), il y a trois scénarios possibles :",
+    "infos4": "Vous connaissez immédiatement la réponse.",
+    "infos5": "Vous devez prendre un moment pour réfléchir et trouver la réponse.",
+    "infos6": "Vous ne savez pas du tout la réponse.",
+    "infos7": "Une fois que vous êtes sûr de votre réponse, vous cliquez sur le bouton \"Dévoiler\".",
+    "infos8": "Ensuite, vous ajustez votre réponse en fonction de ce que vous pensiez :",
+    "infos9": "Si vous pensiez avoir la bonne réponse, mais ce n'était pas le cas, vous pouvez la marquer comme \"Difficile\".",
+    "infos10": "Si votre réponse était correcte, vous la validez comme \"Facile\".",
+    "infos11": "Si vous ne saviez pas du tout la réponse, vous pouvez la classer comme \"Difficile\".",
+    "infos12": "Si vous avez hésitez entre deux vous pouvez utiliser la réponse \"Moyen\".",
+    "infos13": "En suivant ce processus et en respectant vos réponses, les éléments sur lesquels vous avez le plus de difficultés seront révisés plus fréquemment pour faciliter votre apprentissage.",
+    "infos14": "Bon apprentissage !"
 }

@@ -166,5 +166,20 @@
     "contacts": "Contactos",
     "myProfile": "Mi perfil",
     "giveStrength": "¡Dar fuerza al promotor! ❤️",
-    "starRepo": "¡Pon una estrella GitHub! {number}⭐"
+    "starRepo": "¡Pon una estrella GitHub! {number}⭐",
+    "infosTitle": "Comprender el Aprendizaje",
+    "infos1": "El aprendizaje es un proceso dinámico que se puede resumir en varias etapas:",
+    "infos2": "Tu objetivo es responder una pregunta, inicialmente en tu mente, por ejemplo, \"Encuentra la capital de Japón\".",
+    "infos3": "En ese momento, evalúas si conoces la respuesta o no (todavía en tu mente), hay tres posibles escenarios:",
+    "infos4": "Conoces inmediatamente la respuesta.",
+    "infos5": "Necesitas tomar un momento para pensar y encontrar la respuesta.",
+    "infos6": "No tienes idea alguna sobre la respuesta.",
+    "infos7": "Una vez que estás seguro de tu respuesta, haces clic en el botón \"Revelar\".",
+    "infos8": "Luego, ajustas tu respuesta en función de lo que pensaste:",
+    "infos9": "Si pensaste que tenías la respuesta correcta, pero no lo era, puedes marcarla como \"Difícil\".",
+    "infos10": "Si tu respuesta fue correcta, la validas como \"Fácil\".",
+    "infos11": "Si no tenías ni idea sobre la respuesta, puedes clasificarla como \"Difícil\".",
+    "infos12": "Si estabas indeciso entre dos opciones, puedes usar la respuesta \"Medio\".",
+    "infos13": "Siguiendo este proceso y respetando tus respuestas, los elementos con los que más dificultades tengas se revisarán con más frecuencia para facilitar tu aprendizaje.",
+    "infos14": "¡Feliz aprendizaje!"
 }
