@@ -182,5 +182,6 @@
     "infos12": "If you were torn between two options, you can use the \"Medium\" response.",
     "infos13": "By following this process and respecting your answers, the items you have the most difficulty with will be reviewed more frequently to facilitate your learning.",
     "infos14": "Happy learning!",
-    "imageSizeError": "The image size must be less than 500KB"
+    "imageSizeError": "The image size must be less than 500KB",
+    "failedToLoadCurrentUser": "Failed to load current user"
 }
