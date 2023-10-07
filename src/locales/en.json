@@ -181,5 +181,6 @@
     "infos11": "If you had no idea about the answer, you can classify it as \"Difficult\".",
     "infos12": "If you were torn between two options, you can use the \"Medium\" response.",
     "infos13": "By following this process and respecting your answers, the items you have the most difficulty with will be reviewed more frequently to facilitate your learning.",
-    "infos14": "Happy learning!"
+    "infos14": "Happy learning!",
+    "imageSizeError": "The image size must be less than 500KB"
 }
