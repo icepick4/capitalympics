@@ -17,11 +17,10 @@ const emit = defineEmits(['close']);
             class="w-8 h-8 hover:scale-110 hover:cursor-pointer transition-all absolute top-3 right-3"
             @click="emit('close')"
         />
-        <h2 class="text-2xl font-semibold mb-4">Comprendre l'Apprentissage</h2>
+        <h2 class="text-2xl font-semibold mb-4">{{ $t('infosTitle') }}</h2>
         <div class="text-gray-700 mb-4">
             <p>
-                L'apprentissage est un processus dynamique qui peut se résumer
-                en plusieurs étapes :
+                {{ $t('infos1') }}
             </p>
         </div>
         <div class="mb-4">
@@ -33,9 +32,7 @@ const emit = defineEmits(['close']);
                 </div>
                 <div>
                     <p>
-                        Votre objectif est de répondre à une question, dans
-                        votre tête dans un premier temps, par exemple, "Trouvez
-                        la capitale du Japon".
+                        {{ $t('infos2') }}
                     </p>
                 </div>
             </div>
@@ -49,17 +46,18 @@ const emit = defineEmits(['close']);
                 </div>
                 <div>
                     <p>
-                        À ce moment-là, vous évaluez si vous connaissez la
-                        réponse ou non (toujours dans votre tête), il y a trois
-                        scénarios possibles :
+                        {{ $t('infos3') }}
                     </p>
                     <ul class="ml-6 list-disc">
-                        <li>Vous connaissez immédiatement la réponse.</li>
                         <li>
-                            Vous devez prendre un moment pour réfléchir et
-                            trouver la réponse.
+                            {{ $t('infos4') }}
                         </li>
-                        <li>Vous ne savez pas du tout la réponse.</li>
+                        <li>
+                            {{ $t('infos5') }}
+                        </li>
+                        <li>
+                            {{ $t('infos6') }}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -73,8 +71,7 @@ const emit = defineEmits(['close']);
                 </div>
                 <div>
                     <p>
-                        Une fois que vous êtes sûr de votre réponse, vous
-                        cliquez sur le bouton "Dévoiler".
+                        {{ $t('infos7') }}
                     </p>
                 </div>
             </div>
@@ -88,26 +85,20 @@ const emit = defineEmits(['close']);
                 </div>
                 <div>
                     <p>
-                        Ensuite, vous ajustez votre réponse en fonction de ce
-                        que vous pensiez :
+                        {{ $t('infos8') }}
                     </p>
                     <ul class="ml-6 list-disc">
                         <li>
-                            Si vous pensiez avoir la bonne réponse, mais ce
-                            n'était pas le cas, vous pouvez la marquer comme
-                            "Difficile".
+                            {{ $t('infos9') }}
                         </li>
                         <li>
-                            Si votre réponse était correcte, vous la validez
-                            comme "Facile".
+                            {{ $t('infos10') }}
                         </li>
                         <li>
-                            Si vous ne saviez pas du tout la réponse, vous
-                            pouvez la classer comme "Difficile".
+                            {{ $t('infos11') }}
                         </li>
                         <li>
-                            Si vous avez hésitez entre deux vous pouvez utiliser
-                            la réponse "Moyen".
+                            {{ $t('infos12') }}
                         </li>
                     </ul>
                 </div>
@@ -122,16 +113,15 @@ const emit = defineEmits(['close']);
                 </div>
                 <div>
                     <p>
-                        En suivant ce processus et en respectant vos réponses,
-                        les éléments sur lesquels vous avez le plus de
-                        difficultés seront révisés plus fréquemment pour
-                        faciliter votre apprentissage.
+                        {{ $t('infos13') }}
                     </p>
                 </div>
             </div>
         </div>
         <div class="text-gray-700 mt-4">
-            <p>Bon apprentissage !</p>
+            <p>
+                {{ $t('infos14') }}
+            </p>
         </div>
     </div>
 </template>
