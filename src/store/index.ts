@@ -55,6 +55,7 @@ export const useStore = defineStore('app', () => {
 
         const response = await ApiClient.get<SuccessResponse<User>>('/me');
         if (!response.success) {
+            logout({ failedToLoadCurrentUser: '1' });
             throw new Error('Failed to load current user');
         }
 

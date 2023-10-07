@@ -104,4 +104,19 @@ export default class ApiService {
 
         return true;
     }
+
+    public static async uploadImage(
+        image: Blob,
+        user_id: number
+    ): Promise<boolean> {
+        const formData = new FormData();
+        formData.append('image', image, user_id + '.png');
+
+        const response = await ApiClient.post('/images', formData);
+        if (!response.success) {
+            throw new Error('Failed upload image');
+        }
+
+        return true;
+    }
 }

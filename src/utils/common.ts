@@ -25,6 +25,8 @@ export function getLanguage(): Lang {
     return navigator.language.substring(0, 2) as Lang;
 }
 
+export const baseImageURL = import.meta.env.VITE_API_ENDPOINT + '/images/';
+
 export const languages = [
     { value: 'en', text: 'English' },
     { value: 'fr', text: 'Français' },

@@ -38,6 +38,12 @@ if (query.value.loggedOut) {
         message: t('accountDeleted'),
         type: 'success'
     });
+} else if (query.value.failedToLoadCurrentUser) {
+    notify({
+        title: t('error'),
+        message: t('failedToLoadCurrentUser'),
+        type: 'error'
+    });
 }
 
 const handlePlanetMouseDown = () => {
