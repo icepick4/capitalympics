@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ApiService from '@/services/apiService';
-import { Ref, defineEmits } from 'vue';
+import { Ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
