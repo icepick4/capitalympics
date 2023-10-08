@@ -61,11 +61,12 @@ const openFileExplorer = () => {
     <img
         crossorigin="anonymous"
         :src="baseImageURL + user?.id + '.png'"
-        class="rounded-full hover:cursor-pointer object-cover"
+        class="rounded-full object-cover"
         :class="{
             'w-10 h-10': size === 'sm',
             'w-16 h-w-16': size === 'md',
-            'w-32 h-32': size === 'lg'
+            'w-32 h-32': size === 'lg',
+            'hover:cursor-pointer': fileExplorer
         }"
         @click="openFileExplorer"
         v-else
