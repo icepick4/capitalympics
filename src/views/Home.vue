@@ -3,10 +3,13 @@ import CarouselAuto from '@/components/CarouselAuto.vue';
 import Loader from '@/components/Loader.vue';
 import Planet from '@/components/Planet.vue';
 import { CountryI } from '@/models/Country';
+import { User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
 import ApiService from '@/services/apiService';
+import { useStore } from '@/store';
 import { getLanguage } from '@/utils/common';
-import { computed, onBeforeMount, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { Ref, computed, onBeforeMount, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 
@@ -15,12 +18,12 @@ const router = useRouter();
 const planetMouseDown = ref(false);
 const currentCountryHovered = ref<CountryI | null>(null);
 const planetLoaded = ref(false);
-const imageScale = ref(1);
-const previousScrollTop = ref(0);
 const displayPlanet = ref(window.innerWidth > 1536);
 const isDeviceMobile = ref(window.innerWidth < 500);
 const finishedWaited = ref(false);
 const noCountriesFound = ref(false);
+const store = useStore();
+const user = storeToRefs(store).user as Ref<User>;
 
 const { t } = useI18n();
 const route = useRoute();
@@ -116,6 +119,7 @@ onBeforeMount(async () => {
         <div class="flex flex-col items-start w-11/12 md:w-5/6 lg:w-1/2">
             <h1 class="text-4xl sm:text-6xl text-black mb-4 mt-4">
                 {{ $t('welcome') }}
+                <span v-if="user">{{ user?.name }} !</span>
             </h1>
             <p class="text-black text-xl sm:text-2xl">
                 {{ $t('welcomeMessage') }}

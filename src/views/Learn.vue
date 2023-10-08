@@ -6,16 +6,29 @@ import { Level, User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
+import { IconInfoCircle } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, onBeforeMount, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
+import Infos from '../components/Learning/Infos.vue';
+import ProfilePicture from '../components/User/ProfilePicture/ProfilePicture.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
 const { t } = useI18n();
 
 const loading = ref(true);
+
+const showInfos = ref(false);
+
+const hideInfos = () => {
+    showInfos.value = false;
+};
+
+const toggleInfos = () => {
+    showInfos.value = !showInfos.value;
+};
 
 const userScore = ref(-2);
 const nextUserLevel = ref(-1);
@@ -77,16 +90,21 @@ onBeforeMount(async () => {
 
 <template>
     <Loader v-if="loading" :title="$t('loading')" />
+
+    <Infos :show="showInfos" @close="hideInfos" />
     <div
         v-if="user !== null"
         class="flex flex-col justify-center items-center gap-20 my-5 h-full"
     >
         <Loader v-if="initFirstTimeScores" :title="$t('loading')" />
         <div
-            class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-20"
+            class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-10"
         >
+            <ProfilePicture :fileExplorer="false" size="lg" />
+            <p class="text-3xl">{{ $t('hello') }} {{ user.name }} !</p>
+
             <div
-                class="flex flex-col gap-6 justify-center items-center"
+                class="flex flex-row gap-6 justify-center items-center"
                 v-if="userScore != -1"
             >
                 <Badge
@@ -103,6 +121,10 @@ onBeforeMount(async () => {
                         size="md"
                     />
                 </div>
+                <IconInfoCircle
+                    class="w-16 h-16 cursor-pointer hover:scale-110 transition-all"
+                    @click="toggleInfos"
+                />
             </div>
             <div class="flex flex-col md:flex-row gap-10">
                 <div class="flex flex-col items-center gap-5">
@@ -182,7 +204,7 @@ onBeforeMount(async () => {
                     {{ $t('resetScores') }}
                 </div>
                 <RouterLink
-                    to="/profile"
+                    to="/profile/scores"
                     class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
                 >
                     {{ $t('seeScores') }}

@@ -168,7 +168,7 @@ watch(continent, getNewCountry);
                     {{ $t('leave') }}
                 </RouterLink>
                 <IconInfoCircle
-                    class="w-16 h-16 top-0 left-0 cursor-pointer hover:scale-110 transition-all animate-bounce hover:animate-none"
+                    class="w-16 h-16 top-0 left-0 cursor-pointer hover:scale-110 transition-all"
                     @click="toggleInfos"
                 />
             </div>

@@ -65,7 +65,7 @@ const openFileExplorer = () => {
         :class="{
             'w-10 h-10': size === 'sm',
             'w-16 h-w-16': size === 'md',
-            'w-28 h-28': size === 'lg'
+            'w-32 h-32': size === 'lg'
         }"
         @click="openFileExplorer"
         v-else

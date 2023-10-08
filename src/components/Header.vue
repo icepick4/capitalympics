@@ -105,7 +105,7 @@ onUnmounted(() => {
                         to="/profile"
                         class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
                     >
-                        <ProfilePicture :fileExplorer="false" size="md" />
+                        <ProfilePicture :fileExplorer="false" size="sm" />
                     </RouterLink>
                 </template>
             </div>

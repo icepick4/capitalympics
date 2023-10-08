@@ -181,9 +181,11 @@
     "infos11": "If you had no idea about the answer, you can classify it as \"Difficult\".",
     "infos12": "If you were torn between two options, you can use the \"Medium\" response.",
     "infos13": "By following this process and respecting your answers, the items you have the most difficulty with will be reviewed more frequently to facilitate your learning.",
-    "infos14": "Happy learning!",
+    "infos14": "Next, you can view your statistics and progress on your profile in the form of scores. Scores range from 0 to 1000, the higher your score, the more knowledge you have on the subject. Each tier has a name ranging from 'New' to 'Legend'.",
+    "infos15": "Happy learning!",
     "imageSizeError": "The image size must be less than 500KB",
     "failedToLoadCurrentUser": "Failed to load current user",
     "imageUploaded": "Image uploaded successfully, refresh the page to see the changes",
-    "imageUploadError": "Error while uploading the image"
+    "imageUploadError": "Error while uploading the image",
+    "hello": "Hello"
 }

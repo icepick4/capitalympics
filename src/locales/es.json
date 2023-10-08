@@ -181,9 +181,11 @@
     "infos11": "Si no tenías ni idea sobre la respuesta, puedes clasificarla como \"Difícil\".",
     "infos12": "Si estabas indeciso entre dos opciones, puedes usar la respuesta \"Medio\".",
     "infos13": "Siguiendo este proceso y respetando tus respuestas, los elementos con los que más dificultades tengas se revisarán con más frecuencia para facilitar tu aprendizaje.",
-    "infos14": "¡Feliz aprendizaje!",
+    "infos14": "Después, puedes ver tus estadísticas y tu progreso en tu perfil en forma de puntuaciones. Las puntuaciones van desde 0 hasta 1000; cuanto más alta sea tu puntuación, más conocimiento tienes sobre el tema. Cada nivel tiene un nombre que va desde 'Nuevo' hasta 'Leyenda'.",
+    "infos15": "¡Feliz aprendizaje!",
     "imageSizeError": "La imagen no debe superar los 500 KB",
     "failedToLoadCurrentUser": "Error al cargar el usuario actual",
     "imageUploaded": "Imagen subida con éxito, actualice la página para ver los cambios",
-    "imageUploadError": "Error al subir la imagen"
+    "imageUploadError": "Error al subir la imagen",
+    "hello": "Hola"
 }

@@ -125,7 +125,12 @@ const { isAuthenticated } = storeToRefs(useStore());
         class="w-full flex flex-col gap-5 justify-center items-center bg-white p-6"
     >
         <div class="bg-black h-[2px] w-1/2"></div>
-        <h1 class="text-lg text-center">© Copyright 2023 - Rémi JARA</h1>
+        <h1 class="text-lg text-center">
+            © Copyright 2023 -
+            <a href="https://github.com/icepick4" class="hover:underline"
+                >Rémi JARA</a
+            >
+        </h1>
     </div>
 </template>
 

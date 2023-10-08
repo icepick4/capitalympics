@@ -181,9 +181,11 @@
     "infos11": "Si vous ne saviez pas du tout la réponse, vous pouvez la classer comme \"Difficile\".",
     "infos12": "Si vous avez hésitez entre deux vous pouvez utiliser la réponse \"Moyen\".",
     "infos13": "En suivant ce processus et en respectant vos réponses, les éléments sur lesquels vous avez le plus de difficultés seront révisés plus fréquemment pour faciliter votre apprentissage.",
-    "infos14": "Bon apprentissage !",
+    "infos14": "Ensuite, vous pouvez voir vos statistiques et votre progression sur votre profil sous forme de scores. Les scores allant de 0 à 1000, plus votre score est élevé, plus vous avez de connaissances sur le sujet. Chaque palier à un nom allant de \"Nouveau\" à \"Légende\".",
+    "infos15": "Bon apprentissage !",
     "imageSizeError": "La taille de l'image ne doit pas dépasser 500 Ko",
     "failedToLoadCurrentUser": "Une erreur s'est produite lors du chargement de l'utilisateur actuel",
     "imageUploaded": "Image téléchargée avec succès, rafraîchissez la page pour voir les changements",
-    "imageUploadError": "Erreur lors du téléchargement de l'image"
+    "imageUploadError": "Erreur lors du téléchargement de l'image",
+    "hello": "Bonjour"
 }
