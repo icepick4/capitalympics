@@ -5,12 +5,10 @@ import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted, ref, Ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { baseImageURL } from '@/utils/common';
-import { User } from '@/models/User';
 import ProfilePicture from '@/components/User//ProfilePicture/ProfilePicture.vue';
 
 const store = useStore();
 const { isAuthenticated } = storeToRefs(useStore());
-const user = storeToRefs(store).user as Ref<User>;
 
 const isDropdownOpen = ref(false);
 const clickCount = ref(0);
@@ -109,7 +107,7 @@ onUnmounted(() => {
                         to="/profile"
                         class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
                     >
-                        <ProfilePicture />
+                        <ProfilePicture :fileExplorer="false" />
                     </RouterLink>
                 </template>
             </div>

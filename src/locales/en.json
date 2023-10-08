@@ -183,5 +183,7 @@
     "infos13": "By following this process and respecting your answers, the items you have the most difficulty with will be reviewed more frequently to facilitate your learning.",
     "infos14": "Happy learning!",
     "imageSizeError": "The image size must be less than 500KB",
-    "failedToLoadCurrentUser": "Failed to load current user"
+    "failedToLoadCurrentUser": "Failed to load current user",
+    "imageUploaded": "Image uploaded successfully, refresh the page to see the changes",
+    "imageUploadError": "Error while uploading the image"
 }

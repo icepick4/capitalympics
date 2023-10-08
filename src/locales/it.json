@@ -183,5 +183,7 @@
     "infos13": "Seguendo questo processo e rispettando le tue risposte, gli elementi con cui hai più difficoltà saranno riesaminati più frequentemente per facilitare il tuo apprendimento.",
     "infos14": "Buon apprendimento!",
     "imageSizeError": "L'immagine non può superare i 500 KB",
-    "failedToLoadCurrentUser": "Impossibile caricare l'utente corrente"
+    "failedToLoadCurrentUser": "Impossibile caricare l'utente corrente",
+    "imageUploaded": "Imagen subida con éxito, actualice la página para ver los cambios",
+    "imageUploadError": "Error al subir la imagen"
 }

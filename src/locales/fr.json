@@ -183,5 +183,7 @@
     "infos13": "En suivant ce processus et en respectant vos réponses, les éléments sur lesquels vous avez le plus de difficultés seront révisés plus fréquemment pour faciliter votre apprentissage.",
     "infos14": "Bon apprentissage !",
     "imageSizeError": "La taille de l'image ne doit pas dépasser 500 Ko",
-    "failedToLoadCurrentUser": "Une erreur s'est produite lors du chargement de l'utilisateur actuel"
+    "failedToLoadCurrentUser": "Une erreur s'est produite lors du chargement de l'utilisateur actuel",
+    "imageUploaded": "Image téléchargée avec succès, rafraîchissez la page pour voir les changements",
+    "imageUploadError": "Erreur lors du téléchargement de l'image"
 }

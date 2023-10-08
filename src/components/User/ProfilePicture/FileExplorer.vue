@@ -72,7 +72,11 @@ const handleProfilePictureChange = async (event: Event) => {
 
             reader.readAsDataURL(selectedFile);
         } catch (error) {
-            console.log(error);
+            notify({
+                title: t('error'),
+                message: t('imageUploadError'),
+                type: 'error'
+            });
         }
     }
 };

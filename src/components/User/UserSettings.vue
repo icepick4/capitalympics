@@ -87,7 +87,7 @@ const deleteAccount = async () => {
                     <div
                         class="flex flex-col sm:flex-row items-start sm:items-center gap-1"
                     >
-                        <h1 class="w-6 sm:w-11/12 text-xl sm:text-2xl">
+                        <h1 class="w-6 sm:w-11/12 text-xl sm:text-2xl sm:mr-4">
                             {{ $t('editProfile') }}
                         </h1>
                         <ProfilePicture :fileExplorer="true" />

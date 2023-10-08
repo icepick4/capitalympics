@@ -10,6 +10,7 @@ import {
     IconWorld
 } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
+import ProfilePicture from '@/components/User//ProfilePicture/ProfilePicture.vue';
 
 const { isAuthenticated } = storeToRefs(useStore());
 </script>
@@ -69,7 +70,7 @@ const { isAuthenticated } = storeToRefs(useStore());
                     class="flex flex-row gap-3 items-center group cursor-pointer"
                     v-if="isAuthenticated"
                 >
-                    <IconUser class="w-6 h-6" />
+                    <ProfilePicture :fileExplorer="false" />
                     <div>
                         <p>{{ $t('myProfile') }}</p>
                         <div

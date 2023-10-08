@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IconUser } from '@tabler/icons-vue';
 import { baseImageURL } from '@/utils/common';
-import { ref, Ref } from 'vue';
+import { ref, Ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
@@ -16,6 +16,11 @@ defineProps<{
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
+const { isAuthenticated } = storeToRefs(useStore());
+
+onMounted(() => {
+    checkImage();
+});
 
 const { t } = useI18n();
 
@@ -23,7 +28,10 @@ const imageAvailable = ref(false);
 
 const checkImage = async () => {
     try {
-        const response = await fetch(baseImageURL + user.value.id + '.png', {
+        while (!user.value?.id || !isAuthenticated.value) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+        }
+        const response = await fetch(baseImageURL + user.value?.id + '.png', {
             method: 'HEAD'
         });
         if (response.ok) {
@@ -34,8 +42,6 @@ const checkImage = async () => {
         imageAvailable.value = false;
     }
 };
-
-checkImage();
 
 const openFileExplorer = () => {
     const fileInput = document.getElementById(
@@ -49,14 +55,14 @@ const openFileExplorer = () => {
     <FileExplorer v-if="fileExplorer" @imageAvailable="checkImage" />
 
     <IconUser
-        class="w-10 h-10 sm:w-10 sm:h-10 rounded-full sm:ml-4 hover:cursor-pointer"
+        class="w-10 h-10 sm:w-10 sm:h-10 rounded-full hover:cursor-pointer"
         @click="openFileExplorer"
         v-if="!imageAvailable"
     />
     <img
         crossorigin="anonymous"
-        :src="baseImageURL + user.id + '.png'"
-        class="w-10 h-10 sm:w-10 sm:h-10 rounded-full sm:ml-4 hover:cursor-pointer object-cover"
+        :src="baseImageURL + user?.id + '.png'"
+        class="w-10 h-10 sm:w-10 sm:h-10 rounded-full hover:cursor-pointer object-cover"
         @click="openFileExplorer"
         v-else
     />
