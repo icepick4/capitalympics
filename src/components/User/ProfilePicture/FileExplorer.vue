@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import ApiService from '@/services/apiService';
-import { Ref } from 'vue';
+import { Ref, defineEmits } from 'vue';
 import { storeToRefs } from 'pinia';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
 import { notify } from '@/plugins/notifications';
 import { useI18n } from 'vue-i18n';
-import { defineEmits } from 'vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
