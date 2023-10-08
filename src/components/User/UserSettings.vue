@@ -10,7 +10,7 @@ import { Ref, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import { baseImageURL } from '@/utils/common';
-import ProfilePicture from './ProfilePicture.vue';
+import ProfilePicture from './ProfilePicture/ProfilePicture.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -90,7 +90,7 @@ const deleteAccount = async () => {
                         <h1 class="w-6 sm:w-11/12 text-xl sm:text-2xl">
                             {{ $t('editProfile') }}
                         </h1>
-                        <ProfilePicture />
+                        <ProfilePicture :fileExplorer="true" />
                         <IconPhotoEdit class="w-10 h-10" />
                     </div>
                     <ActionIcon

@@ -111,7 +111,7 @@ export default class ApiService {
     ): Promise<boolean> {
         const formData = new FormData();
         formData.append('image', image, user_id + '.png');
-
+        console.log(image, user_id);
         const response = await ApiClient.post('/images', formData);
         if (!response.success) {
             throw new Error('Failed upload image');

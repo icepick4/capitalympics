@@ -21,7 +21,7 @@ import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import StatCardContainer from '../Statistics/StatCardContainer.vue';
 import { notify } from '@/plugins/notifications';
-import ProfilePicture from './ProfilePicture.vue';
+import ProfilePicture from './ProfilePicture/ProfilePicture.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -111,7 +111,7 @@ async function disconnect() {
                     class="flex column flex-row items-center justify-center mb-4 gap-4"
                 >
                     <div class="flex items-center">
-                        <ProfilePicture />
+                        <ProfilePicture :fileExplorer="true" />
                         <h1 class="text-2xl mr-1 ml-4 font-bold">
                             {{ user?.name }}
                         </h1>
