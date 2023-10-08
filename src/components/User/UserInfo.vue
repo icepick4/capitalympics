@@ -5,13 +5,12 @@ import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
-import { baseImageURL, isNow, isToday } from '@/utils/common';
+import { isNow, isToday } from '@/utils/common';
 import {
     IconChartBar,
     IconListNumbers,
     IconLogout2,
-    IconSettings,
-    IconUser
+    IconSettings
 } from '@tabler/icons-vue';
 import { DateTime } from 'luxon';
 import { storeToRefs } from 'pinia';
@@ -20,7 +19,6 @@ import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import StatCardContainer from '../Statistics/StatCardContainer.vue';
-import { notify } from '@/plugins/notifications';
 import ProfilePicture from './ProfilePicture/ProfilePicture.vue';
 
 const store = useStore();
@@ -111,7 +109,7 @@ async function disconnect() {
                     class="flex column flex-row items-center justify-center mb-4 gap-4"
                 >
                     <div class="flex items-center">
-                        <ProfilePicture :fileExplorer="true" />
+                        <ProfilePicture :fileExplorer="true" size="md" />
                         <h1 class="text-2xl mr-1 ml-4 font-bold">
                             {{ user?.name }}
                         </h1>

@@ -1,28 +1,24 @@
 <script setup lang="ts">
-import { IconUser } from '@tabler/icons-vue';
-import { baseImageURL } from '@/utils/common';
-import { ref, Ref, onMounted } from 'vue';
-import { storeToRefs } from 'pinia';
 import { User } from '@/models/User';
 import { useStore } from '@/store';
-import ApiService from '@/services/apiService';
-import { notify } from '@/plugins/notifications';
-import { useI18n } from 'vue-i18n';
+import { baseImageURL } from '@/utils/common';
+import { IconUser } from '@tabler/icons-vue';
+import { storeToRefs } from 'pinia';
+import { Ref, onMounted, ref } from 'vue';
 import FileExplorer from './FileExplorer.vue';
-
-defineProps<{
-    fileExplorer: boolean;
-}>();
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
 const { isAuthenticated } = storeToRefs(useStore());
 
+const props = defineProps<{
+    fileExplorer: boolean;
+    size: 'sm' | 'md' | 'lg';
+}>();
+
 onMounted(() => {
     checkImage();
 });
-
-const { t } = useI18n();
 
 const imageAvailable = ref(false);
 
@@ -44,6 +40,9 @@ const checkImage = async () => {
 };
 
 const openFileExplorer = () => {
+    if (!props.fileExplorer) {
+        return;
+    }
     const fileInput = document.getElementById(
         'profile-picture-input'
     ) as HTMLInputElement;
@@ -55,14 +54,19 @@ const openFileExplorer = () => {
     <FileExplorer v-if="fileExplorer" @imageAvailable="checkImage" />
 
     <IconUser
-        class="w-10 h-10 sm:w-10 sm:h-10 rounded-full hover:cursor-pointer"
+        class="w-10 h-10 rounded-full hover:cursor-pointer"
         @click="openFileExplorer"
         v-if="!imageAvailable"
     />
     <img
         crossorigin="anonymous"
         :src="baseImageURL + user?.id + '.png'"
-        class="w-10 h-10 sm:w-10 sm:h-10 rounded-full hover:cursor-pointer object-cover"
+        class="rounded-full hover:cursor-pointer object-cover"
+        :class="{
+            'w-10 h-10': size === 'sm',
+            'w-16 h-w-16': size === 'md',
+            'w-28 h-28': size === 'lg'
+        }"
         @click="openFileExplorer"
         v-else
     />

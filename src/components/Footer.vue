@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ProfilePicture from '@/components/User//ProfilePicture/ProfilePicture.vue';
 import { useStore } from '@/store';
 import {
     IconBrandGithub,
@@ -6,11 +7,9 @@ import {
     IconBrandReddit,
     IconLogin,
     IconMail,
-    IconUser,
     IconWorld
 } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
-import ProfilePicture from '@/components/User//ProfilePicture/ProfilePicture.vue';
 
 const { isAuthenticated } = storeToRefs(useStore());
 </script>
@@ -70,7 +69,7 @@ const { isAuthenticated } = storeToRefs(useStore());
                     class="flex flex-row gap-3 items-center group cursor-pointer"
                     v-if="isAuthenticated"
                 >
-                    <ProfilePicture :fileExplorer="false" />
+                    <ProfilePicture :fileExplorer="false" size="sm" />
                     <div>
                         <p>{{ $t('myProfile') }}</p>
                         <div

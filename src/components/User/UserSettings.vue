@@ -4,12 +4,11 @@ import { User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { languages } from '@/utils/common';
-import { IconUserX, IconX, IconUser, IconPhotoEdit } from '@tabler/icons-vue';
+import { IconPhotoEdit, IconUserX, IconX } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
-import { baseImageURL } from '@/utils/common';
 import ProfilePicture from './ProfilePicture/ProfilePicture.vue';
 
 const store = useStore();
@@ -90,7 +89,7 @@ const deleteAccount = async () => {
                         <h1 class="w-6 sm:w-11/12 text-xl sm:text-2xl sm:mr-4">
                             {{ $t('editProfile') }}
                         </h1>
-                        <ProfilePicture :fileExplorer="true" />
+                        <ProfilePicture :fileExplorer="true" size="md" />
                         <IconPhotoEdit class="w-10 h-10" />
                     </div>
                     <ActionIcon

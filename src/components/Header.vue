@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { useStore } from '@/store';
-import { IconUser } from '@tabler/icons-vue';
-import { storeToRefs } from 'pinia';
-import { onMounted, onUnmounted, ref, Ref } from 'vue';
-import { RouterLink } from 'vue-router';
-import { baseImageURL } from '@/utils/common';
 import ProfilePicture from '@/components/User//ProfilePicture/ProfilePicture.vue';
+import { useStore } from '@/store';
+import { storeToRefs } from 'pinia';
+import { onMounted, onUnmounted, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const store = useStore();
 const { isAuthenticated } = storeToRefs(useStore());
@@ -107,7 +105,7 @@ onUnmounted(() => {
                         to="/profile"
                         class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
                     >
-                        <ProfilePicture :fileExplorer="false" />
+                        <ProfilePicture :fileExplorer="false" size="md" />
                     </RouterLink>
                 </template>
             </div>
