@@ -1,15 +1,16 @@
 <div align="center">
 
-# Capitalympics
-
+# Capitalympics [![Website](https://img.shields.io/website?style=for-the-badge&url=http%3A%2F%2Fremi-jara.fr)](http://remi-jara.fr)
 <img src="https://raw.githubusercontent.com/icepick4/capitalympics/main/public/logo.png" alt="Capitalympics Logo" width="200" />
+
+
+
 
 Learn flags and capitals of the world !
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-vue.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
-
 </div>
 
 🌍 Capitalympics is a web application that helps you learn the flags and capitals of countries around the world. It provides a filtered learning experience by allowing you to focus on specific regions of the world. You can track your progress with individual scores for each country as well as an overall score. The application also allows you to view your statistics on your profile and sort and filter them by category.
