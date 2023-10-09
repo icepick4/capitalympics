@@ -1,6 +1,6 @@
 <div align="center">
 
-# Capitalympics [![Website](https://img.shields.io/website?style=for-the-badge&url=http%3A%2F%2Fremi-jara.fr)](http://remi-jara.fr)
+# Capitalympics [![Website](https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fcapitalympics.com)](https://capitalympics.com)
 <img src="https://raw.githubusercontent.com/icepick4/capitalympics/main/public/logo.png" alt="Capitalympics Logo" width="200" />
 
 
