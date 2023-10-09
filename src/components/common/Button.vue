@@ -3,6 +3,7 @@ interface Properties {
     type: 'warning' | 'error' | 'success';
     text: string;
     disabled?: boolean;
+    loading?: boolean;
 }
 
 withDefaults(defineProps<Properties>(), {
@@ -24,6 +25,12 @@ withDefaults(defineProps<Properties>(), {
             'hover:bg-green-300': type === 'success'
         }"
     >
-        {{ text }}
+        <span v-if="!loading">
+            {{ text }}
+        </span>
+        <div
+            v-else
+            class="h-5 w-5 border-4 rounded-full border-blue-600/75 border-b-blue-600/25 animate-spin"
+        ></div>
     </button>
 </template>

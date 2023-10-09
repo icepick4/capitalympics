@@ -116,6 +116,7 @@ const deleteAccount = async () => {
                 <Button
                     :text="$t('saveProfile')"
                     :disabled="!canSave || loading"
+                    :loading="loading"
                     type="success"
                     @click="saveProfile"
                 />
