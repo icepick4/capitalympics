@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import ApiService from '@/services/apiService';
-import { Ref } from 'vue';
-import { storeToRefs } from 'pinia';
 import { User } from '@/models/User';
-import { useStore } from '@/store';
 import { notify } from '@/plugins/notifications';
+import { useStore } from '@/store';
+import ApiClient from '@/utils/ApiClient';
+import { storeToRefs } from 'pinia';
+import { Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const store = useStore();
@@ -55,17 +55,24 @@ const handleProfilePictureChange = async (event: Event) => {
                         uint8Array[i] = binaryData.charCodeAt(i);
                     }
                     const blob = new Blob([arrayBuffer], { type: 'image/png' });
+                    const formData = new FormData();
+                    formData.append('image', blob, user.value.id + '.png');
+                    const response = await ApiClient.post('/images', formData);
 
-                    await ApiService.uploadImage(blob, user.value.id).then(
-                        () => {
-                            emit('imageAvailable');
-                            notify({
-                                title: t('success'),
-                                message: t('imageUploaded'),
-                                type: 'success'
-                            });
-                        }
-                    );
+                    if (response.success) {
+                        emit('imageAvailable');
+                        notify({
+                            title: t('success'),
+                            message: t('imageUploaded'),
+                            type: 'success'
+                        });
+                    } else {
+                        notify({
+                            title: t('error'),
+                            message: t('imageUploadError'),
+                            type: 'error'
+                        });
+                    }
                 };
             };
 
