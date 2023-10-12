@@ -8,7 +8,8 @@ import LegalNotices from '@/views/LegalNotices.vue';
 import LogIn from '@/views/LogIn.vue';
 import NotFound from '@/views/NotFound.vue';
 import Profile from '@/views/Profile.vue';
-import Quiz from '@/views/Quiz.vue';
+import Quiz from '@/views/Quiz/Quiz.vue';
+import QuizCreation from '@/views/Quiz/QuizCreation.vue';
 import SignUp from '@/views/SignUp.vue';
 import SingleCountry from '@/views/SingleCountry.vue';
 import {
@@ -123,6 +124,12 @@ const routes = [
         path: '/quiz',
         name: 'Quiz',
         component: Quiz
+    },
+    {
+        path: '/quiz/create',
+        name: 'QuizCreation',
+        component: QuizCreation,
+        beforeEnter: requireAuth
     },
     {
         path: '/legal-notices',
