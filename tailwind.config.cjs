@@ -23,7 +23,9 @@ module.exports = {
             blue: colors.blue,
             purple: colors.violet,
             green: colors.green,
-            orange: colors.orange
+            orange: colors.orange,
+            cyan: colors.cyan,
+            pink: colors.pink
         },
         screens: {
             xs: '500px',

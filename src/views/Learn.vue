@@ -128,84 +128,32 @@ onBeforeMount(async () => {
             </div>
             <div class="flex flex-col md:flex-row gap-10">
                 <div class="flex flex-col items-center gap-5">
-                    <h1 class="text-2xl">{{ $t('capitals') }}</h1>
                     <RouterLink
                         to="/learn/capital"
-                        class="relative group transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md"
+                        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-4xl px-7 py-4 text-center mr-2 mb-2"
                     >
-                        <span
-                            class="absolute group-hover:opacity-100 opacity-100 xs:opacity-0 flex justify-center items-center inset-x-0 inset-y-0 right-0 p-1 text-4xl text-white bg-black bg-opacity-50 z-10 font-thin transition-all duration-300"
-                        >
-                            {{ $t('learn') }}
-                        </span>
-                        <div class="relative w-full h-full">
-                            <img
-                                src="/learn/capitals.jpg"
-                                class="h-auto w-auto"
-                                alt="capitals button image"
-                            />
-                            <span
-                                class="absolute group-hover:opacity-100 opacity-100 xs:opacity-0 bottom-0 right-0 p-1 text-xs text-white bg-black bg-opacity-50 font-extralight transition-all duration-300"
-                            >
-                                Photo of
-                                <a
-                                    href="https://unsplash.com/@jaeh?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-                                    >Jaeh</a
-                                >
-                                on
-                                <a
-                                    href="https://unsplash.com/fr/photos/tpdPRCLKvoY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-                                    >Unsplash</a
-                                >
-                            </span>
-                        </div>
+                        {{ ($t('learn'), $t('capitals')) }}
                     </RouterLink>
                 </div>
                 <div class="flex flex-col items-center gap-5">
-                    <h1 class="text-2xl">{{ $t('flags') }}</h1>
                     <RouterLink
                         to="/learn/flag"
-                        class="relative group transition ease-in-out delay-100 text-black text-2xl font-bold text-center bg-white rounded-md"
+                        class="text-white bg-gradient-to-r from-pink-500 to-orange-400 focus:ring-2 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-4xl px-7 py-4 text-center mr-2 mb-2"
                     >
-                        <span
-                            class="absolute group-hover:opacity-100 opacity-100 xs:opacity-0 flex justify-center items-center inset-x-0 inset-y-0 right-0 p-1 text-4xl text-white bg-black bg-opacity-50 z-10 font-thin transition-all duration-300"
-                        >
-                            {{ $t('learn') }}
-                        </span>
-                        <div class="relative w-full h-full">
-                            <img
-                                src="/learn/flags.jpg"
-                                class="h-full w-auto"
-                                alt="flags button image"
-                            />
-                            <span
-                                class="absolute group-hover:opacity-100 opacity-100 xs:opacity-0 bottom-0 right-0 p-1 text-xs text-white bg-black bg-opacity-50 font-extralight transition-all duration-300"
-                            >
-                                Photo of
-                                <a
-                                    href="https://unsplash.com/@tony_cm__?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-                                    >Anthony Choren</a
-                                >
-                                on
-                                <a
-                                    href="https://unsplash.com/fr/photos/lYzap0eubDY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-                                    >Unsplash</a
-                                >
-                            </span>
-                        </div>
+                        {{ ($t('learn'), $t('flags')) }}
                     </RouterLink>
                 </div>
             </div>
             <div class="flex flex-col gap-5">
                 <div
-                    class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
+                    class="transition ease-in-out delay-100 text-black text-lg font-bold text-center p-3 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
                     @click="resetScoresConfirmation"
                 >
                     {{ $t('resetScores') }}
                 </div>
                 <RouterLink
                     to="/profile/scores"
-                    class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
+                    class="transition ease-in-out delay-100 text-black text-lg font-bold text-center p-3 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
                 >
                     {{ $t('seeScores') }}
                 </RouterLink>
