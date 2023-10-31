@@ -187,5 +187,6 @@
     "failedToLoadCurrentUser": "Error al cargar el usuario actual",
     "imageUploaded": "Imagen subida con éxito, actualice la página para ver los cambios",
     "imageUploadError": "Error al subir la imagen",
-    "hello": "Hola"
+    "hello": "Hola",
+    "never": "Nunca"
 }

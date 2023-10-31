@@ -187,5 +187,6 @@
     "failedToLoadCurrentUser": "Failed to load current user",
     "imageUploaded": "Image uploaded successfully, refresh the page to see the changes",
     "imageUploadError": "Error while uploading the image",
-    "hello": "Hello"
+    "hello": "Hello",
+    "never": "Never"
 }

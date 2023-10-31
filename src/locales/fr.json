@@ -187,5 +187,6 @@
     "failedToLoadCurrentUser": "Une erreur s'est produite lors du chargement de l'utilisateur actuel",
     "imageUploaded": "Image téléchargée avec succès, rafraîchissez la page pour voir les changements",
     "imageUploadError": "Erreur lors du téléchargement de l'image",
-    "hello": "Bonjour"
+    "hello": "Bonjour",
+    "never": "Jamais"
 }

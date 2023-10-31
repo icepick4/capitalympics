@@ -66,6 +66,10 @@ const calculateBestSucceededStreak = (
 };
 
 const getDaysAgoFromDate = (date: DateTime): number | string => {
+    if (!date.isValid) {
+        return t('never');
+    }
+
     const now = DateTime.now();
 
     if (isNow(date)) {
@@ -102,19 +106,24 @@ onMounted(async () => {
 
     const scores = response.data.scores;
     numberOfQuestions.value = scores.length;
+
     numberOfQuestionsFlags.value = scores.filter(
         (score) => score.learning_type == 'flag'
     ).length;
+
     numberOfQuestionsCapitals.value = scores.filter(
         (score) => score.learning_type == 'capital'
     ).length;
+
     bestStreak.value = calculateBestSucceededStreak(
         scores.map((score) => score.result)
     );
+
     const flagScores = scores.filter((score) => score.learning_type == 'flag');
     const capitalScores = scores.filter(
         (score) => score.learning_type == 'capital'
     );
+
     lastStreakFlags.value = calculateLastStreak(
         flagScores.map((score) => score.result),
         'flag'
@@ -123,12 +132,17 @@ onMounted(async () => {
         capitalScores.map((score) => score.result),
         'capital'
     );
+
     daysPlayed.value = new Set(
         scores.map((score) => score.created_at.split('T')[0])
     ).size;
-
-    lastLearnFlags.value = flagScores[0].created_at;
-    lastLearnCapitals.value = capitalScores[0].created_at;
+    
+    if (flagScores.length > 0) {
+        lastLearnFlags.value = flagScores[0].created_at;
+    }
+    if (capitalScores.length > 0) {
+        lastLearnCapitals.value = capitalScores[0].created_at;
+    }
 });
 </script>
 
