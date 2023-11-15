@@ -27,6 +27,7 @@ const props = defineProps<{
 
 const size = ref(props.size ?? 'md');
 const level = computed(() => fromScoreToLevel(props.score));
+console.log(props.score);
 const text = computed(() => getLevelName(props.score));
 
 const icon = computed(() => {
@@ -183,7 +184,14 @@ const circumference = computed(() => 2 * Math.PI * 30);
             >
                 {{ text }}
             </span>
-            <span class="text-2xl font-bold text-gray-800 p-1"
+            <span
+                class="font-bold text-gray-800 p-1"
+                :class="{
+                    'text-xs': size === 'xs',
+                    'text-sm': size === 'sm',
+                    'text-lg': size === 'md',
+                    'text-xl': size === 'lg'
+                }"
                 >{{ isMinScore ? 0 : Math.round(score * 10) }} /
                 {{ Math.ceil(props.score / 10) * 100 }}</span
             >

@@ -2,7 +2,7 @@
 import Badge from '@/components/Badge.vue';
 import Loader from '@/components/Loader.vue';
 import { useConfirmDialog } from '@/composables/confirm-dialog';
-import { Level, User } from '@/models/User';
+import { User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
@@ -30,25 +30,25 @@ const toggleInfos = () => {
     showInfos.value = !showInfos.value;
 };
 
-const userScore = ref(-2);
-const nextUserLevel = ref(-1);
+const userScoreCapital = ref(-2);
+const userScoreFlag = ref(-2);
+const nextUserFlagLevel = ref(-1);
+const nextUserCapitalLevel = ref(-1);
 const initFirstTimeScores = ref(false);
 
-const getUserScore = async (): Promise<number> => {
+const initUserScore = async () => {
     loading.value = true;
-    let score: number = -1;
     try {
         const { capital, flag } = await ApiService.getUserScore();
-        const score = (capital + flag) / 2;
-        nextUserLevel.value = score + 10;
-        return score;
+        userScoreCapital.value = capital;
+        userScoreFlag.value = flag;
+        nextUserCapitalLevel.value = capital + 10;
+        nextUserFlagLevel.value = flag + 10;
     } catch (error) {
         console.log(error);
     } finally {
         loading.value = false;
     }
-
-    return score;
 };
 
 const resetScoresConfirmation = async () => {
@@ -72,7 +72,8 @@ const resetScores = async (): Promise<boolean> => {
         console.log(error);
     } finally {
         initFirstTimeScores.value = false;
-        userScore.value = (await getUserScore()) as Level;
+        userScoreCapital.value = 0;
+        userScoreFlag.value = 0;
         notify({
             title: t('resetScoresTitle'),
             message: t('resetScoresSuccess'),
@@ -84,7 +85,7 @@ const resetScores = async (): Promise<boolean> => {
 };
 
 onBeforeMount(async () => {
-    userScore.value = await getUserScore();
+    await initUserScore();
 });
 </script>
 
@@ -98,29 +99,11 @@ onBeforeMount(async () => {
     >
         <Loader v-if="initFirstTimeScores" :title="$t('loading')" />
         <div
-            class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-10"
+            class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-12"
         >
             <ProfilePicture :fileExplorer="false" size="lg" />
-            <p class="text-3xl">{{ $t('hello') }} {{ user.name }} !</p>
-
-            <div
-                class="flex flex-row gap-6 justify-center items-center"
-                v-if="userScore != -1"
-            >
-                <Badge
-                    v-if="userScore != -2"
-                    :score="userScore"
-                    size="lg"
-                    :progress="true"
-                />
-                <div class="flex flex-col gap-1 justify-center items-center">
-                    <span class="text-lg">{{ $t('nextLevel') }}</span>
-                    <Badge
-                        v-if="nextUserLevel != -1"
-                        :score="nextUserLevel"
-                        size="md"
-                    />
-                </div>
+            <div class="flex flex-row gap-5 items-center">
+                <p class="text-3xl">{{ $t('hello') }} {{ user.name }} !</p>
                 <IconInfoCircle
                     class="w-16 h-16 cursor-pointer hover:scale-110 transition-all"
                     @click="toggleInfos"
@@ -128,17 +111,30 @@ onBeforeMount(async () => {
             </div>
             <div class="flex flex-col md:flex-row gap-10">
                 <div class="flex flex-col items-center gap-5">
+                    <Badge
+                        v-if="userScoreCapital != -1"
+                        :score="userScoreCapital"
+                        size="md"
+                        :progress="true"
+                    />
+
                     <RouterLink
                         to="/learn/capital"
-                        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-4xl px-7 py-4 text-center mr-2 mb-2"
+                        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-4xl px-7 py-4 text-center mr-2 mb-2 hover:scale-105 transition-all"
                     >
                         {{ ($t('learn'), $t('capitals')) }}
                     </RouterLink>
                 </div>
                 <div class="flex flex-col items-center gap-5">
+                    <Badge
+                        v-if="userScoreFlag != -1"
+                        :score="userScoreFlag"
+                        size="md"
+                        :progress="true"
+                    />
                     <RouterLink
                         to="/learn/flag"
-                        class="text-white bg-gradient-to-r from-pink-500 to-orange-400 focus:ring-2 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-4xl px-7 py-4 text-center mr-2 mb-2"
+                        class="text-white bg-gradient-to-r from-pink-500 to-orange-400 focus:ring-2 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-4xl px-7 py-4 text-center mr-2 mb-2 hover:scale-105 transition-all"
                     >
                         {{ ($t('learn'), $t('flags')) }}
                     </RouterLink>
