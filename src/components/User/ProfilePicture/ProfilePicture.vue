@@ -2,7 +2,7 @@
 import { User } from '@/models/User';
 import { useStore } from '@/store';
 import { baseImageURL } from '@/utils/common';
-import { IconUser } from '@tabler/icons-vue';
+import { IconPencil, IconUser } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, onMounted, ref } from 'vue';
 import FileExplorer from './FileExplorer.vue';
@@ -61,14 +61,20 @@ const openFileExplorer = () => {
     <img
         crossorigin="anonymous"
         :src="baseImageURL + user?.id + '.png'"
-        class="rounded-full object-cover"
+        class="rounded-full object-cover transition-all aspect-square border border-gray-800"
         :class="{
             'w-10 h-10': size === 'sm',
             'w-16 h-w-16': size === 'md',
             'w-32 h-32': size === 'lg',
-            'hover:cursor-pointer': fileExplorer
+            'hover:cursor-pointer': fileExplorer,
+            'group-hover:border-transparent': fileExplorer
         }"
         @click="openFileExplorer"
         v-else
+    />
+    <IconPencil
+        class="w-8 h-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fill-white opacity-0 group-hover:opacity-100 transition-all z-0 blur-xl group-hover:blur-none duration-100 hover:cursor-pointer"
+        v-if="fileExplorer"
+        @click="openFileExplorer"
     />
 </template>

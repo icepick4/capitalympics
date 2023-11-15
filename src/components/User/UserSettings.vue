@@ -4,7 +4,7 @@ import { User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { languages } from '@/utils/common';
-import { IconPhotoEdit, IconUserX, IconX } from '@tabler/icons-vue';
+import { IconUserX, IconX } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -84,13 +84,16 @@ const deleteAccount = async () => {
                     class="w-full flex flex-row justify-between items-top sm:items-center gap-5"
                 >
                     <div
-                        class="flex flex-col sm:flex-row items-start sm:items-center gap-1"
+                        class="flex flex-col sm:flex-row items-start sm:items-center"
                     >
                         <h1 class="w-6 sm:w-11/12 text-xl sm:text-2xl sm:mr-4">
                             {{ $t('editProfile') }}
                         </h1>
-                        <ProfilePicture :fileExplorer="true" size="md" />
-                        <IconPhotoEdit class="w-10 h-10" />
+                        <div
+                            class="rounded-full relative hover:ring hover:ring-gray-600 ring-offset-0 bg-gray-600 hover:grayscale group"
+                        >
+                            <ProfilePicture :fileExplorer="true" size="md" />
+                        </div>
                     </div>
                     <ActionIcon
                         :label="$t('deleteAccount')"

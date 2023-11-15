@@ -26,7 +26,7 @@ const switchText = computed(() => {
 <template>
     <div class="flex justify-center">
         <div
-            class="relative w-5/6 md:w-3/5 lg:w-2/5 bg-gray-300 rounded-lg shadow-lg overflow-hidden"
+            class="relative w-5/6 md:w-3/5 lg:w-2/5 bg-gray-100 rounded-lg shadow-lg overflow-hidden"
         >
             <div
                 class="p-2 lg:p-4 flex flex-row justify-center items-start lg:flex-row lg:justify-between gap-3"
