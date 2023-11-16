@@ -5,10 +5,6 @@ import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
 const question = ref('');
-
-const addAnswer = () => {
-    console.log('addAnswer');
-};
 </script>
 
 <template>

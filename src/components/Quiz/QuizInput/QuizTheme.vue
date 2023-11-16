@@ -5,7 +5,15 @@ import { useI18n } from 'vue-i18n';
 const emit = defineEmits(['change']);
 const { t } = useI18n();
 
+const themes = ref<string[]>([]);
 const value = ref('');
+
+const addTheme = () => {
+    themes.value.push(value.value);
+    value.value = '';
+
+    emit('change', themes.value);
+};
 </script>
 
 <template>
@@ -20,7 +28,13 @@ const value = ref('');
             name="quizTheme"
             class="mt-1 p-2 w-full border rounded"
             :placeholder="t('quizTheme')"
-            @input="emit('change', value)"
         />
+        <button
+            type="button"
+            class="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+            @click="addTheme"
+        >
+            {{ t('addAnswer') }}
+        </button>
     </div>
 </template>
