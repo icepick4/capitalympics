@@ -43,20 +43,22 @@ const removeItem = (item: string) => {
                 {{ answer }}
             </span>
         </div>
-        <input
-            v-model="value"
-            type="text"
-            id="quizQuestion"
-            name="quizQuestion"
-            class="p-2 w-full border rounded"
-            :placeholder="t('quizQuestion')"
-        />
-        <button
-            type="button"
-            class="px-4 py-2 bg-blue-500 text-white rounded w-1/2"
-            @click="addAnswer"
-        >
-            {{ t('addAnswer') }}
-        </button>
+        <div class="flex flex-row gap-2">
+            <input
+                v-model="value"
+                type="text"
+                id="quizQuestion"
+                name="quizQuestion"
+                class="p-2 w-full border rounded"
+                :placeholder="t('quizQuestion')"
+            />
+            <button
+                type="button"
+                class="px-4 py-2 bg-blue-500 text-white rounded w-1/2"
+                @click="addAnswer"
+            >
+                {{ t('addAnswer') }}
+            </button>
+        </div>
     </div>
 </template>

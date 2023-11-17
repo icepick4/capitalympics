@@ -78,9 +78,8 @@ const removeItem = (item: string) => {
 </script>
 
 <template>
-    <div class="w-full h-full flex flex-col items-center justify-start gap-20">
-        <h1 class="text-4xl font-bold mb-4">{{ t('QuizCreation') }}</h1>
-        <div class="mb-4 bg-white p-6 rounded-md shadow-md w-1/2">
+    <div class="w-full h-full flex flex-col items-center justify-center">
+        <div class="bg-white p-6 rounded-md shadow-md w-1/2">
             <h2 class="text-2xl font-bold mb-2">Récapitulatif</h2>
             <div class="grid grid-cols-2 gap-2">
                 <div class="flex items-center">
@@ -123,13 +122,13 @@ const removeItem = (item: string) => {
                 </div>
             </div>
         </div>
-        <div class="w-1/2 flex flex-row items-center justify-center">
+        <div class="w-1/2 h-1/2 flex flex-row items-center justify-evenly">
             <IconArrowBigLeft
                 @click="previousStep"
                 class="h-10 w-10 cursor-pointer hover:scale-110 transition-all hover:fill-red-500"
             />
             <div class="w-full flex flex-col items-center">
-                <div class="flex flex-col w-1/2 gap-10">
+                <div class="flex flex-col gap-10">
                     <form @submit.prevent="saveQuiz" class="space-y-4">
                         <div v-if="currentStep === 1">
                             <QuizName @change="quizName = $event" />
