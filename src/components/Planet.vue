@@ -45,7 +45,7 @@ const setParisCameraView = () => {
     camera.position.set(0, 0, 2.25);
     camera.lookAt(0, 0, 0);
     planet.rotation.y = -1.5;
-    planet.rotation.x = 0.5;
+    planet.rotation.x = 0.35;
 };
 
 const initThreeScene = () => {
@@ -84,9 +84,8 @@ const initThreeScene = () => {
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enablePan = false;
     controls.enableZoom = false;
-    // restrict camera movement
-    controls.minDistance = 1;
-    controls.maxDistance = 10;
+    controls.minPolarAngle = Math.PI / 2;
+    controls.maxPolarAngle = Math.PI / 2;
     controls.rotateSpeed = 0.3;
 
     renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
@@ -110,7 +109,7 @@ const initThreeScene = () => {
 
     parisPin.position.set(x, y, z);
     planet.rotation.y = -1.5;
-    planet.rotation.x = 0.5;
+    planet.rotation.x = 0.35;
     planet.add(parisPin);
     scene.add(planet);
     scene.add(camera);
