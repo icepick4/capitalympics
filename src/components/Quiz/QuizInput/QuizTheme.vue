@@ -9,8 +9,21 @@ const themes = ref<string[]>([]);
 const value = ref('');
 
 const addTheme = () => {
+    if (
+        value.value.length < 2 ||
+        value.value.length > 40 ||
+        themes.value.includes(value.value)
+    ) {
+        return;
+    }
     themes.value.push(value.value);
     value.value = '';
+
+    emit('change', themes.value);
+};
+
+const removeItem = (item: string) => {
+    themes.value = themes.value.filter((answer) => answer !== item);
 
     emit('change', themes.value);
 };
@@ -21,6 +34,16 @@ const addTheme = () => {
         <label for="quizTheme" class="block text-sm font-medium text-gray-700">
             {{ t('quizTheme') }}
         </label>
+        <div class="flex flex-wrap gap-1">
+            <span
+                v-for="theme in themes"
+                :key="theme"
+                @click="removeItem(theme)"
+                class="text-xl inline-flex items-center rounded-md px-2 py-1 font-medium ring-1 ring-inset ring-purple-700/10 whitespace-nowrap bg-gray-100 text-gray-800 hover:bg-red-500 hover:text-white cursor-pointer transition-all"
+            >
+                {{ theme }}
+            </span>
+        </div>
         <input
             v-model="value"
             type="text"

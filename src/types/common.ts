@@ -34,3 +34,8 @@ export interface UserScore {
     learning_type: LearningType;
     score: number;
 }
+
+export type Question = {
+    question: string;
+    answers: string[];
+};
