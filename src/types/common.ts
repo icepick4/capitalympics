@@ -3,7 +3,7 @@ export type CurrentState = 'starting' | 'choosing';
 export type ScoreType = 'succeeded' | 'failed' | 'medium';
 export type Sort = 'ASC' | 'DESC';
 
-export type Lang = 'en' | 'fr' | 'es' | 'it';
+export type Lang = 'en' | 'fr' | 'es' | 'it' | 'kr';
 export const DefaultLang: Lang = 'en';
 
 export interface CountryDetails {

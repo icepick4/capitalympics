@@ -6,6 +6,7 @@ import en from './locales/en.json';
 import es from './locales/es.json';
 import fr from './locales/fr.json';
 import it from './locales/it.json';
+import kr from './locales/kr.json';
 import CommonPlugin from './plugins/common';
 import NotificationsPlugin from './plugins/notifications';
 import router from './router';
@@ -14,7 +15,7 @@ import type { Lang } from './types/common';
 
 const browserLanguage = navigator.language;
 const defaultLocale = browserLanguage.substring(0, 2) as Lang;
-const supportedLocales: Lang[] = ['en', 'fr', 'es', 'it'];
+const supportedLocales: Lang[] = ['en', 'fr', 'es', 'it', 'kr'];
 if (!supportedLocales.includes(defaultLocale)) {
     defaultLocale === 'en';
 }
@@ -34,7 +35,7 @@ if (!supportedLocales.includes(defaultLocale)) {
 
     const i18n = createI18n({
         locale: defaultLocale,
-        messages: { fr, en, es, it }
+        messages: { fr, en, es, it, kr }
     });
 
     app.use(router).use(pinia).use(i18n).use(CommonPlugin).use(NotificationsPlugin);
