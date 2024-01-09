@@ -97,42 +97,84 @@ const Ranks: Record<Level, Translation> = {
         en: 'Unranked',
         es: 'Sin clasificar',
         fr: 'Non classé',
-        it: 'Non classificato'
+        it: 'Non classificato',
+        kr: '등급 없음'
     },
     [0]: {
         en: 'Newcomer',
         es: 'Recién llegado',
         fr: 'Nouveau',
-        it: 'Nuovo arrivato'
+        it: 'Nuovo arrivato',
+        kr: '신참자'
     },
     [1]: {
         en: 'Beginner',
         es: 'Principiante',
         fr: 'Débutant',
-        it: 'Principiante'
+        it: 'Principiante',
+        kr: '초보'
     },
-    [2]: { en: 'Learner', es: 'Aprendiz', fr: 'Apprenti', it: 'Apprendista' },
+    [2]: { 
+        en: 'Learner', 
+        es: 'Aprendiz', 
+        fr: 'Apprenti', 
+        it: 'Apprendista', 
+        kr: '학습자' 
+    },
     [3]: {
         en: 'Apprentice',
         es: 'Aprendiz',
         fr: 'Intermédiaire',
-        it: 'Apprendista'
+        it: 'Apprendista',
+        kr: '견습생'
     },
     [4]: {
         en: 'Intermediate',
         es: 'Intermedio',
         fr: 'Moyen',
-        it: 'Intermedio'
+        it: 'Intermedio',
+        kr: '중급'
     },
-    [5]: { en: 'Average', es: 'Promedio', fr: 'Normal', it: 'Medio' },
-    [6]: { en: 'Advanced', es: 'Avanzado', fr: 'Avancé', it: 'Avanzato' },
-    [7]: { en: 'Expert', es: 'Experto', fr: 'Expert', it: 'Esperto' },
-    [8]: { en: 'Master', es: 'Maestro', fr: 'Maître', it: 'Maestro' },
+    [5]: { 
+        en: 'Average', 
+        es: 'Promedio', 
+        fr: 'Normal', 
+        it: 'Medio', 
+        kr: '평균' 
+    },
+    [6]: { 
+        en: 'Advanced', 
+        es: 'Avanzado', 
+        fr: 'Avancé', 
+        it: 'Avanzato', 
+        kr: '고급' 
+    },
+    [7]: { 
+        en: 'Expert', 
+        es: 'Experto', 
+        fr: 'Expert', 
+        it: 'Esperto', 
+        kr: '전문가' 
+    },
+    [8]: { 
+        en: 'Master', 
+        es: 'Maestro', 
+        fr: 'Maître', 
+        it: 'Maestro', 
+        kr: '마스터' 
+    },
     [9]: {
         en: 'Grandmaster',
         es: 'Gran maestro',
         fr: 'Grand maître',
-        it: 'Gran maestro'
+        it: 'Gran maestro',
+        kr: '그랜드마스터'
     },
-    [10]: { en: 'Legend', es: 'Leyenda', fr: 'Légende', it: 'Leggenda' }
+    [10]: { 
+        en: 'Legend', 
+        es: 'Leyenda', 
+        fr: 'Légende', 
+        it: 'Leggenda', 
+        kr: '전설' 
+    }
 };
