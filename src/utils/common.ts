@@ -31,7 +31,8 @@ export const languages = [
     { value: 'en', text: 'English' },
     { value: 'fr', text: 'Français' },
     { value: 'es', text: 'Español' },
-    { value: 'it', text: 'Italiano' }
+    { value: 'it', text: 'Italiano' },
+    { value: 'ko', text: '한국어'}
 ];
 
 export const regions = {
@@ -66,6 +67,14 @@ export const regions = {
         ['Asia', 'Asia'],
         ['Europa', 'Europe'],
         ['Oceania', 'Oceania']
+    ],
+    ko: [
+        ['세계', 'World'],
+        ['아프리카', 'Africa'],
+        ['아메리카', 'Americas'],
+        ['아시아', 'Asia'],
+        ['유럽', 'Europe'],
+        ['오세아니아', 'Oceania']
     ]
 };
 
