@@ -98,83 +98,83 @@ const Ranks: Record<Level, Translation> = {
         es: 'Sin clasificar',
         fr: 'Non classé',
         it: 'Non classificato',
-        kr: '등급 없음'
+        ko: '등급 없음'
     },
     [0]: {
         en: 'Newcomer',
         es: 'Recién llegado',
         fr: 'Nouveau',
         it: 'Nuovo arrivato',
-        kr: '신참자'
+        ko: '신참자'
     },
     [1]: {
         en: 'Beginner',
         es: 'Principiante',
         fr: 'Débutant',
         it: 'Principiante',
-        kr: '초보'
+        ko: '초보'
     },
     [2]: { 
         en: 'Learner', 
         es: 'Aprendiz', 
         fr: 'Apprenti', 
         it: 'Apprendista', 
-        kr: '학습자' 
+        ko: '학습자' 
     },
     [3]: {
         en: 'Apprentice',
         es: 'Aprendiz',
         fr: 'Intermédiaire',
         it: 'Apprendista',
-        kr: '견습생'
+        ko: '견습생'
     },
     [4]: {
         en: 'Intermediate',
         es: 'Intermedio',
         fr: 'Moyen',
         it: 'Intermedio',
-        kr: '중급'
+        ko: '중급'
     },
     [5]: { 
         en: 'Average', 
         es: 'Promedio', 
         fr: 'Normal', 
         it: 'Medio', 
-        kr: '평균' 
+        ko: '평균' 
     },
     [6]: { 
         en: 'Advanced', 
         es: 'Avanzado', 
         fr: 'Avancé', 
         it: 'Avanzato', 
-        kr: '고급' 
+        ko: '고급' 
     },
     [7]: { 
         en: 'Expert', 
         es: 'Experto', 
         fr: 'Expert', 
         it: 'Esperto', 
-        kr: '전문가' 
+        ko: '전문가' 
     },
     [8]: { 
         en: 'Master', 
         es: 'Maestro', 
         fr: 'Maître', 
         it: 'Maestro', 
-        kr: '마스터' 
+        ko: '마스터' 
     },
     [9]: {
         en: 'Grandmaster',
         es: 'Gran maestro',
         fr: 'Grand maître',
         it: 'Gran maestro',
-        kr: '그랜드마스터'
+        ko: '그랜드마스터'
     },
     [10]: { 
         en: 'Legend', 
         es: 'Leyenda', 
         fr: 'Légende', 
         it: 'Leggenda', 
-        kr: '전설' 
+        ko: '전설' 
     }
 };
