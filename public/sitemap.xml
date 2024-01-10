@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Page d'accueil -->
+  <url>
+    <loc>https://capitalympics.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- À propos -->
+  <url>
+    <loc>https://capitalympics.com/about</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Apprendre -->
+  <url>
+    <loc>https://capitalympics.com/learn</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Apprendre - Capitales -->
+  <url>
+    <loc>https://capitalympics.com/learn/capital</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Apprendre - Drapeaux -->
+  <url>
+    <loc>https://capitalympics.com/learn/flag</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- S'inscrire -->
+  <url>
+    <loc>https://capitalympics.com/signup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Se connecter -->
+  <url>
+    <loc>https://capitalympics.com/login</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pays -->
+  <url>
+    <loc>https://capitalympics.com/countries</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pays - Détails -->
+  <url>
+    <loc>https://capitalympics.com/countries/{countryCode}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Profil -->
+  <url>
+    <loc>https://capitalympics.com/profile</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Profil - Édition -->
+  <url>
+    <loc>https://capitalympics.com/profile/edit</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Profil - Statistiques -->
+  <url>
+    <loc>https://capitalympics.com/profile/statistics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Profil - Scores -->
+  <url>
+    <loc>https://capitalympics.com/profile/scores</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Quiz -->
+  <url>
+    <loc>https://capitalympics.com/quiz</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Mentions légales -->
+  <url>
+    <loc>https://capitalympics.com/legal-notices</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Page non trouvée -->
+  <url>
+    <loc>https://capitalympics.com/{catchAll}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+</urlset>
