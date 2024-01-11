@@ -136,16 +136,16 @@
     "tooBad": "아쉽네요! 😔",
     "levelUp": "레벨에 도달했습니다",
     "confirmDialog": {
-    "cancel": "취소",
-    "confirm": "확인"
+        "cancel": "취소",
+        "confirm": "확인"
     },
     "nameSort": {
-    "asc": "이름별 정렬 (A-Z)",
-    "desc": "이름별 정렬 (Z-A)"
+        "asc": "이름별 정렬 (A-Z)",
+        "desc": "이름별 정렬 (Z-A)"
     },
     "populationSort": {
-    "asc": "인구순 정렬 (오름차순)",
-    "desc": "인구순 정렬 (내림차순)"
+        "asc": "인구순 정렬 (오름차순)",
+        "desc": "인구순 정렬 (내림차순)"
     },
     "resetScoresSuccess": "점수가 성공적으로 초기화되었습니다",
     "resetScoresTitle": "점수 초기화",
@@ -189,5 +189,12 @@
     "imageUploadError": "이미지 업로드 중 오류 발생",
     "hello": "안녕하세요",
     "never": "결코",
-    "legalNotices": "법률 정보"
+    "legalNotices": "법률 정보",
+    "homeCTA": {
+        "1": "200개 이상의 국가",
+        "2": "직관적인 학습",
+        "3": "진행 상황 추적"
+    },
+    "noCreditCard": "신용 카드 필요 없음",
+    "play": "플레이"
 }

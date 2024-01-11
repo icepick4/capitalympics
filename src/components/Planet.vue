@@ -132,16 +132,9 @@ const initThreeScene = () => {
 </script>
 
 <template>
-    <div
-        class="relative"
-        id="canvasContainer"
-        @mousedown="handleUserClicking"
-        @mouseup="handleUserStopClicking"
-    >
-        <p
-            class="text-2xl absolute right-0 bottom-0 select-none hover:underline cursor-pointer"
-            @click="setParisCameraView"
-        >
+    <div class="relative w-5/6" id="canvasContainer" @mousedown="handleUserClicking" @mouseup="handleUserStopClicking">
+        <p class="text-2xl absolute right-10 bottom-0 select-none hover:underline cursor-pointer"
+            @click="setParisCameraView">
             Paris, France
         </p>
     </div>

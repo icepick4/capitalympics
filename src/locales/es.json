@@ -189,5 +189,12 @@
     "imageUploadError": "Error al subir la imagen",
     "hello": "Hola",
     "never": "Nunca",
-    "legalNotices":"Información jurídica"
+    "legalNotices": "Información jurídica",
+    "homeCTA": {
+        "1": "200+ Países",
+        "2": "Aprendizaje intuitivo",
+        "3": "Seguimiento de tu progreso"
+    },
+    "noCreditCard": "No se necesita tarjeta de crédito",
+    "play": "Jugar"
 }

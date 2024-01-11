@@ -189,5 +189,12 @@
     "imageUploadError": "Error while uploading the image",
     "hello": "Hello",
     "never": "Never",
-    "legalNotices": "Legal notices"
+    "legalNotices": "Legal notices",
+    "homeCTA": {
+        "1": "200+ Countries",
+        "2": "Intuitive learning",
+        "3": "Track your progression"
+    },
+    "noCreditCard": "No credit card required",
+    "play": "Play"
 }
