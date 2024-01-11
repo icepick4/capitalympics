@@ -134,7 +134,10 @@ onBeforeMount(async () => {
                     <h3 class="mb-6 flex-col text-lg font-bold md:mb-10 md:text-2xl lg:mb-12 max-w-[600px]">
                         {{ $t('welcomeMessage') }}
                     </h3>
-                    <CTAButton to="/learn" :text="$t('play')" />
+                    <div class="flex flex-row gap-6">
+                        <CTAButton to="/learn" :text="$t('play')" />
+                        <CTAButton v-if="user != null" to="/profile/scores" :text="$t('seeScores')"/>
+                    </div>
                     <p>{{ $t('noCreditCard') }}</p>
                 </div>
             </section>

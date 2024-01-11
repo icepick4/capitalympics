@@ -107,7 +107,7 @@
     "resetScoresConfirmation": "Sei sicuro di voler reimpostare i tuoi punteggi?",
     "resetScoresMessage": "Questa azione è irreversibile e cancellerà tutti i tuoi punteggi (Capitali e Bandiere).",
     "myLevel": "Il mio livello",
-    "seeScores": "Vedi i miei punteggi 🏆",
+    "seeScores": "Vedi i miei punteggi",
     "nextLevel": "Prossimo livello",
     "errorSavingProfile": "Si è verificato un errore durante il salvataggio del tuo profilo",
     "homeTitle1": "Scopri il mondo attraverso le capitali e le bandiere dei paesi.",
@@ -196,5 +196,6 @@
         "3": "Segui la tua progressione"
     },
     "noCreditCard": "Non è richiesta la carta di credito",
-    "play": "Gioco"
+    "play": "Gioco",
+    "logout": "Disconnessione"
 }

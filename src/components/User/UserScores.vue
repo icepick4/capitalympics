@@ -186,10 +186,23 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
             >
                 <div class="flex flex-row gap-5">
                     <h1 class="text-4xl font-bold text-center">
-                        <div class="flex flex-col sm:flex-row gap-5">
+                        <div class="flex flex-row sm:flex-row gap-5">
                             <p class="text-2xl sm:text-4xl font-normal">
                                 {{ $t(learningType) }}
                             </p>
+                            <div class="flex flex-col gap-2 justify-center items-center">
+                                <ActionIcon
+                                    :icon="IconArrowsSort"
+                                    :label="$t('switch')"
+                                    rounded
+                                    class="hover:scale-110"
+                                    :class="{
+                                        '-rotate-180': clickedSwitchLearningType
+                                    }"
+                                    @click="switchLearningType"
+                                />
+                                <span class="text-center text-sm">{{ $t('switch') }}</span>
+                            </div>
                         </div>
                     </h1>
                 </div>
@@ -264,19 +277,6 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 </div>
             </div>
             <div class="flex flex-row gap-2 sm:gap-4">
-                <div class="flex flex-col gap-2 justify-center items-center">
-                    <ActionIcon
-                        :icon="IconArrowsSort"
-                        :label="$t('switch')"
-                        rounded
-                        class="hover:scale-110"
-                        :class="{
-                            '-rotate-180': clickedSwitchLearningType
-                        }"
-                        @click="switchLearningType"
-                    />
-                    <span class="text-center text-sm">{{ $t('switch') }}</span>
-                </div>
                 <div class="flex flex-col gap-2 justify-center items-center">
                     <ActionIcon
                         :icon="

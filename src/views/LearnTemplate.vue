@@ -175,6 +175,12 @@ watch(continent, getNewCountry);
                 >
                     {{ $t('leave') }}
                 </RouterLink>
+                <RouterLink
+                    to="/profile/statistics"
+                    class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-auto"
+                >
+                    {{ $t('statistics') }}
+                </RouterLink>
                 <IconInfoCircle
                     class="w-16 h-16 top-0 left-0 cursor-pointer hover:scale-110 transition-all"
                     @click="toggleInfos"

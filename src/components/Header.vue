@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import ProfilePicture from '@/components/User//ProfilePicture/ProfilePicture.vue';
+import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { useStore } from '@/store';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
+import { IconLogout2 } from '@tabler/icons-vue';
 
 const store = useStore();
 const { isAuthenticated } = storeToRefs(useStore());
+
+const { t } = useI18n();
 
 const isDropdownOpen = ref(false);
 const clickCount = ref(0);
@@ -43,6 +48,18 @@ onMounted(() => {
 onUnmounted(() => {
     document.removeEventListener('click', closeMenuOnClickOutside);
 });
+
+async function disconnect() {
+    const hasConfirmed = await useConfirmDialog({
+        title: t('logOutConfirmation'),
+        description: t('loginPageRedirect'),
+        cancelText: t('no'),
+        confirmText: t('yes')
+    });
+
+    if (!hasConfirmed) return;
+    store.logout({ loggedOut: '1' });
+}
 </script>
 
 <template>
@@ -83,6 +100,10 @@ onUnmounted(() => {
                         class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110">
                         <ProfilePicture :fileExplorer="false" size="sm" />
                     </RouterLink>
+                    <IconLogout2
+                        class="hidden sm:flex w-8 h-8 cursor-pointer hover:scale-110 transition-all"
+                        @click="disconnect"
+                    />
                 </template>
             </div>
             <div class="flex flex-row justify-center items-center gap-7 xl:hidden">
@@ -132,6 +153,11 @@ onUnmounted(() => {
                         class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500">
                         {{ $t('quiz') }}
                     </RouterLink>
+                    <h1 v-if="isAuthenticated"
+                        @click="disconnect"
+                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500">
+                        {{ $t('logout') }}
+                    </h1>
                 </div>
             </div>
         </div>

@@ -20,6 +20,7 @@ import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import StatCardContainer from '../Statistics/StatCardContainer.vue';
 import ProfilePicture from './ProfilePicture/ProfilePicture.vue';
+import CTAButton from '../CTAButton.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -68,7 +69,7 @@ async function disconnect() {
         <div class="w-full md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto">
             <div
                 v-if="flagScore !== -2 && capitalScore !== -2"
-                class="flex flex-col sm:flex-row justify-start sm:gap-2"
+                class="flex flex-col sm:flex-row justify-start sm:gap-5"
             >
                 <div
                     class="flex flex-col items-center justify-center sm:items-start sm:justify-start gap-2"

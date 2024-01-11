@@ -107,7 +107,7 @@
     "resetScoresConfirmation": "Are you sure you want to reset all your scores ?",
     "resetScoresMessage": "This action is irreversible and will reset all your scores (capitals and flags).",
     "myLevel": "My level",
-    "seeScores": "See my scores 🏆",
+    "seeScores": "See my scores",
     "nextLevel": "Next level",
     "errorSavingProfile": "Error while saving your profile",
     "homeTitle1": "Discover the world through its capitals and flags.",
@@ -196,5 +196,6 @@
         "3": "Track your progression"
     },
     "noCreditCard": "No credit card required",
-    "play": "Play"
+    "play": "Play",
+    "logout": "Logout"
 }

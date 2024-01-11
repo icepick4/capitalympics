@@ -107,7 +107,7 @@
     "resetScoresConfirmation": "¿Estás seguro de que quieres restablecer tus puntuaciones?",
     "resetScoresMessage": "Esta acción es irreversible y restablecerá todas tus puntuaciones (capitales y banderas).",
     "myLevel": "Mi nivel",
-    "seeScores": "Ver puntuaciones 🏆",
+    "seeScores": "Ver puntuaciones",
     "nextLevel": "Siguiente nivel",
     "errorSavingProfile": "Error al guardar el perfil",
     "homeTitle1": "Descubra el mundo a través de sus capitales y banderas.",
@@ -196,5 +196,6 @@
         "3": "Seguimiento de tu progreso"
     },
     "noCreditCard": "No se necesita tarjeta de crédito",
-    "play": "Jugar"
+    "play": "Jugar",
+    "logout": "Desconectando"
 }

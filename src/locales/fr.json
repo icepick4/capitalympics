@@ -107,7 +107,7 @@
     "resetScoresConfirmation": "Êtes-vous sûr de vouloir réinitialiser vos scores ?",
     "resetScoresMessage": "Cette action est irréversible et va supprimer tous vos scores (Capitales et Drapeaux).",
     "myLevel": "Mon niveau",
-    "seeScores": "Voir mes scores 🏆",
+    "seeScores": "Voir mes scores",
     "nextLevel": "Prochain niveau",
     "errorSavingProfile": "Une erreur s'est produite lors de l'enregistrement de votre profil",
     "homeTitle1": "Découvrez le monde à travers les capitales et les drapeaux des pays.",
@@ -196,5 +196,6 @@
         "3": "Suivez votre progression"
     },
     "noCreditCard": "Aucune carte de crédit n'est nécessaire",
-    "play": "Jouer"
+    "play": "Jouer",
+    "logout": "Se déconnecter"
 }
