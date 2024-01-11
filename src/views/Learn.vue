@@ -12,7 +12,7 @@ import { Ref, onBeforeMount, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import Infos from '../components/Learning/Infos.vue';
-import ProfilePicture from '../components/User/ProfilePicture/ProfilePicture.vue';
+import ProfilePicture from '../components/User/ProfilePicture.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -96,7 +96,7 @@ onBeforeMount(async () => {
     <div v-if="user !== null" class="flex flex-col justify-center items-center gap-20 my-5 h-full">
         <Loader v-if="initFirstTimeScores" :title="$t('loading')" />
         <div class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-12">
-            <ProfilePicture :fileExplorer="false" size="lg" />
+            <ProfilePicture size="lg" />
             <div class="flex flex-row gap-5 items-center">
                 <p class="text-3xl">{{ $t('hello') }} {{ user.name }} !</p>
                 <IconInfoCircle class="w-16 h-16 cursor-pointer hover:scale-110 transition-all" @click="toggleInfos" />

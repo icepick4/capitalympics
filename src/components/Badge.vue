@@ -27,7 +27,6 @@ const props = defineProps<{
 
 const size = ref(props.size ?? 'md');
 const level = computed(() => fromScoreToLevel(props.score));
-console.log(props.score);
 const text = computed(() => getLevelName(props.score));
 
 const icon = computed(() => {
@@ -68,6 +67,27 @@ const color = computed(() => {
             [8]: 'bg-blue-300 text-blue-800',
             [9]: 'bg-blue-400 text-blue-900',
             [10]: 'bg-gradient text-purple-700'
+        }[level.value] ?? defaultColor
+    );
+});
+
+const colorProgress = computed(() => {
+    const defaultColor = 'text-gray-100 bg-gray-700';
+
+    return (
+        {
+            [-1]: 'text-gray-200 bg-gray-700',
+            [0]: 'text-gray-300 bg-gray-800',
+            [1]: 'text-gray-400 bg-gray-900',
+            [2]: 'text-yellow-200 bg-yellow-700',
+            [3]: 'text-yellow-300 bg-yellow-800',
+            [4]: 'text-yellow-400 bg-yellow-900',
+            [5]: 'text-green-300 bg-green-700',
+            [6]: 'text-green-400 bg-green-800',
+            [7]: 'text-green-500 bg-green-900',
+            [8]: 'text-blue-400 bg-blue-800',
+            [9]: 'text-blue-500 bg-blue-900',
+            [10]: 'text-gradient bg-purple-700'
         }[level.value] ?? defaultColor
     );
 });
@@ -146,7 +166,7 @@ const circumference = computed(() => 2 * Math.PI * 30);
                     cy="40"
                 />
                 <circle
-                    :class="color"
+                    :class="colorProgress"
                     stroke-width="5"
                     :stroke-dasharray="circumference"
                     :stroke-dashoffset="offset"

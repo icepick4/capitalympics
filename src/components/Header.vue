@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ProfilePicture from '@/components/User//ProfilePicture/ProfilePicture.vue';
+import ProfilePicture from '@/components/User//ProfilePicture.vue';
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { useStore } from '@/store';
 import { storeToRefs } from 'pinia';
@@ -98,7 +98,7 @@ async function disconnect() {
                     </RouterLink>
                     <RouterLink to="/profile"
                         class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110">
-                        <ProfilePicture :fileExplorer="false" size="sm" />
+                        <ProfilePicture size="sm" />
                     </RouterLink>
                     <IconLogout2
                         class="hidden sm:flex w-8 h-8 cursor-pointer hover:scale-110 transition-all"

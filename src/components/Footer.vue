@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ProfilePicture from '@/components/User//ProfilePicture/ProfilePicture.vue';
+import ProfilePicture from '@/components/User/ProfilePicture.vue';
 import { useStore } from '@/store';
 import {
     IconBrandGithub,
@@ -71,7 +71,7 @@ const { isAuthenticated } = storeToRefs(useStore());
                     class="flex flex-row gap-3 items-center group cursor-pointer"
                     v-if="isAuthenticated"
                 >
-                    <ProfilePicture :fileExplorer="false" size="sm" />
+                    <ProfilePicture size="sm" />
                     <div>
                         <p>{{ $t('myProfile') }}</p>
                         <div

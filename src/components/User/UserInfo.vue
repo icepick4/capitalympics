@@ -19,7 +19,7 @@ import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import StatCardContainer from '../Statistics/StatCardContainer.vue';
-import ProfilePicture from './ProfilePicture/ProfilePicture.vue';
+import ProfilePicture from './ProfilePicture.vue';
 import CTAButton from '../CTAButton.vue';
 
 const store = useStore();
@@ -110,7 +110,7 @@ async function disconnect() {
                     class="flex column flex-row items-center justify-center mb-4 gap-4"
                 >
                     <div class="flex items-center">
-                        <ProfilePicture :fileExplorer="true" size="md" />
+                        <ProfilePicture size="md" />
                         <h1 class="text-2xl mr-1 ml-4 font-bold">
                             {{ user?.name }}
                         </h1>

@@ -9,7 +9,7 @@ import { storeToRefs } from 'pinia';
 import { Ref, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
-import ProfilePicture from './ProfilePicture/ProfilePicture.vue';
+import ProfilePicture from './ProfilePicture.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -92,7 +92,7 @@ const deleteAccount = async () => {
                         <div
                             class="rounded-full relative hover:ring hover:ring-gray-600 ring-offset-0 bg-gray-600 hover:grayscale group"
                         >
-                            <ProfilePicture :fileExplorer="true" size="md" />
+                            <ProfilePicture size="md" />
                         </div>
                     </div>
                     <ActionIcon
