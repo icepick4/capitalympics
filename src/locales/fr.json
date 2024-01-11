@@ -188,5 +188,6 @@
     "imageUploaded": "Image téléchargée avec succès, rafraîchissez la page pour voir les changements",
     "imageUploadError": "Erreur lors du téléchargement de l'image",
     "hello": "Bonjour",
-    "never": "Jamais"
+    "never": "Jamais",
+    "legalNotices": "Mentions légales"
 }

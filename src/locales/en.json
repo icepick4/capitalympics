@@ -188,5 +188,6 @@
     "imageUploaded": "Image uploaded successfully, refresh the page to see the changes",
     "imageUploadError": "Error while uploading the image",
     "hello": "Hello",
-    "never": "Never"
+    "never": "Never",
+    "legalNotices": "Legal notices"
 }

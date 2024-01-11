@@ -7,7 +7,9 @@ import {
     IconBrandReddit,
     IconLogin,
     IconMail,
-    IconWorld
+    IconWorld,
+    IconFileText,
+    IconDeviceDesktop
 } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 
@@ -16,7 +18,7 @@ const { isAuthenticated } = storeToRefs(useStore());
 <template>
     <div class="w-full bg-white p-6 flex items-center justify-center">
         <div
-            class="flex flex-col xl:flex-row justify-between items-center w-2/3 gap-10 xl:gap-0"
+            class="flex flex-col xl:flex-row justify-between items-start w-2/3 gap-10 xl:gap-0"
         >
             <div class="hidden xl:flex flex-row gap-5 items-center">
                 <RouterLink to="/">
@@ -90,6 +92,18 @@ const { isAuthenticated } = storeToRefs(useStore());
                         ></div>
                     </div>
                 </RouterLink>
+                <RouterLink
+                    to="/legal-notices"
+                    class="flex flex-row gap-3 items-center group cursor-pointer"
+                >
+                    <IconFileText class="w-6 h-6" />
+                    <div>
+                        <p>{{ $t('legalNotices') }}</p>
+                        <div
+                            class="bg-black h-[1px] w-0 transition-all duration-300 group-hover:w-full cubic-bezier"
+                        ></div>
+                    </div>
+                </RouterLink>
             </div>
             <div class="flex flex-col gap-5 items-center xl:items-start">
                 <h1 class="text-2xl text-center">{{ $t('socials') }}</h1>
@@ -118,6 +132,18 @@ const { isAuthenticated } = storeToRefs(useStore());
                         ></div>
                     </div>
                 </a>
+                <a
+                    href="https://remi-jara.fr"
+                    class="flex flex-row gap-3 items-center group cursor-pointer"
+                >
+                    <IconDeviceDesktop class="w-6 h-6" />
+                    <div>
+                        <p>Portfolio</p>
+                        <div
+                            class="bg-black h-[1px] w-0 transition-all duration-300 group-hover:w-full cubic-bezier"
+                        ></div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -126,7 +152,7 @@ const { isAuthenticated } = storeToRefs(useStore());
     >
         <div class="bg-black h-[2px] w-1/2"></div>
         <h1 class="text-lg text-center">
-            © Copyright 2023 -
+            © Copyright 2024 -
             <a href="https://github.com/icepick4" class="hover:underline"
                 >Rémi JARA</a
             >

@@ -188,5 +188,6 @@
     "imageUploaded": "이미지가 성공적으로 업로드되었습니다. 변경 사항을 보려면 페이지를 새로 고치세요",
     "imageUploadError": "이미지 업로드 중 오류 발생",
     "hello": "안녕하세요",
-    "never": "결코"
+    "never": "결코",
+    "legalNotices": "법률 정보"
 }
