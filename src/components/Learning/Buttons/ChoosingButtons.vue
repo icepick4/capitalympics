@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ScoreType } from '@/types/common';
 import ButtonTemplate from './ButtonTemplate.vue';
+import JSConfetti from 'js-confetti'
 const emit = defineEmits(['click']);
 type Button = {
     title: string;
@@ -12,6 +13,16 @@ const buttons: Button[] = [
     { title: 'medium', color: 'bg-yellow-500', type: 'medium' },
     { title: 'hard', color: 'bg-red-500', type: 'failed' }
 ];
+const jsConfetti = new JSConfetti();
+
+const submit = (type: ScoreType) => {
+    emit('click', type);
+    if (type === 'succeeded')
+    jsConfetti.addConfetti({
+        confettiRadius: 7,
+        confettiNumber: 25,
+    })
+}
 </script>
 
 <template>
@@ -23,7 +34,7 @@ const buttons: Button[] = [
             :key="btnIndex"
             :title="$t(button.title)"
             :color="button.color"
-            @click="emit('click', button.type)"
+            @click="submit(button.type)"
         />
     </div>
 </template>

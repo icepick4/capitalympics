@@ -14,10 +14,12 @@ import { IconInfoCircle } from '@tabler/icons-vue';
 import { onBeforeMount, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
+import JSConfetti from 'js-confetti'
 
 const { t } = useI18n();
 const route = useRoute();
 const contriesStore = useCountriesStore();
+const jsConfetti = new JSConfetti();
 
 const isLoading = ref(false);
 const showInfos = ref(false);
@@ -79,6 +81,12 @@ async function handleClick(score: ScoreType) {
         console.error(response);
         return;
     } else if (response.data.level) {
+        if (response.data.level === 'up') {
+            jsConfetti.addConfetti({
+                confettiRadius: 7,
+                confettiNumber: 500,
+            })
+        }
         notify({
             title:
                 response.data.level === 'up'

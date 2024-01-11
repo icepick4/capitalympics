@@ -32,7 +32,7 @@ const routes = [
     },
     {
         path: '/learn',
-        name: 'Learn',
+        name: 'play',
         component: Learn,
         beforeEnter: requireAuth
     },
