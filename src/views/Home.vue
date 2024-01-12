@@ -107,27 +107,27 @@ onBeforeMount(async () => {
     <Loader v-if="!finishedWaited || (!planetLoaded && displayPlanet)" :title="$t('loading')" />
     <Dialog v-model="noCountriesFound" :title="$t('noCountriesFound')" :description="$t('checkNetworkConnection')"
         :buttonDescription="$t('close')" type="error" />
-    <div class="overflow-clip flex flex-col 2xl:flex-row items-center justify-center h-full gap-5 mt-20 xs:mb-20">
+    <div class="flex flex-col 2xl:flex-row items-center justify-center h-full gap-5 mt-3 lg:mt-10 xs:mb-20">
         <div class="w-1/3"></div>
         <div class="flex flex-col items-center w-1/3">
             <section>
-                <div class="flex w-full flex-col items-center py-16 text-center md:py-24">
-                    <h2 class="mb-6 flex-col text-4xl font-bold md:mb-10 md:text-5xl lg:mb-12 max-w-[600px]"> {{
-                        $t('welcome') }} <span v-if="user" class="underline">{{ user.name }}</span> !</h2>
+                <div class="flex w-full flex-col items-center py-10 text-center md:py-24">
+                    <h2 class="mb-6 flex-col text-4xl font-bold md:mb-10 md:text-5xl lg:mb-12"> {{
+                        $t('welcome') }} <span v-if="user" class="underline">{{ user.name }}!</span></h2>
                     <div class="mx-auto">
 
                         <ul class="mb-6 flex flex-col flex-nowrap gap-3 md:mb-10 md:flex-row lg:mb-12">
-                            <li class="ml-2 mr-2 flex flex-row items-center md:mx-4">
+                            <li class="ml-2 mr-2 flex flex-row items-start justify-start md:mx-4">
                                 <IconCircleCheckFilled class="text-blue-500 mr-2 inline-block h-8 w-8" />
-                                <p>{{ $t('homeCTA.1') }}</p>
+                                <p class="text-start">{{ $t('homeCTA.1') }}</p>
                             </li>
-                            <li class="ml-2 mr-2 flex flex-row items-center md:mx-4">
+                            <li class="ml-2 mr-2 flex flex-row items-start justify-start md:mx-4">
                                 <IconCircleCheckFilled class="text-blue-500 mr-2 inline-block h-8 w-8" />
-                                <p>{{ $t('homeCTA.2') }}</p>
+                                <p class="text-start">{{ $t('homeCTA.2') }}</p>
                             </li>
-                            <li class="ml-2 mr-2 flex flex-row items-center md:mx-4">
+                            <li class="ml-2 mr-2 flex flex-row items-start justify-start md:mx-4">
                                 <IconCircleCheckFilled class="text-blue-500 mr-2 inline-block h-8 w-8" />
-                                <p>{{ $t('homeCTA.3') }}</p>
+                                <p class="text-start">{{ $t('homeCTA.3') }}</p>
                             </li>
                         </ul>
                     </div>
@@ -218,7 +218,7 @@ onBeforeMount(async () => {
         <h1 class="text-center text-5xl">{{ $t('ready?') }}</h1>
         <div class="w-11/12 lg:w-3/4 flex flex-col lg:flex-row lg:[bg-gradient] rounded-lg gap-10">
             <div class="w-full lg:w-1/2 flex flex-row justify-center items-center lg:p-10 gap-3 sm:gap-10">
-                <img src="/home/login-home.svg" class="w-1/2" alt="Login home image" />
+                <img src="/home/login-home.svg" class="hidden sm:block w-1/2" alt="Login home image" />
                 <div class="flex flex-col gap-5 items-center justify-center">
                     <p class="text-center text-lg sm:text-xl">
                         {{ $t('loginToStart') }}
@@ -227,7 +227,7 @@ onBeforeMount(async () => {
                 </div>
             </div>
             <div class="w-full lg:w-1/2 lg:p-10 flex flex-row justify-center items-center gap-3 sm:gap-10">
-                <img src="/home/register-home.svg" class="w-1/2" alt="Register home image" />
+                <img src="/home/register-home.svg" class="hidden sm:block  w-1/2" alt="Register home image" />
 
                 <div class="flex flex-col gap-5 items-center justify-center">
                     <p class="text-center text-lg sm:text-xl">

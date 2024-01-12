@@ -20,7 +20,6 @@ import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import StatCardContainer from '../Statistics/StatCardContainer.vue';
 import ProfilePicture from './ProfilePicture.vue';
-import CTAButton from '../CTAButton.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -107,41 +106,42 @@ async function disconnect() {
             <!-- Informations de l'utilisateur -->
             <div class="bg-gradient rounded-lg shadow-lg p-3 sm:p-6 mb-5 m-3">
                 <div
-                    class="flex column flex-row items-center justify-center mb-4 gap-4"
+                    class="flex column flex-row items-center justify-between mb-4 gap-4"
                 >
                     <div class="flex items-center">
                         <ProfilePicture size="md" />
-                        <h1 class="text-2xl mr-1 ml-4 font-bold">
+                        <h1 class="flex text-2xl mr-1 ml-4 font-bold">
                             {{ user?.name }}
                         </h1>
                     </div>
-                    <div
-                        class="flex items-center center justify-end gap-4 w-full"
-                    >
-                        <RouterLink to="/profile/statistics" title="Statistics">
-                            <IconChartBar
-                                class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
-                                @click="$emit('close')"
-                            />
-                        </RouterLink>
-                        <RouterLink to="/profile/scores" title="Scores">
-                            <IconListNumbers
-                                class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
-                            />
-                        </RouterLink>
-                        <RouterLink to="/profile/edit" title="Edit">
-                            <IconSettings
-                                class="w-8 h-8 cursor-pointer hover:rotate-180 transition-all duration-500"
-                                @click="$emit('close')"
-                            />
-                        </RouterLink>
-                        <div title="Disconnect">
-                            <IconLogout2
-                                class="w-8 h-8 cursor-pointer hover:scale-110 transition-all"
-                                @click="disconnect"
-                            />
+                        
+                        <div
+                            class="flex items-end center justify-end gap-4 w-full h-full"
+                        >
+                            <RouterLink to="/profile/statistics" title="Statistics">
+                                <IconChartBar
+                                    class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:scale-110 transition-all"
+                                    @click="$emit('close')"
+                                />
+                            </RouterLink>
+                            <RouterLink to="/profile/scores" title="Scores">
+                                <IconListNumbers
+                                    class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:scale-110 transition-all"
+                                />
+                            </RouterLink>
+                            <RouterLink to="/profile/edit" title="Edit">
+                                <IconSettings
+                                    class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:rotate-180 transition-all duration-500"
+                                    @click="$emit('close')"
+                                />
+                            </RouterLink>
+                            <div title="Disconnect">
+                                <IconLogout2
+                                    class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:scale-110 transition-all"
+                                    @click="disconnect"
+                                />
+                            </div>
                         </div>
-                    </div>
                 </div>
                 <p class="text-black mb-2">
                     {{ $t('lastActivity') }} :
@@ -174,7 +174,7 @@ async function disconnect() {
     }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 500px) {
     .column {
         flex-direction: column;
     }
