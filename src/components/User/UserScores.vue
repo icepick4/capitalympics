@@ -201,7 +201,6 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                                     }"
                                     @click="switchLearningType"
                                 />
-                                <span class="text-center text-sm">{{ $t('switch') }}</span>
                             </div>
                         </div>
                     </h1>

@@ -27,10 +27,12 @@ watch(user, (newUser) => {
 function generateAvatar(user: User){
     avatar.value = createAvatar(personas, {
       size: props.size == 'sm' ? 48 : 96,
-      seed: user.name,
+      seed: user.created_at,
       backgroundColor: generateBackgroundColors(userScoreCapital.value, userScoreFlag.value),
       backgroundType: ['solid'],
       mouth: ['smile', 'bigSmile', 'surprise', 'smirk'],
+      nose: ['mediumRound', 'smallRound'],
+      skinColor: ['21a6ff'],
       radius: 100
     }).toDataUriSync();
 }
