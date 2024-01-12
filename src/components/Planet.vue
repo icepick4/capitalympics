@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import ApiService from '@/services/apiService';
-import internal from 'stream';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { onMounted, ref } from 'vue';
+import { IpAPI } from '@/types/common';
 
 onMounted(() => {
     getIpData();
@@ -17,28 +17,13 @@ const long = ref(48.864716);
 const lat = ref(2.349014);
 
 const getIpData = async () => {
-    type IpAPI = {
-        country: string;
-        city: string;
-        lat: number
-        lon: number;
-    }
-    
-    const IP = await ApiService.getIP();
-    console.log(IP);
-    try{        
-        const response = await fetch(`http://ip-api.com/json/${IP}`);
-        const data = await (response.json() as Promise<IpAPI>);
-        if (data.lon !== undefined || data.lat !== undefined){
-            long.value = data.lon;
-            lat.value = data.lat;
-        }
-        countryName.value = data.country;
-        cityName.value = data.city;
-        console.log('pas derreur');
+    const iPdata = await ApiService.getIP();
+    if (iPdata.lon !== undefined && iPdata.lat !== undefined){
+        long.value = iPdata.lon;
+        lat.value = iPdata.lat;
         initThreeScene(long.value, lat.value);
     }
-    catch {
+    else{
         initThreeScene(48.864716, 2.349014);
     }
 }

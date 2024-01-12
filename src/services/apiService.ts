@@ -3,6 +3,7 @@ import { User } from '@/models/User';
 import { Lang } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { getCurrentMySQLDate, getLanguage } from '@/utils/common';
+import { IpAPI } from '@/types/common';
 
 export default class ApiService {
     public static async getCountries(
@@ -38,15 +39,15 @@ export default class ApiService {
         return response.data.country;
     }
 
-    public static async getIP(){
-        const response = await ApiClient.get<{ ip: string }>('/ip');
+    public static async getIP(): Promise<IpAPI>{
+        const response = await ApiClient.get<IpAPI>('/ip');
         if (!response.success){
             throw new Error(
                 'An error occurred while retrieving the ip address'
             )
         }
-
-        return response.data.ip;
+        
+        return response.data
     }
 
     public static async signUp(
