@@ -18,9 +18,11 @@ const lat = ref(2.349014);
 
 const getIpData = async () => {
     const iPdata = await ApiService.getIP();
-    if (iPdata.lon !== undefined && iPdata.lat !== undefined){
+    if (iPdata.lon !== undefined && iPdata.lat !== undefined && iPdata.city !== undefined && iPdata.country !== undefined){
         long.value = iPdata.lon;
         lat.value = iPdata.lat;
+        countryName.value = iPdata.country;
+        cityName.value = iPdata.city;
         initThreeScene(long.value, lat.value);
     }
     else{
@@ -117,7 +119,7 @@ const initThreeScene = (long: number, lat: number) => {
         return { x, y, z };
     }
 
-    let { x, y, z } = calculatePosition(long, lat);
+    let { x, y, z } = calculatePosition(lat, long);
 
     let parisPin = new THREE.Mesh(
         new THREE.SphereGeometry(0.02, 30, 30),
@@ -151,7 +153,7 @@ const initThreeScene = (long: number, lat: number) => {
 <template>
     <div class="relative w-5/6" id="canvasContainer" @mousedown="handleUserClicking" @mouseup="handleUserStopClicking">
         <p class="text-2xl absolute right-10 bottom-0 select-none hover:underline cursor-pointer" @click="setPinCameraView">
-            Paris, France
+            {{ cityName }}, {{ countryName }}
         </p>
     </div>
 </template>
