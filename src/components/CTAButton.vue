@@ -1,19 +1,22 @@
 <script lang="ts" setup>
-defineProps({
-    text: {
-        type: String,
-        required: true
-    },
-    to: {
-        type: String,
-        default: '/'
-    }
-});
+
+type Color = 'black' | 'white' | 'bluebg' | 'gradient';
+
+defineProps<{
+    text: string;
+    textColor: Color;
+    to: string;
+    color: Color;
+}>();
+
+const bg = ['bg-black', 'bg-white', 'bg-bluebg', 'bg-gradient']
+
 </script>
 
 <template>
     <RouterLink :to="to"
-        class="mb-4 flex flex-row items-center bg-[#276ef1] px-8 py-4 font-semibold text-white transition [box-shadow:rgb(171,_196,245)-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
+        :class="'bg-'+color+' text-'+textColor"
+        class="mb-4 flex flex-row items-center rounded-lg px-8 py-4 font-semibold transition [box-shadow:rgb(171,_196,200)-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
         <p class="mr-6">{{ text }}</p>
         <svg fill="currentColor" class="h-4 w-4 flex-none" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
             <title>Arrow Right</title>

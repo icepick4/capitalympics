@@ -20,6 +20,7 @@ import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
 import StatCardContainer from '../Statistics/StatCardContainer.vue';
 import ProfilePicture from './ProfilePicture.vue';
+import CTAButton from '../CTAButton.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -155,11 +156,12 @@ async function disconnect() {
         </div>
         <h1 class="text-3xl mb-5">{{ $t('statistics') }}</h1>
         <StatCardContainer :basicDisplay="true" />
-        <RouterLink
+        <!-- <RouterLink
             to="/profile/statistics"
             class="hover:underline text-lg mt-5"
             >{{ $t('seeMore') }}</RouterLink
-        >
+        > -->
+        <CTAButton to="/profile/statistics" :text="$t('seeMore')" color="white" textColor="black" class="mt-5" />
     </div>
     <Footer></Footer>
 </template>

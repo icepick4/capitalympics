@@ -17,6 +17,7 @@ module.exports = {
             text: '#000000',
             white: '#FFFFFF',
             black: '#000000',
+            bluebg: '#276ef1',
             gray: colors.neutral,
             red: colors.red,
             yellow: colors.amber,

@@ -135,8 +135,8 @@ onBeforeMount(async () => {
                         {{ $t('welcomeMessage') }}
                     </h3>
                     <div class="flex flex-row gap-6">
-                        <CTAButton to="/learn" :text="$t('play')" />
-                        <CTAButton v-if="user != null" to="/profile/scores" :text="$t('seeScores')"/>
+                        <CTAButton to="/learn" :text="$t('play')" color="bluebg" textColor="white" />
+                        <CTAButton v-if="user != null" to="/profile/scores" :text="$t('seeScores')" color="white" textColor="black"/>
                     </div>
                     <p>{{ $t('noCreditCard') }}</p>
                 </div>
@@ -223,7 +223,7 @@ onBeforeMount(async () => {
                     <p class="text-center text-lg sm:text-xl">
                         {{ $t('loginToStart') }}
                     </p>
-                    <CTAButton to="/login" :text="$t('login')" />
+                    <CTAButton to="/login" :text="$t('login')" color="white" textColor="black" />
                 </div>
             </div>
             <div class="w-full lg:w-1/2 lg:p-10 flex flex-row justify-center items-center gap-3 sm:gap-10">
@@ -233,7 +233,7 @@ onBeforeMount(async () => {
                     <p class="text-center text-lg sm:text-xl">
                         {{ $t('joinUs') }}
                     </p>
-                    <CTAButton to="/signup" :text="$t('signup')" />
+                    <CTAButton to="/signup" :text="$t('signup')" color="white" textColor="black" />
                 </div>
             </div>
         </div>
