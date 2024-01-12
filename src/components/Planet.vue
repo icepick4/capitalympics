@@ -1,13 +1,47 @@
 <script setup lang="ts">
+import ApiService from '@/services/apiService';
+import internal from 'stream';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { onMounted, ref } from 'vue';
 
 onMounted(() => {
-    initThreeScene();
+    getIpData();
 });
 
 const emit = defineEmits(['finishedLoading']);
+
+const cityName = ref('Paris');
+const countryName = ref('France');
+const long = ref(48.864716);
+const lat = ref(2.349014);
+
+const getIpData = async () => {
+    type IpAPI = {
+        country: string;
+        city: string;
+        lat: number
+        lon: number;
+    }
+    
+    const IP = await ApiService.getIP();
+    console.log(IP);
+    try{        
+        const response = await fetch(`http://ip-api.com/json/${IP}`);
+        const data = await (response.json() as Promise<IpAPI>);
+        if (data.lon !== undefined || data.lat !== undefined){
+            long.value = data.lon;
+            lat.value = data.lat;
+        }
+        countryName.value = data.country;
+        cityName.value = data.city;
+        console.log('pas derreur');
+        initThreeScene(long.value, lat.value);
+    }
+    catch {
+        initThreeScene(48.864716, 2.349014);
+    }
+}
 
 const userClicking = ref(false);
 
@@ -41,14 +75,14 @@ material.map!.colorSpace = THREE.SRGBColorSpace;
 material.map!.anisotropy = 16;
 const planet = new THREE.Mesh(geometry, material);
 
-const setParisCameraView = () => {
+const setPinCameraView = () => {
     camera.position.set(0, 0, 2.25);
     camera.lookAt(0, 0, 0);
     planet.rotation.y = -1.5;
     planet.rotation.x = 0.35;
 };
 
-const initThreeScene = () => {
+const initThreeScene = (long: number, lat: number) => {
     let renderer: THREE.WebGLRenderer,
         scene: THREE.Scene,
         controls: OrbitControls;
@@ -84,8 +118,6 @@ const initThreeScene = () => {
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enablePan = false;
     controls.enableZoom = false;
-    controls.minPolarAngle = Math.PI / 2;
-    controls.maxPolarAngle = Math.PI / 2;
     controls.rotateSpeed = 0.3;
 
     renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
@@ -100,7 +132,7 @@ const initThreeScene = () => {
         return { x, y, z };
     }
 
-    let { x, y, z } = calculatePosition(48.864716, 2.349014);
+    let { x, y, z } = calculatePosition(long, lat);
 
     let parisPin = new THREE.Mesh(
         new THREE.SphereGeometry(0.02, 30, 30),
@@ -133,8 +165,7 @@ const initThreeScene = () => {
 
 <template>
     <div class="relative w-5/6" id="canvasContainer" @mousedown="handleUserClicking" @mouseup="handleUserStopClicking">
-        <p class="text-2xl absolute right-10 bottom-0 select-none hover:underline cursor-pointer"
-            @click="setParisCameraView">
+        <p class="text-2xl absolute right-10 bottom-0 select-none hover:underline cursor-pointer" @click="setPinCameraView">
             Paris, France
         </p>
     </div>

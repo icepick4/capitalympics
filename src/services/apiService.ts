@@ -38,6 +38,17 @@ export default class ApiService {
         return response.data.country;
     }
 
+    public static async getIP(){
+        const response = await ApiClient.get<{ ip: string }>('/ip');
+        if (!response.success){
+            throw new Error(
+                'An error occurred while retrieving the ip address'
+            )
+        }
+
+        return response.data.ip;
+    }
+
     public static async signUp(
         username: string,
         password: string,
