@@ -117,7 +117,7 @@ onBeforeMount(async () => {
         type="error"
     />
     <div
-        class="flex flex-col 2xl:flex-row items-center justify-center h-full gap-5 mt-3 lg:mt-10 xs:mb-20 overflow-hidden"
+        class="flex flex-col 2xl:flex-row items-center justify-center h-full gap-5 mt-3 lg:mt-10 xs:mb-20"
     >
         <div class="w-1/3"></div>
         <div class="flex flex-col items-center w-1/3">
@@ -205,7 +205,7 @@ onBeforeMount(async () => {
                         ? 'Photo of Thomas Kelley on Unsplash'
                         : 'Photo of Ryan Kim on Unsplash'
                 "
-                class="w-full h-[26rem] object-cover transition-all duration-100 ease-linear brightness-75 xs:brightness-100 scale-125"
+                class="w-fit h-[26rem] object-cover transition-all duration-100 ease-linear brightness-75 xs:brightness-100 overflow-hidden"
             />
         </div>
     </div>
