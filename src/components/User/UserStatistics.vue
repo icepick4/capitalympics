@@ -8,6 +8,7 @@ import { UserScore } from '@/types/common';
 import ApiClient from '@/utils/ApiClient';
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import CTAButton from '../CTAButton.vue';
 
 const rawScores = ref<
     {
@@ -68,7 +69,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="flex flex-col w-full justify-center items-center gap-20">
+    <div class="flex flex-col w-full justify-center items-center gap-10">
         <div class="w-full flex flex-col items-center gap-3">
             <h1 class="text-3xl mb-5">{{ $t('charts') }}</h1>
             <div
@@ -102,9 +103,16 @@ onMounted(async () => {
                 </div>
             </div>
         </div>
-        <div class="flex flex-col items-center gap-3 mb-10">
+        <div class="flex flex-col items-center gap-3">
             <h1 class="text-3xl mb-5">{{ $t('statistics') }}</h1>
             <StatCardContainer :basicDisplay="false" />
         </div>
+        <CTAButton
+            :goBack="true"
+            :text="$t('back')"
+            color="bluebg"
+            textColor="white"
+            class="mb-10"
+        />
     </div>
 </template>

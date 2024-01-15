@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Footer from '@/components/Footer.vue';
 import ProgressBadgeSkeleton from '@/components/Skeletons/ProgressBadgeSkeleton.vue';
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
@@ -162,7 +161,6 @@ async function disconnect() {
             class="mt-5"
         />
     </div>
-    <Footer></Footer>
 </template>
 
 <style scoped>
