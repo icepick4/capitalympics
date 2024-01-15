@@ -25,12 +25,12 @@ const switchText = computed(() => {
 </script>
 
 <template>
-    <div class="flex justify-center">
+    <div class="flex justify-center w-full">
         <div
             class="relative w-5/6 md:w-3/5 lg:w-2/5 bg-gray-100 rounded-lg shadow-lg overflow-hidden"
         >
             <div
-                class="p-2 lg:p-4 flex flex-row justify-center items-start lg:flex-row lg:justify-between gap-3"
+                class="p-4 lg:p-4 flex flex-row justify-center items-start lg:flex-row lg:justify-between gap-3"
             >
                 <div
                     class="w-full flex flex-col items-start lg:items-start gap-2"

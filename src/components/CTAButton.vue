@@ -7,17 +7,27 @@ interface Properties {
     to: string;
     color: Color;
     newTab: boolean;
+    goBack: boolean;
 }
 
-withDefaults(defineProps<Properties>(), {
+const props = withDefaults(defineProps<Properties>(), {
     text: 'Default Text',
     textColor: 'black',
     to: '',
     color: 'white',
-    newTab: false
+    newTab: false,
+    goBack: false
 });
 
 const bg = ['bg-black', 'bg-white', 'bg-bluebg', 'bg-gradient'];
+
+const goBackHandler = () => {
+    if (window.history.length > 1) {
+        window.history.go(-1);
+    } else {
+        window.location.href = '/';
+    }
+};
 </script>
 
 <template>
@@ -26,6 +36,7 @@ const bg = ['bg-black', 'bg-white', 'bg-bluebg', 'bg-gradient'];
         :class="'bg-' + color + ' text-' + textColor"
         class="click-anim mb-4 flex flex-row items-center rounded-lg px-8 py-4 font-semibold transition [box-shadow:rgb(171,_196,200)-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]"
         v-bind="{ target: newTab ? '_blank' : '_self' }"
+        @click="goBack && goBackHandler()"
     >
         <p class="mr-6">{{ text }}</p>
         <svg

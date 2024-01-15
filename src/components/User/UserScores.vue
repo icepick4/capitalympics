@@ -20,6 +20,7 @@ import { storeToRefs } from 'pinia';
 import { Ref, computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Badge from '../Badge.vue';
+import CTAButton from '../CTAButton.vue';
 import Regions from '../Regions.vue';
 import ScoresDisplay from './ScoresDisplay.vue';
 
@@ -176,11 +177,13 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
         <div
             class="relative bg-gradient rounded-lg shadow-lg w-11/12 md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto p-2 sm:p-8"
         >
-            <RouterLink to="/profile">
-                <IconX
-                    class="w-10 h-10 cursor-pointer hover:scale-110 transition-all absolute right-0 top-0 m-5"
-                />
-            </RouterLink>
+            <CTAButton
+                to="/profile"
+                :text="$t('back')"
+                class="absolute right-0 top-0 m-5"
+                :goBack="true"
+            >
+            </CTAButton>
             <div
                 class="w-full flex flex-col md:flex-row justify-center items-center gap-3 mb-10"
             >
@@ -190,7 +193,9 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                             <p class="text-2xl sm:text-4xl font-normal">
                                 {{ $t(learningType) }}
                             </p>
-                            <div class="flex flex-col gap-2 justify-center items-center">
+                            <div
+                                class="flex flex-col gap-2 justify-center items-center"
+                            >
                                 <ActionIcon
                                     :icon="IconArrowsSort"
                                     :label="$t('switch')"
