@@ -12,7 +12,7 @@ interface Properties {
 withDefaults(defineProps<Properties>(), {
     text: 'Default Text',
     textColor: 'black',
-    to: '/',
+    to: '',
     color: 'white',
     newTab: false
 });
@@ -24,7 +24,7 @@ const bg = ['bg-black', 'bg-white', 'bg-bluebg', 'bg-gradient'];
     <RouterLink
         :to="to"
         :class="'bg-' + color + ' text-' + textColor"
-        class="mb-4 flex flex-row items-center rounded-lg px-8 py-4 font-semibold transition [box-shadow:rgb(171,_196,200)-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]"
+        class="click-anim mb-4 flex flex-row items-center rounded-lg px-8 py-4 font-semibold transition [box-shadow:rgb(171,_196,200)-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]"
         v-bind="{ target: newTab ? '_blank' : '_self' }"
     >
         <p class="mr-6">{{ text }}</p>
@@ -41,3 +41,9 @@ const bg = ['bg-black', 'bg-white', 'bg-bluebg', 'bg-gradient'];
         </svg>
     </RouterLink>
 </template>
+
+<style scoped>
+.click-anim:active {
+    transform: translate(-3px, 5px);
+}
+</style>

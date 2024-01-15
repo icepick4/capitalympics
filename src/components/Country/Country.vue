@@ -3,6 +3,7 @@ import { CountryI } from '@/models/Country';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Badge from '../Badge.vue';
+import CTAButton from '../CTAButton.vue';
 
 defineProps<{
     country: CountryI;
@@ -32,12 +33,12 @@ const switchText = computed(() => {
                 class="p-2 lg:p-4 flex flex-row justify-center items-start lg:flex-row lg:justify-between gap-3"
             >
                 <div
-                    class="w-full flex flex-col items-start lg:items-start gap-1"
+                    class="w-full flex flex-col items-start lg:items-start gap-2"
                 >
                     <h1 class="text-4xl font-bold">{{ country.name }}</h1>
                     <p>{{ country.official_name }}</p>
                     <p class="text-gray-500">{{ country.code }}</p>
-                    <div class="flex flex-col items-start gap-2">
+                    <div class="flex flex-col items-start gap-2 mb-2">
                         <Badge
                             :score="flagScore"
                             learningType="flag"
@@ -49,12 +50,12 @@ const switchText = computed(() => {
                             size="md"
                         />
                     </div>
-                    <span
-                        class="text-lg mt-2 hover:underline cursor-pointer select-none"
+                    <CTAButton
                         @click="switchCard"
+                        :text="switchText"
+                        color="gradient"
                     >
-                        {{ switchText }}
-                    </span>
+                    </CTAButton>
                 </div>
 
                 <div class="absolute top-0 right-0 m-3 xs:block col-span-1">
