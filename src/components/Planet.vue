@@ -3,7 +3,6 @@ import ApiService from '@/services/apiService';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { onMounted, ref } from 'vue';
-import { IpAPI } from '@/types/common';
 
 onMounted(() => {
     getIpData();
@@ -11,24 +10,31 @@ onMounted(() => {
 
 const emit = defineEmits(['finishedLoading']);
 
-const cityName = ref('Paris');
+const regionName = ref('Paris');
 const countryName = ref('France');
-const long = ref(48.864716);
-const lat = ref(2.349014);
+const lat = ref(48.864716);
+const long = ref(2.349014);
 
 const getIpData = async () => {
-    const iPdata = await ApiService.getIP();
-    if (iPdata.lon !== undefined && iPdata.lat !== undefined && iPdata.city !== undefined && iPdata.country !== undefined){
-        long.value = iPdata.lon;
-        lat.value = iPdata.lat;
-        countryName.value = iPdata.country;
-        cityName.value = iPdata.city;
+    let iPdata;
+    try {
+        iPdata = await ApiService.getIP();
+        if (
+            iPdata.lon !== undefined &&
+            iPdata.lat !== undefined &&
+            iPdata.regionName !== undefined &&
+            iPdata.country !== undefined
+        ) {
+            long.value = iPdata.lon;
+            lat.value = iPdata.lat;
+            countryName.value = iPdata.country;
+            regionName.value = iPdata.regionName;
+            initThreeScene(long.value, lat.value);
+        }
+    } catch {
         initThreeScene(long.value, lat.value);
     }
-    else{
-        initThreeScene(48.864716, 2.349014);
-    }
-}
+};
 
 const userClicking = ref(false);
 
@@ -110,7 +116,7 @@ const initThreeScene = (long: number, lat: number) => {
     renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
     renderer.setClearColor(0x000000, 0);
 
-    function calculatePosition(latitude: number, longitude: number) {
+    function calculatePosition(longitude: number, latitude: number) {
         let phi = (90 - latitude) * (Math.PI / 180);
         let theta = (longitude + 180) * (Math.PI / 180);
         let x = -(Math.sin(phi) * Math.cos(theta));
@@ -119,7 +125,7 @@ const initThreeScene = (long: number, lat: number) => {
         return { x, y, z };
     }
 
-    let { x, y, z } = calculatePosition(lat, long);
+    let { x, y, z } = calculatePosition(long, lat);
 
     let parisPin = new THREE.Mesh(
         new THREE.SphereGeometry(0.02, 30, 30),
@@ -151,9 +157,17 @@ const initThreeScene = (long: number, lat: number) => {
 </script>
 
 <template>
-    <div class="relative w-5/6" id="canvasContainer" @mousedown="handleUserClicking" @mouseup="handleUserStopClicking">
-        <p class="text-2xl absolute right-10 bottom-0 select-none hover:underline cursor-pointer" @click="setPinCameraView">
-            {{ cityName }}, {{ countryName }}
+    <div
+        class="relative w-5/6"
+        id="canvasContainer"
+        @mousedown="handleUserClicking"
+        @mouseup="handleUserStopClicking"
+    >
+        <p
+            class="text-2xl absolute right-10 bottom-0 select-none hover:underline cursor-pointer"
+            @click="setPinCameraView"
+        >
+            {{ regionName }}, {{ countryName }}
         </p>
     </div>
 </template>

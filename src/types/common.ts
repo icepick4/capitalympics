@@ -30,10 +30,10 @@ export type Maybe<T> = T | Nullish;
 
 export type IpAPI = {
     country: string;
-    city: string;
-    lat: number
+    regionName: string;
+    lat: number;
     lon: number;
-}
+};
 
 export interface UserScore {
     user_id: number;
