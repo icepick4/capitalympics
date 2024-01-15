@@ -380,7 +380,7 @@ onBeforeMount(async () => {
                 <img
                     src="/home/me.jpg"
                     class="object-cover rounded-full cursor-pointer hover:scale-105 transition-all duration-100 ease-linear"
-                    :alt="$t('aboutMe.imageAlt')"
+                    alt="Remi Jara"
                 />
             </a>
         </div>

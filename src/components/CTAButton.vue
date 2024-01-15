@@ -3,15 +3,14 @@ type Color = 'black' | 'white' | 'bluebg' | 'gradient';
 
 interface Properties {
     text: string;
-    textColor: Color;
-    to: string;
-    color: Color;
-    newTab: boolean;
-    goBack: boolean;
+    textColor?: Color;
+    to?: string;
+    color?: Color;
+    newTab?: boolean;
+    goBack?: boolean;
 }
 
-const props = withDefaults(defineProps<Properties>(), {
-    text: 'Default Text',
+withDefaults(defineProps<Properties>(), {
     textColor: 'black',
     to: '',
     color: 'white',

@@ -5,7 +5,7 @@ import { useStore } from '@/store';
 import { personas } from '@dicebear/collection';
 import { createAvatar } from '@dicebear/core';
 import { storeToRefs } from 'pinia';
-import { Ref, onBeforeMount, ref, watch } from 'vue';
+import { Ref, computed, onBeforeMount, ref, watch } from 'vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -28,11 +28,7 @@ function generateAvatar(user: User) {
     avatar.value = createAvatar(personas, {
         size: props.size == 'sm' ? 48 : 96,
         seed: user.created_at,
-        backgroundColor: generateBackgroundColors(
-            userScoreCapital.value,
-            userScoreFlag.value
-        ),
-        backgroundType: ['solid'],
+        backgroundColor: ['transparent'],
         mouth: ['smile', 'bigSmile', 'surprise', 'smirk'],
         nose: ['mediumRound', 'smallRound'],
         skinColor: ['21a6ff'],
@@ -57,29 +53,36 @@ setTimeout(() => {
 function generateBackgroundColors(
     capitalScore: number,
     flagScore: number
-): string[] {
+): string {
     const averageScore = (capitalScore + flagScore) / 2;
     const colorPallete = getColorPallete();
     const colorIndex = Math.floor(averageScore / 8.33);
-    return [colorPallete[colorIndex]];
+    return colorPallete[colorIndex];
 }
 
 function getColorPallete() {
     return [
-        'eeeeee',
-        'e0e0e0',
-        'bdbdbd',
-        'fff59d',
-        'fff176',
-        'ffee58',
-        '81c784',
-        '66bb6a',
-        '4caf50',
-        '42a5f5',
-        '2196f3',
-        'ce93d8'
+        'bg-[#eeeeee]',
+        'bg-[#e0e0e0]',
+        'bg-[#bdbdbd]',
+        'bg-[#fff59d]',
+        'bg-[#fff176]',
+        'bg-[#ffee58]',
+        'bg-[#81c784]',
+        'bg-[#66bb6a]',
+        'bg-[#4caf50]',
+        'bg-[#42a5f5]',
+        'bg-[#2196f3]',
+        'bg-[#ce93d8]'
     ];
 }
+
+const color = computed(() => {
+    return generateBackgroundColors(
+        userScoreCapital.value,
+        userScoreFlag.value
+    );
+});
 
 onBeforeMount(async () => {
     await initUserScore();
@@ -87,5 +90,10 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <img :src="avatar" alt="Avatar" />
+    <div
+        class="flex flex-col items-center justify-center"
+        :class="`${color} rounded-full`"
+    >
+        <img :src="avatar" alt="Avatar" />
+    </div>
 </template>

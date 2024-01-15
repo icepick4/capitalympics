@@ -18,7 +18,6 @@ import {
 } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, onMounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 import Badge from '../Badge.vue';
 import CTAButton from '../CTAButton.vue';
 import Regions from '../Regions.vue';
@@ -41,7 +40,6 @@ if (!user.value) {
 
 const countriesStore = useCountriesStore();
 const regionsStore = useRegionsStore();
-const { t } = useI18n();
 
 const continent = ref(0);
 const learningType = ref<LearningType>('flag');

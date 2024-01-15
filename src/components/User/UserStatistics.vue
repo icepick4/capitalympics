@@ -107,12 +107,6 @@ onMounted(async () => {
             <h1 class="text-3xl mb-5">{{ $t('statistics') }}</h1>
             <StatCardContainer :basicDisplay="false" />
         </div>
-        <CTAButton
-            :goBack="true"
-            :text="$t('back')"
-            color="bluebg"
-            textColor="white"
-            class="mb-10"
-        />
+        <CTAButton :goBack="true" :text="$t('back')" class="mb-10" />
     </div>
 </template>

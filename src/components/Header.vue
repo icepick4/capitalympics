@@ -2,11 +2,11 @@
 import ProfilePicture from '@/components/User//ProfilePicture.vue';
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { useStore } from '@/store';
+import { IconLogout2 } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
-import { IconLogout2 } from '@tabler/icons-vue';
 
 const store = useStore();
 const { isAuthenticated } = storeToRefs(useStore());
@@ -64,40 +64,64 @@ async function disconnect() {
 
 <template>
     <div class="flex items-center justify-center w-full">
-        <div class="header flex flex-row w-full md:w-3/4 2xl:w-7/12 justify-between h-auto relative p-7">
-            <RouterLink to="/" class="w-auto h-full flex justify-center items-center">
-                <img src="/logo.png" alt="logo"
-                    class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-22 xl:h-22" />
+        <div
+            class="header flex flex-row w-full md:w-3/4 2xl:w-7/12 justify-between h-auto relative p-7"
+        >
+            <RouterLink
+                to="/"
+                class="w-auto h-full flex justify-center items-center"
+            >
+                <img
+                    src="/logo.png"
+                    alt="logo"
+                    class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-22 xl:h-22"
+                />
             </RouterLink>
 
             <div class="header flex flex-row justify-center items-center gap-7">
-                <RouterLink to="/countries"
-                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out">
+                <RouterLink
+                    to="/countries"
+                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                >
                     {{ $t('countries') }}
                 </RouterLink>
-                <RouterLink to="/about"
-                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out">
+                <RouterLink
+                    to="/about"
+                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                >
                     {{ $t('about') }}
                 </RouterLink>
-                <RouterLink to="/quiz"
-                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out">
+                <RouterLink
+                    to="/quiz"
+                    class="hidden xl:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                >
                     {{ $t('quiz') }}
                 </RouterLink>
                 <template v-if="!isAuthenticated">
-                    <RouterLink to="/login"
-                        class="hidden sm:flex justify-end items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out">
-                        {{ $t('login') }}</RouterLink>
-                    <RouterLink to="/signup"
-                        class="hidden sm:flex justify-center items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out">
-                        {{ $t('signup') }}</RouterLink>
+                    <RouterLink
+                        to="/login"
+                        class="hidden sm:flex justify-end items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    >
+                        {{ $t('login') }}</RouterLink
+                    >
+                    <RouterLink
+                        to="/signup"
+                        class="hidden sm:flex justify-center items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    >
+                        {{ $t('signup') }}</RouterLink
+                    >
                 </template>
                 <template v-else>
-                    <RouterLink to="/learn"
-                        class="hidden sm:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out">
+                    <RouterLink
+                        to="/learn"
+                        class="hidden sm:flex items-center font-medium text-black no-underline center-underline text-xl transition-all duration-75 ease-in-out"
+                    >
                         {{ $t('play') }}
                     </RouterLink>
-                    <RouterLink to="/profile"
-                        class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110">
+                    <RouterLink
+                        to="/profile"
+                        class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
+                    >
                         <ProfilePicture size="sm" />
                     </RouterLink>
                     <IconLogout2
@@ -106,56 +130,109 @@ async function disconnect() {
                     />
                 </template>
             </div>
-            <div class="flex flex-row justify-center items-center gap-7 xl:hidden">
-                <button @click="toggleDropdown"
-                    class="focus:scale-75 hover:scale-110 transition-all duration-150 ease-in-out" v-if="!isDropdownOpen">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-                        </path>
+            <div
+                class="flex flex-row justify-center items-center gap-7 xl:hidden"
+            >
+                <button
+                    @click="toggleDropdown"
+                    class="focus:scale-75 hover:scale-110 transition-all duration-150 ease-in-out"
+                    v-if="!isDropdownOpen"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-6 h-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"
+                        ></path>
                     </svg>
                 </button>
-                <button @click="toggleDropdown"
-                    class="focus:scale-75 hover:scale-110 transition-all duration-150 ease-in-out" v-if="isDropdownOpen">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
+                <button
+                    @click="toggleDropdown"
+                    class="focus:scale-75 hover:scale-110 transition-all duration-150 ease-in-out"
+                    v-if="isDropdownOpen"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-6 h-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                        ></path>
                     </svg>
                 </button>
             </div>
-            <div class="menu w-40 bg-white rounded-lg shadow-lg xl:hidden z-50 absolute top-16 sm:top-20 right-3 sm:right-0"
-                v-show="isDropdownOpen" :class="{
+            <div
+                class="menu w-40 bg-white rounded-lg shadow-lg xl:hidden z-50 absolute top-16 sm:top-20 right-3 sm:right-0"
+                v-show="isDropdownOpen"
+                :class="{
                     'fade-left': isDropdownOpen
-                }" ref="menu">
+                }"
+                ref="menu"
+            >
                 <div class="py-2" @click="toggleDropdown">
-                    <RouterLink v-if="isAuthenticated" to="/profile"
-                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500">
-                        {{ $t('profile') }}</RouterLink>
-                    <RouterLink v-if="!isAuthenticated" to="/login"
-                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500">
-                        {{ $t('login') }}</RouterLink>
-                    <RouterLink v-if="!isAuthenticated" to="/signup"
-                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500">
-                        {{ $t('signup') }}</RouterLink>
-                    <RouterLink to="/learn"
-                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500">
-                        {{ $t('play') }}</RouterLink>
-                    <RouterLink to="/countries"
-                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500">
+                    <RouterLink
+                        v-if="isAuthenticated"
+                        to="/profile"
+                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
+                        {{ $t('profile') }}</RouterLink
+                    >
+                    <RouterLink
+                        v-if="!isAuthenticated"
+                        to="/login"
+                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
+                        {{ $t('login') }}</RouterLink
+                    >
+                    <RouterLink
+                        v-if="!isAuthenticated"
+                        to="/signup"
+                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
+                        {{ $t('signup') }}</RouterLink
+                    >
+                    <RouterLink
+                        to="/learn"
+                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
+                        {{ $t('play') }}</RouterLink
+                    >
+                    <RouterLink
+                        to="/countries"
+                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
                         {{ $t('countries') }}
                     </RouterLink>
-                    <RouterLink to="/about"
-                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500">
+                    <RouterLink
+                        to="/about"
+                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
                         {{ $t('about') }}
                     </RouterLink>
-                    <RouterLink to="/quiz"
-                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500">
+                    <RouterLink
+                        to="/quiz"
+                        class="block px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
                         {{ $t('quiz') }}
                     </RouterLink>
-                    <h1 v-if="isAuthenticated"
+                    <h1
+                        v-if="isAuthenticated"
                         @click="disconnect"
-                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500">
+                        class="block sm:hidden px-4 py-2 text-black no-underline text-lg transition-all duration-75 ease-in-out hover:text-gray-500"
+                    >
                         {{ $t('logout') }}
                     </h1>
                 </div>
