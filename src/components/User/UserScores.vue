@@ -173,12 +173,12 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
             />
         </div>
         <div
-            class="relative bg-gradient rounded-lg shadow-lg w-11/12 md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto p-2 sm:p-8"
+            class="relative bg-gradient rounded-lg shadow-lg w-11/12 md:w-3/4 2xl:w-7/12 mx-auto p-2 sm:p-8"
         >
             <CTAButton
                 to="/profile"
                 :text="$t('back')"
-                class="absolute right-0 top-0 m-5"
+                class="hidden sm:flex absolute right-0 top-0 m-5"
                 :goBack="true"
             >
             </CTAButton>
@@ -295,6 +295,13 @@ const scoreValues: number[] = [-1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
                 </div>
             </div>
         </div>
+        <CTAButton
+            to="/profile"
+            :text="$t('back')"
+            class="block sm:hidden"
+            :goBack="true"
+        >
+        </CTAButton>
     </div>
 </template>
 

@@ -205,7 +205,7 @@ onBeforeMount(async () => {
                         ? 'Photo of Thomas Kelley on Unsplash'
                         : 'Photo of Ryan Kim on Unsplash'
                 "
-                class="w-fit h-[26rem] object-cover transition-all duration-100 ease-linear brightness-75 xs:brightness-100 overflow-hidden"
+                class="w-full h-[26rem] object-cover transition-all duration-100 ease-linear brightness-75 xs:brightness-100 overflow-hidden"
             />
         </div>
     </div>
@@ -360,12 +360,12 @@ onBeforeMount(async () => {
         </div>
     </div>
     <div class="w-full flex flex-col justify-center items-center gap-10">
-        <div class="w-1/3 bg-black h-[1px]"></div>
+        <div class="w-2/3 sm:w-1/3 bg-black h-[1px]"></div>
         <div
-            class="w-full sm:w-2/3 lg:1/3 xl:w-2/3 2xl:w-2/5 lg:p-10 flex md:flex-row flex-col-reverse justify-center items-center gap-10 p-4"
+            class="w-full lg:1/3 xl:w-2/3 2xl:w-1/2 lg:p-10 flex lg:flex-row flex-col-reverse justify-center items-center gap-10 p-4"
         >
             <div
-                class="flex flex-col gap-5 items-start justify-center w-5/6 md:w-1/2"
+                class="flex flex-col gap-5 items-start justify-center w-5/6 md:w-2/3"
             >
                 <h1 class="text-center text-xl font-bold">
                     {{ $t('aboutMe') }}
@@ -375,7 +375,7 @@ onBeforeMount(async () => {
             </div>
             <a
                 href="https://www.buymeacoffee.com/remijara"
-                class="w-3/4 md:w-1/2"
+                class="w-3/4 md:w-2/5"
             >
                 <img
                     src="/home/me.jpg"

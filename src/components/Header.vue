@@ -65,7 +65,7 @@ async function disconnect() {
 <template>
     <div class="flex items-center justify-center w-full">
         <div
-            class="header flex flex-row w-full md:w-3/4 2xl:w-7/12 justify-between h-auto relative p-7"
+            class="header flex flex-row w-full md:w-3/4 2xl:w-7/12 justify-between h-auto relative p-4"
         >
             <RouterLink
                 to="/"

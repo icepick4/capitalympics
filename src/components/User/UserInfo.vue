@@ -65,7 +65,7 @@ async function disconnect() {
     <div
         class="w-full h-full flex flex-col items-center justify-center mt-10 mb-10"
     >
-        <div class="w-full md:w-5/6 xl:3/4 2xl:w-2/3 mx-auto">
+        <div class="w-full md:w-3/4 2xl:w-7/12 mx-auto">
             <div
                 v-if="flagScore !== -2 && capitalScore !== -2"
                 class="flex flex-col sm:flex-row justify-start sm:gap-5"

@@ -21,7 +21,7 @@ onBeforeMount(async () => {
 <template>
     <Star class="hidden sm:block"></Star>
     <BuyMeACoffee
-        class="hidden sm:block absolute top-0 right-0 mt-5 mr-8"
+        class="hidden 2xl:block absolute top-0 right-0 mt-5 mr-5"
     ></BuyMeACoffee>
     <Loader v-if="isLoading" />
     <div v-else class="flex flex-col h-screen min-h-screen">
