@@ -83,10 +83,14 @@ async function handleClick(score: ScoreType) {
         return;
     } else if (response.data.level) {
         if (response.data.level === 'up') {
-            jsConfetti.addConfetti({
-                confettiRadius: 7,
-                confettiNumber: 500
-            });
+            jsConfetti
+                .addConfetti({
+                    confettiRadius: 7,
+                    confettiNumber: 500
+                })
+                .then(() => {
+                    jsConfetti.clearCanvas();
+                });
         }
         notify({
             title:

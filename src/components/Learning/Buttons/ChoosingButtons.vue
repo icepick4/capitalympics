@@ -18,10 +18,14 @@ const jsConfetti = new JSConfetti();
 const submit = (type: ScoreType) => {
     emit('click', type);
     if (type === 'succeeded') {
-        jsConfetti.addConfetti({
-            confettiRadius: 7,
-            confettiNumber: 25
-        });
+        jsConfetti
+            .addConfetti({
+                confettiRadius: 7,
+                confettiNumber: 25
+            })
+            .then(() => {
+                jsConfetti.clearCanvas();
+            });
     }
 };
 </script>

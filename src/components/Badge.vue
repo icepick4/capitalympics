@@ -98,7 +98,7 @@ const isMinScore = computed(() => props.score === -1);
 const offset = computed(() => {
     if (isMaxScore.value) return 0;
     if (isMinScore.value) return circumference.value;
-    const percent = props.score;
+    const percent = (props.score * 10) % 100;
     return circumference.value - (percent / 100) * circumference.value;
 });
 
@@ -191,7 +191,7 @@ const circumference = computed(() => 2 * Math.PI * 30);
         </div>
         <div class="flex flex-col items-start justify-start">
             <span
-                class="text-2xl font-bold !bg-transparent p-1 rounded-lg"
+                class="text-2xl font-bold !bg-transparent px-3 p-1 rounded-lg"
                 :class="[
                     color,
                     {
@@ -212,7 +212,7 @@ const circumference = computed(() => 2 * Math.PI * 30);
                     'text-lg': size === 'md',
                     'text-xl': size === 'lg'
                 }"
-                >{{ isMinScore ? 0 : Math.round(score * 10) }} /
+                >{{ isMinScore ? 0 : Math.floor(score * 10) }} /
                 {{ Math.ceil(props.score / 10) * 100 }}</span
             >
         </div>
