@@ -197,5 +197,9 @@
     },
     "noCreditCard": "No credit card required",
     "play": "Play",
-    "logout": "Logout"
+    "logout": "Logout",
+    "pageInCreation": {
+        "title": "This page is currently in creation",
+        "desc": "Please come back later."
+    }
 }

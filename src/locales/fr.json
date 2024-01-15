@@ -197,5 +197,9 @@
     },
     "noCreditCard": "Aucune carte de crédit n'est nécessaire",
     "play": "Jouer",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "pageInCreation": {
+        "title": "Cette page est en cours de création",
+        "desc": "Revenez plus tard !"
+    }
 }

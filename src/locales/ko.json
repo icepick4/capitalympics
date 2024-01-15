@@ -197,5 +197,9 @@
     },
     "noCreditCard": "신용 카드 필요 없음",
     "play": "플레이",
-    "logout": "연결 끊기"
+    "logout": "연결 끊기",
+    "pageInCreation": {
+        "title": "페이지 작성 중입니다",
+        "desc": "곧 제공 예정입니다."
+    }
 }

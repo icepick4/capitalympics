@@ -11,10 +11,10 @@ import { CurrentState, LearningType, ScoreType } from '@/types/common';
 import type { Country } from '@/types/models';
 import ApiClient from '@/utils/ApiClient';
 import { IconInfoCircle } from '@tabler/icons-vue';
+import JSConfetti from 'js-confetti';
 import { onBeforeMount, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
-import JSConfetti from 'js-confetti'
 
 const { t } = useI18n();
 const route = useRoute();
@@ -84,8 +84,8 @@ async function handleClick(score: ScoreType) {
         if (response.data.level === 'up') {
             jsConfetti.addConfetti({
                 confettiRadius: 7,
-                confettiNumber: 500,
-            })
+                confettiNumber: 500
+            });
         }
         notify({
             title:
