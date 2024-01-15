@@ -201,5 +201,7 @@
     "pageInCreation": {
         "title": "This page is currently in creation",
         "desc": "Please come back later."
-    }
+    },
+    "aboutMe": "About Me",
+    "passionateDev": "Hi, I'm Rémi JARA, a passionate developer and student. I love exploring the endless possibilities of code, constantly creating innovative projects. Your support helps me dedicate more time and resources to my projects, fostering my growth as a developer. Each contribution makes a real difference, contributing to innovation and education. Thank you!"
 }

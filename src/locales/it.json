@@ -201,5 +201,7 @@
     "pageInCreation": {
         "title": "Questa pagina è in fase di creazione",
         "desc": "Torna più tardi!"
-    }
+    },
+    "aboutMe": "Chi sono",
+    "passionateDev": "Ciao, sono Rémi JARA, uno sviluppatore appassionato e studente. Amo esplorare le infinite possibilità del codice, creando costantemente progetti innovativi. Il vostro supporto mi aiuta a dedicare più tempo e risorse ai miei progetti, stimolando la mia crescita come sviluppatore. Ogni contributo fa una differenza concreta, contribuendo all'innovazione e all'educazione. Grazie!"
 }
