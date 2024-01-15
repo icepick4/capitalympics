@@ -23,7 +23,7 @@ onBeforeMount(async () => {
     <div v-else class="flex flex-col h-screen min-h-screen">
         <NotificationsWrapper />
         <Header />
-        <div class="flex flex-col flex-grow justify-evenly">
+        <div class="flex flex-col flex-grow justify-between">
             <RouterView />
         </div>
     </div>

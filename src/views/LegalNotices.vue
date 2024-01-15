@@ -1,5 +1,9 @@
+<script setup lang="ts">
+import Footer from '@/components/Footer.vue';
+</script>
+
 <template>
-    <div class="flex flex-col flex-start h-auto gap-10 p-10">
+    <div class="flex flex-col h-fit gap-10 p-10">
         <div>
             <h1 class="text-lg underline">Credits</h1>
             <p>This website was created by Rémi JARA.</p>
@@ -36,4 +40,5 @@
             </p>
         </div>
     </div>
+    <Footer />
 </template>
