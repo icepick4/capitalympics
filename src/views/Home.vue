@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BuyMeACoffee from '@/components/BuyMeACoffee.vue';
 import CTAButton from '@/components/CTAButton.vue';
 import CarouselAuto from '@/components/CarouselAuto.vue';
 import Loader from '@/components/Loader.vue';
@@ -116,7 +117,7 @@ onBeforeMount(async () => {
         type="error"
     />
     <div
-        class="flex flex-col 2xl:flex-row items-center justify-center h-full gap-5 mt-3 lg:mt-10 xs:mb-20"
+        class="flex flex-col 2xl:flex-row items-center justify-center h-full gap-5 mt-3 lg:mt-10 xs:mb-20 overflow-hidden"
     >
         <div class="w-1/3"></div>
         <div class="flex flex-col items-center w-1/3">
@@ -227,6 +228,7 @@ onBeforeMount(async () => {
             ></path>
         </svg>
     </div>
+
     <div
         class="w-full h-full flex flex-col justify-center items-center gap-16 mb-20"
         id="home-description"
@@ -357,7 +359,33 @@ onBeforeMount(async () => {
             </div>
         </div>
     </div>
-    <div class="flex justify-center items-center rotate-180 mb-16">
+    <div class="w-full flex flex-col justify-center items-center gap-10">
+        <div class="w-1/3 bg-black h-[1px]"></div>
+        <div
+            class="w-full sm:w-2/3 lg:1/3 xl:w-2/3 2xl:w-2/5 lg:p-10 flex md:flex-row flex-col-reverse justify-center items-center gap-10 p-4"
+        >
+            <div
+                class="flex flex-col gap-5 items-start justify-center w-5/6 md:w-1/2"
+            >
+                <h1 class="text-center text-xl font-bold">
+                    {{ $t('aboutMe') }}
+                </h1>
+                <p class="text-left text-lg">{{ $t('passionateDev') }}</p>
+                <BuyMeACoffee />
+            </div>
+            <a
+                href="https://www.buymeacoffee.com/remijara"
+                class="w-3/4 md:w-1/2"
+            >
+                <img
+                    src="/home/me.jpg"
+                    class="object-cover rounded-full cursor-pointer hover:scale-105 transition-all duration-100 ease-linear"
+                    :alt="$t('aboutMe.imageAlt')"
+                />
+            </a>
+        </div>
+    </div>
+    <div class="flex justify-center items-center rotate-180 mt-16 mb-16">
         <svg
             class="arrow-icon w-12 h-12 animate-bounce cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"

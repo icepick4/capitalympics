@@ -3,7 +3,7 @@ import AboutImage from './AboutImage.vue';
 defineProps<{
     text: string;
     title: string;
-    image: string;
+    image?: string;
     alt: string;
     link: string;
 }>();
@@ -29,7 +29,7 @@ defineProps<{
                 >{{ $t('learnMore') }}</a
             >
         </div>
-        <div class="relative">
+        <div class="relative" v-if="image != null">
             <div class="overflow-hidden">
                 <RouterLink
                     v-if="!link.includes('https')"
@@ -48,5 +48,6 @@ defineProps<{
             >
             </span>
         </div>
+        <slot></slot>
     </div>
 </template>

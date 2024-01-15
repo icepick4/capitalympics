@@ -12,6 +12,7 @@ import {
     IconWorld
 } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
+import BuyMeACoffee from './BuyMeACoffee.vue';
 
 const { isAuthenticated } = storeToRefs(useStore());
 </script>
@@ -52,6 +53,7 @@ const { isAuthenticated } = storeToRefs(useStore());
                             ></div>
                         </div>
                     </a>
+                    <BuyMeACoffee />
                 </div>
                 <div class="flex flex-col gap-5 items-start">
                     <h1 class="text-2xl text-start">{{ $t('quickLinks') }}</h1>

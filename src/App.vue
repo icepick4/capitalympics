@@ -18,7 +18,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <Star></Star>
+    <Star class="hidden sm:block"></Star>
     <Loader v-if="isLoading" />
     <div v-else class="flex flex-col h-screen min-h-screen">
         <NotificationsWrapper />
