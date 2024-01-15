@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Badge from '@/components/Badge.vue';
+import CTAButton from '@/components/CTAButton.vue';
 import Loader from '@/components/Loader.vue';
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
@@ -93,40 +94,64 @@ onBeforeMount(async () => {
     <Loader v-if="loading" :title="$t('loading')" />
 
     <Infos :show="showInfos" @close="hideInfos" />
-    <div v-if="user !== null" class="flex flex-col justify-center items-center gap-20 my-5 h-full">
+    <div
+        v-if="user !== null"
+        class="flex flex-col justify-center items-center gap-20 my-5 h-full"
+    >
         <Loader v-if="initFirstTimeScores" :title="$t('loading')" />
-        <div class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-12">
+        <div
+            class="flex flex-col justify-center items-center w-5/6 sm:w-3/4 md:w-2/3 xl:w-2/5 gap-12"
+        >
             <ProfilePicture size="lg" />
             <div class="flex flex-row gap-5 items-center">
                 <p class="text-3xl">{{ $t('hello') }} {{ user.name }} !</p>
-                <IconInfoCircle class="w-16 h-16 cursor-pointer hover:scale-110 transition-all" @click="toggleInfos" />
+                <IconInfoCircle
+                    class="w-16 h-16 cursor-pointer hover:scale-110 transition-all"
+                    @click="toggleInfos"
+                />
             </div>
-            <div class="flex flex-col md:flex-row gap-10">
+            <div
+                class="flex flex-col md:flex-row gap-10 bg-gray-100 p-10 rounded-lg"
+            >
                 <div class="flex flex-col items-center gap-5">
-                    <Badge v-if="userScoreCapital != -1" :score="userScoreCapital" size="md" :progress="true" />
+                    <Badge
+                        v-if="userScoreCapital != -1"
+                        :score="userScoreCapital"
+                        size="md"
+                        :progress="true"
+                    />
 
-                    <RouterLink to="/learn/capital"
-                        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-4xl px-7 py-4 text-center mr-2 mb-2 hover:scale-105 transition-all">
+                    <RouterLink
+                        to="/learn/capital"
+                        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-4xl px-7 py-4 text-center mr-2 mb-2 hover:scale-105 transition-all"
+                    >
                         {{ ($t('play'), $t('capitals')) }}
                     </RouterLink>
                 </div>
                 <div class="flex flex-col items-center gap-5">
-                    <Badge v-if="userScoreFlag != -1" :score="userScoreFlag" size="md" :progress="true" />
-                    <RouterLink to="/learn/flag"
-                        class="text-white bg-gradient-to-r from-pink-500 to-orange-400 focus:ring-2 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-4xl px-7 py-4 text-center mr-2 mb-2 hover:scale-105 transition-all">
+                    <Badge
+                        v-if="userScoreFlag != -1"
+                        :score="userScoreFlag"
+                        size="md"
+                        :progress="true"
+                    />
+                    <RouterLink
+                        to="/learn/flag"
+                        class="text-white bg-gradient-to-r from-pink-500 to-orange-400 focus:ring-2 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-4xl px-7 py-4 text-center mr-2 mb-2 hover:scale-105 transition-all"
+                    >
                         {{ ($t('play'), $t('flags')) }}
                     </RouterLink>
                 </div>
             </div>
             <div class="flex flex-col gap-5">
-                <div class="transition ease-in-out delay-100 text-black text-lg font-bold text-center p-3 bg-white rounded-md hover:scale-105 w-full cursor-pointer"
-                    @click="resetScoresConfirmation">
-                    {{ $t('resetScores') }}
-                </div>
-                <RouterLink to="/profile/scores"
-                    class="transition ease-in-out delay-100 text-black text-lg font-bold text-center p-3 bg-white rounded-md hover:scale-105 w-full cursor-pointer">
-                    {{ $t('seeScores') }}
-                </RouterLink>
+                <CTAButton
+                    @click="resetScoresConfirmation"
+                    :text="$t('resetScores')"
+                />
+                <CTAButton
+                    to="/profile/scores"
+                    :text="$t('seeScores') + ' 🏆'"
+                />
             </div>
         </div>
     </div>
