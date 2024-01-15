@@ -18,9 +18,9 @@ import { Ref, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import Badge from '../Badge.vue';
+import CTAButton from '../CTAButton.vue';
 import StatCardContainer from '../Statistics/StatCardContainer.vue';
 import ProfilePicture from './ProfilePicture.vue';
-import CTAButton from '../CTAButton.vue';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
@@ -115,34 +115,34 @@ async function disconnect() {
                             {{ user?.name }}
                         </h1>
                     </div>
-                        
-                        <div
-                            class="flex items-end center justify-end gap-4 w-full h-full"
-                        >
-                            <RouterLink to="/profile/statistics" title="Statistics">
-                                <IconChartBar
-                                    class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:scale-110 transition-all"
-                                    @click="$emit('close')"
-                                />
-                            </RouterLink>
-                            <RouterLink to="/profile/scores" title="Scores">
-                                <IconListNumbers
-                                    class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:scale-110 transition-all"
-                                />
-                            </RouterLink>
-                            <RouterLink to="/profile/edit" title="Edit">
-                                <IconSettings
-                                    class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:rotate-180 transition-all duration-500"
-                                    @click="$emit('close')"
-                                />
-                            </RouterLink>
-                            <div title="Disconnect">
-                                <IconLogout2
-                                    class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:scale-110 transition-all"
-                                    @click="disconnect"
-                                />
-                            </div>
+
+                    <div
+                        class="flex items-end center justify-end gap-4 w-full h-full"
+                    >
+                        <RouterLink to="/profile/statistics" title="Statistics">
+                            <IconChartBar
+                                class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:scale-110 transition-all"
+                                @click="$emit('close')"
+                            />
+                        </RouterLink>
+                        <RouterLink to="/profile/scores" title="Scores">
+                            <IconListNumbers
+                                class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:scale-110 transition-all"
+                            />
+                        </RouterLink>
+                        <RouterLink to="/profile/edit" title="Edit">
+                            <IconSettings
+                                class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:rotate-180 transition-all duration-500"
+                                @click="$emit('close')"
+                            />
+                        </RouterLink>
+                        <div title="Disconnect">
+                            <IconLogout2
+                                class="w-7 h-7 sm:w-8 sm:h-8 cursor-pointer hover:scale-110 transition-all"
+                                @click="disconnect"
+                            />
                         </div>
+                    </div>
                 </div>
                 <p class="text-black mb-2">
                     {{ $t('lastActivity') }} :
@@ -156,12 +156,11 @@ async function disconnect() {
         </div>
         <h1 class="text-3xl mb-5">{{ $t('statistics') }}</h1>
         <StatCardContainer :basicDisplay="true" />
-        <!-- <RouterLink
+        <CTAButton
             to="/profile/statistics"
-            class="hover:underline text-lg mt-5"
-            >{{ $t('seeMore') }}</RouterLink
-        > -->
-        <CTAButton to="/profile/statistics" :text="$t('seeMore')" color="white" textColor="black" class="mt-5" />
+            :text="$t('seeMore')"
+            class="mt-5"
+        />
     </div>
     <Footer></Footer>
 </template>

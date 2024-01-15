@@ -60,7 +60,7 @@ const goBack = () => {
 
 <template>
     <Loader v-if="state.isLoading" :title="$t('loading') + countryCode" />
-    <div class="flex flex-col gap-10 m-1 sm:m-5">
+    <div class="flex flex-col h-full justify-center gap-10 m-1 sm:m-5">
         <Transition name="slide-fade" appear>
             <Country
                 v-if="state.country != undefined"

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CTAButton from '@/components/CTAButton.vue';
 import ButtonTemplate from '@/components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Infos from '@/components/Learning/Infos.vue';
@@ -121,7 +122,7 @@ watch(continent, getNewCountry);
     />
     <Loader v-if="isLoading" />
     <Infos :show="showInfos" @close="hideInfos" />
-    <div class="w-full flex flex-col justify-center items-center">
+    <div class="w-full h-full flex flex-col justify-center items-center">
         <div
             class="flex flex-col w-10/12 md:h-auto justify-center items-center gap-10"
         >
@@ -161,29 +162,31 @@ watch(continent, getNewCountry);
                             v-else-if="currentState === 'choosing'"
                             class="text-center flex flex-col gap-5 lg:gap-10"
                         >
+                            <CTAButton
+                                :to="`/countries/${country?.code}`"
+                                :text="$t('learnMore')"
+                                color="gradient"
+                                textColor="black"
+                                :newTab="true"
+                            />
                             <ChoosingButtons @click="handleClick" />
                         </div>
                     </div>
                 </div>
             </div>
             <div
-                class="flex flex-row w-full justify-center gap-10 items-center"
+                class="flex flex-col sm:flex-row w-full justify-center gap-10 items-center"
             >
-                <RouterLink
-                    to="/learn"
-                    class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-auto"
-                >
-                    {{ $t('leave') }}
-                </RouterLink>
-                <RouterLink
-                    to="/profile/statistics"
-                    class="transition ease-in-out delay-100 text-black text-2xl font-bold text-center p-5 bg-white rounded-md hover:scale-105 w-auto"
-                >
-                    {{ $t('statistics') }}
-                </RouterLink>
                 <IconInfoCircle
                     class="w-16 h-16 top-0 left-0 cursor-pointer hover:scale-110 transition-all"
                     @click="toggleInfos"
+                />
+                <CTAButton to="/learn" :text="$t('leave')" />
+                <CTAButton
+                    to="/profile/statistics"
+                    :text="$t('statistics')"
+                    color="bluebg"
+                    textColor="white"
                 />
             </div>
         </div>

@@ -10,6 +10,7 @@
     "dependencies": {
         "@headlessui/vue": "^1.7.14",
         "@tabler/icons-vue": "^2.24.0",
+        "@types/googlemaps": "^3.43.3",
         "@vueuse/core": "^10.2.1",
         "aos": "^2.3.4",
         "axios": "^1.6.0",
