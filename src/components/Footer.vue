@@ -18,7 +18,7 @@ const { isAuthenticated } = storeToRefs(useStore());
 </script>
 <template>
     <div class="flex flex-col">
-        <div class="w-full bg-white p-6 flex items-center justify-center mt-5">
+        <div class="w-full bg-white p-6 py-8 flex items-center justify-center">
             <div
                 class="flex flex-col md:flex-row justify-between items-start w-3/4 gap-10 xl:gap-0"
             >

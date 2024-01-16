@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Badge from '@/components/Badge.vue';
 import CTAButton from '@/components/CTAButton.vue';
+import Footer from '@/components/Footer.vue';
 import Loader from '@/components/Loader.vue';
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { User } from '@/models/User';
@@ -111,7 +112,7 @@ onBeforeMount(async () => {
                 />
             </div>
             <div
-                class="flex flex-col md:flex-row gap-10 bg-gray-100 p-10 rounded-lg"
+                class="flex flex-col md:flex-row gap-10 bg-gray-300 p-10 rounded-lg shadow-xl border border-gray-400"
             >
                 <div class="flex flex-col items-center gap-5">
                     <Badge
@@ -155,4 +156,5 @@ onBeforeMount(async () => {
             </div>
         </div>
     </div>
+    <Footer />
 </template>

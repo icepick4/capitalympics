@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CTAButton from '@/components/CTAButton.vue';
+import Footer from '@/components/Footer.vue';
 import ButtonTemplate from '@/components/Learning/Buttons/ButtonTemplate.vue';
 import ChoosingButtons from '@/components/Learning/Buttons/ChoosingButtons.vue';
 import Infos from '@/components/Learning/Infos.vue';
@@ -126,7 +127,7 @@ watch(continent, getNewCountry);
     />
     <Loader v-if="isLoading" />
     <Infos :show="showInfos" @close="hideInfos" />
-    <div class="w-full h-full flex flex-col justify-center items-center">
+    <div class="w-full h-full flex flex-col justify-center items-center mb-5">
         <div
             class="flex flex-col w-10/12 md:h-auto justify-center items-center gap-10"
         >
@@ -179,7 +180,7 @@ watch(continent, getNewCountry);
                 </div>
             </div>
             <div
-                class="flex flex-col sm:flex-row w-full justify-center gap-10 items-center"
+                class="flex flex-col sm:flex-row w-full justify-center gap-5 sm:gap-10 items-center"
             >
                 <IconInfoCircle
                     class="w-16 h-16 top-0 left-0 cursor-pointer hover:scale-110 transition-all"
@@ -195,4 +196,5 @@ watch(continent, getNewCountry);
             </div>
         </div>
     </div>
+    <Footer />
 </template>
