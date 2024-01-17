@@ -92,6 +92,23 @@ export const useStore = defineStore('app', () => {
         user.value = response.data.user;
     }
 
+    async function updateAvatar(avatar: User['avatar']) {
+        if (!isAuthenticated.value || !isCurrentUserLoaded.value) {
+            throw new Error('Not authenticated');
+        }
+
+        const response = await ApiClient.patch<{
+            success: true;
+            user: User;
+        }>('/me/avatar', { avatar });
+
+        if (!response.success) {
+            throw new Error('Failed to update current user');
+        }
+
+        user.value = response.data.user;
+    }
+
     async function deleteAccount() {
         if (!isAuthenticated.value || !isCurrentUserLoaded.value) {
             throw new Error('Not authenticated');
@@ -114,6 +131,7 @@ export const useStore = defineStore('app', () => {
         login,
         logout,
         updateAccount,
+        updateAvatar,
         user
     };
 });

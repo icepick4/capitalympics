@@ -203,5 +203,11 @@
         "desc": "Revenez plus tard !"
     },
     "aboutMe": "À propos de moi",
-    "passionateDev": "Salut, je suis Rémi, un développeur passionné et étudiant. J'adore explorer les vastes possibilités du code, en créant continuellement des projets personnels. Votre soutien me permet de consacrer davantage de temps et de ressources à mes projets, favorisant ainsi ma croissance en tant que développeur. Chaque contribution me donne de la confiance et de la force dans mes projets. Merci !"
+    "passionateDev": "Salut, je suis Rémi, un développeur passionné et étudiant. J'adore explorer les vastes possibilités du code, en créant continuellement des projets personnels. Votre soutien me permet de consacrer davantage de temps et de ressources à mes projets, favorisant ainsi ma croissance en tant que développeur. Chaque contribution me donne de la confiance et de la force dans mes projets. Merci !",
+    "skinColor": "Couleur de peau",
+    "clothingColor": "Couleur des vêtements",
+    "changeNose": "Changer le nez",
+    "changeMouth": "Changer la bouche",
+    "changeEyes": "Changer les yeux",
+    "changeHair": "Changer les cheveux"
 }

@@ -1,31 +1,31 @@
 <script setup lang="ts">
 import { User } from '@/models/User';
+import { notify } from '@/plugins/notifications';
 import ApiService from '@/services/apiService';
 import { useStore } from '@/store';
 import { personas } from '@dicebear/collection';
 import { createAvatar } from '@dicebear/core';
 import { Options } from '@dicebear/personas/lib/types';
+import { IconDice6Filled, IconUser } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, onBeforeMount, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const store = useStore();
 const user = storeToRefs(store).user as Ref<User>;
-
 const props = defineProps<{
     size: 'sm' | 'md' | 'lg';
     editable?: boolean;
 }>();
 
-const avatar = ref('');
+const { t } = useI18n();
+
+const avatar = ref();
 const userScoreCapital = ref(0);
 const userScoreFlag = ref(0);
-const skinColorPicker = ref('#21a6ff');
-const clothingColorPicker = ref('#000000');
 
 const noseList: Options['nose'] = ['mediumRound', 'smallRound', 'wrinkles'];
-const currentNose = ref<Options['nose']>([
-    noseList[Math.floor(Math.random() * noseList.length)]
-]);
+const currentNose = ref<Options['nose']>([noseList[user.value?.avatar.nose]]);
 
 const mouthList: Options['mouth'] = [
     'smile',
@@ -37,7 +37,7 @@ const mouthList: Options['mouth'] = [
     'pacifier'
 ];
 const currentMouth = ref<Options['mouth']>([
-    mouthList[Math.floor(Math.random() * mouthList.length)]
+    mouthList[user.value?.avatar.mouth]
 ]);
 
 const eyesList: Options['eyes'] = [
@@ -48,9 +48,7 @@ const eyesList: Options['eyes'] = [
     'sunglasses',
     'wink'
 ];
-const currentEyes = ref<Options['eyes']>([
-    eyesList[Math.floor(Math.random() * eyesList.length)]
-]);
+const currentEyes = ref<Options['eyes']>([eyesList[user.value?.avatar.eyes]]);
 
 const hairList: Options['hair'] = [
     'bald',
@@ -74,9 +72,10 @@ const hairList: Options['hair'] = [
     'sideShave',
     'straightBun'
 ];
-const currentHair = ref<Options['hair']>([
-    hairList[Math.floor(Math.random() * hairList.length)]
-]);
+const currentHair = ref<Options['hair']>([hairList[user.value?.avatar.hair]]);
+
+const skinColorPicker = ref(user.value?.avatar.skin);
+const clothingColorPicker = ref(user.value?.avatar.clothes);
 
 watch(user, (newUser) => {
     if (newUser) {
@@ -84,9 +83,20 @@ watch(user, (newUser) => {
     }
 });
 
+const avatarSize = computed(() => {
+    switch (props.size) {
+        case 'sm':
+            return 48;
+        case 'md':
+            return 96;
+        case 'lg':
+            return 128;
+    }
+});
+
 const generateAvatar = (user: User) => {
     avatar.value = createAvatar(personas, {
-        size: props.size == 'sm' ? 48 : 96,
+        size: avatarSize.value,
         seed: user.created_at,
         backgroundColor: ['transparent'],
         mouth: currentMouth.value,
@@ -135,7 +145,7 @@ const initUserScore = async () => {
 
 setTimeout(() => {
     generateAvatar(user.value);
-}, 200);
+}, 500);
 
 const generateBackgroundColors = (
     capitalScore: number,
@@ -187,67 +197,168 @@ const updateAvatarColors = () => {
         timer = null;
     }, 100);
 };
+
+const loading = ref(false);
+
+async function saveProfile(
+    noseIndex: number,
+    mouthIndex: number,
+    eyesIndex: number,
+    hairIndex: number
+) {
+    loading.value = true;
+    try {
+        await store.updateAvatar({
+            skin: skinColorPicker.value,
+            clothes: clothingColorPicker.value,
+            nose: noseIndex,
+            mouth: mouthIndex,
+            eyes: eyesIndex,
+            hair: hairIndex
+        });
+
+        notify({
+            type: 'success',
+            title: t('success'),
+            message: t('profileSaved')
+        });
+    } catch (e) {
+        notify({
+            type: 'error',
+            title: t('error'),
+            message: t('profileNotSaved')
+        });
+    } finally {
+        loading.value = false;
+    }
+}
+
+const rotation = ref(false);
+
+const randomAvatar = () => {
+    const randomNose = Math.floor(Math.random() * noseList.length);
+    const randomMouth = Math.floor(Math.random() * mouthList.length);
+    const randomEyes = Math.floor(Math.random() * eyesList.length);
+    const randomHair = Math.floor(Math.random() * hairList.length);
+
+    currentNose.value = [noseList[randomNose]];
+    currentMouth.value = [mouthList[randomMouth]];
+    currentEyes.value = [eyesList[randomEyes]];
+    currentHair.value = [hairList[randomHair]];
+
+    skinColorPicker.value = `#${Math.floor(Math.random() * 16777215).toString(
+        16
+    )}`;
+
+    clothingColorPicker.value = `#${Math.floor(
+        Math.random() * 16777215
+    ).toString(16)}`;
+
+    rotation.value = !rotation.value;
+    generateAvatar(user.value);
+};
 </script>
 
 <template>
+    <IconDice6Filled
+        v-if="editable"
+        :size="avatarSize / 3"
+        class="text-gray-800 absolute top-0 right-0 cursor-pointer m-5 select-none transform transition-transform ease duration-300"
+        :class="{
+            'rotate-180': rotation
+        }"
+        @click="randomAvatar"
+    />
     <div class="flex items-center justify-center mb-6">
         <div
-            class="flex items-center justify-center rounded-full overflow-hidden"
+            class="flex items-center justify-center rounded-full overflow-hidden border border-gray-500 shadow-lg"
             :class="`${color} rounded-full`"
         >
-            <img :src="avatar" alt="Avatar" class="rounded-full" />
+            <img
+                v-if="avatar"
+                :src="avatar"
+                alt="Avatar"
+                class="rounded-full"
+            />
+            <IconUser v-else :size="avatarSize / 1.2" class="text-gray-800" />
         </div>
     </div>
-    <div v-if="editable" class="flex space-x-4">
-        <div class="color-picker-card">
-            <label for="skinColor" class="text-sm font-medium"
-                >Skin Color</label
-            >
-            <input
-                id="skinColor"
-                type="color"
-                v-model="skinColorPicker"
-                @input="updateAvatarColors"
-                class="rounded-md w-12 h-12"
-            />
+    <div v-if="editable" class="flex flex-row gap-4">
+        <div class="flex flex-col justify-center md:flex-row gap-4">
+            <div class="flex flex-col justify-center items-center">
+                <label for="skinColor" class="text-sm font-medium text-center">
+                    {{ $t('skinColor') }}
+                </label>
+                <input
+                    id="skinColor"
+                    type="color"
+                    v-model="skinColorPicker"
+                    @input="updateAvatarColors"
+                    class="rounded-md w-12 h-12"
+                />
+            </div>
+            <div class="flex flex-col justify-center items-center">
+                <label
+                    for="clothingColor"
+                    class="text-sm font-medium text-center"
+                >
+                    {{ $t('clothingColor') }}
+                </label>
+                <input
+                    id="clothingColor"
+                    type="color"
+                    v-model="clothingColorPicker"
+                    @input="updateAvatarColors"
+                    class="rounded-md w-12 h-12"
+                />
+            </div>
         </div>
-        <div class="color-picker-card">
-            <label for="clothingColor" class="text-sm font-medium"
-                >Clothing Color</label
-            >
-            <input
-                id="clothingColor"
-                type="color"
-                v-model="clothingColorPicker"
-                @input="updateAvatarColors"
-                class="rounded-md w-12 h-12"
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-4">
+            <Button
+                @click="changeNose"
+                class="rounded-md bg-gray-200"
+                :text="$t('changeNose')"
+                type="warning"
             />
-        </div>
-        <div class="flex flex-col space-y-2">
-            <button @click="changeNose" class="rounded-md bg-gray-200 p-2">
-                Change Nose
-            </button>
-            <button @click="changeMouth" class="rounded-md bg-gray-200 p-2">
-                Change Mouth
-            </button>
-            <button @click="changeEyes" class="rounded-md bg-gray-200 p-2">
-                Change Eyes
-            </button>
-            <button @click="changeHair" class="rounded-md bg-gray-200 p-2">
-                Change Hair
-            </button>
+            <Button
+                @click="changeMouth"
+                class="rounded-md bg-gray-200"
+                :text="$t('changeMouth')"
+                type="warning"
+            />
+            <Button
+                @click="changeEyes"
+                class="rounded-md bg-gray-200"
+                :text="$t('changeEyes')"
+                type="warning"
+            />
+            <Button
+                @click="changeHair"
+                class="rounded-md bg-gray-200"
+                :text="$t('changeHair')"
+                type="warning"
+            />
         </div>
     </div>
+    <Button
+        v-if="editable"
+        :text="$t('saveProfile')"
+        :disabled="loading"
+        :loading="loading"
+        type="success"
+        class="mt-6 w-5/6 sm:w-1/2 md:w-1/3"
+        @click="
+            saveProfile(
+                noseList.indexOf(currentNose![0]),
+                mouthList.indexOf(currentMouth![0]),
+                eyesList.indexOf(currentEyes![0]),
+                hairList.indexOf(currentHair![0])
+            )
+        "
+    />
 </template>
 
 <style scoped>
-.color-picker-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .color-picker-card label {
     font-size: 0.75rem;
     margin-bottom: 0.25rem;

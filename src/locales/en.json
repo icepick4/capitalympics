@@ -203,5 +203,11 @@
         "desc": "Please come back later."
     },
     "aboutMe": "About Me",
-    "passionateDev": "Hi, I'm Rémi JARA, a passionate developer and student. I love exploring the endless possibilities of code, constantly creating innovative projects. Your support helps me dedicate more time and resources to my projects, fostering my growth as a developer. Each contribution makes a real difference, contributing to innovation and education. Thank you!"
+    "passionateDev": "Hi, I'm Rémi JARA, a passionate developer and student. I love exploring the endless possibilities of code, constantly creating innovative projects. Your support helps me dedicate more time and resources to my projects, fostering my growth as a developer. Each contribution makes a real difference, contributing to innovation and education. Thank you!",
+    "skinColor": "Skin color",
+    "clothingColor": "Clothing color",
+    "changeNose": "Change nose",
+    "changeMouth": "Change mouth",
+    "changeEyes": "Change eyes",
+    "changeHair": "Change hair"
 }

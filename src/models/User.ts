@@ -8,7 +8,17 @@ export interface User {
     created_at: string;
     updated_at: string;
     language: Lang;
+    avatar: Avatar;
 }
+
+export type Avatar = {
+    mouth: number;
+    eyes: number;
+    hair: number;
+    nose: number;
+    skin: string;
+    clothes: string;
+};
 
 export interface UserScore {
     user_id: number;
