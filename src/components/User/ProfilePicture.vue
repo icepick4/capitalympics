@@ -216,7 +216,6 @@ async function saveProfile(
             eyes: eyesIndex,
             hair: hairIndex
         });
-
         notify({
             type: 'success',
             title: t('success'),

@@ -116,7 +116,7 @@ async function disconnect() {
                         >
                             <ProfilePicture size="lg" />
                             <IconPencil
-                                class="absolute bottom-0 right-0 w-6 h-6 bg-white rounded-full p-1 group-hover:scale-[2.5] transition-all duration-200 group-hover:-translate-y-[150%] group-hover:-translate-x-[150%]"
+                                class="absolute bottom-0 right-0 w-6 h-6 bg-white rounded-full p-1 group-hover:scale-[1.75] transition-all duration-200 group-hover:-translate-y-full group-hover:-translate-x-full"
                             />
                         </RouterLink>
                         <h1 class="flex text-2xl mr-1 ml-4 font-bold">

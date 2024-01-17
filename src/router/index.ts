@@ -1,5 +1,6 @@
 import { useStore } from '@/store';
 import About from '@/views/About.vue';
+import ChangeLog from '@/views/ChangeLog.vue';
 import Countries from '@/views/Countries.vue';
 import Home from '@/views/Home.vue';
 import Learn from '@/views/Learn.vue';
@@ -132,6 +133,11 @@ const routes = [
         path: '/legal-notices',
         name: 'LegalNotices',
         component: LegalNotices
+    },
+    {
+        path: '/change-log',
+        name: 'ChangeLog',
+        component: ChangeLog
     },
     {
         path: '/:catchAll(.*)',

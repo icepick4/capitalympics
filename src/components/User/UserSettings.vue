@@ -95,7 +95,7 @@ const deleteAccount = async () => {
                         >
                             <ProfilePicture size="md" />
                             <IconPencil
-                                class="absolute bottom-0 right-0 w-6 h-6 bg-white rounded-full p-1 group-hover:scale-[2] transition-all duration-200 group-hover:-translate-y-full group-hover:-translate-x-full"
+                                class="absolute bottom-0 right-0 w-6 h-6 bg-white rounded-full p-1 group-hover:scale-[1.5] transition-all duration-200 group-hover:-translate-y-full group-hover:-translate-x-full"
                             />
                         </RouterLink>
                     </div>

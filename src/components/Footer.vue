@@ -7,6 +7,7 @@ import {
     IconBrandReddit,
     IconDeviceDesktop,
     IconFileText,
+    IconId,
     IconLogin,
     IconMail,
     IconWorld
@@ -142,6 +143,18 @@ const { isAuthenticated } = storeToRefs(useStore());
                         <IconDeviceDesktop class="w-6 h-6" />
                         <div>
                             <p>Portfolio</p>
+                            <div
+                                class="bg-black h-[1px] w-0 transition-all duration-300 group-hover:w-full cubic-bezier"
+                            ></div>
+                        </div>
+                    </a>
+                    <a
+                        href="https://bento.me/remij"
+                        class="flex flex-row gap-3 items-center group cursor-pointer"
+                    >
+                        <IconId class="w-6 h-6" />
+                        <div>
+                            <p>Bento</p>
                             <div
                                 class="bg-black h-[1px] w-0 transition-all duration-300 group-hover:w-full cubic-bezier"
                             ></div>
