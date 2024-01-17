@@ -135,11 +135,6 @@ const routes = [
         component: LegalNotices
     },
     {
-        path: '/change-log',
-        name: 'ChangeLog',
-        component: ChangeLog
-    },
-    {
         path: '/:catchAll(.*)',
         name: 'NotFound',
         component: NotFound
