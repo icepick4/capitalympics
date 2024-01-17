@@ -268,6 +268,12 @@ const randomAvatar = () => {
         }"
         @click="randomAvatar"
     />
+    <span
+        v-if="editable"
+        class="hidden sm:block text-center text-gray-800 font-bold text-base absolute top-0 right-0 mr-5 m-16"
+    >
+        {{ $t('random') }}
+    </span>
     <div class="flex items-center justify-center">
         <div
             class="flex items-center justify-center rounded-full overflow-hidden border border-gray-500 shadow-lg"
