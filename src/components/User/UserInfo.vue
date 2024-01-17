@@ -9,6 +9,7 @@ import {
     IconChartBar,
     IconListNumbers,
     IconLogout2,
+    IconPencil,
     IconSettings
 } from '@tabler/icons-vue';
 import { DateTime } from 'luxon';
@@ -109,8 +110,14 @@ async function disconnect() {
                     class="flex column flex-row items-center justify-between mb-4 gap-4"
                 >
                     <div class="flex items-center">
-                        <RouterLink to="/profile/avatar">
-                            <ProfilePicture size="md" />
+                        <RouterLink
+                            to="/profile/avatar"
+                            class="rounded-full relative cursor-pointer transition-all duration-200 group"
+                        >
+                            <ProfilePicture size="lg" />
+                            <IconPencil
+                                class="absolute bottom-0 right-0 w-6 h-6 bg-white rounded-full p-1 group-hover:scale-[2.5] transition-all duration-200 group-hover:-translate-y-[150%] group-hover:-translate-x-[150%]"
+                            />
                         </RouterLink>
                         <h1 class="flex text-2xl mr-1 ml-4 font-bold">
                             {{ user?.name }}

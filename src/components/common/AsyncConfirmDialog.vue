@@ -8,7 +8,7 @@ export interface ConfirmDialogOptions {
     description: string;
     title: string;
     cancelText: string;
-    confirmText: string;
+    confirmText?: string;
 }
 
 const emit = defineEmits(['cancel', 'confirm']);
@@ -34,6 +34,7 @@ dialog.onCancel(() => emit('cancel'));
     >
         <div class="mt-4 flex items-center justify-start gap-3 rounded-b-lg">
             <Button
+                v-if="confirmText"
                 ref="confirmBtn"
                 :text="confirmText"
                 type="warning"

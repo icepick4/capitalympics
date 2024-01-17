@@ -4,7 +4,7 @@ import { User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { languages } from '@/utils/common';
-import { IconUserX, IconX } from '@tabler/icons-vue';
+import { IconPencil, IconUserX, IconX } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -89,11 +89,15 @@ const deleteAccount = async () => {
                         <h1 class="w-6 sm:w-11/12 text-xl sm:text-2xl sm:mr-4">
                             {{ $t('editProfile') }}
                         </h1>
-                        <div
-                            class="rounded-full relative hover:ring hover:ring-gray-600 ring-offset-0 bg-gray-600 hover:grayscale group"
+                        <RouterLink
+                            to="/profile/avatar"
+                            class="rounded-full relative cursor-pointer transition-all duration-200 group"
                         >
                             <ProfilePicture size="md" />
-                        </div>
+                            <IconPencil
+                                class="absolute bottom-0 right-0 w-6 h-6 bg-white rounded-full p-1 group-hover:scale-[2] transition-all duration-200 group-hover:-translate-y-full group-hover:-translate-x-full"
+                            />
+                        </RouterLink>
                     </div>
                     <ActionIcon
                         :label="$t('deleteAccount')"

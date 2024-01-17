@@ -209,5 +209,7 @@
     "changeNose": "Change nose",
     "changeMouth": "Change mouth",
     "changeEyes": "Change eyes",
-    "changeHair": "Change hair"
+    "changeHair": "Change hair",
+    "technicalIssue": "Dear users, due to a technical issue, some accounts may not be accessible. If you are experiencing login difficulties, we recommend recreating your account as it may no longer exist. We apologize for any inconvenience this may cause and thank you for your understanding.",
+    "warning": "Warning"
 }

@@ -209,5 +209,7 @@
     "changeNose": "Cambia il naso",
     "changeMouth": "Cambia la bocca",
     "changeEyes": "Cambia gli occhi",
-    "changeHair": "Cambia i capelli"
+    "changeHair": "Cambia i capelli",
+    "technicalIssue": "Cari utenti, a causa di un problema tecnico, alcuni account potrebbero non essere accessibili. Se riscontrate difficoltà di accesso, vi raccomandiamo di ricreare il vostro account. Ci scusiamo per eventuali disagi e vi ringraziamo per la comprensione.",
+    "warning": "Attenzione"
 }

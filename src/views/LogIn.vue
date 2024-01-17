@@ -1,14 +1,27 @@
 <script setup lang="ts">
+import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { IconUser } from '@tabler/icons-vue';
-import { computed, ref } from 'vue';
+import { computed, onBeforeMount, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 
+const { t } = useI18n();
 const route = useRoute();
 const query = computed(() => route.query);
-const { t } = useI18n();
+
+const confirm = async () => {
+    await useConfirmDialog({
+        title: t('warning'),
+        description: t('technicalIssue'),
+        cancelText: t('confirmDialog.confirm')
+    });
+};
+
+onBeforeMount(() => {
+    confirm();
+});
 
 if (query.value.signedUp) {
     notify({
@@ -45,7 +58,9 @@ async function login() {
             name: name.value,
             password: password.value
         });
-        router.push({ name: 'Profile' });
+        if (router) {
+            router.push({ name: 'Profile' });
+        }
     } catch (error) {
         console.error(error);
         userNotFound.value = true;

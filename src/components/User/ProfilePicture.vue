@@ -269,7 +269,7 @@ const randomAvatar = () => {
         }"
         @click="randomAvatar"
     />
-    <div class="flex items-center justify-center mb-6">
+    <div class="flex items-center justify-center">
         <div
             class="flex items-center justify-center rounded-full overflow-hidden border border-gray-500 shadow-lg"
             :class="`${color} rounded-full`"
@@ -283,7 +283,7 @@ const randomAvatar = () => {
             <IconUser v-else :size="avatarSize / 1.2" class="text-gray-800" />
         </div>
     </div>
-    <div v-if="editable" class="flex flex-row gap-4">
+    <div v-if="editable" class="flex flex-row gap-4 mt-7">
         <div class="flex flex-col justify-center md:flex-row gap-4">
             <div class="flex flex-col justify-center items-center">
                 <label for="skinColor" class="text-sm font-medium text-center">

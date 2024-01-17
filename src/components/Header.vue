@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import ProfilePicture from '@/components/User//ProfilePicture.vue';
 import { useConfirmDialog } from '@/composables/confirm-dialog';
 import { useStore } from '@/store';
-import { IconLogout2 } from '@tabler/icons-vue';
+import { IconLogout2, IconUser } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -122,7 +121,7 @@ async function disconnect() {
                         to="/profile"
                         class="hidden sm:flex justify-end items-center font-medium text-black no-underline text-xl transition-all duration-150 ease-in-out hover:scale-110"
                     >
-                        <ProfilePicture size="sm" />
+                        <IconUser class="w-8 h-8 mr-2" />
                     </RouterLink>
                     <IconLogout2
                         class="hidden sm:flex w-8 h-8 cursor-pointer hover:scale-110 transition-all"
