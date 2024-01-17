@@ -1,6 +1,5 @@
 import { useStore } from '@/store';
 import About from '@/views/About.vue';
-import ChangeLog from '@/views/ChangeLog.vue';
 import Countries from '@/views/Countries.vue';
 import Home from '@/views/Home.vue';
 import Learn from '@/views/Learn.vue';
