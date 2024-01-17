@@ -4,6 +4,7 @@ import CTAButton from '@/components/CTAButton.vue';
 import CarouselAuto from '@/components/CarouselAuto.vue';
 import Loader from '@/components/Loader.vue';
 import Planet from '@/components/Planet.vue';
+import ProfilePicture from '@/components/User/ProfilePicture.vue';
 import { CountryI } from '@/models/Country';
 import { User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
@@ -120,7 +121,9 @@ onBeforeMount(async () => {
         class="flex flex-col 2xl:flex-row items-center justify-center h-full gap-5 mt-3 lg:mt-10 xs:mb-20"
     >
         <div class="w-1/3"></div>
-        <div class="flex flex-col items-center w-1/3">
+        <div
+            class="flex flex-col items-center w-5/6 sm:w-2/3 md:w-1/2 lg:w-1/3"
+        >
             <section>
                 <div
                     class="flex w-full flex-col items-center py-10 text-center md:py-24"
@@ -166,11 +169,16 @@ onBeforeMount(async () => {
                         </ul>
                     </div>
                     <h3
-                        class="mb-6 flex-col text-lg font-bold md:mb-10 md:text-2xl lg:mb-12 max-w-[600px]"
+                        class="mb-4 flex-col text-lg font-bold md:mb-6 md:text-2xl lg:mb-8 max-w-[600px]"
                     >
                         {{ $t('welcomeMessage') }}
                     </h3>
-                    <div class="flex flex-row gap-6">
+                    <RouterLink to="/profile" v-if="user != null">
+                        <ProfilePicture size="lg" />
+                    </RouterLink>
+                    <div
+                        class="flex flex-row gap-6 w-full justify-center mt-4 md:mt-6 lg:mt-8"
+                    >
                         <CTAButton
                             to="/learn"
                             :text="$t('play')"
