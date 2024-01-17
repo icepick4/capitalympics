@@ -38,6 +38,12 @@ if (!supportedLocales.includes(defaultLocale)) {
         messages: { fr, en, es, it, ko }
     });
 
-    app.use(router).use(pinia).use(i18n).use(CommonPlugin).use(NotificationsPlugin);
+    document.documentElement.lang = defaultLocale;
+
+    app.use(router)
+        .use(pinia)
+        .use(i18n)
+        .use(CommonPlugin)
+        .use(NotificationsPlugin);
     app.mount('#app');
 })();

@@ -5,8 +5,6 @@ export interface User {
     name: string;
     image: string;
     password: string;
-    flag_score: number;
-    capital_score: number;
     created_at: string;
     updated_at: string;
     language: Lang;

@@ -114,6 +114,10 @@ const routes = [
             {
                 path: 'scores',
                 component: Profile
+            },
+            {
+                path: 'avatar',
+                component: Profile
             }
         ],
         props: true,

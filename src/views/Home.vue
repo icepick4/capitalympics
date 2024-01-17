@@ -129,7 +129,9 @@ onBeforeMount(async () => {
                         class="mb-6 flex-col text-4xl font-bold md:mb-10 md:text-5xl lg:mb-12"
                     >
                         {{ $t('welcome') }}
-                        <span v-if="user" class="underline"
+                        <span
+                            v-if="user"
+                            class="underline decoration-[7px] decoration-bluebg underline-offset-4"
                             >{{ user.name }}!</span
                         >
                     </h2>

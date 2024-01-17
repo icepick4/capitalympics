@@ -109,7 +109,9 @@ async function disconnect() {
                     class="flex column flex-row items-center justify-between mb-4 gap-4"
                 >
                     <div class="flex items-center">
-                        <ProfilePicture size="md" />
+                        <RouterLink to="/profile/avatar">
+                            <ProfilePicture size="md" />
+                        </RouterLink>
                         <h1 class="flex text-2xl mr-1 ml-4 font-bold">
                             {{ user?.name }}
                         </h1>

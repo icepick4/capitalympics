@@ -59,6 +59,8 @@ export const useStore = defineStore('app', () => {
             throw new Error('Failed to load current user');
         }
 
+        console.log('Loaded current user', response.data.data);
+
         user.value = response.data.data;
     }
 

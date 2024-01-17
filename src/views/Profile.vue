@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Footer from '@/components/Footer.vue';
+import UserAvatar from '@/components/User/UserAvatar.vue';
 import UserInfo from '@/components/User/UserInfo.vue';
 import UserScores from '@/components/User/UserScores.vue';
 import UserSettings from '@/components/User/UserSettings.vue';
@@ -17,6 +18,9 @@ const displayUserStatistics = computed(
 const displayUserScores = computed(
     () => router.currentRoute.value.path === '/profile/scores'
 );
+const displayUserAvatar = computed(
+    () => router.currentRoute.value.path === '/profile/avatar'
+);
 </script>
 
 <template>
@@ -24,6 +28,7 @@ const displayUserScores = computed(
         <UserStatistics v-if="displayUserStatistics" />
         <UserSettings v-else-if="displayUserSettings" />
         <UserScores v-else-if="displayUserScores" />
+        <UserAvatar v-else-if="displayUserAvatar" />
         <UserInfo v-else />
     </div>
     <Footer></Footer>

@@ -154,7 +154,7 @@ const handleScroll = () => {
                 class="section-fade-in"
             />
         </div>
-        <div class="w-full h-auto flex justify-center items-center bg-gradient">
+        <div class="w-full flex justify-center items-center bg-gradient">
             <h1 class="text-3xl text-center lg:w-1/2 m-8">
                 {{ $t('aboutFooter') }}
             </h1>
