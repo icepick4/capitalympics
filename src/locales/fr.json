@@ -212,5 +212,16 @@
     "changeHair": "Changer les cheveux",
     "technicalIssue": "Chers utilisateurs, en raison d'un problème technique, certains comptes peuvent ne pas être accessibles. Si vous rencontrez des difficultés de connexion, nous vous recommandons de recréer votre compte. Nous nous excusons pour tout désagrément que cela pourrait causer et vous remercions de votre compréhension.",
     "warning": "Attention",
-    "random": "Aléatoire"
+    "random": "Aléatoire",
+    "wrongPassword": "Mot de passe incorrect",
+    "passwordUpdated": "Votre mot de passe mis à jour avec succès",
+    "oldPasswordRequired": "Ancien mot de passe requis",
+    "oldPassword": "Ancien mot de passe",
+    "oldPasswordPlaceholder": "Entrez votre ancien mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "newPasswordPlaceholder": "Entrez votre nouveau mot de passe",
+    "newPasswordConfirmation": "Confirmez le nouveau mot de passe",
+    "newPasswordConfirmationPlaceholder": "Confirmez votre nouveau mot de passe",
+    "updatePassword": "Mettre à jour le mot de passe",
+    "changePassword": "Changer le mot de passe"
 }
