@@ -3,6 +3,7 @@ import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import CTAButton from '../CTAButton.vue';
 
 const { t } = useI18n();
 const store = useStore();
@@ -70,47 +71,54 @@ const updatePassword = async () => {
 </script>
 
 <template>
-    <div
-        class="mt-8 mb-8 flex flex-col gap-4 sm:gap-8 bg-white p-5 sm:p-10 rounded-lg shadow-lg w-11/12 sm:w-3/4 md:w-1/2 xl:w-1/3 2xl:w-1/4"
-    >
-        <PasswordInput
-            v-model="oldPassword"
-            :label="$t('oldPassword')"
-            :placeholder="$t('oldPasswordPlaceholder')"
-            :error="errors.oldPassword"
-            revelable
-        />
-        <PasswordInput
-            v-model="password"
-            :label="$t('newPassword')"
-            :placeholder="$t('newPasswordPlaceholder')"
-            :error="errors.password"
-            revelable
-        />
-        <PasswordInput
-            v-model="passwordConfirmation"
-            :label="$t('newPasswordConfirmation')"
-            :placeholder="$t('newPasswordConfirmationPlaceholder')"
-            :error="errors.password"
-            revelable
-            @keyup="
-                ($event.key === 'Enter' || $event.key === ' ') &&
-                    updatePassword()
-            "
-        />
-        <div class="pt-2">
-            <button
-                type="button"
-                :disabled="!canTryToSignup || isLoading"
-                class="w-full flex items-center justify-center px-4 py-4 text-base font-semibold text-white bg-black rounded-md transition-all duration-200 delay-100 hover:scale-105 focus:scale-105 disabled:hover:scale-100 disabled:opacity-60 disabled:cursor-not-allowed outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75"
-                @click="updatePassword"
-            >
-                <span v-if="!isLoading">{{ $t('updatePassword') }}</span>
-                <div
-                    v-else
-                    class="h-5 w-5 border-4 rounded-full border-blue-600/75 border-b-blue-600/25 animate-spin"
-                ></div>
-            </button>
+    <div class="flex flex-col w-full justify-center items-center mb-6">
+        <div
+            class="mt-8 mb-8 flex flex-col gap-4 sm:gap-8 bg-white p-5 sm:p-10 rounded-lg shadow-lg w-11/12 sm:w-3/4 md:w-1/2 xl:w-1/3 2xl:w-1/4"
+        >
+            <PasswordInput
+                v-model="oldPassword"
+                :label="$t('oldPassword')"
+                :placeholder="$t('oldPasswordPlaceholder')"
+                :error="errors.oldPassword"
+                revelable
+            />
+            <PasswordInput
+                v-model="password"
+                :label="$t('newPassword')"
+                :placeholder="$t('newPasswordPlaceholder')"
+                :error="errors.password"
+                revelable
+            />
+            <PasswordInput
+                v-model="passwordConfirmation"
+                :label="$t('newPasswordConfirmation')"
+                :placeholder="$t('newPasswordConfirmationPlaceholder')"
+                :error="errors.password"
+                revelable
+                @keyup="
+                    ($event.key === 'Enter' || $event.key === ' ') &&
+                        updatePassword()
+                "
+            />
+            <div class="pt-2">
+                <button
+                    type="button"
+                    :disabled="!canTryToSignup || isLoading"
+                    class="w-full flex items-center justify-center px-4 py-4 text-base font-semibold text-white bg-black rounded-md transition-all duration-200 delay-100 hover:scale-105 focus:scale-105 disabled:hover:scale-100 disabled:opacity-60 disabled:cursor-not-allowed outline outline-2 outline-offset-2 outline-transparent focus-visible:outline-blue-600/75"
+                    @click="updatePassword"
+                >
+                    <span v-if="!isLoading">{{ $t('updatePassword') }}</span>
+                    <div
+                        v-else
+                        class="h-5 w-5 border-4 rounded-full border-blue-600/75 border-b-blue-600/25 animate-spin"
+                    ></div>
+                </button>
+            </div>
         </div>
+        <CTAButton
+            :text="$t('back')"
+            :goBack="true"
+            class="w-2/3 sm:w-1/3 xl:w-1/6"
+        />
     </div>
 </template>

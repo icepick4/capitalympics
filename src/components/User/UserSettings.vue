@@ -4,7 +4,7 @@ import { User } from '@/models/User';
 import { notify } from '@/plugins/notifications';
 import { useStore } from '@/store';
 import { languages } from '@/utils/common';
-import { IconPencil, IconUserX, IconX } from '@tabler/icons-vue';
+import { IconKey, IconPencil, IconUserX, IconX } from '@tabler/icons-vue';
 import { storeToRefs } from 'pinia';
 import { Ref, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -81,10 +81,10 @@ const deleteAccount = async () => {
                 class="flex flex-row justify-between items-top sm:items-center"
             >
                 <div
-                    class="w-full flex flex-row justify-between items-top sm:items-center gap-5"
+                    class="w-full flex flex-row justify-start items-top sm:items-center gap-5"
                 >
                     <div
-                        class="flex flex-col sm:flex-row items-start sm:items-center"
+                        class="flex flex-col sm:flex-row items-start sm:items-center mr-5"
                     >
                         <h1 class="w-6 sm:w-11/12 text-xl sm:text-2xl sm:mr-4">
                             {{ $t('editProfile') }}
@@ -99,13 +99,25 @@ const deleteAccount = async () => {
                             />
                         </RouterLink>
                     </div>
-                    <ActionIcon
-                        :label="$t('deleteAccount')"
-                        :icon="IconUserX"
-                        rounded
-                        class="hover:scale-110 hover:bg-red-400 transition-all duration-300"
-                        @click="deleteAccount"
-                    />
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <RouterLink
+                            to="/profile/password"
+                            class="flex flex-row items-center gap-2 bg-white rounded-md p-2 transition-all duration-200 hover:scale-105 hover:bg-yellow-300"
+                        >
+                            <IconKey class="w-6 h-6" />
+                            <span class="text-sm sm:text-base">
+                                {{ $t('changePassword') }}
+                            </span>
+                        </RouterLink>
+                        <div
+                            class="flex flex-row items-center gap-2 bg-white rounded-md p-2 transition-all duration-200 hover:scale-105 hover:bg-red-400 cursor-pointer"
+                        >
+                            <IconUserX class="w-6 h-6" />
+                            <span class="text-sm sm:text-base">
+                                {{ $t('deleteAccount') }}
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <RouterLink to="/profile">
                     <IconX
