@@ -118,6 +118,10 @@ const routes = [
             {
                 path: 'avatar',
                 component: Profile
+            },
+            {
+                path: 'password',
+                component: Profile
             }
         ],
         props: true,

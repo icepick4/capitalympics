@@ -2,6 +2,7 @@
 import Footer from '@/components/Footer.vue';
 import UserAvatar from '@/components/User/UserAvatar.vue';
 import UserInfo from '@/components/User/UserInfo.vue';
+import UserPassword from '@/components/User/UserPassword.vue';
 import UserScores from '@/components/User/UserScores.vue';
 import UserSettings from '@/components/User/UserSettings.vue';
 import UserStatistics from '@/components/User/UserStatistics.vue';
@@ -21,6 +22,10 @@ const displayUserScores = computed(
 const displayUserAvatar = computed(
     () => router.currentRoute.value.path === '/profile/avatar'
 );
+
+const displayUserPassword = computed(
+    () => router.currentRoute.value.path === '/profile/password'
+);
 </script>
 
 <template>
@@ -29,6 +34,7 @@ const displayUserAvatar = computed(
         <UserSettings v-else-if="displayUserSettings" />
         <UserScores v-else-if="displayUserScores" />
         <UserAvatar v-else-if="displayUserAvatar" />
+        <UserPassword v-else-if="displayUserPassword" />
         <UserInfo v-else />
     </div>
     <Footer></Footer>
