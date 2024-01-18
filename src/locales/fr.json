@@ -221,5 +221,6 @@
     "newPassword": "Nouveau mot de passe",
     "newPasswordPlaceholder": "Entrez votre nouveau mot de passe",
     "newPasswordConfirmation": "Confirmez le nouveau mot de passe",
-    "newPasswordConfirmationPlaceholder": "Confirmez votre nouveau mot de passe"
+    "newPasswordConfirmationPlaceholder": "Confirmez votre nouveau mot de passe",
+    "updatePassword": "Mettre à jour le mot de passe"
 }

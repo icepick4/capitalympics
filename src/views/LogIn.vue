@@ -35,6 +35,12 @@ if (query.value.signedUp) {
         message: t('expiredToken'),
         type: 'warning'
     });
+} else if (query.value.loggedOut) {
+    notify({
+        title: t('success'),
+        message: t('loggedOutSuccessfully'),
+        type: 'success'
+    });
 }
 
 const router = useRouter();
