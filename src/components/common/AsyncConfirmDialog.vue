@@ -9,11 +9,12 @@ export interface ConfirmDialogOptions {
     title: string;
     cancelText: string;
     confirmText?: string;
+    type?: 'success' | 'warning' | 'error' | 'info';
 }
 
 const emit = defineEmits(['cancel', 'confirm']);
-defineProps<ConfirmDialogOptions>();
-
+const props = defineProps<ConfirmDialogOptions>();
+const type = ref(props.type || 'warning');
 const isRevealed = ref(true);
 const dialog = useConfirmDialog();
 
@@ -27,7 +28,7 @@ dialog.onCancel(() => emit('cancel'));
     <Dialog
         :model-value="isRevealed"
         :title="title"
-        type="warning"
+        :type="type"
         :description="description"
         :initial-focus="confirmBtn"
         @update:model-value="dialog.cancel"
@@ -37,10 +38,10 @@ dialog.onCancel(() => emit('cancel'));
                 v-if="confirmText"
                 ref="confirmBtn"
                 :text="confirmText"
-                type="warning"
+                :type="type"
                 @click="dialog.confirm"
             />
-            <Button :text="cancelText" type="warning" @click="dialog.cancel" />
+            <Button :text="cancelText" :type="type" @click="dialog.cancel" />
         </div>
     </Dialog>
 </template>

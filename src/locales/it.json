@@ -212,5 +212,18 @@
     "changeHair": "Cambia i capelli",
     "technicalIssue": "Cari utenti, a causa di un problema tecnico, alcuni account potrebbero non essere accessibili. Se riscontrate difficoltà di accesso, vi raccomandiamo di ricreare il vostro account. Ci scusiamo per eventuali disagi e vi ringraziamo per la comprensione.",
     "warning": "Attenzione",
-    "random": "Casuale"
+    "random": "Casuale",
+    "wrongPassword": "Password errata",
+    "passwordUpdated": "La tua password è stata aggiornata con successo",
+    "oldPasswordRequired": "Vecchia password richiesta",
+    "oldPassword": "Vecchia password",
+    "oldPasswordPlaceholder": "Inserisci la tua vecchia password",
+    "newPassword": "Nuova password",
+    "newPasswordPlaceholder": "Inserisci la tua nuova password",
+    "newPasswordConfirmation": "Conferma la nuova password",
+    "newPasswordConfirmationPlaceholder": "Conferma la tua nuova password",
+    "updatePassword": "Aggiorna password",
+    "changePassword": "Cambia password",
+    "newUpdate": "Nuovo aggiornamento!",
+    "newUpdateDescription": "Un nuovo aggiornamento è disponibile. Vai a modificare il tuo avatar come preferisci nel tuo profilo! 🎉 Non esitare a visualizzare le statistiche del tuo profilo per vedere i tuoi progressi! 📈 Ora puoi cambiare la tua password o eliminare il tuo account nelle impostazioni del tuo profilo."
 }

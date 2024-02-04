@@ -223,5 +223,7 @@
     "newPasswordConfirmation": "Confirmez le nouveau mot de passe",
     "newPasswordConfirmationPlaceholder": "Confirmez votre nouveau mot de passe",
     "updatePassword": "Mettre à jour le mot de passe",
-    "changePassword": "Changer le mot de passe"
+    "changePassword": "Changer le mot de passe",
+    "newUpdate": "Nouvelle mise à jour !",
+    "newUpdateDescription": "Une nouvelle mise à jour est disponible. Allez modifier votre avatar à votre guise dans votre profil ! 🎉 N'hésitez pas à visualiser les statistiques de votre profil pour voir votre progression ! 📈 Vous pouvez désormais changer votre mot de passe ou supprimer votre compte dans les paramètres votre profil."
 }

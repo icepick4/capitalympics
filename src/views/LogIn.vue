@@ -13,9 +13,10 @@ const query = computed(() => route.query);
 
 const confirm = async () => {
     await useConfirmDialog({
-        title: t('warning'),
-        description: t('technicalIssue'),
-        cancelText: t('confirmDialog.confirm')
+        title: t('newUpdate'),
+        description: t('newUpdateDescription'),
+        cancelText: t('confirmDialog.confirm'),
+        type: 'success'
     });
 };
 

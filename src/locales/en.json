@@ -212,5 +212,18 @@
     "changeHair": "Change hair",
     "technicalIssue": "Dear users, due to a technical issue, some accounts may not be accessible. If you are experiencing login difficulties, we recommend recreating your account as it may no longer exist. We apologize for any inconvenience this may cause and thank you for your understanding.",
     "warning": "Warning",
-    "random": "Random"
+    "random": "Random",
+    "wrongPassword": "Incorrect password",
+    "passwordUpdated": "Your password has been updated successfully",
+    "oldPasswordRequired": "Old password required",
+    "oldPassword": "Old password",
+    "oldPasswordPlaceholder": "Enter your old password",
+    "newPassword": "New password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "newPasswordConfirmation": "Confirm new password",
+    "newPasswordConfirmationPlaceholder": "Confirm your new password",
+    "updatePassword": "Update password",
+    "changePassword": "Change password",
+    "newUpdate": "New Update!",
+    "newUpdateDescription": "A new update is available. Go change your avatar as you like in your profile! 🎉 Do not hesitate to view the statistics of your profile to see your progress! 📈 You can now change your password or delete your account in the settings of your profile."
 }
