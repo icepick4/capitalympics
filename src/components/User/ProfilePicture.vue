@@ -277,7 +277,7 @@ const randomAvatar = () => {
     <div class="flex items-center justify-center">
         <div
             class="flex items-center justify-center rounded-full overflow-hidden border border-gray-500 shadow-lg"
-            :class="`${color} rounded-full`"
+            :class="`${color} w-[${avatarSize}px] h-[${avatarSize}px]`"
         >
             <img
                 v-if="avatar"
@@ -285,7 +285,18 @@ const randomAvatar = () => {
                 alt="Avatar"
                 class="rounded-full"
             />
-            <IconUser v-else :size="avatarSize / 1.2" class="text-gray-800" />
+            <IconUser
+                v-else
+                class="text-gray-800"
+                :class="{
+                    'w-[96px]': size === 'sm',
+                    'w-[128px]': size === 'md',
+                    'w-[160px]': size === 'lg',
+                    'h-[96px]': size === 'sm',
+                    'h-[128px]': size === 'md',
+                    'h-[160px]': size === 'lg'
+                }"
+            />
         </div>
     </div>
     <div v-if="editable" class="flex flex-row gap-4 mt-7">
