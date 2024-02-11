@@ -4,9 +4,7 @@ import { defineConfig } from 'vite';
 import compression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
 
-function hash() {
-    return Math.floor(Math.random() * 90000) + 10000;
-}
+const hash = Math.floor(Math.random() * 90000) + 10000;
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -70,9 +68,9 @@ export default defineConfig({
                             .toString();
                     }
                 },
-                entryFileNames: `[name]` + hash() + `.js`,
-                chunkFileNames: `[name]` + hash() + `.js`,
-                assetFileNames: `[name]` + hash() + `.[ext]`
+                entryFileNames: `[name]` + hash + `.js`,
+                chunkFileNames: `[name]` + hash + `.js`,
+                assetFileNames: `[name]` + hash + `.[ext]`
             }
         }
     },
