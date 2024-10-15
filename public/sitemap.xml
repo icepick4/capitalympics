@@ -57,13 +57,6 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Pays - Détails -->
-  <url>
-    <loc>https://www.capitalympics.com/countries/{countryCode}</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
   <!-- Profil -->
   <url>
     <loc>https://www.capitalympics.com/profile</loc>
@@ -106,11 +99,1227 @@
     <priority>0.5</priority>
   </url>
 
-  <!-- Page non trouvée -->
-  <url>
-    <loc>https://www.capitalympics.com/{catchAll}</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
+    <!-- Pays -->
+
+    <url>
+        <loc>https://www.capitalympics.com/countries/ABW</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/AFG</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/AGO</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/AIA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ALA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ALB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/AND</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ARE</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ARG</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ARM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ASM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ATG</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/AUS</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/AUT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/AZE</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BDI</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BEL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BEN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BES</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BFA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BGD</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BGR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BHR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BHS</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BIH</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BLM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BLR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BLZ</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BMU</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BOL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BRA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BRB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BRN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BTN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/BWA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CAF</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CAN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CCK</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CHE</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CHL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CHN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CIV</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CMR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/COD</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/COG</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/COK</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/COL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/COM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CPV</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CRI</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CUB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CUW</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CXR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CYM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CYP</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/CZE</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/DEU</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/DJI</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/DMA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/DNK</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/DOM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/DZA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ECU</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/EGY</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ERI</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ESH</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ESP</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/EST</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ETH</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/FIN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/FJI</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/FLK</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/FRA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/FRO</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/FSM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GAB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GBR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GEO</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GGY</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GHA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GIB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GIN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GLP</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GMB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GNB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GNQ</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GRC</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GRD</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GRL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GTM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GUF</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GUM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/GUY</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/HKG</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/HND</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/HRV</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/HTI</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/HUN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/IDN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/IMN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/IND</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/IOT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/IRL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/IRN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/IRQ</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ISL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ISR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ITA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/JAM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/JEY</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/JOR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/JPN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/KAZ</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/KEN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/KGZ</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/KHM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/KIR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/KNA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/KOR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/KWT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LAO</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LBN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LBR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LBY</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LCA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LIE</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LKA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LSO</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LTU</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LUX</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/LVA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MAF</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MAR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MCO</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MDA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MDG</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MDV</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MEX</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MHL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MKD</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MLI</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MLT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MMR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MNE</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MNG</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MNP</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MOZ</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MRT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MSR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MTQ</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MUS</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MWI</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MYS</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/MYT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NAM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NCL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NER</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NFK</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NGA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NIC</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NIU</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NLD</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NOR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NPL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NRU</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/NZL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/OMN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PAK</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PAN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PCN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PER</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PHL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PLW</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PNG</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/POL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PRI</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PRK</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PRT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PRY</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PSE</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/PYF</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/QAT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/REU</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ROU</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/RUS</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/RWA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SAU</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SDN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SEN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SGP</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SHN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SJM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SLB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SLE</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SLV</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SMR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SOM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SPM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SRB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SSD</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/STP</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SUR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SVK</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SVN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SWE</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SWZ</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SXM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SYC</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/SYR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TCA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TCD</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TGO</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/THA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TJK</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TKL</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TKM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TLS</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TON</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TTO</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TUN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TUR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TUV</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TWN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/TZA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/UGA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/UKR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/UMI</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/UNK</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/URY</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/USA</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/UZB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/VAT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/VCT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/VEN</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/VGB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/VIR</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/VNM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/VUT</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/WLF</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/WSM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/YEM</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ZAF</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ZMB</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
+    <url>
+        <loc>https://www.capitalympics.com/countries/ZWE</loc>
+        <changefreqchangefreq>never</changefreqchangefreq>
+    </url>
+    
 
 </urlset>
